@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+  --accent-1: #F48023;
+  --accent-1-1: #FCF4EC;
+  --accent-2: #2377F4;
+  --accent-2-1: #DCE9FD;
+
+  --bg: #F3F3F3;
+
+  --white-1: #FFFFFF;
+  --white-2: #EAEAEA;
+
+  --black-1: #16181A;
+  --black-2: #808080;
+
+  --error: #FF0000;
+  --good: #17A100;
+  /*--it-logo: #BCBBBC;*/
+
+  --font-family: Roboto;
+
+
+  --pad: 15px;
+  --white-container: calc(1440px + var(--pad) * 2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, body > div {
+  height: 100%;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--bg);
+  color: var(--text-1);
+}
+
+a {
+  text-decoration: none;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.input {
+  width: 100%;
+}
+
+@keyframes rotateAnimation {
+  from {
+    transform: rotate(0deg); /* Начальное положение (0 градусов) */
+  }
+  to {
+    transform: rotate(360deg); /* Конечное положение (360 градусов) */
+  }
+}

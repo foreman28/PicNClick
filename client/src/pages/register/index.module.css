@@ -1,0 +1,30 @@
+.content {
+  width: 100%;
+  max-width: 580px;
+  padding: 200px 100px;
+}
+
+.image {
+  width: 60%;
+}
+
+.title {
+  color: var(--black-1);
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  color: var(--black-2);
+  font-family: var(--font-family);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 30px; /* 166.667% */
+  letter-spacing: 0.05rem;
+
+  margin-bottom: 20px;
+}
+
+.form {
+  margin-bottom: 12px;
+}
