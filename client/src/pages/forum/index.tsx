@@ -8,7 +8,7 @@ import {Layout} from "../../components/layout";
 import {selectUser} from "../../features/auth/authSlice";
 import {useSelector} from "react-redux";
 
-export const Form = () => {
+export const Forum = () => {
   const navigate = useNavigate();
   const user = useSelector(selectUser);
 
@@ -25,7 +25,7 @@ export const Form = () => {
       <Button type="primary" onClick={gotToAddUser}>
         Добавить
       </Button>
-
+123
     </Layout>
   );
 };

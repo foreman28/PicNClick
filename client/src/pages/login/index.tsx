@@ -29,7 +29,7 @@ export const Login = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/form");
+      navigate("/forum");
     }
   }, [user, navigate]);
 
@@ -37,7 +37,7 @@ export const Login = () => {
     try {
       await loginUser(data).unwrap();
 
-      navigate("/form");
+      navigate("/forum");
     } catch (err) {
       const maybeError = isErrorWithMessage(err);
 

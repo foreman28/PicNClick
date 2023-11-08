@@ -10,7 +10,7 @@ import {AddEmployee} from "./pages/add-employee";
 import {Employees} from "./pages/employees";
 import {Employee} from "./pages/employee";
 
-import {Form} from "./pages/form";
+import {Forum} from "./pages/forum";
 
 import {Register} from "./pages/register";
 import {Login} from "./pages/login";
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
 
   {
     path: Paths.forum,
-    element: <Form />,
+    element: <Forum />,
   },
 
   {
