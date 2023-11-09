@@ -1,21 +1,22 @@
 import React from "react";
+
 import {createRoot} from "react-dom/client";
 import {Provider} from "react-redux";
 import {store} from "./app/store";
 import reportWebVitals from "./reportWebVitals";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 
-import {EditEmployee} from "./pages/edit-employee";
-import {AddEmployee} from "./pages/add-employee";
-import {Employees} from "./pages/employees";
-import {Employee} from "./pages/employee";
+import {EditEmployee} from "./pages/edit-employee/edit-employee";
+import {AddEmployee} from "./pages/add-employee/add-employee";
+import {Employees} from "./pages/employees/employees";
+import {Employee} from "./pages/employee/employee";
 
-import {Forum} from "./pages/forum";
+import {Forum} from "./pages/forum/forum";
 
-import {Register} from "./pages/register";
-import {Login} from "./pages/login";
+import {Register} from "./pages/register/register";
+import {Login} from "./pages/login/login";
 
-import {Status} from "./pages/status";
+import {Status} from "./pages/status/status";
 
 import {Auth} from "./features/auth/auth";  // Авторизация
 import {Paths} from "./paths";  // Пути

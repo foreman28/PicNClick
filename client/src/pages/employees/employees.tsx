@@ -7,7 +7,7 @@ import { Employee } from "@prisma/client";
 import { Paths } from "../../paths";
 import { useNavigate } from "react-router-dom";
 import { useGetAllEmployeesQuery } from "../../app/serivices/employees";
-import { Layout } from "../../components/layout";
+import { Layout } from "../../components/layout/layout";
 import { selectUser } from "../../features/auth/authSlice";
 import { useSelector } from "react-redux";
 

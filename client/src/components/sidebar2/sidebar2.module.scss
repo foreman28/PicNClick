@@ -1,0 +1,37 @@
+.sidebar {
+}
+
+.sidebar_container {
+  /*width: 100%;*/
+  /*max-width: var(--white-container);*/
+  /*margin-inline: auto;*/
+
+  padding: 20px 20px;
+  background-color: var(--white-1);
+  border-radius: 5px;
+}
+
+
+.sidebar_list {
+  border-top: 1px solid var(--black-2);
+}
+
+.sidebar_title {
+  color: var(--black-1);
+  font-family: var(--font-family);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.02rem;
+}
+
+.sidebar_link {
+  color: var(--accent-2);
+  font-family: var(--font-family);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: 0.02rem;
+}

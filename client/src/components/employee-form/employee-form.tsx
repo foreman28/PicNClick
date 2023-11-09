@@ -1,8 +1,8 @@
 import { Employee } from "@prisma/client";
 import {Form, Card, Space, Button} from "antd";
 // import { CustomButton } from "../custom-button";
-import { CustomInput } from "../custom-input";
-import { ErrorMessage } from "../error-message";
+import { CustomInput } from "../custom-input/custom-input";
+import { ErrorMessage } from "../error-message/error-message";
 
 type Props<T> = {
   onFinish: (values: T) => void;

@@ -1,12 +1,14 @@
 import React, {useEffect} from "react";
-import {Button} from "antd";
+import {Button, Flex} from "antd";
 // import { CustomButton } from "../../components/custom-button";
 
 import {Paths} from "../../paths";
 import {useNavigate} from "react-router-dom";
-import {Layout} from "../../components/layout";
+import {Layout} from "../../components/layout/layout";
 import {selectUser} from "../../features/auth/authSlice";
 import {useSelector} from "react-redux";
+import {inspect} from "util";
+import styles from "./forum.module.css";
 
 export const Forum = () => {
   const navigate = useNavigate();
@@ -22,10 +24,13 @@ export const Forum = () => {
 
   return (
     <Layout>
-      <Button type="primary" onClick={gotToAddUser}>
-        Добавить
-      </Button>
-123
+      <Flex className={styles.main}>
+        <Button type="primary" onClick={gotToAddUser}>
+          Добавить
+        </Button>
+        123
+
+      </Flex>
     </Layout>
   );
 };

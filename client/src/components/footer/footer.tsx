@@ -1,6 +1,6 @@
 import {Button, ConfigProvider, Layout } from "antd";
 
-import styles from "./index.module.css";
+import styles from "./footer.module.css";
 export const Footer = () => {
 
 

@@ -1,11 +1,13 @@
 .content {
   width: 100%;
-  max-width: 580px;
-  padding: 200px 100px;
+  /*max-width: 580px;*/
+  padding: 180px 320px;
 }
 
 .image {
+  object-fit: cover;
   width: 60%;
+  height: 852px;
 }
 
 .title {
@@ -19,7 +21,7 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 300;
-  line-height: 30px; /* 166.667% */
+  line-height: 30px;
   letter-spacing: 0.05rem;
 
   margin-bottom: 20px;

@@ -1,8 +1,8 @@
 import { Row } from "antd";
 import { useState } from "react";
-import { EmployeeForm } from "../../components/employee-form";
+import { EmployeeForm } from "../../components/employee-form/employee-form";
 import { useNavigate } from "react-router-dom";
-import { Layout } from "../../components/layout";
+import { Layout } from "../../components/layout/layout";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../features/auth/authSlice";
 import { useEffect } from "react";

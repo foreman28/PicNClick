@@ -8,9 +8,9 @@ import {
   useGetEmployeeQuery,
   useRemoveEmployeeMutation,
 } from "../../app/serivices/employees";
-import { Layout } from "../../components/layout";
+import { Layout } from "../../components/layout/layout";
 import { isErrorWithMessage } from "../../utils/is-error-with-message";
-import { ErrorMessage } from "../../components/error-message";
+import { ErrorMessage } from "../../components/error-message/error-message";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../features/auth/authSlice";
 

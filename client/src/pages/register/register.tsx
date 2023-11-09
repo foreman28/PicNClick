@@ -1,22 +1,27 @@
 import {User} from "@prisma/client";
-import {Button, Card, ConfigProvider, Flex, Form, Row, Space, Typography} from "antd";
+import {Button, ConfigProvider, Flex, Form, Layout, Space} from "antd";
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import {useRegisterMutation} from "../../app/serivices/auth";
-// import { CustomButton } from "../../components/custom-button";
-import {CustomInput} from "../../components/custom-input";
-import {ErrorMessage} from "../../components/error-message";
-import {Layout} from "../../components/layout";
-import { CustomPasswordInput } from "../../components/custom-password-input";
+
+import {CustomInput} from "../../components/custom-input/custom-input";
+import {ErrorMessage} from "../../components/error-message/error-message";
+import { CustomPasswordInput } from "../../components/custom-password-input/custom-password-input";
 import {selectUser} from "../../features/auth/authSlice";
 import {Paths} from "../../paths";
 import {isErrorWithMessage} from "../../utils/is-error-with-message";
-import styles from "./index.module.css";
+
 import Title from "antd/lib/typography/Title";
 import Text from "antd/lib/typography/Text";
+
 import {inputPassword, inputText} from "../../themes/inputs";
 import {button} from "../../themes/buttons";
+
+import {Header} from "../../components/header/header";
+import {Footer} from "../../components/footer/footer";
+
+import styles from "./register.module.css";
 
 type RegisterData = Omit<User, "id"> & { confirmPassword: string };
 
@@ -49,10 +54,10 @@ export const Register = () => {
   };
 
   return (
-    <Layout>
+    <>
+      <Header/>
+      <Layout.Content className={styles.main}>
       <Flex style={{height:'100%'}}>
-        <img srcSet={"./img/register-img.png"} alt={''} className={styles.image}/>
-
         <div className={styles.content}>
           <Form onFinish={register} className={styles.form}>
             <Flex vertical>
@@ -80,7 +85,10 @@ export const Register = () => {
             <ErrorMessage message={error}/>
           </Space>
         </div>
+        <img srcSet={"./img/register-img.png"} alt={''} className={styles.image}/>
       </Flex>
-    </Layout>
+      </Layout.Content>
+      <Footer/>
+    </>
   );
 };

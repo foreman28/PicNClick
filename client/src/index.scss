@@ -37,9 +37,9 @@ html, body, body > div {
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font-family), sans-serif;
   background-color: var(--bg);
-  color: var(--text-1);
+  color: var(--black-1);
 }
 
 a {

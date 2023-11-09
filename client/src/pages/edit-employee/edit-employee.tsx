@@ -3,8 +3,8 @@ import { Row } from "antd";
 import { useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import { useEditEmployeeMutation, useGetEmployeeQuery } from "../../app/serivices/employees";
-import { EmployeeForm } from "../../components/employee-form";
-import { Layout } from "../../components/layout";
+import { EmployeeForm } from "../../components/employee-form/employee-form";
+import { Layout } from "../../components/layout/layout";
 import { Paths } from "../../paths";
 import { isErrorWithMessage } from "../../utils/is-error-with-message";
 

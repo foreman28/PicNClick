@@ -5,7 +5,7 @@ import { logout, selectUser } from "../../features/auth/authSlice";
 
 import { button, button2 } from "../../themes/buttons";
 
-import style from "./index.module.css";
+import style from "./header.module.css";
 export const Header = () => {
   const user = useSelector(selectUser);
   const navigate = useNavigate();

@@ -1,5 +1,7 @@
 .header {
   background-color: var(--white-1);
+  outline: 1px solid var(--white-2);
+
 }
 
 .header_container{
@@ -9,10 +11,10 @@
   flex-direction: row;
 
   width: 100%;
-  max-width: var(--white-container);
+  /*max-width: var(--white-container);*/
   margin-inline: auto;
 
-  padding: 20px 40px;
+  padding: 20px 0px;
   background-color: transparent;
 }
 
