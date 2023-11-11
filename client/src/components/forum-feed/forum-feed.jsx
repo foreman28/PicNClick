@@ -7,6 +7,7 @@ import {
 } from '@ant-design/icons';
 
 import styles from './forum-feed.module.scss';
+import {Link} from "react-router-dom";
 
 const {Text} = Typography;
 
@@ -62,7 +63,7 @@ const ForumFeed = () => {
             // title={<a className={styles.item_title} href={`/forum/${item.title}`}>{item.title}</a>}
             description={
               <div>
-                <a className={styles.item_title} href={`/forum/${item.title}`}>{item.title}</a>
+                <Link className={styles.item_title} to={`/forum/${item.id}`}>{item.title}</Link>
                 <div className={styles.item_text}>{item.content}</div>
 
                 <Space>

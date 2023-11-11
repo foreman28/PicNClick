@@ -1,4 +1,4 @@
-const { prisma } = require("../prisma/prisma-client");
+const {prisma} = require("../prisma/prisma-client");
 
 /**
  * @route GET /api/posts
@@ -11,7 +11,7 @@ const all = async (req, res) => {
 
     res.status(200).json(post);
   } catch {
-    res.status(500).json({ message: "Не удалось получить посты" });
+    res.status(500).json({message: "Не удалось получить посты"});
   }
 };
 
@@ -25,7 +25,7 @@ const add = async (req, res) => {
     const data = req.body;
 
     if (!data.title || !data.content || !data.tags) {
-      return res.status(400).json({ message: "Все поля обязательные" });
+      return res.status(400).json({message: "Все поля обязательные"});
     }
 
     const post = await prisma.forumPost.create({
@@ -38,7 +38,7 @@ const add = async (req, res) => {
     return res.status(201).json(post);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Что-то пошло не так" });
+    res.status(500).json({message: "Что-то пошло не так"});
   }
 };
 
@@ -48,7 +48,7 @@ const add = async (req, res) => {
  * @access Private
  */
 const remove = async (req, res) => {
-  const { id } = req.body;
+  const {id} = req.body;
 
   try {
     await prisma.forumPost.delete({
@@ -59,7 +59,7 @@ const remove = async (req, res) => {
 
     res.status(204).json("OK");
   } catch {
-    res.status(500).json({ message: "Не удалось удалить пост" });
+    res.status(500).json({message: "Не удалось удалить пост"});
   }
 };
 
@@ -81,8 +81,8 @@ const edit = async (req, res) => {
     });
 
     res.status(204).json("OK");
-  } catch(err) {
-    res.status(500).json({ message: "Не удалось редактировать пост" });
+  } catch (err) {
+    res.status(500).json({message: "Не удалось редактировать пост"});
   }
 };
 
@@ -92,18 +92,19 @@ const edit = async (req, res) => {
  * @access Private
  */
 const post = async (req, res) => {
-  const { id } = req.params; // http://localhost:8000/api/employees/9fe371c1-361f-494a-9def-465959ecc098
+  console.log(req.params)
+  const {id} = req.params; // http://localhost:8000/api/posts/1
 
   try {
     const post = await prisma.forumPost.findUnique({
       where: {
-        id,
+        id: +id,
       },
     });
 
     res.status(200).json(post);
   } catch {
-    res.status(500).json({ message: "Не удалось получить пост" });
+    res.status(500).json({message: "Не удалось получить пост"});
   }
 };
 

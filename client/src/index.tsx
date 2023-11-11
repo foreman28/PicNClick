@@ -17,15 +17,21 @@ import {Auth} from "./features/auth/auth";  // Авторизация
 import {Paths} from "./paths";  // Пути
 
 import "./index.scss";
+import {Post} from "./pages/post/post";
 
 const router = createBrowserRouter([
   {
     path: Paths.home,
     element: <Forum />,
   },
+
   {
     path: Paths.forum,
     element: <Forum />,
+  },
+  {
+    path: `${Paths.forum}/:id`,
+    element: <Post />,
   },
 
   {
