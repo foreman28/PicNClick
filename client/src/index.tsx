@@ -20,6 +20,10 @@ import "./index.scss";
 
 const router = createBrowserRouter([
   {
+    path: Paths.home,
+    element: <Forum />,
+  },
+  {
     path: Paths.forum,
     element: <Forum />,
   },
