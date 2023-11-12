@@ -35,7 +35,7 @@ export const Sidebar2 = () => {
 
         <Flex gap={"small"} vertical>
           <Flex gap={"small"} align={"center"}>
-            <StarOutlined style={{fontSize: '18px'}} rev/>
+            <StarOutlined style={{fontSize: '18px'}} rev="true"/>
             <span className={styles.sidebar_title}>Стоит прочитать</span>
           </Flex>
           <List
@@ -48,7 +48,7 @@ export const Sidebar2 = () => {
 
         <Flex gap={"small"} vertical>
           <Flex gap={"small"} align={"center"}>
-            <LinkOutlined style={{fontSize: '18px'}} rev/>
+            <LinkOutlined style={{fontSize: '18px'}} rev="true"/>
             <span className={styles.sidebar_title}>Рекомендуемые ссылки</span>
           </Flex>
           <List

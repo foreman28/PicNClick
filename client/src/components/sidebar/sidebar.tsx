@@ -29,17 +29,17 @@ export const Sidebar = () => {
         <Flex gap={"small"} vertical>
           <span className={style.sidebar_title}>меню</span>
             <Link to={'/forum'} className={style.sidebar_link + ' ' + (currentPath == '/forum' ? style.active : '')}>
-              <UnorderedListOutlined style={{fontSize: '18px'}} rev/>
-              <span className={style.sidebar_item}>Вопросы</span>
+              <UnorderedListOutlined style={{fontSize: '18px'}} rev="true"/>
+              <span className={style.sidebar_item}>Форумы</span>
             </Link>
 
             <Link to={'/tag'} className={style.sidebar_link}>
-              <TagOutlined style={{fontSize: '18px'}} rev/>
+              <TagOutlined style={{fontSize: '18px'}} rev="true"/>
               <span className={style.sidebar_item}>Теги</span>
             </Link>
 
             <Link to={'/tag'} className={style.sidebar_link}>
-              <CompassOutlined style={{fontSize: '18px'}} rev/>
+              <CompassOutlined style={{fontSize: '18px'}} rev="true"/>
               <span className={style.sidebar_item}>Ранжирование</span>
             </Link>
         </Flex>

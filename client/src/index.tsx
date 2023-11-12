@@ -10,14 +10,16 @@ import {Forum} from "./pages/forum/forum";
 
 import {Register} from "./pages/register/register";
 import {Login} from "./pages/login/login";
-
 import {Status} from "./pages/status/status";
 
 import {Auth} from "./features/auth/auth";  // Авторизация
 import {Paths} from "./paths";  // Пути
 
-import "./index.scss";
 import {Post} from "./pages/post/post";
+import {ConfigProvider} from "antd";
+import ruRU from 'antd/lib/locale/ru_RU';
+
+import "./index.scss";
 
 const router = createBrowserRouter([
   {
@@ -55,15 +57,16 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      {/*<ConfigProvider*/}
-      {/*  theme={{*/}
-      {/*    algorithm: theme.darkAlgorithm,*/}
-      {/*  }}*/}
-      {/*>*/}
+      <ConfigProvider
+        // theme={{
+        //   algorithm: theme.darkAlgorithm,
+        // }}
+        locale={ruRU}
+      >
       <Auth>
         <RouterProvider router={router}/>
       </Auth>
-      {/*</ConfigProvider>*/}
+      </ConfigProvider>
     </Provider>
   </React.StrictMode>
 );

@@ -92,7 +92,7 @@ const edit = async (req, res) => {
  * @access Private
  */
 const post = async (req, res) => {
-  console.log(req.params)
+  // console.log(req.params)
   const {id} = req.params; // http://localhost:8000/api/posts/1
 
   try {

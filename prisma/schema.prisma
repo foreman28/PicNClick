@@ -9,36 +9,42 @@ datasource db {
 
 model User {
   id        Int         @id @default(autoincrement())
+  username  String      @unique
   email     String      @unique
   password  String
-  fullName  String
-  username  String      @unique
+  fullName  String?
   avatarURL String?
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   posts     ForumPost[]
+  Comment   Comment[]
 }
 
 model ForumPost {
   id            Int      @id @default(autoincrement())
   title         String
   content       String
-  author        String
+  authorId      Int
   tags          String[]
   imageURL      String
   authorAvatar  String
   commentsCount Int
   likesCount    Int
-  timestamp     DateTime
+  timestamp     DateTime @default(now())
 
+  // Отношение к User
+  author   User      @relation(fields: [authorId], references: [id])
   comments Comment[]
-  User     User?     @relation(fields: [userId], references: [id])
-  userId   Int?
 }
 
 model Comment {
-  id      Int       @id @default(autoincrement())
-  content String
-  post    ForumPost @relation(fields: [postId], references: [id])
-  postId  Int
+  id        Int      @id @default(autoincrement())
+  content   String
+  postId    Int
+  userId    Int
+  createdAt DateTime @default(now())
+
+  // Связь с ForumPost и User
+  post ForumPost @relation(fields: [postId], references: [id])
+  user User      @relation(fields: [userId], references: [id])
 }

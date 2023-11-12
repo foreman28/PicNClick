@@ -10,16 +10,16 @@ const jwt = require('jsonwebtoken');
 const login = async (req, res) => {
   try {
     // console.log('Cookies: ', req.cookies)
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
     console.log(req.body)
-    if (!email || !password) {
+    if (!username || !password) {
       return res.status(400).json({ message: 'Пожалуйста, заполните обязятельные поля' })
     }
   
     const user = await prisma.user.findFirst({
       where: {
-        email, // email: email
+        username, // email: email
       }
     });
   
@@ -48,26 +48,27 @@ const login = async (req, res) => {
  * @access Public
  */
 const register = async (req, res, next) => {
+  console.log(req.body)
   try {
     const { email, password, username } = req.body;
 
     if(!email || !password || !username) {
       return res.status(400).json({ message: 'Пожалуйста, заполните обязательные поля' })
     }
-  
+
     const registeredUser = await prisma.user.findFirst({
       where: {
         email
       }
     });
-  
+
     if (registeredUser) {
       return res.status(400).json({ message: 'Пользователь, с таким email уже существует' })
     }
-  
+
     const salt = await brypt.genSalt(10);
     const hashedPassord = await brypt.hash(password, salt);
-  
+
     const user = await prisma.user.create({
       data: {
         email,
@@ -75,7 +76,7 @@ const register = async (req, res, next) => {
         password: hashedPassord
       }
     });
-  
+
     const secret = process.env.JWT_SECRET;
 
     if (user && secret) {

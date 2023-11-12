@@ -22,6 +22,7 @@ import {Header} from "../../components/header/header";
 import {Footer} from "../../components/footer/footer";
 
 import styles from "./register.module.css";
+import {CustomButton} from "../../components/custom-button/button";
 
 type RegisterData = Omit<User, "id"> & { confirmPassword: string };
 
@@ -64,17 +65,14 @@ export const Register = () => {
               <Title level={1} className={styles.title}>Мы скучали по тебе!</Title>
               <Text className={styles.subtitle}>Более 150 вопросов ждут ваших мудрых предложений!</Text>
 
-              <CustomInput theme={inputText} type="text" name="name" placeholder="Имя"/>
+              <CustomInput theme={inputText} type="text" name="username" placeholder="Имя"/>
               <CustomInput theme={inputText} type="email" name="email" placeholder="Email"/>
               <CustomPasswordInput theme={inputPassword} name="password" placeholder="Пароль"/>
               <CustomPasswordInput theme={inputPassword} name="confirmPassword" placeholder="Пароль"/>
 
-
-              <ConfigProvider theme={button}>
-                <Button type="primary" htmlType="submit">
-                  Зарегистрироваться
-                </Button>
-              </ConfigProvider>
+              <CustomButton theme={button} type="primary" htmlType="submit">
+                Зарегистрироваться
+              </CustomButton>
             </Flex>
           </Form>
 

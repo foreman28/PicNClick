@@ -1,0 +1,30 @@
+.item {
+  border-radius: 5px;
+  border: 1px solid var(--white-2);
+  background: var(--white-1);
+
+  box-shadow: 2px 1px 5px 0 rgba(0, 0, 0, 0.15);
+
+  margin-bottom: 20px;
+
+  &_title {
+    color: var(--black-1);
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.8px;
+
+    display: inline-block;
+    margin-bottom: 4px;
+  }
+
+  &_text {
+    margin-bottom: 16px;
+  }
+
+  &_tag {
+
+  }
+}

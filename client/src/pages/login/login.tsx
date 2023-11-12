@@ -3,9 +3,11 @@ import {useState, useEffect} from "react";
 import {useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import {useLoginMutation, UserData} from "../../app/serivices/auth";
+
 import {CustomInput} from "../../components/custom-input/custom-input";
 import {ErrorMessage} from "../../components/error-message/error-message";
 import {CustomPasswordInput} from "../../components/custom-password-input/custom-password-input";
+
 import {selectUser} from "../../features/auth/authSlice";
 import {Paths} from "../../paths";
 import {isErrorWithMessage} from "../../utils/is-error-with-message";
@@ -62,7 +64,7 @@ export const Login = () => {
                 <Title level={1} className={styles.title}>Мы скучали по тебе!</Title>
                 <Text className={styles.subtitle}>Более 150 вопросов ждут ваших мудрых предложений!</Text>
 
-                <CustomInput theme={inputText} type="email" name="email" placeholder="Email"/>
+                <CustomInput theme={inputText} type="text" name="username" placeholder="Email"/>
                 <CustomPasswordInput theme={inputPassword} name="password" placeholder="Пароль"/>
 
 
