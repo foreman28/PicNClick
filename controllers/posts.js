@@ -7,7 +7,11 @@ const {prisma} = require("../prisma/prisma-client");
  */
 const all = async (req, res) => {
   try {
-    const post = await prisma.forumPost.findMany();
+    const post = await prisma.forumPost.findMany({
+      include: {
+        author: true, // информация об авторе
+      },
+    });
 
     res.status(200).json(post);
   } catch {

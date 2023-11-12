@@ -8,9 +8,21 @@ import {
 import {Link} from 'react-router-dom';
 import styles from './forum-post.module.scss';
 
+import {ru} from 'date-fns/locale';
+import {format, formatDistanceToNow} from "date-fns";
+
 const {Text} = Typography;
 
 const ForumPost = ({post}) => {
+
+  const createdDate = new Date(post.timestamp);
+
+  // Display different formats based on the age of the post
+  const formattedTimestamp =
+    new Date() - createdDate < 24 * 60 * 60 * 1000
+      ? formatDistanceToNow(createdDate, {locale: ru, addSuffix: true})
+      : format(createdDate, 'MMMM d, yyyy HH:mm', {locale: ru});
+
   return (
     <List.Item
       className={styles.item}
@@ -26,7 +38,7 @@ const ForumPost = ({post}) => {
         </Space>,
         <Space>
           <ClockCircleOutlined key="clock" rev="true"/>
-          <span> {post.timestamp}</span>
+          <span> {formattedTimestamp}</span>
         </Space>,
       ]}
       // extra={
@@ -38,26 +50,35 @@ const ForumPost = ({post}) => {
     >
       <List.Item.Meta
         description={
-          <div>
-            {console.log(post.author)}
-            <Flex gap={16}>
-              <Avatar src="/img/avatar.jpg"/>
-              <Text strong>{post.author}</Text>
-            </Flex>
-
-            <Link className={styles.item_title} to={`/forum/${post.id}`}>
-              {post.title}
+          <Flex gap={8} vertical>
+            <Link to={"/user/" + post.author.id}>
+              <Flex gap={16} align={"center"}>
+                <Avatar src={post.author.avatarURL || '/img/avatar.jpg'}/>
+                <Flex vertical>
+                  <Space className={styles.username}>{post.author.username}</Space>
+                </Flex>
+              </Flex>
             </Link>
-            <div className={styles.item_text}>{post.content}</div>
 
-            <Space>
-              {post.tags.map((tag, index) => (
-                <Tag key={index} className={styles.item_tag}>
-                  {tag}
-                </Tag>
-              ))}
-            </Space>
-          </div>
+              <Link style={{display: "block"}} className={styles.title} to={`/forum/${post.id}`}>
+                <img className={styles.img} src={post.imageURL + "/img/Image-1.png"} alt=""/>
+              </Link>
+
+              <Flex gap={0} vertical>
+              <Link className={styles.title} to={`/forum/${post.id}`}>
+                {post.title}
+              </Link>
+              <div className={styles.text}>{post.content}</div>
+
+              <Space>
+                {post.tags.map((tag, index) => (
+                  <Tag key={index} className={styles.tag}>
+                    {tag}
+                  </Tag>
+                ))}
+              </Space>
+            </Flex>
+          </Flex>
         }
       />
     </List.Item>

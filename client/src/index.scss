@@ -32,6 +32,11 @@
   box-sizing: border-box;
 }
 
+*::selection {
+  color: var(--white-1);
+  background: var(--accent-2);
+}
+
 
 
 body {

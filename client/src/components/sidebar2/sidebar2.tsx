@@ -30,7 +30,7 @@ export const Sidebar2 = () => {
   ];
 
   return (
-    <Layout.Sider className={styles.sidebar} width={270}>
+    <Layout.Sider className={styles.sidebar} width={320}>
       <Flex className={styles.sidebar_container} gap={"middle"} vertical>
 
         <Flex gap={"small"} vertical>
