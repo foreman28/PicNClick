@@ -10,6 +10,8 @@ import {useSelector} from "react-redux";
 // import {inspect} from "util";
 import styles from "./forum.module.css";
 import ForumFeed from "../../components/forum-feed/forum-feed";
+import {CustomButton} from "../../components/custom-button/button";
+import {button, button2} from "../../themes/buttons";
 
 export const Forum = () => {
   const navigate = useNavigate();
@@ -27,12 +29,12 @@ export const Forum = () => {
     <Layout>
       <Flex className={styles.main} vertical gap={"12px"}>
         <Space>
-          <Button type="primary">
+          <CustomButton theme={button} type="primary">
             Добавить
-          </Button>
-          <Button type="primary">
+          </CustomButton>
+          <CustomButton theme={button} type="primary">
             asd
-          </Button>
+          </CustomButton>
         </Space>
 
         <ForumFeed/>

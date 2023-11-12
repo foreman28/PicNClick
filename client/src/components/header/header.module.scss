@@ -45,6 +45,10 @@
   gap: 16px;
 }
 
-.header_search:not(:hover) {
-  opacity: 0.6;
+.header_search {
+  max-width: 800px;
+
+  &:not(:focus-within) {
+    opacity: 0.6;
+  }
 }

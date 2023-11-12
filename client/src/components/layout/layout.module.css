@@ -1,7 +1,8 @@
 .main {
   width: 100%;
+  padding:24px;
+  max-width: var(--white-container);
 
-  /*max-width: var(--white-container);*/
   /*margin-inline: auto;*/
 
   /*padding: 0 var(--pad);*/

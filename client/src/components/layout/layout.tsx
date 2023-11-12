@@ -16,14 +16,14 @@ export const Layout = ({children}: Props) => {
   return (
     <>
       <Header/>
-      <Flex style={{height: '100%'}}>
+      <Flex justify={"space-between"} style={{height: '100%'}}>
         <Sidebar/>
-        <Flex gap={24} justify={"space-between"} style={{width:'100%', padding:'24px'}}>
+        {/*<Flex gap={24} justify={"space-between"} className={styles.main}>*/}
           <AntLayout.Content className={styles.main}>
             {children}
           </AntLayout.Content>
-          <Sidebar2/>
-        </Flex>
+        {/*</Flex>*/}
+        <Sidebar2/>
       </Flex>
       <Footer/>
     </>

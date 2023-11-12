@@ -1,10 +1,13 @@
 .sidebar {
+  padding: 12px;
+}
+
+.sidebar>div{
+  position: sticky;
+  top: 12px;
 }
 
 .sidebar_container {
-  /*width: 100%;*/
-  /*max-width: var(--white-container);*/
-  /*margin-inline: auto;*/
 
   padding: 20px 20px;
   background-color: var(--white-1);

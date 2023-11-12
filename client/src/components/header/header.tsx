@@ -22,26 +22,22 @@ export const Header = () => {
 
   return (
     <Layout.Header className={style.header} style={{height: 'auto'}}>
-      <Flex justify={"space-between"} className={style.header_container}>
-        <Flex gap={150}>
-          <Link to="/" className={style.logo_text}>
-            <img srcSet={"../../../logo.svg"} alt={"PicNClick"}/>
-            <span>Pic<span>&</span>Click</span>
-          </Link>
+      <Flex justify={"space-between"} align={"center"} className={style.header_container}>
 
-          {/*<span className={style.title}>Asd</span>*/}
+        <Link to="/" className={style.logo_text}>
+          <img srcSet={"../../../logo.svg"} alt={"PicNClick"}/>
+          <span>Pic<span>&</span>Click</span>
+        </Link>
+
+        <ConfigProvider theme={{
+          token: {
+            controlHeight: 40,
+          },
+        }}>
           <Search className={style.header_search}/>
-        </Flex>
-
+        </ConfigProvider>
 
         {user ? (
-          // <ConfigProvider theme={button2}>
-          //   <Button type="primary" onClick={onLogoutClick}>
-          //     <Link to={'/'}>
-          //       Выйти
-          //     </Link>
-          //   </Button>
-          // </ConfigProvider>
           <CustomButton theme={button2} type="primary" onClick={onLogoutClick}>
             Выйти
           </CustomButton>
