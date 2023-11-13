@@ -1,4 +1,13 @@
-123
+```
+git clone git@github.com:foreman28/PicNClick.git
+
+git add *
+
+git commit -m "asd"
+
+git push
+```
+
 npm run dev
 
 # Для запуска проекта, необходимо выполнить следующие шаги:

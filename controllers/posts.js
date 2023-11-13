@@ -7,17 +7,60 @@ const {prisma} = require("../prisma/prisma-client");
  */
 const all = async (req, res) => {
   try {
-    const post = await prisma.forumPost.findMany({
-      include: {
-        author: true, // информация об авторе
-      },
-    });
+    const { search } = req.query;
 
-    res.status(200).json(post);
-  } catch {
-    res.status(500).json({message: "Не удалось получить посты"});
+    let posts;
+
+    if (search) {
+      posts = await prisma.forumPost.findMany({
+        where: {
+          OR: [
+            {
+              title: {
+                contains: search,
+                mode: 'insensitive', // Case-insensitive search
+              },
+            },
+            {
+              content: {
+                contains: search,
+                mode: 'insensitive',
+              },
+            },
+          ],
+        },
+        include: {
+          author: true,
+        },
+      });
+    } else {
+      posts = await prisma.forumPost.findMany({
+        include: {
+          author: true,
+        },
+      });
+    }
+
+    res.status(200).json(posts);
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+    res.status(500).json({ message: "Не удалось получить посты" });
   }
 };
+
+// const all = async (req, res) => {
+//   try {
+//     const post = await prisma.forumPost.findMany({
+//       include: {
+//         author: true, // информация об авторе
+//       },
+//     });
+//
+//     res.status(200).json(post);
+//   } catch {
+//     res.status(500).json({message: "Не удалось получить посты"});
+//   }
+// };
 
 /**
  * @route POST /api/posts/add

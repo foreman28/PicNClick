@@ -1,4 +1,4 @@
-import {Button, ConfigProvider, Flex, Layout} from "antd";
+import {Button, Cascader, ConfigProvider, Flex, Layout, TreeSelect} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import {logout, selectUser} from "../../features/auth/authSlice";
@@ -8,7 +8,15 @@ import {button, button2} from "../../themes/buttons";
 import style from "./header.module.scss";
 import {CustomButton} from "../custom-button/button";
 import Search from "antd/es/input/Search";
+import {useState} from "react";
+import SearchComponent from "../custom-search/search";
 
+interface Post {
+  id: number;
+  title: string;
+  content: string;
+  // ... other properties
+}
 export const Header = () => {
   const user = useSelector(selectUser);
   // const navigate = useNavigate();
@@ -19,6 +27,9 @@ export const Header = () => {
     localStorage.removeItem("token");
     // navigate("/login");
   };
+
+
+
 
   return (
     <Layout.Header className={style.header} style={{height: 'auto'}}>
@@ -34,7 +45,7 @@ export const Header = () => {
             controlHeight: 40,
           },
         }}>
-          <Search className={style.header_search}/>
+          <SearchComponent />
         </ConfigProvider>
 
         {user ? (
