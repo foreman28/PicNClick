@@ -20,11 +20,16 @@ import {ConfigProvider} from "antd";
 import ruRU from 'antd/lib/locale/ru_RU';
 
 import "./index.scss";
+import {Search} from "./pages/search/search";
 
 const router = createBrowserRouter([
   {
     path: Paths.home,
     element: <Forum />,
+  },
+  {
+    path: Paths.search,
+    element: <Search />,
   },
 
   {

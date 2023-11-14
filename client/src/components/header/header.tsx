@@ -1,4 +1,4 @@
-import {Button, Cascader, ConfigProvider, Flex, Layout, TreeSelect} from "antd";
+import {Flex, Layout} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import {logout, selectUser} from "../../features/auth/authSlice";
@@ -7,16 +7,15 @@ import {button, button2} from "../../themes/buttons";
 
 import style from "./header.module.scss";
 import {CustomButton} from "../custom-button/button";
-import Search from "antd/es/input/Search";
-import {useState} from "react";
 import SearchComponent from "../custom-search/search";
+import {search} from "../../themes/search";
 
 interface Post {
   id: number;
   title: string;
   content: string;
-  // ... other properties
 }
+
 export const Header = () => {
   const user = useSelector(selectUser);
   // const navigate = useNavigate();
@@ -29,8 +28,6 @@ export const Header = () => {
   };
 
 
-
-
   return (
     <Layout.Header className={style.header} style={{height: 'auto'}}>
       <Flex justify={"space-between"} align={"center"} className={style.header_container}>
@@ -40,13 +37,8 @@ export const Header = () => {
           <span>Pic<span>&</span>Click</span>
         </Link>
 
-        <ConfigProvider theme={{
-          token: {
-            controlHeight: 40,
-          },
-        }}>
-          <SearchComponent />
-        </ConfigProvider>
+
+        <SearchComponent theme={search}/>
 
         {user ? (
           <CustomButton theme={button2} type="primary" onClick={onLogoutClick}>

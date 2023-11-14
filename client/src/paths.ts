@@ -6,5 +6,7 @@ export const Paths = {
   login: '/login',
   register: '/register',
 
-  forum: '/forum'
+  forum: '/forum',
+
+  search: '/search',
 } as const;

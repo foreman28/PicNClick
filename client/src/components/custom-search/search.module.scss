@@ -1,0 +1,40 @@
+.searchBox {
+  display: flex;
+  position: relative;
+}
+
+.search {
+  max-width: 100%;
+  width: 600px;
+}
+
+.list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+
+  overflow: hidden;
+}
+
+.item {
+  padding: 10px 0;
+
+  &:hover {
+    background: var(--accent-2-1);
+  }
+}
+
+.title {
+  color: var(--black-1);
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.02rem;
+}
