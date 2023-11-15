@@ -1,5 +1,5 @@
 import React from 'react';
-import {List, Space, Tag, Typography, Avatar, Flex} from 'antd';
+import {List, Space, Tag, Avatar, Flex} from 'antd';
 import {
   MessageOutlined,
   LikeOutlined,
@@ -11,7 +11,6 @@ import styles from './forum-post.module.scss';
 import {ru} from 'date-fns/locale';
 import {format, formatDistanceToNow} from "date-fns";
 
-const {Text} = Typography;
 
 const ForumPost = ({post}) => {
 

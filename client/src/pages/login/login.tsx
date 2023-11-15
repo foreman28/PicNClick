@@ -2,7 +2,10 @@ import {Button, ConfigProvider, Flex, Form, Layout, Space} from "antd";
 import {useState, useEffect} from "react";
 import {useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
+import {Paths} from "../../paths";
+
 import {useLoginMutation, UserData} from "../../app/serivices/auth";
+import {selectUser} from "../../features/auth/authSlice";
 
 import {CustomInput} from "../../components/custom-input/custom-input";
 import {ErrorMessage} from "../../components/error-message/error-message";
@@ -10,10 +13,7 @@ import {CustomPasswordInput} from "../../components/custom-password-input/custom
 import {Header} from "../../components/header/header";
 import {Footer} from "../../components/footer/footer";
 
-import {selectUser} from "../../features/auth/authSlice";
-import {Paths} from "../../paths";
 import {isErrorWithMessage} from "../../utils/is-error-with-message";
-import {inspect} from "util";
 
 import Title from "antd/lib/typography/Title";
 import Text from "antd/lib/typography/Text";
@@ -41,6 +41,7 @@ export const Login = () => {
 
       navigate("/forum");
     } catch (err) {
+      console.log(123)
       const maybeError = isErrorWithMessage(err);
 
       if (maybeError) {
@@ -62,7 +63,7 @@ export const Login = () => {
                 <Title level={1} className={styles.title}>Мы скучали по тебе!</Title>
                 <Text className={styles.subtitle}>Более 150 вопросов ждут ваших мудрых предложений!</Text>
 
-                <CustomInput theme={inputText} type="text" name="username" placeholder="Email"/>
+                <CustomInput theme={inputText} type="text" name="username" placeholder="Логин"/>
                 <CustomPasswordInput theme={inputPassword} name="password" placeholder="Пароль"/>
 
 

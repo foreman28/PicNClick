@@ -21,6 +21,7 @@ import ruRU from 'antd/lib/locale/ru_RU';
 
 import "./index.scss";
 import {Search} from "./pages/search/search";
+import {Tags} from "./pages/tags/tags";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: Paths.search,
     element: <Search />,
+  },
+  {
+    path: Paths.tags,
+    element: <Tags />,
   },
 
   {

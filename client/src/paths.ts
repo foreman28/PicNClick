@@ -9,4 +9,5 @@ export const Paths = {
   forum: '/forum',
 
   search: '/search',
+  tags: '/tags',
 } as const;

@@ -1,5 +1,5 @@
 import {Flex, List} from "antd";
-import styles from "./search.module.scss";
+import styles from "./search-main.module.scss";
 import React, { useEffect, useState } from "react";
 import queryString from 'query-string';
 import {useNavigate} from "react-router-dom";
@@ -47,6 +47,7 @@ export const SearchMain = () => {
     renderItem={(item) =>
       <ForumPost post={item}/>
     }
+    locale={{emptyText: 'Пусто'}}
   />
   );
 };

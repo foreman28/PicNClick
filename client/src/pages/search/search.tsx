@@ -1,7 +1,7 @@
 import {Flex} from "antd";
 import {Layout} from "../../components/layout/layout";
 import styles from "./search.module.scss";
-import {SearchMain} from "../../components/search-main/search";
+import {SearchMain} from "../../components/search-main/search-main";
 
 export const Search = () => {
 

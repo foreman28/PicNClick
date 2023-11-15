@@ -1,32 +1,37 @@
 .content {
-  width: 100%;
-  /*max-width: 580px;*/
-  padding: 180px 320px;
+    width: 100%;
+    /*max-width: 580px;*/
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .image {
-  object-fit: cover;
-  width: 60%;
-  height: 852px;
+    object-fit: cover;
+    width: 60%;
+    height: 852px;
 }
 
 .title {
-  color: var(--black-1);
-  margin-bottom: 20px;
+    color: var(--black-1);
+    margin-bottom: 20px;
 }
 
 .subtitle {
-  color: var(--black-2);
-  font-family: var(--font-family);
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: 30px;
-  letter-spacing: 0.05rem;
+    color: var(--black-2);
+    font-family: var(--font-family);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 30px;
+    letter-spacing: 0.05rem;
 
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .form {
-  margin-bottom: 12px;
+    margin-bottom: 12px;
 }
