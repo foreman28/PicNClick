@@ -1,44 +1,54 @@
 import React, {useEffect, useState} from "react";
 import {Layout} from "../../components/layout/layout";
 import {useParams} from "react-router-dom";
+import styles from "./post.module.scss"
+import {Flex, Space, Tag} from "antd";
 
 export const Post = () => {
-  const {id} = useParams(); // Получаем значение динамического параметра из URL
-  const [postData, setPostData] = useState(null);
+    const {id} = useParams(); // Получаем значение динамического параметра из URL
+    const [postData, setPostData] = useState(null);
 
-  useEffect(() => {
-    const fetchPostData = async () => {
-      try {
-        const response = await fetch(`http://localhost:8000/api/posts/${id}`);
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+    useEffect(() => {
+        const fetchPostData = async () => {
+            try {
+                const response = await fetch(`http://localhost:8000/api/posts/${id}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
 
-        const data = await response.json();
-        setPostData(data);
-      } catch (error) {
-        console.error('Ошибка получения данных из API:', error);
-      }
-    };
+                const data = await response.json();
+                setPostData(data);
+            } catch (error) {
+                console.error('Ошибка получения данных из API:', error);
+            }
+        };
 
-    fetchPostData();
-  }, [id]); // Зависимость от id, чтобы обновить данные при изменении id
+        fetchPostData();
+    }, [id]); // Зависимость от id, чтобы обновить данные при изменении id
 
-  if (!postData) {
+    if (!postData) {
+        return (
+            <Layout>
+                ...
+            </Layout>
+        );
+    }
+
     return (
-      <Layout>
+        <Layout>
+            <img className={styles.img} src={postData.imageURL !== null ? postData.imageURL : "/img/Image-1.png"}></img>
+            <Flex gap={8}>
+                {postData.tags.map((tag, index) => (
+                    <Tag key={index} className={styles.tag}>
+                        {tag}
+                    </Tag>
+                ))}
+            </Flex>
 
-      </Layout>
+            <h1 className={styles.title}>{postData.title}</h1>
+            <p className={styles.text}>{postData.content}</p>
+
+
+        </Layout>
     );
-  }
-
-  return (
-    <Layout>
-
-      <h2>{postData.title}</h2>
-      <p>{postData.content}</p>
-
-
-    </Layout>
-  );
 };

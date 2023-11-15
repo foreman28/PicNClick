@@ -1,29 +1,28 @@
-import React, {useEffect} from "react";
-import {Button, Flex, Space} from "antd";
-// import { CustomButton } from "../../components/custom-button";
-
-// import {Paths} from "../../paths";
-import {useNavigate} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import {Flex, Space, List} from "antd";
 import {Layout} from "../../components/layout/layout";
-import {selectUser} from "../../features/auth/authSlice";
-import {useSelector} from "react-redux";
-// import {inspect} from "util";
+
 import styles from "./forum.module.css";
-import ForumFeed from "../../components/forum-feed/forum-feed";
 import {CustomButton} from "../../components/custom-button/button";
 import {button, button2} from "../../themes/buttons";
+import ForumPost from "../../components/forum-post/forum-post";
 
 export const Forum = () => {
-  const navigate = useNavigate();
-  const user = useSelector(selectUser);
+  const [data, setData] = useState([]);
 
-  // useEffect(() => {
-  //   if (!user) {
-  //     navigate("/login");
-  //   }
-  // }, [user, navigate]);
+  useEffect(() => {
+    const apiUrl = `${process.env.REACT_APP_API_URL}/posts`;
 
-  // const gotToAddUser = () => navigate(Paths.employeeAdd);
+    fetch(apiUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => setData(data))
+      .catch((error) => console.error('Ошибка получения данных из API:', error));
+  }, []);
 
   return (
     <Layout>
@@ -37,7 +36,17 @@ export const Forum = () => {
           </CustomButton>
         </Space>
 
-        <ForumFeed/>
+        <List
+          className={styles.list}
+          itemLayout="vertical"
+          size="large"
+          dataSource={data}
+          renderItem={(item) =>
+            <ForumPost post={item}/>
+          }
+          locale={{emptyText: 'Пусто'}}
+        />
+
       </Flex>
     </Layout>
   );

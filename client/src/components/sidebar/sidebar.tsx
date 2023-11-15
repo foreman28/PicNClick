@@ -1,19 +1,18 @@
 import {Flex, Layout} from "antd";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
-import {logout} from "../../features/auth/authSlice";
+import {logout, selectUser} from "../../features/auth/authSlice";
+
+import Search from "antd/es/input/Search";
+import {CompassOutlined, SearchOutlined, TagOutlined, UnorderedListOutlined} from '@ant-design/icons';
 
 import style from "./sidebar.module.scss";
-import Search from "antd/es/input/Search";
-
-import {CompassOutlined, SearchOutlined, TagOutlined, UnorderedListOutlined} from '@ant-design/icons';
-import {NavLink} from "react-router-dom";
 
 export const Sidebar = () => {
 
   const currentPath = window.location.pathname;
 
-  // const user = useSelector(selectUser);
+  const user = useSelector(selectUser);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const onLogoutClick = () => {
@@ -44,11 +43,24 @@ export const Sidebar = () => {
             <span className={style.sidebar_item}>Теги</span>
           </Link>
 
-          <Link to={'/tag'} className={style.sidebar_link}>
-            <CompassOutlined style={{fontSize: '18px'}} rev="true"/>
-            <span className={style.sidebar_item}>Ранжирование</span>
-          </Link>
         </Flex>
+
+        <Flex gap={"small"} vertical>
+          <span className={style.sidebar_title}>меню</span>
+
+          {
+            user ?
+              <Link to={'/'} className={style.sidebar_link + ' ' + (currentPath == '/tags' ? style.active : '')}
+                    onClick={onLogoutClick}>
+                <TagOutlined style={{fontSize: '18px'}} rev="true"/>
+                <span className={style.sidebar_item}>Выход</span>
+              </Link>
+              :
+              ''
+          }
+
+        </Flex>
+
 
       </Flex>
     </Layout.Sider>
