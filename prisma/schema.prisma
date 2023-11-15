@@ -26,8 +26,8 @@ model ForumPost {
   content       String
   authorId      Int
   tags          String[]
-  imageURL      String
-  authorAvatar  String
+  imageURL      String?
+  authorAvatar  String?
   commentsCount Int
   likesCount    Int
   timestamp     DateTime @default(now())

@@ -2,10 +2,13 @@
   background-color: var(--white-1);
   outline: 1px solid var(--white-2);
 
+
 }
 
 .header_container {
   padding: 20px 0;
+  display: flex;
+  gap: 20px;
 }
 
 .title {

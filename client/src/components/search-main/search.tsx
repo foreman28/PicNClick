@@ -1,8 +1,10 @@
-import { Flex } from "antd";
+import {Flex, List} from "antd";
 import styles from "./search.module.scss";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import queryString from 'query-string';
 import {useNavigate} from "react-router-dom";
+import {postApi} from "../../app/serivices/posts";
+import ForumPost from "../forum-post/forum-post";
 
 export const SearchMain = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -35,11 +37,16 @@ export const SearchMain = () => {
     }
   }
 
+
   return (
-    <Flex className={styles.main} vertical gap={"12px"}>
-      <div>123</div>
-      <div>searchTerm: {searchTerm}</div>
-      <div>suggestions: {JSON.stringify(suggestions)}</div>
-    </Flex>
+  <List
+    className={styles.list}
+    itemLayout="vertical"
+    size="large"
+    dataSource={suggestions}
+    renderItem={(item) =>
+      <ForumPost post={item}/>
+    }
+  />
   );
 };

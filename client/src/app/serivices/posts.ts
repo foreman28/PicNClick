@@ -30,10 +30,10 @@ export const postApi = api.injectEndpoints({
       }),
     }),
     addPost: builder.mutation<ForumPost, ForumPost>({
-      query: (employee) => ({
+      query: (post) => ({
         url: "/posts/add",
         method: "POST",
-        body: employee,
+        body: post,
       }),
     }),
   }),

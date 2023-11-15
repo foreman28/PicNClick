@@ -7,6 +7,8 @@ import {useLoginMutation, UserData} from "../../app/serivices/auth";
 import {CustomInput} from "../../components/custom-input/custom-input";
 import {ErrorMessage} from "../../components/error-message/error-message";
 import {CustomPasswordInput} from "../../components/custom-password-input/custom-password-input";
+import {Header} from "../../components/header/header";
+import {Footer} from "../../components/footer/footer";
 
 import {selectUser} from "../../features/auth/authSlice";
 import {Paths} from "../../paths";
@@ -20,10 +22,6 @@ import {inputText, inputPassword} from "../../themes/inputs";
 import {button} from "../../themes/buttons";
 
 import styles from "./login.module.css";
-import {Header} from "../../components/header/header";
-import {Sidebar} from "../../components/sidebar/sidebar";
-import {Footer} from "../../components/footer/footer";
-
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -57,7 +55,7 @@ export const Login = () => {
     <>
       <Header/>
       <Layout.Content className={styles.main}>
-        <Flex justify={"space-between"} style={{height:'100%'}}>
+        <Flex justify={"space-between"} style={{height: '100%'}}>
           <div className={styles.content}>
             <Form onFinish={login} className={styles.form}>
               <Flex vertical>
@@ -88,8 +86,5 @@ export const Login = () => {
       </Layout.Content>
       <Footer/>
     </>
-
-
-
   );
 };

@@ -7,7 +7,7 @@ const ForumFeed = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const apiUrl = 'http://localhost:8000/api/posts';
+    const apiUrl = `${process.env.REACT_APP_API_URL}/posts`;
 
     fetch(apiUrl)
     .then((response) => {

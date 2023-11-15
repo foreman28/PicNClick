@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "ForumPost" ALTER COLUMN "imageURL" DROP NOT NULL,
+ALTER COLUMN "authorAvatar" DROP NOT NULL;

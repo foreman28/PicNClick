@@ -60,7 +60,7 @@ const container = document.getElementById("root")!;
 const root = createRoot(container);
 
 root.render(
-  <React.StrictMode>
+  <>
     <Provider store={store}>
       <ConfigProvider
         // theme={{
@@ -73,7 +73,7 @@ root.render(
       </Auth>
       </ConfigProvider>
     </Provider>
-  </React.StrictMode>
+  </>
 );
 
 reportWebVitals();
