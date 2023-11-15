@@ -1,30 +1,24 @@
 import {Flex, Layout} from "antd";
-import {useDispatch, useSelector} from "react-redux";
-import {Link, useNavigate} from "react-router-dom";
-import {logout, selectUser} from "../../features/auth/authSlice";
+import {useSelector} from "react-redux";
+import {Link} from "react-router-dom";
+import {selectUser} from "../../features/auth/authSlice";
 
-import Search from "antd/es/input/Search";
-import {CompassOutlined, SearchOutlined, TagOutlined, UnorderedListOutlined} from '@ant-design/icons';
+import {EditOutlined, SearchOutlined, TagOutlined, UnorderedListOutlined} from '@ant-design/icons';
 
 import style from "./sidebar.module.scss";
+import React from "react";
 
 export const Sidebar = () => {
 
   const currentPath = window.location.pathname;
 
   const user = useSelector(selectUser);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const onLogoutClick = () => {
-    dispatch(logout());
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
+
+
 
   return (
     <Layout.Sider className={style.sidebar} width={310}>
       <Flex className={style.sidebar_container} gap={"large"} vertical>
-        {/*<Search className={style.sidebar_search}/>*/}
 
         <Flex gap={"small"} vertical>
           <span className={style.sidebar_title}>меню</span>
@@ -50,15 +44,16 @@ export const Sidebar = () => {
 
           {
             user ?
-              <Link to={'/'} className={style.sidebar_link + ' ' + (currentPath == '/tags' ? style.active : '')}
-                    onClick={onLogoutClick}>
-                <TagOutlined style={{fontSize: '18px'}} rev="true"/>
-                <span className={style.sidebar_item}>Выход</span>
-              </Link>
+              <>
+                <Link to={'/'} className={style.sidebar_link + ' ' + (currentPath == '/add_post' ? style.active : '')}>
+                  <EditOutlined style={{fontSize: '18px'}} rev="true"/>
+                  <span className={style.sidebar_item}>Добавить</span>
+                </Link>
+
+              </>
               :
               ''
           }
-
         </Flex>
 
 

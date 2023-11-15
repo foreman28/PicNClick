@@ -1,5 +1,11 @@
 .sidebar {
   background-color: var(--white-1);
+  position: relative;
+
+  &>div{
+    position: sticky;
+    top: 0;
+  }
 }
 
 .sidebar_container {
@@ -37,6 +43,12 @@
   flex-wrap: nowrap;
   gap: 12px;
 
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: var(--white-2);
+  }
+
   & span {
     color: var(--black-1);
     font-family: var(--font-family);
@@ -49,14 +61,14 @@
 
   &.active {
     position: relative;
-    background: var(--accent-2-1);
+    background-color: var(--accent-2-1);
     &:before {
       content: '';
       position: absolute;
       left: 0;
       height: 100%;
       width: 5px;
-      background: var(--accent-2);
+      background-color: var(--accent-2);
     }
   }
 }

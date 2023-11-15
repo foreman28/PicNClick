@@ -27,15 +27,6 @@ export const Forum = () => {
   return (
     <Layout>
       <Flex className={styles.main} vertical gap={"12px"}>
-        <Space>
-          <CustomButton theme={button} type="primary">
-            Добавить
-          </CustomButton>
-          <CustomButton theme={button} type="primary">
-            asd
-          </CustomButton>
-        </Space>
-
         <List
           className={styles.list}
           itemLayout="vertical"
@@ -46,7 +37,6 @@ export const Forum = () => {
           }
           locale={{emptyText: 'Пусто'}}
         />
-
       </Flex>
     </Layout>
   );
