@@ -1,14 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {Flex, Space, List} from "antd";
+import {Flex, List} from "antd";
 import {Layout} from "../../components/layout/layout";
 
 import styles from "./forum.module.css";
-import {CustomButton} from "../../components/custom-button/button";
-import {button, button2} from "../../themes/buttons";
 import ForumPost from "../../components/forum-post/forum-post";
 
 export const Forum = () => {
   const [data, setData] = useState([]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const apiUrl = `${process.env.REACT_APP_API_URL}/posts`;

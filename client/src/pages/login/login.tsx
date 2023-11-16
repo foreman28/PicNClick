@@ -30,6 +30,10 @@ export const Login = () => {
   const [loginUser, loginUserResult] = useLoginMutation();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     if (user) {
       navigate("/forum");
     }

@@ -1,5 +1,6 @@
 import { Button, Result, Row } from "antd";
 import { Link, useParams } from "react-router-dom";
+import {useEffect} from "react";
 
 const Statuses: Record<string, string> = {
   created: "Пользователь успешно создан",
@@ -9,6 +10,10 @@ const Statuses: Record<string, string> = {
 
 export const Status = () => {
   const { status } = useParams();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Row align="middle" justify="center" style={{ width: "100%" }}>

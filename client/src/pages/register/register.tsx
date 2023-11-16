@@ -1,5 +1,5 @@
 import {User} from "@prisma/client";
-import {Button, ConfigProvider, Flex, Form, Layout, Space} from "antd";
+import {Flex, Form, Layout, Space} from "antd";
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
@@ -31,6 +31,10 @@ export const Register = () => {
   const user = useSelector(selectUser);
   const [error, setError] = useState("");
   const [registerUser] = useRegisterMutation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     if (user) {

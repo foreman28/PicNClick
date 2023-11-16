@@ -1,4 +1,4 @@
-import {Button, ConfigProvider, Flex, Layout} from "antd";
+import {Flex, Layout} from "antd";
 
 import styles from "./footer.module.css";
 export const Footer = () => {

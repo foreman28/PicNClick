@@ -50,14 +50,14 @@ const ForumPost = ({post}) => {
       <List.Item.Meta
         description={
           <Flex gap={8} vertical>
-            <Link to={"/user/" + post.author.id}>
+            <Space>
               <Flex gap={16} align={"center"}>
-                <Avatar src={post.author.avatarURL !== null ? post.author.avatarURL : "/img/avatar.jpg"}/>
+                <Link to={"/user/" + post.author.id}><Avatar src={post.author.avatarURL !== null ? post.author.avatarURL : "/img/avatar.jpg"}/></Link>
                 <Flex vertical>
-                  <Space className={styles.username}>{post.author.username}</Space>
+                  <Link to={"/user/" + post.author.id} className={styles.username}>{post.author.username}</Link>
                 </Flex>
               </Flex>
-            </Link>
+            </Space>
 
               <Link style={{display: "block"}} className={styles.title} to={`/forum/${post.id}`}>
                 <img className={styles.img} src={post.imageURL !== null ? post.imageURL : "/img/Image-1.png"} alt=""/>

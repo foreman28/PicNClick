@@ -4,6 +4,12 @@
 
   width: 100%;
   max-width: 600px;
+
+  &:focus-within {
+    .list{
+      display: block;
+    }
+  }
 }
 
 .search {
@@ -21,6 +27,7 @@
   border-radius: 4px;
 
   overflow: hidden;
+  display: none;
 }
 
 .item {

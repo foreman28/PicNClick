@@ -1,6 +1,6 @@
 import {Flex, Layout} from "antd";
 import {useDispatch, useSelector} from "react-redux";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {logout, selectUser} from "../../features/auth/authSlice";
 
 import {button, button2} from "../../themes/buttons";
@@ -10,11 +10,11 @@ import {CustomButton} from "../custom-button/button";
 import SearchComponent from "../custom-search/search";
 import {search} from "../../themes/search";
 
-interface Post {
-  id: number;
-  title: string;
-  content: string;
-}
+// interface Post {
+//   id: number;
+//   title: string;
+//   content: string;
+// }
 
 export const Header = () => {
   const user = useSelector(selectUser);

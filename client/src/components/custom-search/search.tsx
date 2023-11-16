@@ -1,18 +1,16 @@
 import {useState} from 'react';
 import {ConfigProvider, Input, List} from 'antd';
-import {search} from "../../themes/search";
 import styles from "./search.module.scss";
 import {Link, useNavigate} from "react-router-dom";
-import Title from "antd/lib/typography/Title";
 
 const {Search} = Input;
 
-const SearchComponent = (theme: any) => {
-  const [searchTerm, setSearchTerm] = useState<string>('');
+const SearchComponent = (props: any) => {
+  // const [searchTerm, setSearchTerm] = useState<string>('');
   const [suggestions, setSuggestions] = useState<any[]>([]);
   const navigate = useNavigate();
   const handleSearch = async (value: string) => {
-    setSearchTerm(value);
+    // setSearchTerm(value);
 
     if (value) {
       // Replace the URL with your actual API endpoint
@@ -32,15 +30,19 @@ const SearchComponent = (theme: any) => {
   };
 
   const sendSearch = async (value: String) => {
-    navigate(`/search?search=${value}`);
-    // console.log(suggestions)
 
+    if (value) {
+      navigate(`/search?search=${value}`);
+    }
+    else {
+      navigate(`/search`);
+    }
   }
 
   return (
     <div className={styles.searchBox}>
       <ConfigProvider
-        theme={search}>
+        theme={props.theme}>
         <Search
           placeholder="Search for posts..."
           allowClear

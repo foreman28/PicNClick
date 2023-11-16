@@ -9,6 +9,10 @@ export const Tags = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const apiUrl = `${process.env.REACT_APP_API_URL}/posts`;
 
     fetch(apiUrl)

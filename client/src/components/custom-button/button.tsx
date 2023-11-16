@@ -1,5 +1,5 @@
 import React from "react";
-import {Form, Button, ConfigProvider} from "antd";
+import {Button, ConfigProvider} from "antd";
 import styles from "./button.module.scss"
 
 type Props = {

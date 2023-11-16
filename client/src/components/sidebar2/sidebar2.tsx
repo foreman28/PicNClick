@@ -1,25 +1,24 @@
-import {Button, Flex, Layout, List, Space} from "antd";
+import {Flex, Layout, List} from "antd";
 import {useDispatch} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import {logout} from "../../features/auth/authSlice";
 
 import styles from "./sidebar2.module.scss";
-import Search from "antd/es/input/Search";
 
-import {CompassOutlined, LinkOutlined, StarOutlined, TagOutlined, UnorderedListOutlined} from '@ant-design/icons';
-import { NavLink } from "react-router-dom";
+import {LinkOutlined, StarOutlined} from '@ant-design/icons';
+
 export const Sidebar2 = () => {
 
-  const currentPath  = window.location.pathname;
+  // const currentPath  = window.location.pathname;
 
   // const user = useSelector(selectUser);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const onLogoutClick = () => {
-    dispatch(logout());
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
+  // const onLogoutClick = () => {
+  //   dispatch(logout());
+  //   localStorage.removeItem("token");
+  //   navigate("/login");
+  // };
 
   const data = [
     'Racing car sprays burning fuel into crowd.',

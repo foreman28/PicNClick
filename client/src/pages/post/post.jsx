@@ -2,11 +2,15 @@ import React, {useEffect, useState} from "react";
 import {Layout} from "../../components/layout/layout";
 import {useParams} from "react-router-dom";
 import styles from "./post.module.scss"
-import {Flex, Space, Tag} from "antd";
+import {Flex, Tag} from "antd";
 
 export const Post = () => {
     const {id} = useParams(); // Получаем значение динамического параметра из URL
     const [postData, setPostData] = useState(null);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     useEffect(() => {
         const fetchPostData = async () => {
@@ -36,7 +40,7 @@ export const Post = () => {
 
     return (
         <Layout>
-            <img className={styles.img} src={postData.imageURL !== null ? postData.imageURL : "/img/Image-1.png"}></img>
+            <img className={styles.img} src={postData.imageURL !== null ? postData.imageURL : "/img/Image-1.png"} alt={''}></img>
             <Flex gap={8}>
                 {postData.tags.map((tag, index) => (
                     <Tag key={index} className={styles.tag}>
