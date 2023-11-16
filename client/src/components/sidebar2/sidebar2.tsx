@@ -1,7 +1,6 @@
 import {Flex, Layout, List} from "antd";
 import {useDispatch} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
-import {logout} from "../../features/auth/authSlice";
 
 import styles from "./sidebar2.module.scss";
 
@@ -12,8 +11,8 @@ export const Sidebar2 = () => {
   // const currentPath  = window.location.pathname;
 
   // const user = useSelector(selectUser);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const navigate = useNavigate();
+  // const dispatch = useDispatch();
   // const onLogoutClick = () => {
   //   dispatch(logout());
   //   localStorage.removeItem("token");

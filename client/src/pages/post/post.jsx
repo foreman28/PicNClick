@@ -16,9 +16,6 @@ export const Post = () => {
         const fetchPostData = async () => {
             try {
                 const response = await fetch(`http://localhost:8000/api/posts/${id}`);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
 
                 const data = await response.json();
                 setPostData(data);
