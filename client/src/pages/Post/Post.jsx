@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {Layout} from "../../components/layout/layout";
 import {useParams} from "react-router-dom";
-import styles from "./post.module.scss"
+import styles from "./Post.module.scss"
 import {Flex, Tag} from "antd";
 import {useGetPostQuery} from "../../app/services/posts";
 // import {useDispatch} from "react-redux";
@@ -18,7 +18,7 @@ export const Post = () => {
 
   useEffect(() => {
     if (isError) {
-      console.error('Error fetching post:', isError);
+      console.error('Error fetching Post:', isError);
     }
   }, [isError]);
 

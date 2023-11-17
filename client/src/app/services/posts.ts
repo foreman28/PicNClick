@@ -36,9 +36,9 @@ export const postsApi = api.injectEndpoints({
         body: post,
       }),
     }),
-    searchPosts: builder.query<ForumPost[], string>({
-      query: (searchTerm) => ({
-        url: `/posts/search?search=${searchTerm}`,
+    searchPosts: builder.query<ForumPost[], { search: string }>({
+      query: ({ search }) => ({
+        url: `/posts/search?search=${search}`,
         method: "GET",
       }),
     }),

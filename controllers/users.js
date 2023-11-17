@@ -3,7 +3,7 @@ const brypt = require('bcrypt'); // хеширование пароля
 const jwt = require('jsonwebtoken');
 
 /**
- * @route POST /api/user/login
+ * @route POST /api/user/Login
  * @desс Логин
  * @access Public
  */
@@ -43,7 +43,7 @@ const login = async (req, res) => {
 
 /**
  * 
- * @route POST /api/user/register
+ * @route POST /api/user/Register
  * @desc Регистрация
  * @access Public
  */

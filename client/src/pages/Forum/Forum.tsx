@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {Flex, List} from "antd";
 import {Layout} from "../../components/layout/layout";
 
-import styles from "./forum.module.css";
+import styles from "./Forum.module.scss";
 import ForumPost from "../../components/forum-post/forum-post";
 // import {useDispatch, useSelector} from "react-redux";
 import {useGetAllPostsQuery} from "../../app/services/posts";

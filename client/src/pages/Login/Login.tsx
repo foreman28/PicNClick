@@ -21,7 +21,7 @@ import Text from "antd/lib/typography/Text";
 import {inputText, inputPassword} from "../../themes/inputs";
 import {button} from "../../themes/buttons";
 
-import styles from "./login.module.css";
+import styles from "./Login.module.css";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ export const Login = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/forum");
+      navigate("/Forum");
     }
   }, [user, navigate]);
 
@@ -43,9 +43,8 @@ export const Login = () => {
     try {
       await loginUser(data).unwrap();
 
-      navigate("/forum");
+      navigate("/Forum");
     } catch (err) {
-      console.log(123)
       const maybeError = isErrorWithMessage(err);
 
       if (maybeError) {
@@ -86,7 +85,7 @@ export const Login = () => {
               <ErrorMessage message={error}/>
             </Space>
           </div>
-          <img srcSet={"./img/login-img.png"} alt={''} className={styles.image}/>
+          <img srcSet={"./img/Login-img.png"} alt={''} className={styles.image}/>
         </Flex>
       </Layout.Content>
       <Footer/>

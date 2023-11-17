@@ -6,22 +6,23 @@ import {store} from "./app/store";
 import reportWebVitals from "./reportWebVitals";
 import {createBrowserRouter, RouterProvider, useParams} from "react-router-dom";
 
-import {Forum} from "./pages/forum/forum";
+import {Forum} from "./pages/Forum/Forum";
 
-import {Register} from "./pages/register/register";
-import {Login} from "./pages/login/login";
-import {Status} from "./pages/status/status";
+import {Register} from "./pages/Register/Register";
+import {Login} from "./pages/Login/Login";
+import {Status} from "./pages/Status/Status";
 
 import {Auth} from "./features/auth/auth";  // Авторизация
 import {Paths} from "./paths";  // Пути
 
-import {Post} from "./pages/post/post";
+import {Post} from "./pages/Post/Post";
 import {ConfigProvider} from "antd";
 import ruRU from 'antd/lib/locale/ru_RU';
 
 import "./index.scss";
-import {Search} from "./pages/search/search";
-import {Tags} from "./pages/tags/tags";
+
+import {Search} from "./pages/Search/Search";
+import {Tags} from "./pages/Tags/Tags";
 import NotFound from "./pages/NotFound/NotFound";
 
 

@@ -21,7 +21,7 @@ import {button} from "../../themes/buttons";
 import {Header} from "../../components/header/header";
 import {Footer} from "../../components/footer/footer";
 
-import styles from "./register.module.css";
+import styles from "./Register.module.css";
 import {CustomButton} from "../../components/custom-button/button";
 
 type RegisterData = Omit<User, "id"> & { confirmPassword: string };
@@ -38,7 +38,7 @@ export const Register = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/forum");
+      navigate("/Forum");
     }
   }, [user, navigate]);
 
@@ -46,7 +46,7 @@ export const Register = () => {
     try {
       await registerUser(data).unwrap();
 
-      navigate("/forum");
+      navigate("/Forum");
     } catch (err) {
       const maybeError = isErrorWithMessage(err);
 
@@ -87,7 +87,7 @@ export const Register = () => {
             <ErrorMessage message={error}/>
           </Space>
         </div>
-        <img srcSet={"./img/register-img.png"} alt={''} className={styles.image}/>
+        <img srcSet={"./img/Register-img.png"} alt={''} className={styles.image}/>
       </Flex>
       </Layout.Content>
       <Footer/>

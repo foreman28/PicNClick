@@ -3,7 +3,7 @@ import {Flex} from "antd";
 
 import {Layout} from "../../components/layout/layout";
 
-import styles from "./tags.module.scss";
+import styles from "./Tags.module.scss";
 
 export const Tags = () => {
   const [data, setData] = useState([]);

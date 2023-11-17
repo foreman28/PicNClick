@@ -22,17 +22,17 @@ export const Sidebar = () => {
 
         <Flex gap={"small"} vertical>
           <span className={style.sidebar_title}>меню</span>
-          <Link to={'/search'} className={style.sidebar_link + ' ' + (currentPath == '/search' ? style.active : '')}>
+          <Link to={'/Search'} className={style.sidebar_link + ' ' + (currentPath == '/Search' ? style.active : '')}>
             <SearchOutlined style={{fontSize: '18px'}} rev="true"/>
             <span className={style.sidebar_item}>Поиск</span>
           </Link>
 
-          <Link to={'/forum'} className={style.sidebar_link + ' ' + (currentPath == '/forum' ? style.active : '')}>
+          <Link to={'/Forum'} className={style.sidebar_link + ' ' + (currentPath == '/Forum' ? style.active : '')}>
             <UnorderedListOutlined style={{fontSize: '18px'}} rev="true"/>
             <span className={style.sidebar_item}>Форумы</span>
           </Link>
 
-          <Link to={'/tags'} className={style.sidebar_link + ' ' + (currentPath == '/tags' ? style.active : '')}>
+          <Link to={'/Tags'} className={style.sidebar_link + ' ' + (currentPath == '/Tags' ? style.active : '')}>
             <TagOutlined style={{fontSize: '18px'}} rev="true"/>
             <span className={style.sidebar_item}>Теги</span>
           </Link>

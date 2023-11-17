@@ -18,7 +18,7 @@ const all = async (req, res) => {
             {
               title: {
                 contains: search,
-                mode: 'insensitive', // Case-insensitive search
+                mode: 'insensitive', // Case-insensitive Search
               },
             },
             {
@@ -50,15 +50,15 @@ const all = async (req, res) => {
 
 // const all = async (req, res) => {
 //   try {
-//     const post = await prisma.forumPost.findMany({
+//     const Post = await prisma.forumPost.findMany({
 //       include: {
 //         author: true, // информация об авторе
 //       },
 //     });
 //
-//     res.status(200).json(post);
+//     res.Status(200).json(Post);
 //   } catch {
-//     res.status(500).json({message: "Не удалось получить посты"});
+//     res.Status(500).json({message: "Не удалось получить посты"});
 //   }
 // };
 
