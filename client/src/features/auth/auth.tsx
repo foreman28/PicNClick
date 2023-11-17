@@ -1,4 +1,4 @@
-import { useCurrentQuery } from "../../app/serivices/auth";
+import { useCurrentQuery } from "../../app/services/auth";
 import {Flex} from "antd";
 
 export const Auth = ({ children }: { children: JSX.Element }) => {
@@ -6,9 +6,9 @@ export const Auth = ({ children }: { children: JSX.Element }) => {
 
   if(isLoading) {
     return (
-      <Flex justify={'center'} align={'center'} style={{height: '100%'}}>
+      <Flex justify={'center'} align={'center'} style={{height: '100vh'}}>
 
-        <img srcSet={"./logo512.png"} width={120} height={120} alt={''}
+        <img srcSet={"/logo.svg"} width={120} height={120} alt={'logo'}
              style={{ animation: 'rotateAnimation 4s linear infinite' }}/>
       </Flex>
     )

@@ -1,5 +1,6 @@
 export const Paths = {
   home: '/',
+  all: '/*',
   
   status: '/status',
 

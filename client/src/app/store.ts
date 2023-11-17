@@ -1,14 +1,14 @@
 import {configureStore, ThunkAction, Action} from "@reduxjs/toolkit";
-import counterReducer from "../features/counter/counterSlice";
-import {api} from "./serivices/api";
+import {api} from "./services/api";
 import auth from '../features/auth/authSlice'
+import posts from '../features/posts/postsSlice'
 import {listenerMiddleware} from "../middleware/auth";
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
     [api.reducerPath]: api.reducer,
     auth,
+    posts,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(api.middleware).prepend(listenerMiddleware.middleware),

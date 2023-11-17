@@ -4,7 +4,7 @@ import {createRoot} from "react-dom/client";
 import {Provider} from "react-redux";
 import {store} from "./app/store";
 import reportWebVitals from "./reportWebVitals";
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, RouterProvider, useParams} from "react-router-dom";
 
 import {Forum} from "./pages/forum/forum";
 
@@ -22,6 +22,8 @@ import ruRU from 'antd/lib/locale/ru_RU';
 import "./index.scss";
 import {Search} from "./pages/search/search";
 import {Tags} from "./pages/tags/tags";
+import NotFound from "./pages/NotFound/NotFound";
+
 
 const router = createBrowserRouter([
   {
@@ -58,6 +60,11 @@ const router = createBrowserRouter([
   {
     path: `${Paths.status}/:status`,
     element: <Status/>,
+  },
+
+  {
+    path: Paths.all,
+    element: <NotFound />,
   },
 ]);
 

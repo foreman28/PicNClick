@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import {Paths} from "../../paths";
 
-import {useLoginMutation, UserData} from "../../app/serivices/auth";
+import {useLoginMutation, UserData} from "../../app/services/auth";
 import {selectUser} from "../../features/auth/authSlice";
 
 import {CustomInput} from "../../components/custom-input/custom-input";

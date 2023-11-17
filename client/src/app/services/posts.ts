@@ -1,7 +1,7 @@
 import { ForumPost } from "@prisma/client";
 import { api } from "./api";
 
-export const postApi = api.injectEndpoints({
+export const postsApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getAllPosts: builder.query<ForumPost[], void>({
       query: () => ({
@@ -36,6 +36,12 @@ export const postApi = api.injectEndpoints({
         body: post,
       }),
     }),
+    searchPosts: builder.query<ForumPost[], string>({
+      query: (searchTerm) => ({
+        url: `/posts/search?search=${searchTerm}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -45,7 +51,8 @@ export const {
   useEditPostMutation,
   useRemovePostMutation,
   useAddPostMutation,
-} = postApi;
+  useSearchPostsQuery,
+} = postsApi;
 
 export const {
   endpoints: {
@@ -54,5 +61,6 @@ export const {
     editPost,
     removePost,
     addPost,
+    searchPosts,
   },
-} = postApi;
+} = postsApi;

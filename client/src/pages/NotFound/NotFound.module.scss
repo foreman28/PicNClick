@@ -1,0 +1,29 @@
+.main {
+  min-height: 800px;
+  width: 100%;
+  max-width: var(--white-container);
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  color: var(--black-1);
+  font-family: var(--font-family);
+  font-size: 100px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.text {
+  color: var(--black-1);
+  font-family: var(--font-family);
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

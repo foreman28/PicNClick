@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 import ForumPost from "../../components/forum-post/forum-post";
 
 export const Search = () => {
-  // const [searchTerm, setSearchTerm] = useState<string>('');
+  const [searchTerm, setSearchTerm] = useState<string>('');
   const [suggestions, setSuggestions] = useState<any[]>([]);
   const queryParams = queryString.parse(window.location.search);
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export const Search = () => {
   }, [queryParams.search, navigate]);
 
   async function handleSearch(value: any) {
-    // setSearchTerm(value);
+    setSearchTerm(value);
 
     if (value) {
       // Replace the URL with your actual API endpoint
@@ -53,7 +53,7 @@ export const Search = () => {
   return (
     <Layout>
       <Flex className={styles.main} vertical gap={"12px"}>
-        <h1>Поиск {}</h1>
+        <h1>Поиск{searchTerm ? ': ' + searchTerm : ''}</h1>
 
         <List
           className={styles.list}
