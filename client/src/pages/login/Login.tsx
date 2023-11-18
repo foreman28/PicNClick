@@ -38,6 +38,7 @@ export const Login = () => {
   }, [user, navigate]);
 
   const login = async (data: UserData) => {
+    console.log(data)
     try {
       await loginUser(data).unwrap();
 
