@@ -9,7 +9,7 @@ export const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
     auth,
-    posts,
+    posts
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(api.middleware).prepend(listenerMiddleware.middleware),

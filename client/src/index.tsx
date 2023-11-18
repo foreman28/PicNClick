@@ -22,6 +22,7 @@ import {ConfigProvider} from "antd";
 import ruRU from 'antd/lib/locale/ru_RU';
 
 import "./index.scss";
+import {Auth} from "./features/auth/auth";
 
 
 const router = createBrowserRouter([
@@ -79,7 +80,9 @@ root.render(
         // }}
         locale={ruRU}
       >
+        <Auth>
           <RouterProvider router={router}/>
+        </Auth>
       </ConfigProvider>
     </Provider>
   </>

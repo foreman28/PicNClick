@@ -13,15 +13,13 @@ import {CustomPasswordInput} from "../../components/custom-password-input/custom
 import {Header} from "../../components/header/header";
 import {Footer} from "../../components/footer/footer";
 
-import {isErrorWithMessage} from "../../utils/is-error-with-message";
-
 import Title from "antd/lib/typography/Title";
 import Text from "antd/lib/typography/Text";
 
 import {inputText, inputPassword} from "../../themes/inputs";
 import {button} from "../../themes/buttons";
 
-import styles from "./Login.module.css";
+import styles from "./Login.module.scss";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -44,14 +42,8 @@ export const Login = () => {
       await loginUser(data).unwrap();
 
       navigate("/home");
-    } catch (err) {
-      const maybeError = isErrorWithMessage(err);
-
-      if (maybeError) {
-        setError(err.data.message);
-      } else {
-        setError("Неизвестная ошибка");
-      }
+    } catch (err: any) {
+      setError(err.data.message);
     }
   };
 

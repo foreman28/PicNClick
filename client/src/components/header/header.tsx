@@ -5,22 +5,21 @@ import {logout, selectUser} from "../../features/auth/authSlice";
 
 import {button, button2} from "../../themes/buttons";
 
-import style from "./header.module.scss";
 import {CustomButton} from "../custom-button/button";
 import SearchComponent from "../custom-search/search";
 import {search} from "../../themes/search";
+
+import style from "./header.module.scss";
 
 export const Header = () => {
   const user = useSelector(selectUser);
   // const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const onLogoutClick = () => {
     dispatch(logout());
     localStorage.removeItem("token");
     // navigate("/login");
   };
-
 
 
   return (
