@@ -3,7 +3,7 @@ import {Layout} from "../../components/layout/layout";
 import {useParams} from "react-router-dom";
 import styles from "./Post.module.scss"
 import {Flex, Tag} from "antd";
-import {useGetPostQuery} from "../../app/services/posts";
+import {useGetPostQuery} from "../../api/posts";
 // import {useDispatch} from "react-redux";
 
 export const Post = () => {
@@ -28,7 +28,7 @@ export const Post = () => {
         <p>Loading...</p>
       ) : (
         <>
-          <img className={styles.img} src={post.imageURL !== null ? post.imageURL : "/img/Image-1.png"}
+          <img className={styles.img} src={post.imageURL !== null ? post.imageURL : "/img/image-1.png"}
                alt={''}></img>
           <Flex gap={8}>
             {post.tags.map((tag, index) => (

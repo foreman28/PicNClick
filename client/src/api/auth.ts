@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import { api } from "./api";
+import {api} from "./apiConfig";
 
 export type UserData = Omit<User, "id">;
 type ResponseLoginData = User & { token: string };
@@ -29,8 +29,7 @@ export const authApi = api.injectEndpoints({
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation, useCurrentQuery } =
-  authApi;
+export const { useRegisterMutation, useLoginMutation, useCurrentQuery } = authApi;
 
 export const {
   endpoints: { login, register, current },

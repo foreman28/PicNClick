@@ -3,7 +3,7 @@ import {Flex, Form, Layout, Space} from "antd";
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
-import {useRegisterMutation} from "../../app/services/auth";
+import {useRegisterMutation} from "../../api/auth";
 
 import {CustomInput} from "../../components/custom-input/custom-input";
 import {ErrorMessage} from "../../components/error-message/error-message";

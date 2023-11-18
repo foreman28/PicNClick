@@ -52,18 +52,19 @@ const ForumPost = ({post}) => {
           <Flex gap={8} vertical>
             <Space>
               <Flex gap={16} align={"center"}>
-                <Link to={"/user/" + post.author.id}><Avatar src={post.author.avatarURL !== null ? post.author.avatarURL : "/img/avatar.jpg"}/></Link>
+                <Link to={"/user/" + post.author.id}><Avatar
+                  src={post.author.avatarURL !== null ? post.author.avatarURL : "/img/avatar.jpg"}/></Link>
                 <Flex vertical>
                   <Link to={"/user/" + post.author.id} className={styles.username}>{post.author.username}</Link>
                 </Flex>
               </Flex>
             </Space>
 
-              <Link style={{display: "block"}} className={styles.title} to={`/forum/${post.id}`}>
-                <img className={styles.img} src={post.imageURL !== null ? post.imageURL : "/img/Image-1.png"} alt=""/>
-              </Link>
+            <Link style={{display: "contents"}} to={`/forum/${post.id}`}>
+              <img className={styles.img} srcSet={post.imageURL !== null ? post.imageURL : "/img/image-1.png"} width={1132} height={420} alt=""/>
+            </Link>
 
-              <Flex gap={0} vertical>
+            <Flex gap={0} vertical>
               <Link className={styles.title} to={`/forum/${post.id}`}>
                 {post.title}
               </Link>

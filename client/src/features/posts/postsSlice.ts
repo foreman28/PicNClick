@@ -1,9 +1,7 @@
-// postsSlice.ts
-
 import { createSlice } from "@reduxjs/toolkit";
-import { postsApi } from "../../app/services/posts";
-import { RootState } from "../../app/store";
 import { ForumPost } from "@prisma/client";
+import {postsApi} from "../../api/posts";
+import {RootState} from "../../store/store";
 
 interface InitialState {
   posts: ForumPost[] | null;
@@ -24,7 +22,6 @@ const slice = createSlice({
       .addMatcher(postsApi.endpoints.getAllPosts.matchFulfilled, (state, action) => {
         state.posts = action.payload;
       })
-      // Add a new matcher for the searchPosts endpoint
       .addMatcher(postsApi.endpoints.searchPosts.matchFulfilled, (state, action) => {
         state.posts = action.payload;
       });

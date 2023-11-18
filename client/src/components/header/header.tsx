@@ -10,12 +10,6 @@ import {CustomButton} from "../custom-button/button";
 import SearchComponent from "../custom-search/search";
 import {search} from "../../themes/search";
 
-// interface post {
-//   id: number;
-//   title: string;
-//   content: string;
-// }
-
 export const Header = () => {
   const user = useSelector(selectUser);
   // const navigate = useNavigate();
@@ -28,12 +22,13 @@ export const Header = () => {
   };
 
 
+
   return (
     <Layout.Header className={style.header} style={{height: 'auto'}}>
       <Flex justify={"space-between"} align={"center"} className={style.header_container}>
 
         <Link to="/" className={style.logo_text}>
-          <img srcSet={"../../../logo.svg"} alt={"PicNClick"}/>
+          <img srcSet={"../../../logo.svg"} width={32} height={32} alt={"PicNClick"}/>
           <span>Pic<span>&</span>Click</span>
         </Link>
 

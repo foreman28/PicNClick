@@ -1,8 +1,9 @@
-import {configureStore, ThunkAction, Action} from "@reduxjs/toolkit";
-import {api} from "./services/api";
-import auth from '../features/auth/authSlice'
-import posts from '../features/posts/postsSlice'
-import {listenerMiddleware} from "../middleware/auth";
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+
+import auth from '../features/auth/authSlice';
+import posts from '../features/posts/postsSlice';
+import { listenerMiddleware } from "../middleware/auth";
+import {api} from "../api/apiConfig";
 
 export const store = configureStore({
   reducer: {

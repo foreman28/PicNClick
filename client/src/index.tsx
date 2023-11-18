@@ -2,22 +2,19 @@ import React from "react";
 
 import {createRoot} from "react-dom/client";
 import {Provider} from "react-redux";
-import {store} from "./app/store";
+import {store} from "./store/store";
 import reportWebVitals from "./reportWebVitals";
 import {createBrowserRouter, RouterProvider, useParams} from "react-router-dom";
 
-import {Forum} from "./pages/forum/Forum";
-
 import {Register} from "./pages/register/Register";
 import {Login} from "./pages/login/Login";
-import {Status} from "./pages/status/Status";
-
+// import {Status} from "./pages/status/Status";
 import {Home} from "./pages/home/Home";
+import {Forum} from "./pages/forum/Forum";
 import {Search} from "./pages/search/Search";
 import {Tags} from "./pages/tags/Tags";
 import NotFound from "./pages/notFound/NotFound";
 
-import {Auth} from "./features/auth/auth";  // Авторизация
 import {Paths} from "./paths";  // Пути
 
 import {Post} from "./pages/post/Post";
@@ -27,29 +24,27 @@ import ruRU from 'antd/lib/locale/ru_RU';
 import "./index.scss";
 
 
-
-
 const router = createBrowserRouter([
   {
     path: Paths.home,
-    element: <Home />,
+    element: <Home/>,
   },
   {
     path: Paths.search,
-    element: <Search />,
+    element: <Search/>,
   },
   {
     path: Paths.tags,
-    element: <Tags />,
+    element: <Tags/>,
   },
 
   {
     path: Paths.forum,
-    element: <Forum />,
+    element: <Forum/>,
   },
   {
     path: `${Paths.forum}/:id`,
-    element: <Post />,
+    element: <Post/>,
   },
 
   {
@@ -61,14 +56,14 @@ const router = createBrowserRouter([
     element: <Register/>,
   },
 
-  {
-    path: `${Paths.status}/:status`,
-    element: <Status/>,
-  },
+  // {
+  //   path: `${Paths.status}/:status`,
+  //   element: <Status/>,
+  // },
 
   {
     path: Paths.all,
-    element: <NotFound />,
+    element: <NotFound/>,
   },
 ]);
 
@@ -84,9 +79,7 @@ root.render(
         // }}
         locale={ruRU}
       >
-      <Auth>
-        <RouterProvider router={router}/>
-      </Auth>
+          <RouterProvider router={router}/>
       </ConfigProvider>
     </Provider>
   </>

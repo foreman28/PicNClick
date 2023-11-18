@@ -5,7 +5,7 @@ import {Layout} from "../../components/layout/layout";
 import styles from "./Forum.module.scss";
 import ForumPost from "../../components/forum-post/forum-post";
 // import {useDispatch, useSelector} from "react-redux";
-import {useGetAllPostsQuery} from "../../app/services/posts";
+import {useGetAllPostsQuery} from "../../api/posts";
 
 export const Forum = () => {
 
@@ -20,6 +20,7 @@ export const Forum = () => {
     if (isError) {
       console.error('Error fetching posts:', isError);
     }
+
   }, [isError]);
 
   return (

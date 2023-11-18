@@ -1,5 +1,5 @@
 import { ForumPost } from "@prisma/client";
-import { api } from "./api";
+import { api } from "./apiConfig";
 
 export const postsApi = api.injectEndpoints({
   endpoints: (builder) => ({
