@@ -1,4 +1,3 @@
-import {User} from "@prisma/client";
 import {Flex, Form, Layout, Space} from "antd";
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
@@ -35,7 +34,7 @@ export const Register = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/home");
+      navigate("/");
     }
   }, [user, navigate]);
 
@@ -43,7 +42,7 @@ export const Register = () => {
     try {
       await registerUser(data).unwrap();
 
-      navigate("/home");
+      navigate("/");
     } catch (err: any) {
       setError(err.data.message);
     }

@@ -19,9 +19,9 @@ export const Layout = ({children}: Props) => {
       <Flex justify={"space-between"} style={{height: '100%'}}>
         <Sidebar/>
         {/*<Flex gap={24} justify={"space-between"} className={styles.main}>*/}
-          <AntLayout.Content className={styles.main}>
-            {children}
-          </AntLayout.Content>
+        <AntLayout.Content className={styles.main}>
+          {children}
+        </AntLayout.Content>
         {/*</Flex>*/}
         <Sidebar2/>
       </Flex>

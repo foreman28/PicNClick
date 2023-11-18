@@ -33,7 +33,7 @@ export const Login = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/home");
+      navigate("/");
     }
   }, [user, navigate]);
 
@@ -41,7 +41,7 @@ export const Login = () => {
     try {
       await loginUser(data).unwrap();
 
-      navigate("/home");
+      navigate("/");
     } catch (err: any) {
       setError(err.data.message);
     }

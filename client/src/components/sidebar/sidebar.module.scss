@@ -3,7 +3,8 @@
   position: relative;
 
   &>div{
-    position: sticky;
+    height: 100%;
+    //position: sticky;
     //top: 0; // headerHeight
   }
 }

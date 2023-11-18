@@ -17,7 +17,7 @@ export const Sidebar = () => {
 
   return (
     <Layout.Sider className={style.sidebar} width={310}>
-      <Flex className={style.sidebar_container} gap={"large"} vertical>
+      <Flex style={{position: 'sticky', top:'70px'}} className={style.sidebar_container} gap={"large"} vertical>
 
         <Flex gap={"small"} vertical>
           <span className={style.sidebar_title}>меню</span>
