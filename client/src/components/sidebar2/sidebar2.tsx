@@ -15,7 +15,7 @@ export const Sidebar2 = () => {
   // const onLogoutClick = () => {
   //   dispatch(logout());
   //   localStorage.removeItem("token");
-  //   navigate("/Login");
+  //   navigate("/login");
   // };
 
   const data = [

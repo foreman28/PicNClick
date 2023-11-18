@@ -18,7 +18,7 @@ export const Post = () => {
 
   useEffect(() => {
     if (isError) {
-      console.error('Error fetching Post:', isError);
+      console.error('Error fetching post:', isError);
     }
   }, [isError]);
 

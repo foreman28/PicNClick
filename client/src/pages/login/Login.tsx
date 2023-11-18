@@ -35,7 +35,7 @@ export const Login = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/Forum");
+      navigate("/home");
     }
   }, [user, navigate]);
 
@@ -43,7 +43,7 @@ export const Login = () => {
     try {
       await loginUser(data).unwrap();
 
-      navigate("/Forum");
+      navigate("/home");
     } catch (err) {
       const maybeError = isErrorWithMessage(err);
 
@@ -85,7 +85,7 @@ export const Login = () => {
               <ErrorMessage message={error}/>
             </Space>
           </div>
-          <img srcSet={"./img/Login-img.png"} alt={''} className={styles.image}/>
+          <img srcSet={"./img/login-img.png"} alt={''} className={styles.image}/>
         </Flex>
       </Layout.Content>
       <Footer/>

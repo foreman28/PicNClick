@@ -38,7 +38,7 @@ export const Register = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/Forum");
+      navigate("/home");
     }
   }, [user, navigate]);
 
@@ -46,7 +46,7 @@ export const Register = () => {
     try {
       await registerUser(data).unwrap();
 
-      navigate("/Forum");
+      navigate("/home");
     } catch (err) {
       const maybeError = isErrorWithMessage(err);
 
@@ -87,7 +87,7 @@ export const Register = () => {
             <ErrorMessage message={error}/>
           </Space>
         </div>
-        <img srcSet={"./img/Register-img.png"} alt={''} className={styles.image}/>
+        <img srcSet={"./img/register-img.png"} alt={''} className={styles.image}/>
       </Flex>
       </Layout.Content>
       <Footer/>

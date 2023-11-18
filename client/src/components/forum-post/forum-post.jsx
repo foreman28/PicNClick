@@ -16,7 +16,7 @@ const ForumPost = ({post}) => {
 
   const createdDate = new Date(post.timestamp);
 
-  // Display different formats based on the age of the Post
+  // Display different formats based on the age of the post
   const formattedTimestamp =
     new Date() - createdDate < 24 * 60 * 60 * 1000
       ? formatDistanceToNow(createdDate, {locale: ru, addSuffix: true})
@@ -43,7 +43,7 @@ const ForumPost = ({post}) => {
       // extra={
       //   <Space>
       //     <Avatar src="/img/avatar.jpg"/>
-      //     <Text strong>{Post.author}</Text>
+      //     <Text strong>{post.author}</Text>
       //   </Space>
       // }
     >

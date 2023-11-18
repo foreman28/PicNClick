@@ -7,6 +7,7 @@ import {EditOutlined, SearchOutlined, TagOutlined, UnorderedListOutlined} from '
 
 import style from "./sidebar.module.scss";
 import React from "react";
+import {Paths} from "../../paths";
 
 export const Sidebar = () => {
 
@@ -22,17 +23,17 @@ export const Sidebar = () => {
 
         <Flex gap={"small"} vertical>
           <span className={style.sidebar_title}>меню</span>
-          <Link to={'/Search'} className={style.sidebar_link + ' ' + (currentPath == '/Search' ? style.active : '')}>
+          <Link to={Paths.search} className={style.sidebar_link + ' ' + (currentPath == Paths.search ? style.active : '')}>
             <SearchOutlined style={{fontSize: '18px'}} rev="true"/>
             <span className={style.sidebar_item}>Поиск</span>
           </Link>
 
-          <Link to={'/Forum'} className={style.sidebar_link + ' ' + (currentPath == '/Forum' ? style.active : '')}>
+          <Link to={Paths.forum} className={style.sidebar_link + ' ' + (currentPath == Paths.forum ? style.active : '')}>
             <UnorderedListOutlined style={{fontSize: '18px'}} rev="true"/>
             <span className={style.sidebar_item}>Форумы</span>
           </Link>
 
-          <Link to={'/Tags'} className={style.sidebar_link + ' ' + (currentPath == '/Tags' ? style.active : '')}>
+          <Link to={Paths.tags} className={style.sidebar_link + ' ' + (currentPath == Paths.tags ? style.active : '')}>
             <TagOutlined style={{fontSize: '18px'}} rev="true"/>
             <span className={style.sidebar_item}>Теги</span>
           </Link>

@@ -20,7 +20,7 @@ const SearchComponent = (props: any) => {
 
         setSuggestions(data);
       } catch (error) {
-        console.error('Error fetching Search suggestions:', error);
+        console.error('Error fetching search suggestions:', error);
       }
     } else {
       setSuggestions([]);

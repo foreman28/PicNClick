@@ -10,7 +10,7 @@ import {CustomButton} from "../custom-button/button";
 import SearchComponent from "../custom-search/search";
 import {search} from "../../themes/search";
 
-// interface Post {
+// interface post {
 //   id: number;
 //   title: string;
 //   content: string;
@@ -24,7 +24,7 @@ export const Header = () => {
   const onLogoutClick = () => {
     dispatch(logout());
     localStorage.removeItem("token");
-    // navigate("/Login");
+    // navigate("/login");
   };
 
 

@@ -2,13 +2,13 @@ export const Paths = {
   home: '/',
   all: '/*',
   
-  status: '/Status',
+  status: '/status',
 
-  login: '/Login',
-  register: '/Register',
+  login: '/login',
+  register: '/register',
 
-  forum: '/Forum',
+  forum: '/forum',
 
-  search: '/Search',
-  tags: '/Tags',
+  search: '/search',
+  tags: '/tags',
 } as const;

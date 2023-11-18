@@ -6,30 +6,33 @@ import {store} from "./app/store";
 import reportWebVitals from "./reportWebVitals";
 import {createBrowserRouter, RouterProvider, useParams} from "react-router-dom";
 
-import {Forum} from "./pages/Forum/Forum";
+import {Forum} from "./pages/forum/Forum";
 
-import {Register} from "./pages/Register/Register";
-import {Login} from "./pages/Login/Login";
-import {Status} from "./pages/Status/Status";
+import {Register} from "./pages/register/Register";
+import {Login} from "./pages/login/Login";
+import {Status} from "./pages/status/Status";
+
+import {Home} from "./pages/home/Home";
+import {Search} from "./pages/search/Search";
+import {Tags} from "./pages/tags/Tags";
+import NotFound from "./pages/notFound/NotFound";
 
 import {Auth} from "./features/auth/auth";  // Авторизация
 import {Paths} from "./paths";  // Пути
 
-import {Post} from "./pages/Post/Post";
+import {Post} from "./pages/post/Post";
 import {ConfigProvider} from "antd";
 import ruRU from 'antd/lib/locale/ru_RU';
 
 import "./index.scss";
 
-import {Search} from "./pages/Search/Search";
-import {Tags} from "./pages/Tags/Tags";
-import NotFound from "./pages/NotFound/NotFound";
+
 
 
 const router = createBrowserRouter([
   {
     path: Paths.home,
-    element: <Forum />,
+    element: <Home />,
   },
   {
     path: Paths.search,
