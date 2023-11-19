@@ -1,11 +1,13 @@
 import React, {useEffect} from 'react';
-import {Flex, List} from "antd";
+import {Flex, List, Typography} from "antd";
 import {Layout} from "../../components/layout/layout";
 
 import styles from "./Users.module.scss";
-import ForumPost from "../../components/forum-post/forum-post";
+import FeedPost from "../../components/feed-post/feed-post";
 // import {useDispatch, useSelector} from "react-redux";
 import {useGetAllPostsQuery} from "../../api/posts";
+
+const {Title, Text} = Typography;
 
 export const Users = () => {
 
@@ -25,6 +27,8 @@ export const Users = () => {
 
   return (
     <Layout>
+      <Flex gap={12} vertical>
+        <Title level={1}>Пользователи</Title>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
@@ -36,14 +40,14 @@ export const Users = () => {
               size="large"
               dataSource={posts}
               renderItem={(item) =>
-                <ForumPost post={item}/>
+                <FeedPost post={item}/>
               }
               locale={{emptyText: 'Пусто'}}
             />
           </Flex>
         </>
       )}
-
+      </Flex>
     </Layout>
   );
 };

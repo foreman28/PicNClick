@@ -4,7 +4,10 @@ import styles from "./Search.module.scss";
 import React, { useEffect, useState } from "react";
 import queryString from "query-string";
 import { useNavigate } from "react-router-dom";
-import ForumPost from "../../components/forum-post/forum-post";
+import FeedPost from "../../components/feed-post/feed-post";
+
+import {Typography} from "antd";
+const {Title, Text} = Typography;
 
 export const Search = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -23,9 +26,10 @@ export const Search = () => {
   const handleSearch = async (value: any) => {
     setSearchTerm(value);
 
+    const API_URL = process.env.REACT_APP_API_URL;
     const apiUrl = value
-      ? `${process.env.REACT_APP_API_URL}/posts?search=${value}`
-      : `${process.env.REACT_APP_API_URL}/posts`;
+      ? `${API_URL}/posts?search=${value}`
+      : `${API_URL}/posts`;
 
     try {
       const response = await fetch(apiUrl);
@@ -39,14 +43,14 @@ export const Search = () => {
   return (
     <Layout>
       <Flex className={styles.main} vertical gap={"12px"}>
-        <h1>Поиск{searchTerm ? ': ' + searchTerm : ''}</h1>
+        <Title level={1}>Поиск{searchTerm ? ': ' + searchTerm : ''}</Title>
 
         <List
           className={styles.list}
           itemLayout="vertical"
           size="large"
           dataSource={suggestions}
-          renderItem={(item) => <ForumPost post={item} />}
+          renderItem={(item) => <FeedPost post={item} />}
           locale={{ emptyText: 'Пусто' }}
         />
       </Flex>

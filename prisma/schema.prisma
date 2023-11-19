@@ -20,7 +20,7 @@ model User {
   Comment   Comment[]
 }
 
-model ForumPost {
+model FeedPost {
   id            Int      @id @default(autoincrement())
   title         String
   content       String
@@ -44,7 +44,7 @@ model Comment {
   userId    Int
   createdAt DateTime @default(now())
 
-  // Связь с ForumPost и User
+  // Связь с FeedPost и User
   post ForumPost @relation(fields: [postId], references: [id])
   user User      @relation(fields: [userId], references: [id])
 }

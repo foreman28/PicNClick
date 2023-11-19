@@ -3,7 +3,7 @@ import {RootState} from "../store/store";
 
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:8000/api",
+  baseUrl: `${process.env.REACT_APP_API_URL}`,
   prepareHeaders: (headers, { getState }) => {
     const token =
       (getState() as RootState).auth.user?.token ||

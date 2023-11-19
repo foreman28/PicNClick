@@ -6,15 +6,15 @@ import {
   ClockCircleOutlined,
 } from '@ant-design/icons';
 import {Link} from 'react-router-dom';
-import styles from './forum-post.module.scss';
+import styles from './feed-post.module.scss';
 
 import {ru} from 'date-fns/locale';
 import {format, formatDistanceToNow} from "date-fns";
 import {Paths} from "../../paths";
 
-const {Paragraph, Text} = Typography;
+const {Paragraph, Text, Title} = Typography;
 
-const ForumPost = ({post}) => {
+const FeedPost = ({post}) => {
 
   const createdDate = new Date(post.timestamp);
 
@@ -42,12 +42,7 @@ const ForumPost = ({post}) => {
           <span> {formattedTimestamp}</span>
         </Space>,
       ]}
-      // extra={
-      //   <Space>
-      //     <Avatar src="/img/avatar.jpg"/>
-      //     <Text strong>{post.author}</Text>
-      //   </Space>
-      // }
+
     >
       <List.Item.Meta
         description={
@@ -55,7 +50,7 @@ const ForumPost = ({post}) => {
             <Space>
               <Flex gap={16} align={"center"}>
                 <Link to={"/user/" + post.author.id}><Avatar
-                  src={post.author.avatarURL !== null ? post.author.avatarURL : "/img/avatar.jpg"}/></Link>
+                  src={post.author.avatarURL !== null ? post.author.avatarURL : `${process.env.PUBLIC_URL}/img/avatar.jpg`}/></Link>
                 <Flex vertical>
                   <Link to={"/user/" + post.author.id} className={styles.username}>{post.author.username}</Link>
                 </Flex>
@@ -63,8 +58,8 @@ const ForumPost = ({post}) => {
             </Space>
 
             <Link style={{display: "contents"}} to={`/forum/${post.id}`}>
-              <img className={styles.img} srcSet={post.imageURL !== null ? post.imageURL : "/img/image-1.png"}
-                   width={1132} height={420} alt=""/>
+              <img className={styles.img} srcSet={post.imageURL !== null ? post.imageURL : `${process.env.PUBLIC_URL}/img/image-1.png`}
+                   width={932} height={420} alt={post.title}/>
             </Link>
 
             <Flex gap={0} vertical>
@@ -74,13 +69,13 @@ const ForumPost = ({post}) => {
               <Paragraph className={styles.text} ellipsis={{rows: 2}}>
                 {post.content}
               </Paragraph>
-              <Space>
+              <Flex>
                 {post.tags.map((tag, index) => (
                   <Tag key={index} className={styles.tag}>
                     <Link to={Paths.tags}>{tag}</Link>
                   </Tag>
                 ))}
-              </Space>
+              </Flex>
             </Flex>
           </Flex>
         }
@@ -89,4 +84,4 @@ const ForumPost = ({post}) => {
   );
 };
 
-export default ForumPost;
+export default FeedPost;

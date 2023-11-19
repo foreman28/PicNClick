@@ -1,10 +1,10 @@
 /*
   Warnings:
 
-  - You are about to drop the column `author` on the `ForumPost` table. All the data in the column will be lost.
-  - You are about to drop the column `userId` on the `ForumPost` table. All the data in the column will be lost.
+  - You are about to drop the column `author` on the `FeedPost` table. All the data in the column will be lost.
+  - You are about to drop the column `userId` on the `FeedPost` table. All the data in the column will be lost.
   - Added the required column `userId` to the `Comment` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `authorId` to the `ForumPost` table without a default value. This is not possible if the table is not empty.
+  - Added the required column `authorId` to the `FeedPost` table without a default value. This is not possible if the table is not empty.
 
 */
 -- DropForeignKey

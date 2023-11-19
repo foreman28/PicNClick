@@ -9,7 +9,7 @@ import {CustomButton} from "../custom-button/button";
 import SearchComponent from "../custom-search/search";
 import {search} from "../../themes/search";
 
-import style from "./header.module.scss";
+import styles from "./header.module.scss";
 
 export const Header = () => {
   const user = useSelector(selectUser);
@@ -23,36 +23,39 @@ export const Header = () => {
 
 
   return (
-    <Layout.Header className={style.header} style={{height: 'auto'}}>
-      <Flex justify={"space-between"} align={"center"} className={style.header_container}>
+    <Layout.Header className={styles.header} style={{height: 'auto'}}>
+      <Flex justify={"space-between"} align={"center"} className={styles.header_container}>
 
-        <Link to="/" className={style.logo_text}>
-          <img className={style.logo} srcSet={"../../../logo.svg"} width={32} height={32} alt={"PicNClick"}/>
+        <Link to="/" className={styles.logo_content}>
+          <img className={styles.logo} srcSet={`${process.env.PUBLIC_URL}/logo.svg`} width={40} height={40} alt={"PicNClick"}/>
           <span>Pic<span>&</span>Click</span>
         </Link>
 
 
         <SearchComponent theme={search}/>
 
-        {user ? (
-          <CustomButton theme={button2} type="primary" onClick={onLogoutClick}>
-            Выйти
-          </CustomButton>
-        ) : (
-          <Flex gap={16}>
-            <Link to="/register" style={{lineHeight: 0}}>
-              <CustomButton theme={button} type="primary">
-                Зарегистрироваться
-              </CustomButton>
-            </Link>
+        <Flex className={styles.btns} justify={"end"}>
+          {user ? (
+            <CustomButton theme={button2} type="primary" onClick={onLogoutClick}>
+              Выйти
+            </CustomButton>
+          ) : (
+            <Flex gap={16}>
+              <Link to="/register" style={{lineHeight: 0}}>
+                <CustomButton theme={button} type="primary">
+                  Зарегистрироваться
+                </CustomButton>
+              </Link>
 
-            <Link to="/login" style={{lineHeight: 0}}>
-              <CustomButton theme={button2} type="primary">
-                Войти
-              </CustomButton>
-            </Link>
-          </Flex>
-        )}
+              <Link to="/login" style={{lineHeight: 0}}>
+                <CustomButton theme={button2} type="primary">
+                  Войти
+                </CustomButton>
+              </Link>
+            </Flex>
+          )}
+        </Flex>
+
       </Flex>
 
     </Layout.Header>

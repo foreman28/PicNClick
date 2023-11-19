@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {Flex} from "antd";
+import {Flex, Typography} from "antd";
 
 import {Layout} from "../../components/layout/layout";
 
 import styles from "./Tags.module.scss";
+
+const {Title, Text} = Typography;
 
 export const Tags = () => {
   const [data, setData] = useState([]);
@@ -25,8 +27,8 @@ export const Tags = () => {
 
   return (
     <Layout>
-      <Flex className={styles.main} vertical gap={"12px"}>
-        <h1>Tags</h1>
+      <Flex className={styles.main} gap={12} vertical>
+        <Title level={1}>Теги</Title>
 
       </Flex>
     </Layout>

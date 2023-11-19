@@ -3,7 +3,7 @@ import {Flex, List} from "antd";
 import {Layout} from "../../components/layout/layout";
 
 import styles from "./Home.module.scss";
-import ForumPost from "../../components/forum-post/forum-post";
+import FeedPost from "../../components/feed-post/feed-post";
 import {useNavigate} from "react-router-dom";
 import {Paths} from "../../paths";
 

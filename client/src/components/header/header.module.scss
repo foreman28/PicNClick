@@ -24,9 +24,10 @@
   background-color: red;
 }
 
-.logo_text {
+.logo_content {
   display: flex;
   gap: 16px;
+  width: 260px;
 }
 
 .logo{
@@ -34,7 +35,7 @@
   height: 40px;
 }
 
-.logo_text > span {
+.logo_content > span {
   display: flex;
   align-items: center;
 
@@ -47,7 +48,7 @@
   letter-spacing: 1px;
 }
 
-.logo_text > span > span {
+.logo_content > span > span {
   font-weight: 700;
 }
 
@@ -63,4 +64,8 @@
   &:not(:focus-within) {
     opacity: 0.6;
   }
+}
+
+.btns {
+  width: 260px;
 }
