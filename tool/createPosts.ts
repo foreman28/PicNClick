@@ -2,6 +2,8 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+// start: ts-node createPosts.ts
+
 // @ts-ignore
 async function createPosts() {
   try {
@@ -10,12 +12,12 @@ async function createPosts() {
         data: {
           title: `Photo Post ${i}`,
           content: `This is a photo post number ${i}.`,
-          authorId: 2, // ID 1 as the author
+          authorId: 1, // ID 1 as the author
           tags: ['photo', 'photography'],
-          imageURL: `https://example.com/photo${i}.jpg`,
-          authorAvatar: `https://example.com/avatar${i}.jpg`,
-          commentsCount: 0,
-          likesCount: 0,
+          // imageURL: `${process.env.REACT_APP_API_URL}/photo${i}.jpg`,
+          imageURL: `/img/image-1.png`,
+          commentsCount: 12,
+          likesCount: 33,
         },
       });
     }

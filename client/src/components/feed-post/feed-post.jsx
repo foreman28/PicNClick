@@ -35,7 +35,7 @@ const FeedPost = ({post}) => {
         </Space>,
         <Space>
           <LikeOutlined key="like" rev="true"/>
-          <span>45</span>
+          <span>{post.likesCount}</span>
         </Space>,
         <Space>
           <ClockCircleOutlined key="clock" rev="true"/>
