@@ -57,7 +57,8 @@
 }
 
 .img {
-  height: 420px;
+  height: auto;
+  max-height: 420px;
   width: 100%;
   object-fit: cover;
   border-radius: 6px;

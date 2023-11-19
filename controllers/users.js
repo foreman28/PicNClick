@@ -1,6 +1,9 @@
 const { prisma } = require('../prisma/prisma-client');
-const brypt = require('bcrypt'); // хеширование пароля
+const bcrypt = require('bcrypt'); // хеширование пароля
 const jwt = require('jsonwebtoken');
+
+const TOKEN_EXPIRATION = '1d';
+
 
 /**
  * @route POST /api/user/login
@@ -9,34 +12,34 @@ const jwt = require('jsonwebtoken');
  */
 const login = async (req, res) => {
   try {
-    // console.log('Cookies: ', req.cookies)
     const { username, password } = req.body;
 
     console.log(req.body)
     if (!username || !password) {
       return res.status(400).json({ message: 'Пожалуйста, заполните обязятельные поля' })
     }
-  
+
     const user = await prisma.user.findFirst({
       where: {
-        username, // email: email
+        username, // username: username
       }
     });
-  
-    const isPasswordCorrect = user && (await brypt.compare(password, user.password));
+
+    const isPasswordCorrect = user && (await bcrypt.compare(password, user.password));
     const secret = process.env.JWT_SECRET;
-  
+
     if (user && isPasswordCorrect && secret) {
       res.status(200).json({
         id: user.id,
-        email: user.email,
         username: user.username,
-        token: jwt.sign({ id: user.id }, secret, { expiresIn: '30d' })
+        email: user.email,
+        token: jwt.sign({ id: user.id }, secret, { expiresIn: TOKEN_EXPIRATION })
       })
     } else {
       return res.status(400).json({ message: 'Неверно введен логин или пароль' })
     }
-  } catch {
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ message: 'Что-то пошло не так' })
   }
 }
@@ -66,14 +69,24 @@ const register = async (req, res, next) => {
       return res.status(400).json({ message: 'Пользователь, с таким email уже существует' })
     }
 
-    const salt = await brypt.genSalt(10);
-    const hashedPassord = await brypt.hash(password, salt);
+    const registeredUser2 = await prisma.user.findFirst({
+      where: {
+        username
+      }
+    });
+
+    if (registeredUser2) {
+      return res.status(400).json({ message: 'Пользователь, с таким username уже существует' })
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
     const user = await prisma.user.create({
       data: {
         email,
         username,
-        password: hashedPassord
+        password: hashedPassword
       }
     });
 
@@ -84,7 +97,7 @@ const register = async (req, res, next) => {
         id: user.id,
         email: user.email,
         username,
-        token: jwt.sign({ id: user.id }, secret, { expiresIn: '30d' })
+        token: jwt.sign({ id: user.id }, secret, { expiresIn: TOKEN_EXPIRATION })
       })
     } else {
       return res.status(400).json({ message: 'Не удалось создать пользователя' })

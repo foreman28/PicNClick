@@ -27,7 +27,7 @@ const FeedPost = ({post}) => {
   return (
     <List.Item
       className={styles.item}
-      key={post.title}
+      key={post.id}
       actions={[
         <Space>
           <MessageOutlined key="comments" rev="true"/>
@@ -58,7 +58,10 @@ const FeedPost = ({post}) => {
             </Space>
 
             <Link style={{display: "contents"}} to={`/forum/${post.id}`}>
-              <img className={styles.img} srcSet={post.imageURL !== null ? post.imageURL : `${process.env.PUBLIC_URL}/img/image-1.png`}
+              <img className={styles.img}
+                   srcSet={
+                     post.imageURL !== null ? post.imageURL : `${process.env.PUBLIC_URL}/img/image-1.png`
+                   }
                    width={932} height={420} alt={post.title}/>
             </Link>
 

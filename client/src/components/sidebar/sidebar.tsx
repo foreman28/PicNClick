@@ -44,7 +44,7 @@ export const Sidebar = () => {
         </Flex>
 
         <Flex gap={"small"} vertical>
-          <span className={style.sidebar_title}>ыфвыфв</span>
+          <span className={style.sidebar_title}>ПЕРСОНАЛЬНЫЙ НАВИГАТОР</span>
 
           {
             user ?
