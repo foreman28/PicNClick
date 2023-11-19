@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {selectUser} from "../../features/auth/authSlice";
 
-import {EditOutlined, SearchOutlined, TagOutlined, UnorderedListOutlined} from '@ant-design/icons';
+import {EditOutlined, SearchOutlined, TagOutlined, UnorderedListOutlined, UserOutlined} from '@ant-design/icons';
 
 import style from "./sidebar.module.scss";
 import React from "react";
@@ -34,6 +34,11 @@ export const Sidebar = () => {
           <Link to={Paths.tags} className={style.sidebar_link + ' ' + (currentPath == Paths.tags ? style.active : '')}>
             <TagOutlined style={{fontSize: '18px'}} rev="true"/>
             <span className={style.sidebar_item}>Теги</span>
+          </Link>
+
+          <Link to={Paths.users} className={style.sidebar_link + ' ' + (currentPath == Paths.users ? style.active : '')}>
+            <UserOutlined style={{fontSize: '18px'}} rev="true"/>
+            <span className={style.sidebar_item}>Пользователи</span>
           </Link>
 
         </Flex>

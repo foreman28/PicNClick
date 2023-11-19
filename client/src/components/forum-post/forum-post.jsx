@@ -1,5 +1,5 @@
 import React from 'react';
-import {List, Space, Tag, Avatar, Flex} from 'antd';
+import {List, Space, Tag, Avatar, Flex, Typography} from 'antd';
 import {
   MessageOutlined,
   LikeOutlined,
@@ -10,7 +10,9 @@ import styles from './forum-post.module.scss';
 
 import {ru} from 'date-fns/locale';
 import {format, formatDistanceToNow} from "date-fns";
+import {Paths} from "../../paths";
 
+const {Paragraph, Text} = Typography;
 
 const ForumPost = ({post}) => {
 
@@ -61,19 +63,21 @@ const ForumPost = ({post}) => {
             </Space>
 
             <Link style={{display: "contents"}} to={`/forum/${post.id}`}>
-              <img className={styles.img} srcSet={post.imageURL !== null ? post.imageURL : "/img/image-1.png"} width={1132} height={420} alt=""/>
+              <img className={styles.img} srcSet={post.imageURL !== null ? post.imageURL : "/img/image-1.png"}
+                   width={1132} height={420} alt=""/>
             </Link>
 
             <Flex gap={0} vertical>
               <Link className={styles.title} to={`/forum/${post.id}`}>
                 {post.title}
               </Link>
-              <div className={styles.text}>{post.content}</div>
-
+              <Paragraph className={styles.text} ellipsis={{rows: 2}}>
+                {post.content}
+              </Paragraph>
               <Space>
                 {post.tags.map((tag, index) => (
                   <Tag key={index} className={styles.tag}>
-                    {tag}
+                    <Link to={Paths.tags}>{tag}</Link>
                   </Tag>
                 ))}
               </Space>

@@ -27,7 +27,7 @@ export const Header = () => {
       <Flex justify={"space-between"} align={"center"} className={style.header_container}>
 
         <Link to="/" className={style.logo_text}>
-          <img srcSet={"../../../logo.svg"} width={32} height={32} alt={"PicNClick"}/>
+          <img className={style.logo} srcSet={"../../../logo.svg"} width={32} height={32} alt={"PicNClick"}/>
           <span>Pic<span>&</span>Click</span>
         </Link>
 

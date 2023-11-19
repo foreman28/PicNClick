@@ -29,15 +29,20 @@
   gap: 16px;
 }
 
+.logo{
+  width: 40px;
+  height: 40px;
+}
+
 .logo_text > span {
   display: flex;
   align-items: center;
 
   color: var(--black-2);
   font-family: var(--font-family), sans-serif;
-  font-size: 20px;
+  font-size: 22px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: 400;
   line-height: normal;
   letter-spacing: 1px;
 }

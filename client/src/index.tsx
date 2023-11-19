@@ -23,6 +23,8 @@ import ruRU from 'antd/lib/locale/ru_RU';
 
 import "./index.scss";
 import {Auth} from "./features/auth/auth";
+import {Users} from "./pages/users/Users";
+import {theme} from "./themes/main";
 
 
 const router = createBrowserRouter([
@@ -35,13 +37,16 @@ const router = createBrowserRouter([
     element: <Search/>,
   },
   {
+    path: Paths.forum,
+    element: <Forum/>,
+  },
+  {
     path: Paths.tags,
     element: <Tags/>,
   },
-
   {
-    path: Paths.forum,
-    element: <Forum/>,
+    path: Paths.users,
+    element: <Users/>,
   },
   {
     path: `${Paths.forum}/:id`,
@@ -75,9 +80,7 @@ root.render(
   <>
     <Provider store={store}>
       <ConfigProvider
-        // theme={{
-        //   algorithm: theme.darkAlgorithm,
-        // }}
+        theme={theme}
         locale={ruRU}
       >
         <Auth>
