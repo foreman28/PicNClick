@@ -59,7 +59,7 @@ const FeedPost = ({post}) => {
               </Flex>
             </Space>
 
-            <Link style={{display: "contents"}} to={`/forum/${post.title}`}>
+            <Link style={{display: "contents"}} to={`/forum/${post.url}`}>
               <img
                 className={styles.img}
                 srcSet={
@@ -73,7 +73,7 @@ const FeedPost = ({post}) => {
             </Link>
 
             <Flex gap={0} vertical>
-              <Link className={styles.title} to={`/forum/${post.title}`}>
+              <Link className={styles.title} to={`/forum/${post.url}`}>
                 {post.title}
               </Link>
               <Paragraph className={styles.text} ellipsis={{rows: 2}}>

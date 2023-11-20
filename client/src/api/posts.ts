@@ -10,8 +10,8 @@ export const postsApi = api.injectEndpoints({
       }),
     }),
     getPost: builder.query<ForumPost, string>({
-      query: (title) => ({
-        url: `/posts/${title}`,
+      query: (url) => ({
+        url: `/posts/${url}`,
         method: "GET",
       }),
     }),
