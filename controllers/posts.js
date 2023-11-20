@@ -1,4 +1,5 @@
 const {prisma} = require("../prisma/prisma-client");
+const slugify = require('slugify');
 
 /**
  * @route GET /api/posts
@@ -75,10 +76,13 @@ const add = async (req, res) => {
       return res.status(400).json({message: "Все поля обязательные"});
     }
 
+    const slug = slugify(data.title, { lower: true, remove: /[*+~.()'"!:@]/g }); // Генерация уникального URL
+
     const post = await prisma.forumPost.create({
       data: {
         ...data,
         userId: req.user.id,
+        url: slug, // Сохранение уникального URL
       },
     });
 
