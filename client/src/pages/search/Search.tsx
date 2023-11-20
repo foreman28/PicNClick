@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import FeedPost from "../../components/feed-post/feed-post";
 
 import {Typography} from "antd";
+import CustomBreadcrumb from "../../components/breadcrumb/breadcrumb";
 const {Title, Text} = Typography;
 
 export const Search = () => {
@@ -43,7 +44,8 @@ export const Search = () => {
   return (
     <Layout>
       <Flex className={styles.main} vertical gap={"12px"}>
-        <Title level={1}>Поиск{searchTerm ? ': ' + searchTerm : ''}</Title>
+        <CustomBreadcrumb />
+        {/*<Title level={1}>Поиск{searchTerm ? ': ' + searchTerm : ''}</Title>*/}
 
         <List
           className={styles.list}

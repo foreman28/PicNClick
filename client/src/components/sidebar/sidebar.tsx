@@ -21,22 +21,22 @@ export const Sidebar = () => {
 
         <Flex gap={"small"} vertical>
           <span className={style.sidebar_title}>меню</span>
-          <Link to={Paths.search} className={style.sidebar_link + ' ' + (currentPath == Paths.search ? style.active : '')}>
+          <Link to={Paths.search} className={style.sidebar_link + ' ' + (currentPath === Paths.search ? style.active : '')}>
             <SearchOutlined style={{fontSize: '18px'}} rev="true"/>
             <span className={style.sidebar_item}>Поиск</span>
           </Link>
 
-          <Link to={Paths.forum} className={style.sidebar_link + ' ' + (currentPath == Paths.forum ? style.active : '')}>
+          <Link to={Paths.forum} className={style.sidebar_link + ' ' + (currentPath === Paths.forum ? style.active : '')}>
             <UnorderedListOutlined style={{fontSize: '18px'}} rev="true"/>
-            <span className={style.sidebar_item}>Форумы</span>
+            <span className={style.sidebar_item}>Форум</span>
           </Link>
 
-          <Link to={Paths.tags} className={style.sidebar_link + ' ' + (currentPath == Paths.tags ? style.active : '')}>
+          <Link to={Paths.tags} className={style.sidebar_link + ' ' + (currentPath === Paths.tags ? style.active : '')}>
             <TagOutlined style={{fontSize: '18px'}} rev="true"/>
             <span className={style.sidebar_item}>Теги</span>
           </Link>
 
-          <Link to={Paths.users} className={style.sidebar_link + ' ' + (currentPath == Paths.users ? style.active : '')}>
+          <Link to={Paths.users} className={style.sidebar_link + ' ' + (currentPath === Paths.users ? style.active : '')}>
             <UserOutlined style={{fontSize: '18px'}} rev="true"/>
             <span className={style.sidebar_item}>Пользователи</span>
           </Link>
@@ -49,7 +49,7 @@ export const Sidebar = () => {
           {
             user ?
               <>
-                <Link to={'/'} className={style.sidebar_link + ' ' + (currentPath == '/add_post' ? style.active : '')}>
+                <Link to={'/'} className={style.sidebar_link + ' ' + (currentPath === '/add_post' ? style.active : '')}>
                   <EditOutlined style={{fontSize: '18px'}} rev="true"/>
                   <span className={style.sidebar_item}>Добавить</span>
                 </Link>

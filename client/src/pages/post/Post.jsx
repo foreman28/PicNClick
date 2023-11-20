@@ -4,11 +4,12 @@ import {useParams} from "react-router-dom";
 import styles from "./Post.module.scss"
 import {Flex, Tag} from "antd";
 import {useGetPostQuery} from "../../api/posts";
+import CustomBreadcrumb from "../../components/breadcrumb/breadcrumb";
 // import {useDispatch} from "react-redux";
 
 export const Post = () => {
-  const { id } = useParams();
-  const { data: post, isLoading, isError } = useGetPostQuery(id);
+  const {id} = useParams();
+  const {data: post, isLoading, isError} = useGetPostQuery(id);
   // const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,25 +25,28 @@ export const Post = () => {
 
   return (
     <Layout>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          <img className={styles.img} src={post.imageURL !== null ? post.imageURL : "/img/image-1.png"}
-               alt={''}></img>
-          <Flex gap={8}>
-            {post.tags.map((tag, index) => (
-              <Tag key={index} className={styles.tag}>
-                {tag}
-              </Tag>
-            ))}
-          </Flex>
+      <Flex gap={12} vertical>
+        <CustomBreadcrumb/>
 
-          <h1 className={styles.title}>{post.title}</h1>
-          <p className={styles.text}>{post.content}</p>
-        </>
-      )}
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <>
+            <img className={styles.img} src={post.imageURL !== null ? post.imageURL : "/img/image-1.png"}
+                 alt={''}></img>
+            <Flex gap={8}>
+              {post.tags.map((tag, index) => (
+                <Tag key={index} className={styles.tag}>
+                  {tag}
+                </Tag>
+              ))}
+            </Flex>
 
+            <h1 className={styles.title}>{post.title}</h1>
+            <p className={styles.text}>{post.content}</p>
+          </>
+        )}
+      </Flex>
     </Layout>
   );
 };

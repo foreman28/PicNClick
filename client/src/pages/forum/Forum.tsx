@@ -1,10 +1,11 @@
 import React, {useEffect} from 'react';
-import {Flex, List, Skeleton, Space, Typography} from 'antd';
+import {Breadcrumb, Flex, List, Skeleton, Space, Typography} from 'antd';
 import {Layout} from '../../components/layout/layout';
 import {useGetAllPostsQuery} from '../../api/posts';
 import FeedPost from '../../components/feed-post/feed-post';
 
 import styles from './Forum.module.scss';
+import CustomBreadcrumb from "../../components/breadcrumb/breadcrumb";
 
 const {Title} = Typography;
 
@@ -63,7 +64,10 @@ export const Forum = () => {
   return (
     <Layout>
       <Flex gap={12} vertical>
-        <Title level={1}>Форум</Title>
+
+        <CustomBreadcrumb />
+        {/*<Title level={1}>Форум</Title>*/}
+
         {isLoading ? (
           <Flex vertical gap="12px">
             <List

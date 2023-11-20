@@ -140,12 +140,13 @@ const edit = async (req, res) => {
  */
 const post = async (req, res) => {
   // console.log(req.params)
-  const {id} = req.params; // http://localhost:8000/api/posts/1
+  const {title} = req.params; // http://localhost:8000/api/posts/1
 
   try {
     const post = await prisma.forumPost.findUnique({
       where: {
-        id: +id,
+        title: title,
+        // id: +id,
       },
     });
 

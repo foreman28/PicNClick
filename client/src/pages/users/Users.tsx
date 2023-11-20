@@ -6,6 +6,7 @@ import styles from "./Users.module.scss";
 import FeedPost from "../../components/feed-post/feed-post";
 // import {useDispatch, useSelector} from "react-redux";
 import {useGetAllPostsQuery} from "../../api/posts";
+import CustomBreadcrumb from "../../components/breadcrumb/breadcrumb";
 
 const {Title, Text} = Typography;
 
@@ -28,25 +29,27 @@ export const Users = () => {
   return (
     <Layout>
       <Flex gap={12} vertical>
-        <Title level={1}>Пользователи</Title>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          <Flex className={styles.main} vertical gap={"12px"}>
-            <List
-              className={styles.list}
-              itemLayout="vertical"
-              size="large"
-              dataSource={posts}
-              renderItem={(item) =>
-                <FeedPost post={item}/>
-              }
-              locale={{emptyText: 'Пусто'}}
-            />
-          </Flex>
-        </>
-      )}
+        <CustomBreadcrumb/>
+        {/*<Title level={1}>Пользователи</Title>*/}
+
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <>
+            <Flex className={styles.main} vertical gap={"12px"}>
+              <List
+                className={styles.list}
+                itemLayout="vertical"
+                size="large"
+                dataSource={posts}
+                renderItem={(item) =>
+                  <FeedPost post={item}/>
+                }
+                locale={{emptyText: 'Пусто'}}
+              />
+            </Flex>
+          </>
+        )}
       </Flex>
     </Layout>
   );
