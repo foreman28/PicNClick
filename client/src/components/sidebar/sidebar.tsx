@@ -49,11 +49,10 @@ export const Sidebar = () => {
           {
             user ?
               <>
-                <Link to={'/'} className={style.sidebar_link + ' ' + (currentPath === '/add_post' ? style.active : '')}>
+                <Link to={Paths.addPost} className={style.sidebar_link + ' ' + (currentPath === Paths.addPost ? style.active : '')}>
                   <EditOutlined style={{fontSize: '18px'}} rev="true"/>
                   <span className={style.sidebar_item}>Добавить</span>
                 </Link>
-
               </>
               :
               ''

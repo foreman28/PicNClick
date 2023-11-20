@@ -81,7 +81,8 @@ const add = async (req, res) => {
     const post = await prisma.forumPost.create({
       data: {
         ...data,
-        userId: req.user.id,
+        // userId: req.user.id,
+        authorId: req.user.id,
         url: slug, // Сохранение уникального URL
       },
     });

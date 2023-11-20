@@ -11,10 +11,11 @@ const CustomBreadcrumb: React.FC = () => {
     const breadcrumbItems = pathSnippets.map((_, index) => {
       const pathsMap: { [key: string]: string } = {
         forum: 'Форум',
+        'add-post': 'Добавить пост',
         search: 'Поиск',
         tags: 'Теги',
         users: 'Пользователи',
-        // Добавьте другие пути и их локализованные названия по мере необходимости
+        // Добавьте другие пути и их локализованные названия
       };
 
       const pathKey = _.toLowerCase();

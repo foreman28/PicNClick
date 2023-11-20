@@ -4,6 +4,7 @@ const prisma = new PrismaClient();
 
 // start: ts-node createPosts.ts
 
+
 // @ts-ignore
 async function createPosts() {
   try {

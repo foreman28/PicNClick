@@ -25,6 +25,7 @@ import "./index.scss";
 import {Auth} from "./features/auth/auth";
 import {Users} from "./pages/users/Users";
 import {theme} from "./themes/main";
+import {AddPost} from "./pages/add-post/Add-post";
 
 
 const router = createBrowserRouter([
@@ -36,10 +37,16 @@ const router = createBrowserRouter([
     path: Paths.search,
     element: <Search/>,
   },
+
   {
     path: Paths.forum,
     element: <Forum/>,
   },
+  {
+    path: Paths.addPost,
+    element: <AddPost/>,
+  },
+
   {
     path: Paths.tags,
     element: <Tags/>,
