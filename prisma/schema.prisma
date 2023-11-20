@@ -23,6 +23,7 @@ model User {
 model ForumPost {
   id            Int      @id @default(autoincrement())
   title         String   @unique
+  url           String   @unique
   content       String
   authorId      Int
   tags          String[]

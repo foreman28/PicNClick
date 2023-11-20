@@ -11,6 +11,7 @@ async function createPosts() {
       await prisma.forumPost.create({
         data: {
           title: `Photo Post ${i}`,
+          url: `photo-post-${i}`,
           content: `This is a photo post number ${i}.`,
           authorId: 1, // ID 1 as the author
           tags: ['photo', 'photography'],
