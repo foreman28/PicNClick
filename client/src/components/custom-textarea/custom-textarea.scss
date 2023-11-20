@@ -1,0 +1,25 @@
+.quill {
+
+
+  &:focus-within .ql-toolbar.ql-snow,
+  &:focus-within .ql-container.ql-snow{
+    transition: border-color 0.2s;
+    border-color: #4096ff;
+  }
+
+}
+
+.ql-editor {
+  min-height: 300px;
+}
+
+
+.ql-toolbar.ql-snow {
+  border: 1px solid var(--white-2);
+  border-radius: 6px 6px 0 0;
+}
+
+.ql-container.ql-snow {
+  border: 1px solid var(--white-2);
+  border-radius: 0 0 6px 6px;
+}

@@ -1,36 +1,57 @@
-import React from "react";
-import {ConfigProvider, Form, Input} from "antd";
+import { Form } from "antd";
+import {useState} from "react";
+
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
+import './custom-textarea.scss';
+
 
 type Props = {
   name: string;
-  placeholder: string;
-  type?: string;
+  placeholder?: string;
   theme?: any;
 };
 
-export const CustomTextarea = ({  // custom-textarea нету
-  type = 'text',
-  name,
-  placeholder,
-  theme,
-
-}: Props) => {
-
-  let message = 'Обязательное поле';
-
+export const CustomTextarea = ({
+                                 name,
+                                 placeholder,
+                                 theme,
+                               }: Props) => {
+  const [content, setContent] = useState('');
+  
+  const modules = {
+    toolbar: [
+      [{'header': [1, 2, 3, false]}],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [{'list': 'ordered'}, {'list': 'bullet'}],
+      ['link', 'image', 'video'],
+      [{'color': []}, {'background': []}],
+      ['clean'],
+    ],
+  };
+  
+  const formats = [
+    'header',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+    'list', 'bullet',
+    'link', 'image', 'video',
+    'color', 'background',
+  ];
+  const handleChange = (value: any) => {
+    setContent(value);
+  };
+  
   return (
-    <ConfigProvider theme={ theme }>
     <Form.Item
       name={name}
-      rules={[{ required: true, message: message }]}
-      shouldUpdate={ true }
     >
-      <Input
-        placeholder={ placeholder }
-        type={ type }
-        size="middle"
+      <ReactQuill
+        value={content}
+        onChange={handleChange}
+        modules={modules}
+        formats={formats}
       />
     </Form.Item>
-    </ConfigProvider>
   );
 };

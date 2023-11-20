@@ -1,16 +1,15 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {Button, ConfigProvider, Flex, Form} from 'antd';
 import {Layout} from '../../components/layout/layout';
 import {useAddPostMutation} from '../../api/posts';
 
 import CustomBreadcrumb from "../../components/breadcrumb/breadcrumb";
-import {useForm} from "react-hook-form";
-
 import {CustomInput} from "../../components/custom-input/custom-input";
 import {CustomButton} from "../../components/custom-button/button";
 import {button} from "../../themes/buttons";
 
 import styles from './Add-post.module.scss';
+import {CustomTextarea} from "../../components/custom-textarea/custom-textarea";
 
 export const AddPost = () => {
   useEffect(() => {
@@ -18,7 +17,6 @@ export const AddPost = () => {
   }, []);
 
   const [addPost, {isLoading}] = useAddPostMutation();
-
   const onSubmit = async (data: any) => {
     data = {
       ...data,
@@ -35,27 +33,32 @@ export const AddPost = () => {
     }
   };
 
-
   return (
     <Layout>
       <Flex gap={12} vertical>
         <CustomBreadcrumb/>
         <Form
+          className={styles.item}
           layout={"vertical"}
           onFinish={onSubmit}
         >
-          <CustomInput name={"title"} placeholder={"Заголовок"}/>
-          <CustomInput name={"content"} placeholder={"Содержание"}/>
+          <Flex vertical gap={12}>
+            <CustomInput name={"title"} placeholder={"Заголовок"}/>
+            
+            {/*<CustomInput name={"content"} placeholder={"Содержание"}/>*/}
 
-          <ConfigProvider theme={button}>
-            <Button type="primary" htmlType="submit" loading={isLoading}>
-              Добавить пост
-            </Button>
-          </ConfigProvider>
+            <CustomTextarea name={"content"} />
 
-          {/*<CustomButton htmlType="submit">*/}
-          {/*  */}
-          {/*</CustomButton>*/}
+            <ConfigProvider theme={button}>
+              <Button type="primary" htmlType="submit" loading={isLoading}>
+                Добавить пост
+              </Button>
+            </ConfigProvider>
+
+            {/*<CustomButton htmlType="submit">*/}
+            {/*  */}
+            {/*</CustomButton>*/}
+          </Flex>
         </Form>
 
         {/*<form onSubmit={handleSubmit(onSubmit)}>*/}

@@ -43,7 +43,7 @@ export const Post = () => {
             </Flex>
 
             <h1 className={styles.title}>{post.title}</h1>
-            <p className={styles.text}>{post.content}</p>
+            <div dangerouslySetInnerHTML={{ __html: post.content }} className={styles.content}></div>
           </>
         )}
       </Flex>

@@ -13,7 +13,6 @@ export const CustomInput = ({
   name,
   placeholder,
   theme,
-
 }: Props) => {
 
   let message = 'Обязательное поле';
