@@ -19,17 +19,17 @@ export const CustomInput = ({
 
   return (
     <ConfigProvider theme={ theme }>
-    <Form.Item
-      name={name}
-      rules={[{ required: true, message: message }]}
-      shouldUpdate={ true }
-    >
-      <Input
-        placeholder={ placeholder }
-        type={ type }
-        size="middle"
-      />
-    </Form.Item>
+      <Form.Item
+        name={name}
+        rules={[{ required: true, message: message }]}
+        shouldUpdate={ true }
+      >
+        <Input
+          placeholder={ placeholder }
+          type={ type }
+          size="middle"
+        />
+      </Form.Item>
     </ConfigProvider>
   );
 };

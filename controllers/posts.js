@@ -71,7 +71,7 @@ const all = async (req, res) => {
 const add = async (req, res) => {
   try {
     const data = req.body;
-
+    // console.log(data)
     if (!data.title || !data.content || !data.tags) {
       return res.status(400).json({message: "Все поля обязательные"});
     }
@@ -83,6 +83,8 @@ const add = async (req, res) => {
         ...data,
         // userId: req.user.id,
         authorId: req.user.id,
+        likesCount: 0,
+        commentsCount: 0,
         url: slug, // Сохранение уникального URL
       },
     });

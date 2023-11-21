@@ -18,11 +18,10 @@ export const AddPost = () => {
 
   const [addPost, {isLoading}] = useAddPostMutation();
   const onSubmit = async (data: any) => {
+    console.log(data)
     data = {
       ...data,
-      tags: ['asd'], // изменить
-      likesCount: 0,      // изменять на стороне сервера
-      commentsCount: 0    // изменять на стороне сервера
+      tags: ['asd']   // изменить
     }
 
     try {
@@ -42,8 +41,9 @@ export const AddPost = () => {
           layout={"vertical"}
           onFinish={onSubmit}
         >
-          <Flex vertical gap={12}>
+          <Flex vertical gap={4}>
             <CustomInput name={"title"} placeholder={"Заголовок"}/>
+            <CustomInput name={"description"} placeholder={"Краткое описание"}/>
             
             {/*<CustomInput name={"content"} placeholder={"Содержание"}/>*/}
 

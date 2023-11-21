@@ -77,7 +77,7 @@ const FeedPost = ({post}) => {
                 {post.title}
               </Link>
               <Paragraph className={styles.text} ellipsis={{rows: 2}}>
-                {post.content}
+                {post.description}
               </Paragraph>
               <Flex>
                 {post.tags.map((tag, index) => (

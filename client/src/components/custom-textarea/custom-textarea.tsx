@@ -37,6 +37,7 @@ export const CustomTextarea = ({
     'list', 'bullet',
     'link', 'image', 'video',
     'color', 'background',
+    
   ];
   const handleChange = (value: any) => {
     setContent(value);
@@ -44,13 +45,29 @@ export const CustomTextarea = ({
   
   return (
     <Form.Item
+      className={"custom-textarea-box"}
       name={name}
+      rules={[
+        {
+          required: true,
+          validator: (_, value) => {
+            if (value && value.trim() !== "<p><br></p>") {
+              return Promise.resolve();
+            }
+            return Promise.reject(new Error("Обязательное поле"));
+          },
+        },
+      ]}
+
+      shouldUpdate={ true }
     >
       <ReactQuill
         value={content}
         onChange={handleChange}
         modules={modules}
         formats={formats}
+        className={"custom-textarea"}
+        placeholder={"Содержание"}
       />
     </Form.Item>
   );

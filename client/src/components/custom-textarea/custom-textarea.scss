@@ -1,18 +1,55 @@
 .quill {
+  .ql-snow {
 
+    transition: all 0.2s;
+    outline: 0;
+  }
 
-  &:focus-within .ql-toolbar.ql-snow,
-  &:focus-within .ql-container.ql-snow{
-    transition: border-color 0.2s;
+  &:hover .ql-snow,
+  &:focus-within .ql-snow {
     border-color: #4096ff;
   }
 
+  &.ant-form-item-has-error .ql-snow {
+    border-color: #ff4d4f;
+  }
+
+  &.ant-form-item-has-error:not(:focus-within) .ql-snow {
+    border-color: #ff4d4f;
+  }
+
+  &:focus-within .ql-snow {
+    border-color: #1677ff;
+    box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1);
+  }
 }
+
+.ql-container {
+  font-family: var(--font-family), sans-serif;
+  font-size: 14px;
+}
+
+/* Если вы хотите применить стили для пустого редактора */
+.ql-editor.ql-blank::before {
+  color: #d9d9d9;
+  content: attr(data-placeholder);
+  font-style: normal;
+  font-weight: 300;
+}
+
 
 .ql-editor {
-  min-height: 300px;
-}
+  font-style: normal;
+  font-weight: 400;
 
+  min-height: 300px;
+
+  img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+  }
+}
 
 .ql-toolbar.ql-snow {
   border: 1px solid var(--white-2);
@@ -22,4 +59,17 @@
 .ql-container.ql-snow {
   border: 1px solid var(--white-2);
   border-radius: 0 0 6px 6px;
+}
+
+
+.custom-textarea-box {
+  padding: 0;
+}
+
+.ant-form-item-has-error.custom-textarea-box .ql-snow {
+  border-color: #ffa39e;
+}
+
+.ant-form-item-has-error.custom-textarea-box:focus-within .ql-snow {
+  box-shadow: 0 0 0 2px rgba(255, 38, 5, 0.06);
 }

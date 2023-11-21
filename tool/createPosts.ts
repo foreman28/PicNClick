@@ -13,6 +13,7 @@ async function createPosts() {
         data: {
           title: `Photo Post ${i}`,
           url: `photo-post-${i}`,
+          description: `This is a description ${i}.`,
           content: `This is a photo post number ${i}.`,
           authorId: 1, // ID 1 as the author
           tags: ['photo', 'photography'],
