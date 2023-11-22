@@ -1,13 +1,11 @@
 import React, {useEffect} from 'react';
-import {Breadcrumb, Flex, List, Skeleton, Space, Typography} from 'antd';
+import {Flex, List, Skeleton, Space} from 'antd';
 import {Layout} from '../../components/layout/layout';
 import {useGetAllPostsQuery} from '../../api/posts';
 import FeedPost from '../../components/feed-post/feed-post';
 
 import styles from './Forum.module.scss';
-import CustomBreadcrumb from "../../components/breadcrumb/breadcrumb";
-
-const {Title} = Typography;
+import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
 
 export const Forum = () => {
   useEffect(() => {

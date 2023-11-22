@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import {useRegisterMutation} from "../../api/auth";
 
-import {CustomButton} from "../../components/custom-button/button";
+import {CustomButton} from "../../components/custom-button/custom-button";
 import {CustomInput} from "../../components/custom-input/custom-input";
 import {ErrorMessage} from "../../components/error-message/error-message";
 import {CustomPasswordInput} from "../../components/custom-password-input/custom-password-input";

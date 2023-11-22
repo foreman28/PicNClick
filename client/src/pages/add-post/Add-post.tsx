@@ -1,15 +1,17 @@
-import {useEffect} from 'react';
-import {Button, ConfigProvider, Flex, Form} from 'antd';
+import {useEffect, useState} from 'react';
+import {Button, ConfigProvider, Flex, Form, Upload} from 'antd';
 import {Layout} from '../../components/layout/layout';
 import {useAddPostMutation} from '../../api/posts';
 
-import CustomBreadcrumb from "../../components/breadcrumb/breadcrumb";
+import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
 import {CustomInput} from "../../components/custom-input/custom-input";
-import {CustomButton} from "../../components/custom-button/button";
 import {button} from "../../themes/buttons";
 
 import styles from './Add-post.module.scss';
 import {CustomTextarea} from "../../components/custom-textarea/custom-textarea";
+import {UploadChangeParam} from "antd/es/upload";
+import CustomSelect from "../../components/custom-select/custom-select";
+
 
 export const AddPost = () => {
   useEffect(() => {
@@ -32,6 +34,19 @@ export const AddPost = () => {
     }
   };
 
+
+  const [imageUrl, setImageUrl] = useState<string>();
+
+  const handleChange = (info: UploadChangeParam) => {
+    console.log(info.file.url);
+    if (info.file.status === 'uploading') {
+      setImageUrl(info.file.url);
+      return;
+    }
+    if (info.file.status === 'done') {
+    }
+  };
+
   return (
     <Layout>
       <Flex gap={12} vertical>
@@ -44,10 +59,28 @@ export const AddPost = () => {
           <Flex vertical gap={4}>
             <CustomInput name={"title"} placeholder={"Заголовок"}/>
             <CustomInput name={"description"} placeholder={"Краткое описание"}/>
-            
+
+            <Upload
+              name="img"
+              listType="picture-card"
+              className="avatar-uploader"
+              showUploadList={false}
+              // action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
+              onChange={handleChange}
+
+            >
+              {imageUrl ?
+                <img src={imageUrl} alt="avatar" style={{ width: '100%' }} />
+                :
+                <div style={{ marginTop: 8 }}>Upload</div>
+              }
+            </Upload>
+
             {/*<CustomInput name={"content"} placeholder={"Содержание"}/>*/}
 
             <CustomTextarea name={"content"} />
+
+            <CustomSelect name={"tags"} placeholder={"Теги"} />
 
             <ConfigProvider theme={button}>
               <Button type="primary" htmlType="submit" loading={isLoading}>

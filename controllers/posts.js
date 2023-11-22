@@ -82,6 +82,8 @@ const add = async (req, res) => {
       data: {
         ...data,
         // userId: req.user.id,
+        // imageURL: req.user.id,
+        imageURL: req.imageURL ? req.imageURL : "/img/image-1.png",
         authorId: req.user.id,
         likesCount: 0,
         commentsCount: 0,

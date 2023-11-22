@@ -15,13 +15,11 @@ export const CustomInput = ({
   theme,
 }: Props) => {
 
-  let message = 'Обязательное поле';
-
   return (
     <ConfigProvider theme={ theme }>
       <Form.Item
         name={name}
-        rules={[{ required: true, message: message }]}
+        rules={[{ required: true, message: 'Обязательное поле' }]}
         shouldUpdate={ true }
       >
         <Input

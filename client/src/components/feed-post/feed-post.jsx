@@ -60,16 +60,17 @@ const FeedPost = ({post}) => {
             </Space>
 
             <Link style={{display: "contents"}} to={`/forum/${post.url}`}>
-              <img
-                className={styles.img}
-                srcSet={
-                  post.imageURL !== null ? post.imageURL :
-                    `${process.env.PUBLIC_URL}/img/image-1.png`
-                }
-                width={932}
-                height={420}
-                alt={post.title}
-              />
+              {post.imageURL ?
+                <img
+                  className={styles.img}
+                  srcSet={post.imageURL}
+                  width={932}
+                  height={420}
+                  alt={post.title}
+                />
+                :
+                ""
+              }
             </Link>
 
             <Flex gap={0} vertical>

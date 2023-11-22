@@ -1,14 +1,12 @@
 import React, {useEffect} from 'react';
-import {Flex, List, Typography} from "antd";
+import {Flex, List} from "antd";
 import {Layout} from "../../components/layout/layout";
 
 import styles from "./Users.module.scss";
 import FeedPost from "../../components/feed-post/feed-post";
 // import {useDispatch, useSelector} from "react-redux";
 import {useGetAllPostsQuery} from "../../api/posts";
-import CustomBreadcrumb from "../../components/breadcrumb/breadcrumb";
-
-const {Title, Text} = Typography;
+import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
 
 export const Users = () => {
 

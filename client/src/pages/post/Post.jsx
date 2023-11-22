@@ -1,10 +1,11 @@
 import React, {useEffect} from "react";
 import {Layout} from "../../components/layout/layout";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import styles from "./Post.module.scss"
 import {Flex, Tag} from "antd";
 import {useGetPostQuery} from "../../api/posts";
-import CustomBreadcrumb from "../../components/breadcrumb/breadcrumb";
+import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
+import {Paths} from "../../paths";
 // import {useDispatch} from "react-redux";
 
 export const Post = () => {
@@ -32,18 +33,27 @@ export const Post = () => {
           <p>Loading...</p>
         ) : (
           <>
-            <img className={styles.img} src={post.imageURL !== null ? post.imageURL : "/img/image-1.png"}
-                 alt={''}></img>
-            <Flex gap={8}>
+            {post.imageURL ?
+              <img
+                className={styles.img}
+                srcSet={post.imageURL}
+                alt={post.title}
+              />
+              :
+              ""
+            }
+
+            <h1 className={styles.title}>{post.title}</h1>
+
+            <Flex>
               {post.tags.map((tag, index) => (
                 <Tag key={index} className={styles.tag}>
-                  {tag}
+                  <Link to={`${Paths.tags}#${tag}`}>{tag}</Link>
                 </Tag>
               ))}
             </Flex>
 
-            <h1 className={styles.title}>{post.title}</h1>
-            <div dangerouslySetInnerHTML={{ __html: post.content }} className={styles.content}></div>
+            <div dangerouslySetInnerHTML={{__html: post.content}} className={"ql-editor " + styles.content}></div>
           </>
         )}
       </Flex>

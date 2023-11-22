@@ -4,7 +4,7 @@ import {createRoot} from "react-dom/client";
 import {Provider} from "react-redux";
 import {store} from "./store/store";
 import reportWebVitals from "./reportWebVitals";
-import {createBrowserRouter, RouterProvider, useParams} from "react-router-dom";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 
 import {Register} from "./pages/register/Register";
 import {Login} from "./pages/login/Login";

@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {Breadcrumb} from 'antd';
 import {Link, useLocation} from 'react-router-dom';
 
-const CustomBreadcrumb: React.FC = () => {
+const CustomBreadcrumb = () => {
   const location = useLocation();
   const [breadcrumbs, setBreadcrumbs] = useState<JSX.Element[]>([]);
 
@@ -23,7 +23,7 @@ const CustomBreadcrumb: React.FC = () => {
 
       return (
         <Breadcrumb.Item key={index}>
-            <Link to={url}>{pathsMap[pathKey] || _}</Link>
+          <Link to={url}>{pathsMap[pathKey] || _}</Link>
         </Breadcrumb.Item>
       );
     });
@@ -31,6 +31,7 @@ const CustomBreadcrumb: React.FC = () => {
     setBreadcrumbs(breadcrumbItems);
   }, [location]);
 
+  // error Breadcrumb
   return (
     <Breadcrumb style={{margin: '16px 0'}}>
       <Breadcrumb.Item>

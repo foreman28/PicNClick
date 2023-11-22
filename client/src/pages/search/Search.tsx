@@ -6,12 +6,10 @@ import queryString from "query-string";
 import { useNavigate } from "react-router-dom";
 import FeedPost from "../../components/feed-post/feed-post";
 
-import {Typography} from "antd";
-import CustomBreadcrumb from "../../components/breadcrumb/breadcrumb";
-const {Title, Text} = Typography;
+import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
 
 export const Search = () => {
-  const [searchTerm, setSearchTerm] = useState<string>('');
+  // const [searchTerm, setSearchTerm] = useState<string>('');
   const [suggestions, setSuggestions] = useState<any[]>([]);
   const queryParams = queryString.parse(window.location.search);
   const navigate = useNavigate();
@@ -25,7 +23,7 @@ export const Search = () => {
   }, [queryParams.search, navigate]);
 
   const handleSearch = async (value: any) => {
-    setSearchTerm(value);
+    // setSearchTerm(value);
 
     const API_URL = process.env.REACT_APP_API_URL;
     const apiUrl = value
