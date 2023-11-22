@@ -3,7 +3,7 @@ import {Flex, List} from "antd";
 import {Layout} from "../../components/layout/layout";
 
 import styles from "./Users.module.scss";
-import FeedPost from "../../components/feed-post/feed-post";
+import PostItem from "../../components/post-item/post-item";
 // import {useDispatch, useSelector} from "react-redux";
 import {useGetAllPostsQuery} from "../../api/posts";
 import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
@@ -41,7 +41,7 @@ export const Users = () => {
                 size="large"
                 dataSource={posts}
                 renderItem={(item) =>
-                  <FeedPost post={item}/>
+                  <PostItem post={item}/>
                 }
                 locale={{emptyText: 'Пусто'}}
               />

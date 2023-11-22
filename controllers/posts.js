@@ -49,20 +49,6 @@ const all = async (req, res) => {
   }
 };
 
-// const all = async (req, res) => {
-//   try {
-//     const post = await prisma.forumPost.findMany({
-//       include: {
-//         author: true, // информация об авторе
-//       },
-//     });
-//
-//     res.status(200).json(post);
-//   } catch {
-//     res.status(500).json({message: "Не удалось получить посты"});
-//   }
-// };
-
 /**
  * @route POST /api/posts/add
  * @desc Добавление сотрудника
@@ -71,7 +57,7 @@ const all = async (req, res) => {
 const add = async (req, res) => {
   try {
     const data = req.body;
-    // console.log(data)
+    console.log(data)
     if (!data.title || !data.content || !data.tags) {
       return res.status(400).json({message: "Все поля обязательные"});
     }
@@ -81,8 +67,6 @@ const add = async (req, res) => {
     const post = await prisma.forumPost.create({
       data: {
         ...data,
-        // userId: req.user.id,
-        // imageURL: req.user.id,
         imageURL: req.imageURL ? req.imageURL : "/img/image-1.png",
         authorId: req.user.id,
         likesCount: 0,

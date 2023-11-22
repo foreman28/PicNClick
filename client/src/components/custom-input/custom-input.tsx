@@ -16,15 +16,15 @@ export const CustomInput = ({
 }: Props) => {
 
   return (
-    <ConfigProvider theme={ theme }>
+    <ConfigProvider theme={theme}>
       <Form.Item
         name={name}
-        rules={[{ required: true, message: 'Обязательное поле' }]}
-        shouldUpdate={ true }
+        rules={[{required: true, message: 'Обязательное поле'}]}
+        shouldUpdate={true}
       >
         <Input
-          placeholder={ placeholder }
-          type={ type }
+          placeholder={placeholder}
+          type={type}
           size="middle"
         />
       </Form.Item>

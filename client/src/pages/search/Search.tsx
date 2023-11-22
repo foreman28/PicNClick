@@ -4,7 +4,7 @@ import styles from "./Search.module.scss";
 import React, { useEffect, useState } from "react";
 import queryString from "query-string";
 import { useNavigate } from "react-router-dom";
-import FeedPost from "../../components/feed-post/feed-post";
+import PostItem from "../../components/post-item/post-item";
 
 import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
 
@@ -50,7 +50,7 @@ export const Search = () => {
           itemLayout="vertical"
           size="large"
           dataSource={suggestions}
-          renderItem={(item) => <FeedPost post={item} />}
+          renderItem={(item) => <PostItem post={item} />}
           locale={{ emptyText: 'Пусто' }}
         />
       </Flex>

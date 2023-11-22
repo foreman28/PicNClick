@@ -6,7 +6,7 @@ import {
   ClockCircleOutlined,
 } from '@ant-design/icons';
 import {Link} from 'react-router-dom';
-import styles from './feed-post.module.scss';
+import styles from './post-item.module.scss';
 
 import {ru} from 'date-fns/locale';
 import {format, formatDistanceToNow} from "date-fns";
@@ -14,11 +14,11 @@ import {Paths} from "../../paths";
 
 const {Paragraph} = Typography;
 
-const FeedPost = ({post}) => {
+const PostItem = ({post}) => {
 
   const createdDate = new Date(post.timestamp);
 
-  // Display different formats based on the age of the post
+  // Display different formats based on the age of the post-item
   const formattedTimestamp =
     new Date() - createdDate < 24 * 60 * 60 * 1000
       ? formatDistanceToNow(createdDate, {locale: ru, addSuffix: true})
@@ -95,4 +95,4 @@ const FeedPost = ({post}) => {
   );
 };
 
-export default FeedPost;
+export default PostItem;
