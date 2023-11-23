@@ -17,6 +17,7 @@ app.use(cookieParser()); // Промежуточное программное о
 
 app.use('/api/user', require("./routes/users"));
 app.use('/api/posts', require("./routes/posts"));
+app.use('/api/tags', require("./routes/tags"));
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);

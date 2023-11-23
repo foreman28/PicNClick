@@ -8,25 +8,40 @@ const { Search } = Input;
 const SearchComponent = (props: any) => {
   const [suggestions, setSuggestions] = useState<any[]>([]);
   const navigate = useNavigate();
-
+  
   const handleSearch = async (value: string) => {
     if (value) {
-      // Replace the URL with your actual API endpoint
-      const apiUrl = process.env.REACT_APP_API_URL + `/posts?search=${value}`;
-
-      try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-
-        setSuggestions(data);
-      } catch (error) {
-        console.error('Error fetching search suggestions:', error);
+      if (value.startsWith('#')) {
+        const partialTag = value.substring(1);
+        
+        // Fetch tag suggestions based on the partial tag
+        const apiUrl = `${process.env.REACT_APP_API_URL}/tags?search=${partialTag}`;
+        
+        try {
+          const response = await fetch(apiUrl);
+          const data = await response.json();
+          
+          setSuggestions(data);
+        } catch (error) {
+          console.error('Error fetching tag suggestions:', error);
+        }
+      } else {
+        const apiUrl = `${process.env.REACT_APP_API_URL}/posts?search=${value}`;
+        
+        try {
+          const response = await fetch(apiUrl);
+          const data = await response.json();
+          
+          setSuggestions(data);
+        } catch (error) {
+          console.error('Error fetching search suggestions:', error);
+        }
       }
     } else {
       setSuggestions([]);
     }
   };
-
+  
   const sendSearch = async (value: string) => {
     if (value) {
       navigate(`/search?search=${value}`);
@@ -34,7 +49,7 @@ const SearchComponent = (props: any) => {
       navigate(`/search`);
     }
   };
-
+  
   return (
     <div className={styles.searchBox}>
       <ConfigProvider theme={props.theme}>
@@ -45,18 +60,19 @@ const SearchComponent = (props: any) => {
           onChange={(e) => handleSearch(e.target.value)}
           className={styles.search}
         />
-
+        
         {suggestions.length > 0 && (
           <List
             size="small"
             bordered
             dataSource={suggestions}
             renderItem={(item) => (
-              <Link to={`/forum/${item.id}`}>
-                <List.Item className={styles.item}>
-                  <span className={styles.title}>{item.title}</span>
-                </List.Item>
-              </Link>
+              <List.Item className={styles.item}>
+                {/*to={item.url ? `/forum/${item.url}` : `/tags/${item.name}`}*/}
+                <Link to={item.url ? `/forum/${item.url}` : `/search?search=${item.name}`}>
+                  <span className={styles.title}>{item.title || item.name}</span>
+                </Link>
+              </List.Item>
             )}
             className={styles.list}
           />
@@ -64,6 +80,7 @@ const SearchComponent = (props: any) => {
       </ConfigProvider>
     </div>
   );
+  
 };
 
 export default SearchComponent;

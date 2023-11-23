@@ -1,7 +1,7 @@
 import { Tags } from "@prisma/client";
 import { api } from "./apiConfig";
 
-export const postsApi = api.injectEndpoints({
+export const tagsApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getAllTags: builder.query<Tags[], void>({
       query: () => ({
@@ -10,35 +10,27 @@ export const postsApi = api.injectEndpoints({
       }),
     }),
     getTag: builder.query<Tags, string>({
-      query: (url) => ({
-        url: `/tags/${url}`,
+      query: (id) => ({
+        url: `/tags/${id}`,
         method: "GET",
       }),
     }),
-    editTag: builder.mutation<string, Tags>({
-      query: (tag) => ({
-        url: `/tags/edit/${tag.id}`,
-        method: "PUT",
-        body: tag,
+    addTag: builder.mutation<Tags, { name: string }>({
+      query: ({ name }) => ({
+        url: "/tags/add",
+        method: "POST",
+        body: { name },
       }),
     }),
     removeTag: builder.mutation<string, string>({
       query: (id) => ({
         url: `/tags/remove/${id}`,
-        method: "POST",
-        body: { id },
-      }),
-    }),
-    addTag: builder.mutation<Tags, Tags>({
-      query: (tag) => ({
-        url: "/tags/add",
-        method: "POST",
-        body: tag,
+        method: "DELETE",
       }),
     }),
     searchTags: builder.query<Tags[], { search: string }>({
       query: ({ search }) => ({
-        url: `/tags/search?search=${search}`,
+        url: `/tags?search=${search}`,
         method: "GET",
       }),
     }),
@@ -48,19 +40,17 @@ export const postsApi = api.injectEndpoints({
 export const {
   useGetAllTagsQuery,
   useGetTagQuery,
-  useEditTagMutation,
-  useRemoveTagMutation,
   useAddTagMutation,
+  useRemoveTagMutation,
   useSearchTagsQuery,
-} = postsApi;
+} = tagsApi;
 
 export const {
   endpoints: {
     getAllTags,
     getTag,
-    editTag,
-    removeTag,
     addTag,
+    removeTag,
     searchTags,
   },
-} = postsApi;
+} = tagsApi;

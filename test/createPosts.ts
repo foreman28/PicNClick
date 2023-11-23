@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import {PrismaClient} from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -17,16 +17,16 @@ const prisma = new PrismaClient();
           content: `This is a photo post number ${i}.`,
           authorId: 1, // ID 1 as the author
           tags: {
-            // @ts-ignore
             connect: [
-              { id: 1 },
-              { id: 2 },
+              {id: 1},
+              {id: 2},
             ],
           },
           // imageURL: `${process.env.REACT_APP_API_URL}/photo${i}.jpg`,
           imageURL: `/img/image-1.png`,
           commentsCount: 12,
           likesCount: 33,
+          
         },
       });
     }
