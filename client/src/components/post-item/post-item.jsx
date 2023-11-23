@@ -81,9 +81,9 @@ const PostItem = ({post}) => {
                 {post.description}
               </Paragraph>
               <Flex>
-                {post.tags.map((tag, index) => (
+                {post.tags && post.tags.map((tag, index) => (
                   <Tag key={index} className={styles.tag}>
-                    <Link to={`${Paths.tags}#${tag}`}>{tag}</Link>
+                    <Link to={`${Paths.tags}#${tag.name}`}>{tag.name}</Link>
                   </Tag>
                 ))}
               </Flex>

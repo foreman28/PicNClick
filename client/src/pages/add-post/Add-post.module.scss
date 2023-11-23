@@ -10,3 +10,14 @@
   padding: 16px 24px;
 }
 
+.img {
+  height: auto;
+  max-height: 420px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+
+  background-color: var(--white-2);
+
+  margin-bottom: 24px;
+}

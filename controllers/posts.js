@@ -9,7 +9,6 @@ const slugify = require('slugify');
 const all = async (req, res) => {
   try {
     const { search } = req.query;
-
     let posts;
 
     if (search) {
@@ -37,7 +36,17 @@ const all = async (req, res) => {
     } else {
       posts = await prisma.forumPost.findMany({
         include: {
-          author: true,
+          author: {
+            select: {
+              id: true,
+              username: true,
+              email: true,
+              fullName: true,
+              avatarURL: true,
+            },
+          },
+          comments: true,
+          tags: true,
         },
       });
     }
@@ -141,7 +150,23 @@ const post = async (req, res) => {
         url: url,
         // id: +id,
       },
+      include: {
+        author: {
+          select: {
+            id: true,
+            username: true,
+            email: true,
+            fullName: true,
+            avatarURL: true,
+          },
+        },
+        comments: true,
+        tags: true,
+      },
     });
+
+
+    console.log(post)
 
     res.status(200).json(post);
   } catch {

@@ -12,6 +12,7 @@ model User {
   username  String      @unique
   email     String      @unique
   password  String
+  role      String?
   fullName  String?
   avatarURL String?
   createdAt DateTime    @default(now())
@@ -27,7 +28,7 @@ model ForumPost {
   description   String
   content       String
   authorId      Int
-  tags          String[]
+  tags          Tag[]
   imageURL      String?
   commentsCount Int
   likesCount    Int
@@ -36,6 +37,12 @@ model ForumPost {
   // Отношение к User
   author   User      @relation(fields: [authorId], references: [id])
   comments Comment[]
+}
+
+model Tag {
+  id    Int         @id @default(autoincrement())
+  name  String      @unique
+  posts ForumPost[] // Добавляем обратное отношение к модели ForumPost
 }
 
 model Comment {
