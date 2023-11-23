@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import {Button, ConfigProvider, Flex, Form, message, Space, Upload} from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import {Button, ConfigProvider, Flex, Form, message, Upload} from 'antd';
 import { Layout } from '../../components/layout/layout';
 import { useAddPostMutation } from '../../api/posts';
 import CustomBreadcrumb from '../../components/custom-breadcrumb/custom-breadcrumb';
