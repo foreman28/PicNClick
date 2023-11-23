@@ -17,6 +17,7 @@ export const Search = () => {
   }, []);
   
   useEffect(() => {
+    // console.log(queryParams.search)
     handleSearch(queryParams.search);
   }, [queryParams.search, navigate]);
   
@@ -25,6 +26,7 @@ export const Search = () => {
     
     // Check if the search term starts with '#'
     if (value && value.startsWith('#')) {
+      console.log(1)
       // Treat it as a tag search
       const tag = value.substring(1); // Remove the '#' character
       const apiUrl = `${API_URL}/tags/${tag}`;
@@ -32,7 +34,7 @@ export const Search = () => {
       try {
         const response = await fetch(apiUrl);
         const data = await response.json();
-        console.log(data)
+        
         setSuggestions(data.posts || []);
       } catch (error) {
         console.error('Error fetching tag search results:', error);
