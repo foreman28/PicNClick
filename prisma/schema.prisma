@@ -28,7 +28,7 @@ model ForumPost {
   description   String
   content       String
   authorId      Int
-  tags          Tag[]
+  tags          Tags[]
   imageURL      String?
   commentsCount Int
   likesCount    Int
@@ -39,7 +39,7 @@ model ForumPost {
   comments Comment[]
 }
 
-model Tag {
+model Tags {
   id    Int         @id @default(autoincrement())
   name  String      @unique
   posts ForumPost[] // Добавляем обратное отношение к модели ForumPost

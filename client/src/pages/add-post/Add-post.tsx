@@ -71,6 +71,7 @@ export const AddPost = () => {
       <Flex vertical gap={12}>
         <CustomBreadcrumb />
         <Form className={styles.item} layout="vertical" onFinish={onFinish}>
+          <Flex vertical gap={4}>
           <CustomInput name="title" placeholder="Заголовок" />
           <CustomInput name="description" placeholder="Краткое описание" />
           
@@ -119,6 +120,7 @@ export const AddPost = () => {
               Добавить пост
             </Button>
           </ConfigProvider>
+          </Flex>
         </Form>
       </Flex>
     </Layout>
