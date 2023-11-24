@@ -1,4 +1,4 @@
-const { prisma } = require("../prisma/prisma-client");
+const {prisma} = require("../prisma/prisma-client");
 
 /**
  * @route GET /api/tags
@@ -7,62 +7,16 @@ const { prisma } = require("../prisma/prisma-client");
  */
 const allTags = async (req, res) => {
   try {
-    const { search } = req.query;
-
-    let tags;
-
-    if (search) {
-      tags = await prisma.tags.findMany({
-        where: {
-          name: {
-            contains: search,
-            mode: 'insensitive',
-          },
-        },
-        include: {
-          posts: {
-            include: {
-              author: {
-                select: {
-                  id: true,
-                  username: true,
-                  email: true,
-                  fullName: true,
-                  avatarURL: true,
-                },
-              },
-              comments: true,
-              tags: true,
-            },
-          },
-        },
-      });
-    } else {
-      tags = await prisma.tags.findMany({
-        include: {
-          posts: {
-            include: {
-              author: {
-                select: {
-                  id: true,
-                  username: true,
-                  email: true,
-                  fullName: true,
-                  avatarURL: true,
-                },
-              },
-              comments: true,
-              tags: true,
-            },
-          },
-        },
-      });
-    }
+    const tags = await prisma.tags.findMany({
+      include: {
+        posts: true
+      },
+    });
 
     res.status(200).json(tags);
   } catch (error) {
     console.error('Error fetching tags:', error);
-    res.status(500).json({ message: "Не удалось получить теги" });
+    res.status(500).json({message: "Не удалось получить теги"});
   }
 };
 
@@ -74,7 +28,7 @@ const allTags = async (req, res) => {
  */
 
 const tagById = async (req, res) => {
-  const { name } = req.params;
+  const {name} = req.params;
 
   try {
     const tag = await prisma.tags.findUnique({
@@ -87,13 +41,13 @@ const tagById = async (req, res) => {
     });
 
     if (!tag) {
-      return res.status(404).json({ message: "Тег не найден" });
+      return res.status(404).json({message: "Тег не найден"});
     }
 
     res.status(200).json(tag);
   } catch (error) {
     console.error('Error fetching tag by ID:', error);
-    res.status(500).json({ message: "Не удалось получить тег" });
+    res.status(500).json({message: "Не удалось получить тег"});
   }
 };
 
@@ -104,10 +58,10 @@ const tagById = async (req, res) => {
  */
 const addTag = async (req, res) => {
   try {
-    const { name } = req.body;
+    const {name} = req.body;
 
     if (!name) {
-      return res.status(400).json({ message: "Имя тега обязательно" });
+      return res.status(400).json({message: "Имя тега обязательно"});
     }
 
     const tag = await prisma.tags.create({
@@ -119,7 +73,7 @@ const addTag = async (req, res) => {
     res.status(201).json(tag);
   } catch (error) {
     console.error('Error adding tag:', error);
-    res.status(500).json({ message: "Что-то пошло не так при добавлении тега" });
+    res.status(500).json({message: "Что-то пошло не так при добавлении тега"});
   }
 };
 
@@ -129,7 +83,7 @@ const addTag = async (req, res) => {
  * @access Private
  */
 const removeTag = async (req, res) => {
-  const { id } = req.params;
+  const {id} = req.params;
 
   try {
     await prisma.tags.delete({
@@ -141,7 +95,7 @@ const removeTag = async (req, res) => {
     res.status(204).json("OK");
   } catch (error) {
     console.error('Error removing tag:', error);
-    res.status(500).json({ message: "Не удалось удалить тег" });
+    res.status(500).json({message: "Не удалось удалить тег"});
   }
 };
 
@@ -151,8 +105,8 @@ const removeTag = async (req, res) => {
  * @access Private
  */
 const editTag = async (req, res) => {
-  const { id } = req.params;
-  const { name } = req.body;
+  const {id} = req.params;
+  const {name} = req.body;
 
   try {
     const updatedTag = await prisma.tags.update({
@@ -167,7 +121,7 @@ const editTag = async (req, res) => {
     res.status(200).json(updatedTag);
   } catch (error) {
     console.error('Error updating tag:', error);
-    res.status(500).json({ message: "Не удалось обновить тег" });
+    res.status(500).json({message: "Не удалось обновить тег"});
   }
 };
 

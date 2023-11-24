@@ -40,9 +40,13 @@ model ForumPost {
 }
 
 model Tags {
-  id    Int         @id @default(autoincrement())
-  name  String      @unique
-  posts ForumPost[] // Добавляем обратное отношение к модели ForumPost
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+
+  // Добавляем обратное отношение к модели ForumPost
+  posts ForumPost[]
 }
 
 model Comment {
