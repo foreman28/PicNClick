@@ -1,44 +1,49 @@
-import {useState, useEffect} from 'react';
-import {Breadcrumb} from 'antd';
-import {Link, useLocation} from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Breadcrumb } from 'antd';
+import { Link, useLocation } from 'react-router-dom';
 
 const CustomBreadcrumb = () => {
   const location = useLocation();
-  const [breadcrumbs, setBreadcrumbs] = useState<JSX.Element[]>([]);
-
+  const [breadcrumbs, setBreadcrumbs] = useState<any[]>([]);
+  
   useEffect(() => {
     const pathSnippets = location.pathname.split('/').filter((i) => i);
     const breadcrumbItems = pathSnippets.map((_, index) => {
-      const pathsMap: { [key: string]: string } = {
+      const pathsMap:any = {
         forum: 'Форум',
         'add-post': 'Добавить пост',
         search: 'Поиск',
         tags: 'Теги',
         users: 'Пользователи',
-        // Добавьте другие пути и их локализованные названия
+        // Add other paths and their localized names
       };
-
+      
       const pathKey = _.toLowerCase();
       const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
-
-      return (
-        <Breadcrumb.Item key={index}>
+      
+      return {
+        title: (
           <Link to={url}>{pathsMap[pathKey] || _}</Link>
-        </Breadcrumb.Item>
-      );
+        ),
+        key: index.toString(),
+      };
     });
-
+    
     setBreadcrumbs(breadcrumbItems);
   }, [location]);
-
-  // error Breadcrumb
+  
+  // Updated Breadcrumb
   return (
-    <Breadcrumb style={{margin: '16px 0'}}>
-      <Breadcrumb.Item>
-        <Link to="/">Главная</Link>
-      </Breadcrumb.Item>
-      {breadcrumbs}
-    </Breadcrumb>
+    <Breadcrumb
+      style={{ margin: '16px 0' }}
+      items={[
+        {
+          title: <Link to="/">Главная</Link>,
+          key: 'home',
+        },
+        ...breadcrumbs,
+      ]}
+    />
   );
 };
 

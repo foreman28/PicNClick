@@ -18,7 +18,7 @@ const all = async (req, res) => {
             {
               title: {
                 contains: search,
-                mode: 'insensitive', // Case-insensitive search
+                mode: 'insensitive',
               },
             },
             {
@@ -27,10 +27,21 @@ const all = async (req, res) => {
                 mode: 'insensitive',
               },
             },
+            {
+              tags: {
+                some: {
+                  name: {
+                    contains: search,
+                    mode: 'insensitive',
+                  },
+                },
+              },
+            },
           ],
         },
         include: {
           author: true,
+          tags: true,
         },
       });
     } else {
@@ -57,6 +68,7 @@ const all = async (req, res) => {
     res.status(500).json({ message: "Не удалось получить посты" });
   }
 };
+
 
 /**
  * @route POST /api/posts/add

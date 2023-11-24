@@ -23,23 +23,7 @@ export const Search = () => {
   
   const handleSearch = async (value: any) => {
     const API_URL = process.env.REACT_APP_API_URL;
-    
-    // Check if the search term starts with '#'
-    if (value && value.startsWith('#')) {
-      console.log(1)
-      // Treat it as a tag search
-      const tag = value.substring(1); // Remove the '#' character
-      const apiUrl = `${API_URL}/tags/${tag}`;
-      
-      try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        
-        setSuggestions(data.posts || []);
-      } catch (error) {
-        console.error('Error fetching tag search results:', error);
-      }
-    } else {
+
       // Treat it as a regular text-based search
       const apiUrl = value ? `${API_URL}/posts?search=${value}` : `${API_URL}/posts`;
       
@@ -50,7 +34,7 @@ export const Search = () => {
       } catch (error) {
         console.error('Error fetching search suggestions:', error);
       }
-    }
+    
   };
   
   return (

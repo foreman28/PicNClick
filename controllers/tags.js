@@ -16,17 +16,45 @@ const allTags = async (req, res) => {
         where: {
           name: {
             contains: search,
-            mode: 'insensitive', // Case-insensitive search
+            mode: 'insensitive',
           },
         },
         include: {
-          posts: true,
+          posts: {
+            include: {
+              author: {
+                select: {
+                  id: true,
+                  username: true,
+                  email: true,
+                  fullName: true,
+                  avatarURL: true,
+                },
+              },
+              comments: true,
+              tags: true,
+            },
+          },
         },
       });
     } else {
       tags = await prisma.tags.findMany({
         include: {
-          posts: true,
+          posts: {
+            include: {
+              author: {
+                select: {
+                  id: true,
+                  username: true,
+                  email: true,
+                  fullName: true,
+                  avatarURL: true,
+                },
+              },
+              comments: true,
+              tags: true,
+            },
+          },
         },
       });
     }
@@ -37,6 +65,7 @@ const allTags = async (req, res) => {
     res.status(500).json({ message: "Не удалось получить теги" });
   }
 };
+
 
 /**
  * @route GET /api/tags/:id

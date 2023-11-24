@@ -34,16 +34,26 @@
   padding: 10px 0;
 
   &:hover {
-    background: var(--accent-2-1);
+    background: var(--bg);
   }
 }
 
 .title {
   color: var(--black-1);
   font-family: var(--font-family);
-  font-size: 14px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.02rem;
+}
+
+.text {
+  color: var(--black-1);
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
   line-height: normal;
   letter-spacing: 0.02rem;
 }
