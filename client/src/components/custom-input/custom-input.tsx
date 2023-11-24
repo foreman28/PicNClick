@@ -1,33 +1,63 @@
 import React from "react";
-import {ConfigProvider, Form, Input} from "antd";
+import { ConfigProvider, Form, Input } from "antd";
+import { NamePath } from "antd/es/form/interface";
 
 type Props = {
   name: string;
   placeholder: string;
   type?: string;
+  dependencies?: NamePath[];
   theme?: any;
 };
 
 export const CustomInput = ({
-  type = 'text',
-  name,
-  placeholder,
-  theme,
-}: Props) => {
-
+                       type = 'text',
+                       name,
+                       placeholder,
+                       dependencies,
+                       theme,
+                     }: Props) => {
   return (
     <ConfigProvider theme={theme}>
       <Form.Item
         name={name}
-        rules={[{required: true, message: 'Обязательное поле'}]}
-        shouldUpdate={true}
+        dependencies={dependencies}
+        hasFeedback={type === 'password'}
+        rules={[
+          {
+            required: true,
+            message: 'Обязательное поле',
+          },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value) {
+                return Promise.resolve();
+              }
+              
+              if (type === 'password' && name === 'confirmPassword') {
+                if (!value || getFieldValue('password') === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(new Error('Пароли должны совпадать'));
+              } else if (type === 'password') {
+                if (value.length < 6) {
+                  return Promise.reject(new Error('Пароль должен быть длиньше 6-ти символов'));
+                }
+                return Promise.resolve();
+              }
+              
+              return Promise.resolve();
+            },
+          }),
+        ]}
       >
-        <Input
-          placeholder={placeholder}
-          type={type}
-          size="middle"
-        />
+        {type === 'password' ? (
+          <Input.Password placeholder={placeholder} size="large" />
+        ) : (
+          <Input placeholder={placeholder} type={type} size="middle" />
+        )}
       </Form.Item>
     </ConfigProvider>
   );
 };
+

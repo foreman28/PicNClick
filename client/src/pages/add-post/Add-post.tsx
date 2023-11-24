@@ -8,6 +8,7 @@ import { button } from '../../themes/buttons';
 import styles from './Add-post.module.scss';
 import { CustomTextarea } from '../../components/custom-textarea/custom-textarea';
 import CustomSelect from '../../components/custom-select/custom-select';
+import {DownloadOutlined} from "@ant-design/icons";
 
 export const AddPost = () => {
   useEffect(() => {
@@ -89,7 +90,12 @@ export const AddPost = () => {
                 className={styles.img}
               />
             ) : (
-              <div className={styles.img} style={{ height: '932px' }}></div>
+              <div className={styles.img} style={{ height: '932px' }}>
+                <Flex vertical gap={4} align={"center"} justify={"center"} style={{ height: '100%' }}>
+                  <DownloadOutlined className={styles.icon} />
+                  <span className={styles.download}>Загрузить изображение</span>
+                </Flex>
+              </div>
             )}
           </div>
           

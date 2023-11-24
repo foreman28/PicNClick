@@ -1,32 +1,34 @@
 import React from "react";
+import reportWebVitals from "./reportWebVitals";
 
+// Store & Router
 import {createRoot} from "react-dom/client";
 import {Provider} from "react-redux";
 import {store} from "./store/store";
-import reportWebVitals from "./reportWebVitals";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 
+// Pages
 import {Register} from "./pages/register/Register";
 import {Login} from "./pages/login/Login";
-// import {Status} from "./pages/status/Status";
 import {Home} from "./pages/home/Home";
 import {Forum} from "./pages/forum/Forum";
 import {Search} from "./pages/search/Search";
 import {Tags} from "./pages/tags/Tags";
 import NotFound from "./pages/notFound/NotFound";
-
-import {Paths} from "./paths";  // Пути
-
 import {Post} from "./pages/post/Post";
+import {Users} from "./pages/users/Users";
+import {AddPost} from "./pages/add-post/Add-post";
+
+// Пути
+import {Paths} from "./paths";
+
+import {Auth} from "./features/auth/auth";
+
 import {ConfigProvider} from "antd";
 import ruRU from 'antd/lib/locale/ru_RU';
 
-import "./index.scss";
-import {Auth} from "./features/auth/auth";
-import {Users} from "./pages/users/Users";
 import {theme} from "./themes/main";
-import {AddPost} from "./pages/add-post/Add-post";
-
+import "./index.scss";
 
 const router = createBrowserRouter([
   {
@@ -68,11 +70,6 @@ const router = createBrowserRouter([
     path: Paths.register,
     element: <Register/>,
   },
-
-  // {
-  //   path: `${Paths.status}/:status`,
-  //   element: <Status/>,
-  // },
 
   {
     path: Paths.all,

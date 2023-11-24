@@ -9,7 +9,6 @@ import {selectUser} from "../../features/auth/authSlice";
 
 import {CustomInput} from "../../components/custom-input/custom-input";
 import {ErrorMessage} from "../../components/error-message/error-message";
-import {CustomPasswordInput} from "../../components/custom-password-input/custom-password-input";
 import {Header} from "../../components/header/header";
 import {Footer} from "../../components/footer/footer";
 
@@ -58,9 +57,9 @@ export const Login = () => {
               <Flex vertical>
                 <Title level={1} className={styles.title}>Мы скучали по тебе!</Title>
                 <Text className={styles.subtitle}>Более 150 вопросов ждут ваших мудрых предложений!</Text>
-
+                
                 <CustomInput theme={inputText} type="text" name="username" placeholder="Логин"/>
-                <CustomPasswordInput theme={inputPassword} name="password" placeholder="Пароль"/>
+                <CustomInput theme={inputPassword} type="password" name="password" placeholder="Пароль"/>
 
 
                 <ConfigProvider theme={button}>

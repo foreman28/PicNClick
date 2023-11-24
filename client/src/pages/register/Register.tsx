@@ -7,7 +7,6 @@ import {useRegisterMutation} from "../../api/auth";
 import {CustomButton} from "../../components/custom-button/custom-button";
 import {CustomInput} from "../../components/custom-input/custom-input";
 import {ErrorMessage} from "../../components/error-message/error-message";
-import {CustomPasswordInput} from "../../components/custom-password-input/custom-password-input";
 import {selectUser} from "../../features/auth/authSlice";
 import {Paths} from "../../paths";
 
@@ -27,27 +26,27 @@ export const Register = () => {
   const user = useSelector(selectUser);
   const [error, setError] = useState("");
   const [registerUser] = useRegisterMutation();
-
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
+  
   useEffect(() => {
     if (user) {
       navigate("/");
     }
   }, [user, navigate]);
-
+  
   const register = async (data: any) => {
     try {
       await registerUser(data).unwrap();
-
+      
       navigate("/");
     } catch (err: any) {
       setError(err.data.message);
     }
   };
-
+  
   return (
     <>
       <Header/>
@@ -58,18 +57,18 @@ export const Register = () => {
               <Flex vertical>
                 <Title level={1} className={styles.title}>Мы скучали по тебе!</Title>
                 <Text className={styles.subtitle}>Более 150 вопросов ждут ваших мудрых предложений!</Text>
-
+                
                 <CustomInput theme={inputText} type="text" name="username" placeholder="Имя"/>
                 <CustomInput theme={inputText} type="email" name="email" placeholder="Email"/>
-                <CustomPasswordInput theme={inputPassword} name="password" placeholder="Пароль"/>
-                <CustomPasswordInput theme={inputPassword} name="confirmPassword" placeholder="Пароль"/>
-
+                <CustomInput theme={inputPassword} type="password" name="password" placeholder="Пароль"/>
+                <CustomInput theme={inputPassword} type="password" name="confirmPassword" placeholder="Пароль"/>
+                
                 <CustomButton theme={button} type="primary" htmlType="submit">
                   Зарегистрироваться
                 </CustomButton>
               </Flex>
             </Form>
-
+            
             <Space direction="vertical" size="middle">
               <Text>
                 Уже зарегистрированы? <Link to={Paths.login}>Войдите</Link>
