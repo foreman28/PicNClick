@@ -8,6 +8,17 @@ git commit -m "asd"
 git push
 ```
 
+npm -g list
+
++-- express-generator@4.16.1      
++-- node-gyp@10.0.1               
++-- nodemon@3.0.1                 
++-- npm@10.2.1                    
++-- prisma@5.6.0                  
++-- ts-node@10.9.1                
+`-- typescript@5.2.2
+
+
 # Старт:
 
 1. Склонировать репозиторий:
