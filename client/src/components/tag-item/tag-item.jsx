@@ -10,7 +10,7 @@ const TagItem = ({tag}) => {
     <List.Item id={`${tag.name}`} className={styles.item} key={tag.id}>
       <List.Item.Meta
         title={
-          <Link to={`${Paths.search}?search=@${tag.name}`} className={styles.title}>#{tag.name}</Link>
+          <Link to={`${Paths.search}?search=@${tag.url}`} className={styles.title}>#{tag.name}</Link>
         }
         description={
           <Space>

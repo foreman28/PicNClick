@@ -4,7 +4,7 @@ const { allTags, tagById, addTag, removeTag, editTag} = require("../controllers/
 const { auth } = require('../middleware/auth');
 
 router.get("/", allTags);
-router.get("/:name", tagById);
+router.get("/:url", tagById);
 router.post("/add", auth, addTag);
 router.post("/remove/:id", auth, removeTag);
 router.put("/edit/:id", auth, editTag); // Uncomment this line

@@ -11,6 +11,7 @@ import styles from './post-item.module.scss';
 import {ru} from 'date-fns/locale';
 import {format, formatDistanceToNow} from "date-fns";
 import {Paths} from "../../paths";
+import TagItem from "../tag-item/tag-item";
 
 const {Paragraph} = Typography;
 
@@ -82,9 +83,15 @@ const PostItem = ({post}) => {
               <Flex>
                 {post.tags && post.tags.map((tag, index) => (
                   <Tag key={index} className={styles.tag}>
-                    <Link to={`${Paths.search}?search=@${tag.name}`}>{tag.name}</Link>
+                    <Link to={`${Paths.search}?search=@${tag.url}`}>{tag.name}</Link>
                   </Tag>
                 ))}
+                {/*<List*/}
+                {/*  itemLayout="vertical"*/}
+                {/*  size="large"*/}
+                {/*  dataSource={post.tags}*/}
+                {/*  renderItem={(tag) => <TagItem key={tag.id} tag={tag} />}*/}
+                {/*/>*/}
               </Flex>
             </Flex>
           </Flex>

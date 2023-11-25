@@ -42,7 +42,7 @@ export const Post = () => {
               {post.tags &&
                 post.tags.map((tag, index) => (
                   <Tag key={index} className={styles.tag}>
-                    <Link to={`${Paths.search}?search=@${tag.name}`}>{tag.name}</Link>
+                    <Link to={`${Paths.search}?search=@${tag.url}`}>{tag.name}</Link>
                   </Tag>
                 ))}
             </Flex>

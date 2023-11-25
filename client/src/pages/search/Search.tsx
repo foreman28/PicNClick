@@ -32,6 +32,7 @@ export const Search = () => {
         const response = await fetch(apiUrl);
         const data = await response.json();
         setSuggestions(data);
+        // console.log(data)
       } catch (error) {
         console.error('Error fetching search suggestions:', error);
       }

@@ -29,12 +29,12 @@ const allTags = async (req, res) => {
  */
 
 const tagById = async (req, res) => {
-  const {name} = req.params;
+  const {url} = req.params;
 
   try {
     const tag = await prisma.tags.findUnique({
       where: {
-        name,
+        url,
       },
       include: {
         posts: true,

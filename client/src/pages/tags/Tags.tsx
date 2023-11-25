@@ -16,7 +16,7 @@ export const Tags = () => {
   }, []);
   
   const { data: tags, error, isLoading } = useGetAllTagsQuery();
-  
+
   return (
     <Layout>
       <Flex className={styles.main} gap={12} vertical>

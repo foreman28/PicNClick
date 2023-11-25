@@ -3,11 +3,11 @@ import { api } from "./apiConfig";
 
 export const postsApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getAllPosts: builder.query<ForumPost[], { page?: number; pageSize?: number }>({
-      query: ({ page, pageSize }) => ({
+    getAllPosts: builder.query<ForumPost[], { page?: number; pageSize?: number; search?: string }>({
+      query: ({ page, pageSize, search}) => ({
         url: `/posts`,
         method: "GET",
-        params: { page, pageSize }, // Pass page and pageSize as query parameters
+        params: { page, pageSize, search }, // Pass page and pageSize as query parameters
       }),
     }),
     getPost: builder.query<ForumPost, string>({

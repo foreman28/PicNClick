@@ -19,14 +19,18 @@ export const FeedPosts = ({data}: Props) => {
   const navigate = useNavigate();
   
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 10;
+  const pageSize = 3;
+  
+  const searchS = new URLSearchParams(search).get('search') || '';
   
   const {data: posts, isLoading, isError} = useGetAllPostsQuery({
     page: currentPage,
     pageSize: pageSize,
+    search: searchS, // Get the search parameter from the URL
   });
   
   const {data: allPosts, isLoading: isLoadingPosts} = useGetAllPostsQuery({});
+  
   const totalPosts = data?.length || allPosts?.length || 0;
   
   useEffect(() => {
@@ -40,7 +44,7 @@ export const FeedPosts = ({data}: Props) => {
   }, [currentPage]);
   
   const handlePageChange = (page: number) => {
-    navigate(`?page=${page}`);
+    navigate(`?page=${page}&search=${searchS}`);
   };
   
   return (
@@ -59,7 +63,7 @@ export const FeedPosts = ({data}: Props) => {
           <List
             itemLayout="vertical"
             size="large"
-            dataSource={data || posts}
+            dataSource={posts}
             renderItem={(item) => <PostItem post={item}/>}
             locale={{emptyText: 'Пусто'}}
           />

@@ -10,8 +10,8 @@ export const tagsApi = api.injectEndpoints({
       }),
     }),
     getTag: builder.query<Tags, string>({
-      query: (id) => ({
-        url: `/tags/${id}`,
+      query: (url) => ({
+        url: `/tags/${url}`,
         method: "GET",
       }),
     }),

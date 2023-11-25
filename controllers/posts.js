@@ -8,8 +8,8 @@ const slugify = require('slugify');
  */
 const all = async (req, res) => {
   try {
-    const { search, page, pageSize } = req.query;
-
+    const {search, page, pageSize} = req.query;
+    console.log(search)
     let posts;
 
     const findManyOptions = {
@@ -32,10 +32,22 @@ const all = async (req, res) => {
           where: {
             tags: {
               some: {
-                name: {
-                  contains: search.substring(1), // Remove '@' symbol
-                  mode: 'insensitive',
-                },
+
+                OR: [
+                  {
+                    url: {
+                      contains: search.substring(1), // Remove '@' symbol
+                      mode: 'insensitive',
+                    },
+
+                  },
+                  {
+                    name: {
+                      contains: search.substring(1), // Remove '@' symbol
+                      mode: 'insensitive',
+                    },
+                  }
+                ]
               },
             },
           },
@@ -70,12 +82,9 @@ const all = async (req, res) => {
     res.status(200).json(posts);
   } catch (error) {
     console.error('Error fetching posts:', error);
-    res.status(500).json({ message: 'Не удалось получить посты' });
+    res.status(500).json({message: 'Не удалось получить посты'});
   }
 };
-
-
-
 
 
 /**
@@ -91,7 +100,7 @@ const add = async (req, res) => {
       return res.status(400).json({message: "Все поля обязательные"});
     }
 
-    const slug = slugify(data.title, { lower: true, remove: /[*+~.()'"!:@]/g }); // Генерация уникального URL
+    const slug = slugify(data.title, {lower: true, remove: /[*+~.()'"!:@]/g}); // Генерация уникального URL
 
     const post = await prisma.forumPost.create({
       data: {

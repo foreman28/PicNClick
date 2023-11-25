@@ -48,6 +48,7 @@ const SearchComponent = (props: any) => {
         
         {suggestions.length > 0 && (
           <List
+            className={styles.list}
             size="small"
             bordered
             dataSource={suggestions}
@@ -71,7 +72,6 @@ const SearchComponent = (props: any) => {
               </List.Item>
               </Link>
             )}
-            className={styles.list}
           />
         )}
       </ConfigProvider>
