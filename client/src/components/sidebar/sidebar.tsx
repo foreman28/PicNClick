@@ -15,8 +15,8 @@ export const Sidebar = () => {
 
   const user = useSelector(selectUser);
 
-  return (
-    <Layout.Sider className={style.sidebar} width={310}>
+  return ( // width={"max(310px, calc(100vw - (var(--white-container) + var(--white-sidebar))))"}
+    <Layout.Sider className={style.sidebar} width={"var(--white-sidebar)"}>
       <Flex style={{position: 'sticky', top:'70px'}} className={style.sidebar_container} gap={"large"} vertical>
 
         <Flex gap={"small"} vertical>

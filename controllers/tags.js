@@ -1,4 +1,5 @@
 const {prisma} = require("../prisma/prisma-client");
+const transliteration = require("transliteration");
 
 /**
  * @route GET /api/tags
@@ -58,22 +59,29 @@ const tagById = async (req, res) => {
  */
 const addTag = async (req, res) => {
   try {
-    const {name} = req.body;
+    const { name, description } = req.body;
+
+    const url = (name) => {
+      const transliteratedName = transliteration.transliterate(name);
+      return transliteratedName.toLowerCase().replace(/\s+/g, '-');
+    };
 
     if (!name) {
-      return res.status(400).json({message: "Имя тега обязательно"});
+      return res.status(400).json({ message: "Имя тега обязательно" });
     }
 
     const tag = await prisma.tags.create({
       data: {
+        url: url(name),
         name,
+        description,
       },
     });
 
     res.status(201).json(tag);
   } catch (error) {
     console.error('Error adding tag:', error);
-    res.status(500).json({message: "Что-то пошло не так при добавлении тега"});
+    res.status(500).json({ message: "Что-то пошло не так при добавлении тега", error: error.message });
   }
 };
 

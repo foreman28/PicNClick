@@ -65,6 +65,7 @@ const PostItem = ({post}) => {
                   width={932}
                   height={420}
                   alt={post.title}
+                  loading="lazy"
                 />
                 :
                 ""

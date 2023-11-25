@@ -1,15 +1,16 @@
 import {PrismaClient} from '@prisma/client';
+import {transliterate} from "transliteration";
 
 const prisma = new PrismaClient();
 
 // start: ts-node createTags.ts
 
-interface Tag {
+interface TagData {
   name: string;
-  description?: string;
+  description: string;
 }
 
-const tagsData: Tag[] = [
+const tagsData: TagData[] = [
   {"name": "Фотография", "description": "Общая тема для всех фотографических обсуждений и вопросов в сообществе."},
   {"name": "Мастерство", "description": "Обмен опытом и советами по повышению мастерства в искусстве фотографии."},
   {
@@ -126,13 +127,23 @@ const tagsData: Tag[] = [
 // @ts-ignore
 (async () => {
   try {
-    for (const tag of tagsData) {
+    for (let i = 0; i < tagsData.length; i++) {
+      const tag = tagsData[i];
+      const url: string =
+        transliterate(tag.name)
+          .toLowerCase().replace(/\s+/g, '-')
+      
       await prisma.tags.create({
-        data: tag,
+// @ts-ignore
+        data: {
+          name: tag.name,
+          description: tag.description,
+          url: url
+        },
       });
     }
   } catch (error) {
-    throw error;
+    console.error('Error creating tags:', error);
   } finally {
     await prisma.$disconnect();
   }

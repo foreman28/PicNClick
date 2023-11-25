@@ -27,7 +27,7 @@ export const Sidebar2 = () => {
   ];
 
   return (
-    <Layout.Sider className={styles.sidebar} width={310}>
+    <Layout.Sider className={styles.sidebar} width={"var(--white-sidebar)"}>
       <Flex style={{
         // position: 'sticky',
         // top:'82px'

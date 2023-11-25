@@ -41,6 +41,7 @@ model ForumPost {
 
 model Tags {
   id          Int      @id @default(autoincrement())
+  url         String   @unique
   name        String   @unique
   description String?
   createdAt   DateTime @default(now())

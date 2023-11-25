@@ -4,7 +4,6 @@ import {List, Flex, Pagination} from 'antd';
 import {useLocation, useNavigate} from 'react-router-dom';
 import styles from './feed-posts.module.scss';
 
-import {Paths} from "../../paths";
 import SkeletonPost from "../skeleton-post/skeleton-post";
 import PostItem from "../post-item/post-item";
 import {useGetAllPostsQuery} from "../../api/posts";
@@ -60,7 +59,7 @@ export const FeedPosts = ({data}: Props) => {
           <List
             itemLayout="vertical"
             size="large"
-            dataSource={posts}
+            dataSource={data || posts}
             renderItem={(item) => <PostItem post={item}/>}
             locale={{emptyText: 'Пусто'}}
           />

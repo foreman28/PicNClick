@@ -10,6 +10,8 @@ git push
 
 npm -g list
 
+cd client/src/api/test (Создание )
+
 +-- express-generator@4.16.1      
 +-- node-gyp@10.0.1               
 +-- nodemon@3.0.1                 
