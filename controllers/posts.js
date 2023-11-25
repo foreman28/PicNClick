@@ -36,7 +36,7 @@ const all = async (req, res) => {
               },
             },
             {
-              content: {
+              description: {
                 contains: search,
                 mode: 'insensitive',
               },
