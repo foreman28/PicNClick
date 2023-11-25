@@ -25,36 +25,45 @@ const all = async (req, res) => {
     }
 
     if (search) {
-      posts = await prisma.forumPost.findMany({
-        ...findManyOptions,
-        where: {
-          OR: [
-            {
-              title: {
-                contains: search,
-                mode: 'insensitive',
-              },
-            },
-            {
-              description: {
-                contains: search,
-                mode: 'insensitive',
-              },
-            },
-            {
-              tags: {
-                some: {
-                  name: {
-                    contains: search,
-                    mode: 'insensitive',
-                  },
+      if (search.startsWith('@')) {
+        // Search by tag
+        posts = await prisma.forumPost.findMany({
+          ...findManyOptions,
+          where: {
+            tags: {
+              some: {
+                name: {
+                  contains: search.substring(1), // Remove '@' symbol
+                  mode: 'insensitive',
                 },
               },
             },
-          ],
-        },
-      });
+          },
+        });
+      } else {
+        // Search by title or description
+        posts = await prisma.forumPost.findMany({
+          ...findManyOptions,
+          where: {
+            OR: [
+              {
+                title: {
+                  contains: search,
+                  mode: 'insensitive',
+                },
+              },
+              {
+                description: {
+                  contains: search,
+                  mode: 'insensitive',
+                },
+              },
+            ],
+          },
+        });
+      }
     } else {
+      // No search query provided, retrieve all posts
       posts = await prisma.forumPost.findMany(findManyOptions);
     }
 
@@ -64,6 +73,7 @@ const all = async (req, res) => {
     res.status(500).json({ message: 'Не удалось получить посты' });
   }
 };
+
 
 
 
