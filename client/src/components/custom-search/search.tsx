@@ -42,9 +42,7 @@ const SearchComponent = (props: any) => {
           placeholder="Поиск..."
           allowClear
           onSearch={sendSearch}
-          onChange={(e) => setTimeout(() => {
-            handleSearch(e.target.value)
-          }, 100)}
+          onChange={(e) => handleSearch(e.target.value)}
           className={styles.search}
         />
         

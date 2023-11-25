@@ -8,11 +8,25 @@ const slugify = require('slugify');
  */
 const all = async (req, res) => {
   try {
-    const { search } = req.query;
+    const { search, page, pageSize } = req.query;
+
     let posts;
+
+    const findManyOptions = {
+      include: {
+        author: true,
+        tags: true,
+      },
+    };
+
+    if (page && pageSize) {
+      findManyOptions.skip = ((+page) - 1) * (+pageSize);
+      findManyOptions.take = +pageSize;
+    }
 
     if (search) {
       posts = await prisma.forumPost.findMany({
+        ...findManyOptions,
         where: {
           OR: [
             {
@@ -39,35 +53,19 @@ const all = async (req, res) => {
             },
           ],
         },
-        include: {
-          author: true,
-          tags: true,
-        },
       });
     } else {
-      posts = await prisma.forumPost.findMany({
-        include: {
-          author: {
-            select: {
-              id: true,
-              username: true,
-              email: true,
-              fullName: true,
-              avatarURL: true,
-            },
-          },
-          comments: true,
-          tags: true,
-        },
-      });
+      posts = await prisma.forumPost.findMany(findManyOptions);
     }
 
     res.status(200).json(posts);
   } catch (error) {
     console.error('Error fetching posts:', error);
-    res.status(500).json({ message: "Не удалось получить посты" });
+    res.status(500).json({ message: 'Не удалось получить посты' });
   }
 };
+
+
 
 
 /**
