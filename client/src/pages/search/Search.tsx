@@ -6,6 +6,7 @@ import queryString from "query-string";
 import { useNavigate } from "react-router-dom";
 import PostItem from "../../components/post-item/post-item";
 import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
+import {FeedPosts} from "../../components/feed-posts/feed-posts";
 
 export const Search = () => {
   const [suggestions, setSuggestions] = useState<any[]>([]);
@@ -41,14 +42,15 @@ export const Search = () => {
     <Layout>
       <Flex className={styles.main} vertical gap={"12px"}>
         <CustomBreadcrumb />
-        <List
-          className={styles.list}
-          itemLayout="vertical"
-          size="large"
-          dataSource={suggestions}
-          renderItem={(item) => <PostItem post={item} />}
-          locale={{ emptyText: 'Пусто' }}
-        />
+        {/*<List*/}
+        {/*  className={styles.list}*/}
+        {/*  itemLayout="vertical"*/}
+        {/*  size="large"*/}
+        {/*  dataSource={suggestions}*/}
+        {/*  renderItem={(item) => <PostItem post={item} />}*/}
+        {/*  locale={{ emptyText: 'Пусто' }}*/}
+        {/*/>*/}
+        <FeedPosts data={suggestions}/>
       </Flex>
     </Layout>
   );

@@ -3,7 +3,7 @@ import {Flex, List} from "antd";
 import {Layout} from "../../components/layout/layout";
 
 import styles from "./Users.module.scss";
-// import PostItem from "../../components/post-item/post-item";
+// import FeedPosts from "../../components/post-item/post-item";
 // import {useDispatch, useSelector} from "react-redux";
 // import {useGetAllPostsQuery} from "../../api/posts";
 import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
