@@ -13,8 +13,8 @@ const TOKEN_EXPIRATION = '1d';
 const login = async (req, res) => {
   try {
     const { username, password } = req.body;
+    // console.log(req.body)
 
-    console.log(req.body)
     if (!username || !password) {
       return res.status(400).json({ message: 'Пожалуйста, заполните обязятельные поля' })
     }
@@ -39,7 +39,6 @@ const login = async (req, res) => {
       return res.status(400).json({ message: 'Неверно введен логин или пароль' })
     }
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: 'Что-то пошло не так' })
   }
 }
@@ -51,7 +50,7 @@ const login = async (req, res) => {
  * @access Public
  */
 const register = async (req, res, next) => {
-  console.log(req.body)
+  // console.log(req.body)
   try {
     const { email, password, username } = req.body;
 

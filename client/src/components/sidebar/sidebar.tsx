@@ -26,7 +26,7 @@ export const Sidebar = () => {
             <span className={style.sidebar_item}>Поиск</span>
           </Link>
 
-          <Link to={Paths.forum} className={style.sidebar_link + ' ' + (currentPath === Paths.forum ? style.active : '')}>
+          <Link to={`${Paths.forum}`} className={style.sidebar_link + ' ' + (currentPath === Paths.forum ? style.active : '')}>
             <UnorderedListOutlined style={{fontSize: '18px'}} rev="true"/>
             <span className={style.sidebar_item}>Форум</span>
           </Link>

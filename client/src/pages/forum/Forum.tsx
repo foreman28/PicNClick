@@ -7,20 +7,22 @@ import PostItem from '../../components/post-item/post-item';
 import styles from './Forum.module.scss';
 import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
 import SkeletonPost from "../../components/skeleton-post/skeleton-post";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
+import {Paths} from "../../paths";
 
 export const Forum = () => {
-  const {search} = useLocation();
+  const { search } = useLocation();
+  const navigate = useNavigate();
   
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
   
-  const {data: posts, isLoading, isError} = useGetAllPostsQuery({
+  const { data: posts, isLoading, isError } = useGetAllPostsQuery({
     page: currentPage,
     pageSize: pageSize,
   });
   
-  const {data: allPosts} = useGetAllPostsQuery({});
+  const { data: allPosts } = useGetAllPostsQuery({});
   const totalPosts = allPosts?.length || 0;
   
   useEffect(() => {
@@ -29,14 +31,13 @@ export const Forum = () => {
     setCurrentPage(page);
   }, [search]);
   
-  const handlePageChange = (page: number) => {
-    window.history.pushState({}, '', `?page=${page}`);
-    setCurrentPage(page);
-  };
-  
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [handlePageChange]);
+  }, [currentPage]);
+  
+  const handlePageChange = (page: number) => {
+    navigate(`${Paths.forum}?page=${page}`);
+  };
   
   return (
     <Layout>
