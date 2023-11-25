@@ -17,12 +17,6 @@ export const Post = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    if (isError) {
-      console.error("Error fetching post-item:", isError);
-    }
-  }, [isError]);
-
   return (
     <Layout>
       <Flex gap={12} vertical>
