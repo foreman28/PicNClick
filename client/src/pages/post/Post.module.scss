@@ -1,8 +1,15 @@
 .img {
   width: 100%;
-  height: 420px;
-  object-fit: cover;
+
+  height: auto;
+  max-height: 420px;
+  
   border-radius: 6px;
+  background: var(--white-1);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+
+  object-fit: cover;
+  aspect-ratio: 31 / 14;
 }
 
 .title {
@@ -41,4 +48,14 @@
   line-height: normal;
   letter-spacing: 0.5px;
   padding: 4px 8px;
+}
+
+.comments {
+  border-radius: 5px;
+  border: 1px solid var(--white-2);
+  background: var(--white-1);
+
+  box-shadow: 2px 1px 5px 0 rgba(0, 0, 0, 0.15);
+
+  padding: 16px 24px;
 }

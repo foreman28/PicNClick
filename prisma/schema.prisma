@@ -19,6 +19,7 @@ model User {
   updatedAt DateTime    @updatedAt
   posts     ForumPost[]
   Comment   Comment[]
+  Like      Like[]
 }
 
 model ForumPost {
@@ -35,19 +36,21 @@ model ForumPost {
   timestamp     DateTime @default(now())
 
   // Отношение к User
-  author   User      @relation(fields: [authorId], references: [id])
+  author User @relation(fields: [authorId], references: [id])
+
   comments Comment[]
+  Like     Like[]
 }
 
-model Tags {
-  id          Int      @id @default(autoincrement())
-  url         String   @unique
-  name        String   @unique
-  description String?
-  createdAt   DateTime @default(now())
+model Like {
+  id        Int      @id @default(autoincrement())
+  postId    Int
+  userId    Int
+  createdAt DateTime @default(now())
 
-  // Добавляем обратное отношение к модели ForumPost
-  posts ForumPost[]
+  // Связи с ForumPost и User
+  post ForumPost @relation(fields: [postId], references: [id])
+  user User      @relation(fields: [userId], references: [id])
 }
 
 model Comment {
@@ -60,4 +63,15 @@ model Comment {
   // Связь с ForumPost и User
   post ForumPost @relation(fields: [postId], references: [id])
   user User      @relation(fields: [userId], references: [id])
+}
+
+model Tags {
+  id          Int      @id @default(autoincrement())
+  url         String   @unique
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+
+  // Добавляем обратное отношение к модели ForumPost
+  posts ForumPost[]
 }

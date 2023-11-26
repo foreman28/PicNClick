@@ -26,7 +26,7 @@ export const Tags = () => {
         {/*  itemLayout="vertical"*/}
         {/*  size="large"*/}
         {/*  dataSource={tags}*/}
-        {/*  renderItem={(tag) => <TagItem key={tag.id} tag={tag} />}*/}
+        {/*  renderItem={(tag) => <Comments key={tag.id} tag={tag} />}*/}
         {/*/>*/}
           <List
             grid={{ gutter: 12, xs: 1, sm: 2, md: 3, lg: 4, xl: 4, xxl: 4 }}

@@ -3,7 +3,7 @@ import {Button, ConfigProvider} from "antd";
 import styles from "./custom-button.module.scss"
 
 type Props = {
-  theme:any,
+  theme?:any,
   children: React.ReactNode;
   htmlType?: "button" | "submit" | "reset" | undefined;
   onClick?: () => void;

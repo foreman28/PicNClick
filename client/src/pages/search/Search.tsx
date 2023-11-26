@@ -18,7 +18,6 @@ export const Search = () => {
   }, []);
   
   useEffect(() => {
-    // console.log(queryParams.search)
     handleSearch(queryParams.search);
   }, [queryParams.search, navigate]);
   
@@ -43,14 +42,7 @@ export const Search = () => {
     <Layout>
       <Flex className={styles.main} vertical gap={"12px"}>
         <CustomBreadcrumb />
-        {/*<List*/}
-        {/*  className={styles.list}*/}
-        {/*  itemLayout="vertical"*/}
-        {/*  size="large"*/}
-        {/*  dataSource={suggestions}*/}
-        {/*  renderItem={(item) => <PostItem post={item} />}*/}
-        {/*  locale={{ emptyText: 'Пусто' }}*/}
-        {/*/>*/}
+        
         <FeedPosts data={suggestions}/>
       </Flex>
     </Layout>

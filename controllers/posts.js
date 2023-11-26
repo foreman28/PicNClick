@@ -10,7 +10,7 @@ const {auth} = require("../middleware/auth");
 const all = async (req, res) => {
   try {
     const {search, page, pageSize} = req.query;
-    console.log(search)
+    // console.log(search)
     let posts;
 
     const findManyOptions = {
@@ -193,7 +193,25 @@ const post = async (req, res) => {
             avatarURL: true,
           },
         },
-        comments: true,
+        comments: {
+          select: {
+            id: true,
+            content: true,
+            user: {
+              select: {
+                id: true,
+                username: true,
+                email: true,
+                fullName: true,
+                avatarURL: true,
+              },
+            },
+            post: true,
+            userId: true,
+            postId: true,
+            createdAt: true,
+          },
+        },
         tags: true,
       },
     });

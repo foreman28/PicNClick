@@ -90,7 +90,7 @@ const PostItem = ({post}) => {
                 {/*  itemLayout="vertical"*/}
                 {/*  size="large"*/}
                 {/*  dataSource={post.tags}*/}
-                {/*  renderItem={(tag) => <TagItem key={tag.id} tag={tag} />}*/}
+                {/*  renderItem={(tag) => <Comments key={tag.id} tag={tag} />}*/}
                 {/*/>*/}
               </Flex>
             </Flex>

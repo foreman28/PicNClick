@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useLocation, useNavigate} from 'react-router-dom';
+import {useLocation, useNavigate, useSearchParams} from 'react-router-dom';
 import {List, Flex, Pagination} from 'antd';
 
 import SkeletonPost from "../skeleton-post/skeleton-post";
@@ -14,6 +14,7 @@ type Props = {
 };
 
 export const FeedPosts = ({ data }: Props) => {
+  // console.log(data)
   const { search } = useLocation();
   const navigate = useNavigate();
   
@@ -28,19 +29,23 @@ export const FeedPosts = ({ data }: Props) => {
     search: searchS,
   });
   
-  const { data: allPosts } = useGetAllPostsQuery({});
+  // console.log(posts)
+  const { data: allPosts, isLoading:allIsLoading, isError:allIsError } = useGetAllPostsQuery({});
   const totalPosts = data?.length || allPosts?.length || 0;
   
+  const [searchParams]:any = useSearchParams();
+  const pageParam:any = parseInt(searchParams.get('page')) || 1;
+  
   useEffect(() => {
-    const pageParam = new URLSearchParams(search).get('page');
-    const page = pageParam ? parseInt(pageParam) : 1;
-    setCurrentPage(page);
-  }, [search]);
+    setCurrentPage(pageParam);
+  }, [pageParam]);
   
   const handlePageChange = (page: number) => {
     const totalPages = Math.ceil(totalPosts / pageSize);
     const validPage = Math.min(Math.max(1, page), totalPages);
-    navigate(`?page=${validPage}&search=${searchS}`);
+    searchParams.set('page', validPage.toString());
+    searchParams.set('search', searchS);
+    navigate(`?${searchParams.toString()}`);
   };
   
   useEffect(() => {
@@ -49,13 +54,14 @@ export const FeedPosts = ({ data }: Props) => {
   
   return (
     <>
-      {isLoading || isError ? (
+      {isLoading || allIsLoading ? (
         <Flex vertical gap="12px">
           <List
             itemLayout="vertical"
             size="large"
             dataSource={[1, 2, 3]}
             renderItem={() => <SkeletonPost />}
+            locale={{ emptyText: 'Пусто' }}
           />
         </Flex>
       ) : (
@@ -69,8 +75,8 @@ export const FeedPosts = ({ data }: Props) => {
           />
         </Flex>
       )}
-      {console.log(totalPosts)}
-      {totalPosts > pageSize && posts?.length !=0 && (
+      
+      {totalPosts > pageSize && (
         <Flex justify="center" style={{ marginTop: '16px' }}>
           <Pagination
             total={totalPosts}
