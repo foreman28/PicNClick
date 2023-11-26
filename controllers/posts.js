@@ -1,5 +1,6 @@
 const {prisma} = require("../prisma/prisma-client");
 const slugify = require('slugify');
+const {auth} = require("../middleware/auth");
 
 /**
  * @route GET /api/posts
@@ -93,6 +94,9 @@ const all = async (req, res) => {
  * @access Private
  */
 const add = async (req, res) => {
+  if (auth) {
+    console.log(1)
+  }
   try {
     const data = req.body;
     console.log(data)
