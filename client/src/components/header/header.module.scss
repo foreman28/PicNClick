@@ -25,8 +25,6 @@
 }
 
 .logo_content {
-  display: flex;
-  gap: 16px;
   width: 260px;
 }
 
@@ -35,11 +33,11 @@
   height: 40px;
 }
 
-.logo_content > span {
+.logo_content span {
   display: flex;
   align-items: center;
 
-  color: var(--black-2);
+  color: var(--accent-1);
   font-family: var(--font-family), sans-serif;
   font-size: 22px;
   font-style: normal;
@@ -48,8 +46,9 @@
   letter-spacing: 1px;
 }
 
-.logo_content > span > span {
+.logo_content span span {
   font-weight: 700;
+  color: var(--accent-2);
 }
 
 .header_items {

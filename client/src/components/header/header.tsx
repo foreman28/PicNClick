@@ -26,10 +26,14 @@ export const Header = () => {
     <Layout.Header className={styles.header} style={{height: 'auto'}}>
       <Flex justify={"space-between"} align={"center"} className={styles.header_container}>
 
-        <Link to="/" className={styles.logo_content}>
-          <img className={styles.logo} srcSet={`${process.env.PUBLIC_URL}/logo.svg`} width={40} height={40} alt={"PicNClick"}/>
-          <span>Pic<span>&</span>Click</span>
-        </Link>
+        <Flex gap={16} align={"center"} className={styles.logo_content}>
+          <Link to="/" className={styles.logo}>
+            <img srcSet={`${process.env.PUBLIC_URL}/logo.svg`} width={40} height={40} alt={"PicNClick"}/>
+          </Link>
+          <Link to="/">
+            <span>Pic<span>&</span>Click</span>
+          </Link>
+        </Flex>
 
 
         <SearchComponent theme={search}/>

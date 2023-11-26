@@ -64,6 +64,7 @@
   &.active {
     position: relative;
     background-color: var(--accent-2-1);
+
     &:before {
       content: '';
       position: absolute;
@@ -71,6 +72,10 @@
       height: 100%;
       width: 5px;
       background-color: var(--accent-2);
+    }
+
+    & span {
+      font-weight: 600;
     }
   }
 }

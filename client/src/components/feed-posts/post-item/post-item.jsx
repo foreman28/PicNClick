@@ -10,8 +10,8 @@ import styles from './post-item.module.scss';
 
 import {ru} from 'date-fns/locale';
 import {format, formatDistanceToNow} from "date-fns";
-import {Paths} from "../../paths";
-import TagItem from "../tag-item/tag-item";
+import {Paths} from "../../../paths";
+import TagItem from "../../tag-item/tag-item";
 
 const {Paragraph} = Typography;
 

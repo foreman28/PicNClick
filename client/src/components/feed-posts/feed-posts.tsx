@@ -1,36 +1,34 @@
 import React, {useEffect, useState} from 'react';
+import {useLocation, useNavigate} from 'react-router-dom';
 import {List, Flex, Pagination} from 'antd';
 
-import {useLocation, useNavigate} from 'react-router-dom';
-import styles from './feed-posts.module.scss';
-
 import SkeletonPost from "../skeleton-post/skeleton-post";
-import PostItem from "../post-item/post-item";
+import PostItem from "./post-item/post-item";
+
 import {useGetAllPostsQuery} from "../../api/posts";
 
+import styles from './feed-posts.module.scss';
 
 type Props = {
-  // pageProps: string;
   data?: any;
 };
 
-export const FeedPosts = ({data}: Props) => {
-  const {search} = useLocation();
+export const FeedPosts = ({ data }: Props) => {
+  const { search } = useLocation();
   const navigate = useNavigate();
   
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 3;
+  const pageSize = 5;
   
   const searchS = new URLSearchParams(search).get('search') || '';
   
-  const {data: posts, isLoading, isError} = useGetAllPostsQuery({
+  const { data: posts, isLoading, isError } = useGetAllPostsQuery({
     page: currentPage,
     pageSize: pageSize,
-    search: searchS, // Get the search parameter from the URL
+    search: searchS,
   });
   
-  const {data: allPosts, isLoading: isLoadingPosts} = useGetAllPostsQuery({});
-  
+  const { data: allPosts } = useGetAllPostsQuery({});
   const totalPosts = data?.length || allPosts?.length || 0;
   
   useEffect(() => {
@@ -39,23 +37,25 @@ export const FeedPosts = ({data}: Props) => {
     setCurrentPage(page);
   }, [search]);
   
+  const handlePageChange = (page: number) => {
+    const totalPages = Math.ceil(totalPosts / pageSize);
+    const validPage = Math.min(Math.max(1, page), totalPages);
+    navigate(`?page=${validPage}&search=${searchS}`);
+  };
+  
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [currentPage]);
-  
-  const handlePageChange = (page: number) => {
-    navigate(`?page=${page}&search=${searchS}`);
-  };
+  }, [currentPage, handlePageChange]);
   
   return (
     <>
-      {isLoading ? (
+      {isLoading || isError ? (
         <Flex vertical gap="12px">
           <List
             itemLayout="vertical"
             size="large"
             dataSource={[1, 2, 3]}
-            renderItem={() => <SkeletonPost/>}
+            renderItem={() => <SkeletonPost />}
           />
         </Flex>
       ) : (
@@ -64,15 +64,14 @@ export const FeedPosts = ({data}: Props) => {
             itemLayout="vertical"
             size="large"
             dataSource={posts}
-            renderItem={(item) => <PostItem post={item}/>}
-            locale={{emptyText: 'Пусто'}}
+            renderItem={(item) => <PostItem post={item} />}
+            locale={{ emptyText: 'Пусто' }}
           />
         </Flex>
       )}
-      
-      
-      {(totalPosts > pageSize) ? (
-        <Flex justify="center" style={{marginTop: '16px'}}>
+      {console.log(totalPosts)}
+      {totalPosts > pageSize && posts?.length !=0 && (
+        <Flex justify="center" style={{ marginTop: '16px' }}>
           <Pagination
             total={totalPosts}
             pageSize={pageSize}
@@ -80,8 +79,9 @@ export const FeedPosts = ({data}: Props) => {
             onChange={handlePageChange}
           />
         </Flex>
-      ) : undefined}
+      )}
     </>
   );
 };
+
 

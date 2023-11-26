@@ -4,7 +4,7 @@ import styles from "./Search.module.scss";
 import React, { useEffect, useState } from "react";
 import queryString from "query-string";
 import { useNavigate } from "react-router-dom";
-import PostItem from "../../components/post-item/post-item";
+import PostItem from "../../components/feed-posts/post-item/post-item";
 import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
 import {FeedPosts} from "../../components/feed-posts/feed-posts";
 

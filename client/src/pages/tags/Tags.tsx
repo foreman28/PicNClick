@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {Flex, List} from "antd";
+import {Col, Flex, Grid, List, Row} from "antd";
 
 import {Layout} from "../../components/layout/layout";
 
@@ -22,12 +22,19 @@ export const Tags = () => {
       <Flex className={styles.main} gap={12} vertical>
         <CustomBreadcrumb/>
         {/*<Title level={1}>Теги</Title>*/}
-        <List
-          itemLayout="vertical"
-          size="large"
-          dataSource={tags}
-          renderItem={(tag) => <TagItem key={tag.id} tag={tag} />}
-        />
+        {/*<List*/}
+        {/*  itemLayout="vertical"*/}
+        {/*  size="large"*/}
+        {/*  dataSource={tags}*/}
+        {/*  renderItem={(tag) => <TagItem key={tag.id} tag={tag} />}*/}
+        {/*/>*/}
+          <List
+            grid={{ gutter: 12, xs: 1, sm: 2, md: 3, lg: 4, xl: 4, xxl: 4 }}
+            dataSource={tags}
+            renderItem={(tag) => (
+              <TagItem key={tag.id} tag={tag}/>
+            )}
+          />
       </Flex>
     </Layout>
   );
