@@ -90,7 +90,7 @@ export const AddPost = () => {
                 className={styles.img}
               />
             ) : (
-              <div className={styles.img} style={{ height: '932px' }}>
+              <div className={styles.img}>
                 <Flex vertical gap={4} align={"center"} justify={"center"} style={{ height: '100%' }}>
                   <DownloadOutlined className={styles.icon} />
                   <span className={styles.download}>Загрузить изображение</span>

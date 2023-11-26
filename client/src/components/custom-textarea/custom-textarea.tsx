@@ -1,5 +1,5 @@
 import {Form} from "antd";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -54,29 +54,49 @@ export const CustomTextarea = ({
   }
   
   
-  // const [content, setContent] = useState('');
-  // const [error, setError] = useState('');
-  //
-  // const handleChange = (value:any, delta:any, source:any, editor:any) => {
-  //     const maxLength = 10; // Замените на ваше максимальное количество символов
-  //
-  //     // Удаление HTML-тегов и проверка максимального количества символов
-  //     const plainText = editor.getText();
-  //     if (plainText.length <= maxLength) {
-  //       setContent(value);
-  //       setError('');
-  //     } else {
-  //       // Обрезаем текст до максимального количества символов
-  //       const truncatedText = plainText.slice(0, maxLength);
-  //
-  //       // Преобразование обрезанного текста обратно в формат Quill
-  //       const delta = editor.clipboard.convert(truncatedText);
-  //       editor.setContents(delta);
-  //
-  //       setError(`Превышено максимальное количество символов (${maxLength})`);
-  //     }
-  //   };
-
+  const [content, setContent] = useState("");
+  const [error, setError] = useState("");
+  const [valueLength, setValueLength] = useState(true);
+  
+  const handleChange = (value: any, delta: any, source: any, editor: any) => {
+    const maxLength = 10;
+    
+    // Получаем plainText
+    const plainText = editor.getText();
+    
+    // Получаем список изображений
+    const images = editor.getContents().filter((op: any) => op.insert && op.insert.image);
+    
+    // Получаем текущее количество изображений
+    const currentImageCount = images.length;
+    
+    // Максимальный размер файла в байтах (здесь 1 MB)
+    const maxImageSize = 1024 * 1024;
+    
+    // Проверяем условия
+    const oversizedImages = images.filter((op: any) => {
+      const imageSrc = op.insert.image;
+      const imageSize = imageSrc.size || 0;
+      return imageSize > maxImageSize;
+    });
+    
+    if (plainText.length <= maxLength && currentImageCount <= 10 && oversizedImages.length === 0) {
+      // Устанавливаем контент и сбрасываем ошибку
+      setContent(value);
+      setError("Обязательное поле");
+      setValueLength(true);
+    } else {
+      // Обрабатываем случай, когда есть изображения превышающие максимальный размер
+      if (oversizedImages.length > 0) {
+        setError(`Некоторые изображения превышают максимальный размер ${maxImageSize / (1024 * 1024)} MB`);
+      } else {
+        setError(
+          `Превышено максимальное количество символов (${plainText.length} / ${maxLength}) или изображений (максимум 10)`
+        );
+      }
+      setValueLength(false);
+    }
+  };
   
   return (
     <Form.Item
@@ -86,22 +106,19 @@ export const CustomTextarea = ({
         {
           required: true,
           validator: (_, value) => {
-            if (value && value.trim() !== "<p><br></p>") {
-              // if (error) {
-              //   setError('');
-              // }
+            if (value && valueLength && value.trim() !== "<p><br></p>") {
               return Promise.resolve();
             }
-            return Promise.reject(new Error("Обязательное поле"));
+            return Promise.reject(new Error(error));
           },
         },
       ]}
       shouldUpdate={true}
-      // help={error} // Вывод сообщения об ошибке
     >
       <ReactQuill
-        // value={content}
-        // onChange={handleChange}
+        value={content}
+        onChange={handleChange}
+        theme="snow"
         modules={modules}
         formats={formats}
         className="custom-textarea"
