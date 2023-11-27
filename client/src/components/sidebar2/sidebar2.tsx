@@ -43,7 +43,7 @@ export const Sidebar2 = () => {
             dataSource={data}
             className={styles.sidebar_list}
             renderItem={(item) =>
-              <List.Item>
+              <List.Item className={styles.sidebar_item}>
                 
                 <Link to={'/'} className={styles.sidebar_link}>{item}</Link>
               </List.Item>
@@ -61,7 +61,7 @@ export const Sidebar2 = () => {
             dataSource={data}
             className={styles.sidebar_list}
             renderItem={(item) =>
-              <List.Item>
+              <List.Item className={styles.sidebar_item}>
                 <Link to={'/'} className={styles.sidebar_link}>{item}</Link>
               </List.Item>
             }

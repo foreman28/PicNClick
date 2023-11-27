@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useLocation, useNavigate, useSearchParams} from 'react-router-dom';
 import {List, Flex, Pagination} from 'antd';
 
@@ -14,7 +14,8 @@ type Props = {
 };
 
 export const FeedPosts = ({ data }: Props) => {
-  // console.log(data)
+  console.log(1)
+  
   const { search } = useLocation();
   const navigate = useNavigate();
   
