@@ -17,7 +17,7 @@ async function createUsers() {
         data: {
           username: `asd${i}`,
           email: `asd${i}@gmail.com`,
-          password: `123456`,
+          password: `$2b$10$id.9tqKri3aXqKGChDm51OEZ7wKJXEExAyXriGCgpszUgKPlOMVQS`,
         },
       });
     }

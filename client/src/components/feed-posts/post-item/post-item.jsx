@@ -12,6 +12,7 @@ import {ru} from 'date-fns/locale';
 import {format, formatDistanceToNow} from "date-fns";
 import {Paths} from "../../../paths";
 import TagItem from "../../tag-item/tag-item";
+import {CustomTag} from "../../custom-tag/custom-tag";
 
 const {Paragraph} = Typography;
 
@@ -81,11 +82,8 @@ const PostItem = ({post}) => {
                 {post.description}
               </Paragraph>
               <Flex>
-                {post.tags && post.tags.map((tag, index) => (
-                  <Tag key={index} className={styles.tag}>
-                    <Link to={`${Paths.search}?search=@${tag.url}`}>{tag.name}</Link>
-                  </Tag>
-                ))}
+                <CustomTag post={post} />
+
                 {/*<List*/}
                 {/*  itemLayout="vertical"*/}
                 {/*  size="large"*/}

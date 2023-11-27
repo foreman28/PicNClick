@@ -18,15 +18,15 @@ export const Search = () => {
   }, []);
   
   useEffect(() => {
-    handleSearch(queryParams.search);
-  }, [queryParams.search, navigate]);
-  
+    handleSearch(queryParams.q);
+  }, [queryParams.q, navigate]);
+
   const handleSearch = async (value: any) => {
     const API_URL = process.env.REACT_APP_API_URL;
 
       // Treat it as a regular text-based search
-      const apiUrl = value ? `${API_URL}/posts?search=${value}` : `${API_URL}/posts`;
-      
+      const apiUrl = value ? `${API_URL}/posts?q=${value}` : `${API_URL}/posts`;
+    // console.log(apiUrl)
       try {
         const response = await fetch(apiUrl);
         const data = await response.json();

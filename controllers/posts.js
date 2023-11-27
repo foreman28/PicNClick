@@ -9,7 +9,7 @@ const {auth} = require("../middleware/auth");
  */
 const all = async (req, res) => {
   try {
-    const {search, page, pageSize} = req.query;
+    const { q:search, page, pageSize} = req.query;
     // console.log(search)
     let posts;
 

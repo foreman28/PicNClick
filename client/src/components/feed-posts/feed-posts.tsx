@@ -22,12 +22,12 @@ export const FeedPosts = ({ data }: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 5;
   
-  const searchS = new URLSearchParams(search).get('search') || '';
+  const searchS = new URLSearchParams(search).get('q') || '';
   
   const { data: posts, isLoading, isError } = useGetAllPostsQuery({
     page: currentPage,
     pageSize: pageSize,
-    search: searchS,
+    q: searchS,
   });
   
   // console.log(posts)
@@ -45,7 +45,7 @@ export const FeedPosts = ({ data }: Props) => {
     const totalPages = Math.ceil(totalPosts / pageSize);
     const validPage = Math.min(Math.max(1, page), totalPages);
     searchParams.set('page', validPage.toString());
-    searchParams.set('search', searchS);
+    searchParams.set('q', searchS);
     navigate(`?${searchParams.toString()}`);
   };
   

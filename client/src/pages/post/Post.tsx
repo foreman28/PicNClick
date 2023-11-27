@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Layout} from "../../components/layout/layout";
 import {Link, useParams} from "react-router-dom";
 import styles from "./Post.module.scss";
@@ -9,6 +9,7 @@ import {Paths} from "../../paths";
 import Comments from "../../components/comments/comments";
 import {CustomTextarea} from "../../components/custom-textarea/custom-textarea";
 import {CustomButton} from "../../components/custom-button/custom-button";
+import {CustomTag} from "../../components/custom-tag/custom-tag";
 // import { useDispatch } from "react-redux";
 
 const {Title} = Typography;
@@ -70,13 +71,9 @@ export const Post = () => {
           }
           
           <h1 className={styles.title}>{post.title}</h1>
-          
-          <Flex>
-            {post.tags && post.tags.map((tag: any, index: any): any => (
-              <Tag key={index} className={styles.tag}>
-                <Link to={`${Paths.search}?search=@${tag.url}`}>{tag.name}</Link>
-              </Tag>))}
-          </Flex>
+
+            <CustomTag post={post} />
+
           
           <div
             dangerouslySetInnerHTML={{__html: post.content}}

@@ -1,17 +1,26 @@
-import {ConfigProvider, Form, Select, SelectProps, Space} from 'antd';
+import {Flex, Tag} from 'antd';
+import {Link} from "react-router-dom";
+import {Paths} from "../../paths";
+
 import styles from './custom-tag.module.scss';
 
 type Props = {
-  name: string;
+  post: any;
 };
 
-const SearchComponent = ({
-                           name
-                         }: Props) => {
-  
+export const CustomTag = ({
+                            post
+                          }: Props) => {
+
   return (
-      1
+    <Flex>
+      {
+        post.tags && post.tags.map((tag: any, index: any) => (
+          <Tag key={index} className={styles.tag}>
+            <Link to={`${Paths.search}?q=@${tag.url}`}>{tag.name}</Link>
+          </Tag>
+        ))
+      }
+    </Flex>
   );
 };
-
-export default SearchComponent;

@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {ConfigProvider, Flex, Input, List, Tag} from 'antd';
 import styles from './search.module.scss';
 import {Link, useNavigate} from 'react-router-dom';
-import {Paths} from "../../paths";
+import {CustomTag} from "../custom-tag/custom-tag";
 
 const {Search} = Input;
 
@@ -12,7 +12,7 @@ const SearchComponent = (props: any) => {
   
   const handleSearch = async (value: string) => {
     if (value) {
-      const apiUrl = `${process.env.REACT_APP_API_URL}/posts?search=${value}`;
+      const apiUrl = `${process.env.REACT_APP_API_URL}/posts?q=${value}`;
       try {
         const response = await fetch(apiUrl);
         const data = await response.json();
@@ -29,7 +29,7 @@ const SearchComponent = (props: any) => {
   
   const sendSearch = async (value: string) => {
     if (value) {
-      navigate(`/search?search=${value}`);
+      navigate(`/search?q=${value}`);
     } else {
       navigate(`/search`);
     }
@@ -53,7 +53,7 @@ const SearchComponent = (props: any) => {
             bordered
             dataSource={suggestions}
             renderItem={(item) => (
-              <Link to={item.url ? `/forum/${item.url}` : `/search?search=${item.name}`}>
+              <Link to={item.url ? `/forum/${item.url}` : `/search?q=${item.name}`}>
               <List.Item className={styles.item}>
                   <Flex vertical gap={8}>
                     <Flex gap={8} align={"center"}>
@@ -68,6 +68,7 @@ const SearchComponent = (props: any) => {
                         </Tag>
                       ))}
                     </Flex>
+                    {/*<CustomTag post={item} />*/}
                   </Flex>
               </List.Item>
               </Link>

@@ -3,11 +3,11 @@ import { api } from "./apiConfig";
 
 export const postsApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getAllPosts: builder.query<ForumPost[], { page?: number; pageSize?: number; search?: string }>({
-      query: ({ page, pageSize, search}) => ({
+    getAllPosts: builder.query<ForumPost[], { page?: number; pageSize?: number; q?: string }>({
+      query: ({ page, pageSize, q}) => ({
         url: `/posts`,
         method: "GET",
-        params: { page, pageSize, search }, // Pass page and pageSize as query parameters
+        params: { page, pageSize, q }, // Pass page and pageSize as query parameters
       }),
     }),
     getPost: builder.query<ForumPost, string>({
@@ -39,7 +39,7 @@ export const postsApi = api.injectEndpoints({
     }),
     searchPosts: builder.query<ForumPost[], { search: string }>({
       query: ({ search }) => ({
-        url: `/posts/search?search=${search}`,
+        url: `/posts/search?q=${search}`,
         method: "GET",
       }),
     }),
