@@ -1,5 +1,5 @@
 const { prisma } = require('../prisma/prisma-client');
-const bcrypt = require('bcrypt'); // хеширование пароля
+const bcrypt = require('bcryptjs'); // хеширование пароля
 const jwt = require('jsonwebtoken');
 
 const TOKEN_EXPIRATION = '1d';

@@ -8,6 +8,8 @@ git commit -m "asd"
 git push
 ```
 
+$ENV:NODE_TLS_REJECT_UNAUTHORIZED=0
+
 npm -g list
 
 cd client/src/api/test (Создание )
