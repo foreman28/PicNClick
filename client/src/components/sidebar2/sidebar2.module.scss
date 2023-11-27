@@ -30,11 +30,13 @@
 }
 
 .sidebar_link {
-  color: var(--accent-2);
+  color: initial;
   font-family: var(--font-family);
   font-size: 13px;
   font-style: normal;
-  font-weight: 500;
-  line-height: 140%;
+  font-weight: 600;
+  //line-height: 140%;
   //letter-spacing: 0.02rem;
+
+
 }

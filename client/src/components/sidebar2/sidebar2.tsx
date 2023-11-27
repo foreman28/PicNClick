@@ -6,9 +6,9 @@ import styles from "./sidebar2.module.scss";
 import {LinkOutlined, StarOutlined} from '@ant-design/icons';
 
 export const Sidebar2 = () => {
-
+  
   // const currentPath  = window.location.pathname;
-
+  
   // const user = useSelector(selectUser);
   // const navigate = useNavigate();
   // const dispatch = useDispatch();
@@ -17,7 +17,7 @@ export const Sidebar2 = () => {
   //   localStorage.removeItem("token");
   //   navigate("/login");
   // };
-
+  
   const data = [
     'Racing car sprays burning fuel into crowd.',
     'Japanese princess to wed commoner.',
@@ -25,14 +25,14 @@ export const Sidebar2 = () => {
     'Man charged over missing wedding girl.',
     'Los Angeles battles huge wildfires.',
   ];
-
+  
   return (
     <Layout.Sider className={styles.sidebar} width={"var(--white-sidebar)"}>
       <Flex style={{
         // position: 'sticky',
         // top:'82px'
       }} className={styles.sidebar_container} gap={"middle"} vertical>
-
+        
         <Flex gap={"small"} vertical>
           <Flex gap={"small"} align={"center"}>
             <StarOutlined style={{fontSize: '18px'}} rev="true"/>
@@ -42,10 +42,15 @@ export const Sidebar2 = () => {
             size="small"
             dataSource={data}
             className={styles.sidebar_list}
-            renderItem={(item) => <List.Item><Link to={'/'} className={styles.sidebar_link}>{item}</Link></List.Item>}
+            renderItem={(item) =>
+              <List.Item>
+                
+                <Link to={'/'} className={styles.sidebar_link}>{item}</Link>
+              </List.Item>
+            }
           />
         </Flex>
-
+        
         <Flex gap={"small"} vertical>
           <Flex gap={"small"} align={"center"}>
             <LinkOutlined style={{fontSize: '18px'}} rev="true"/>
@@ -55,10 +60,14 @@ export const Sidebar2 = () => {
             size="small"
             dataSource={data}
             className={styles.sidebar_list}
-            renderItem={(item) => <List.Item><Link to={'/'} className={styles.sidebar_link}>{item}</Link></List.Item>}
+            renderItem={(item) =>
+              <List.Item>
+                <Link to={'/'} className={styles.sidebar_link}>{item}</Link>
+              </List.Item>
+            }
           />
         </Flex>
-
+      
       </Flex>
     </Layout.Sider>
   );

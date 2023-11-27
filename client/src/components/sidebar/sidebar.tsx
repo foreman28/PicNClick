@@ -5,7 +5,7 @@ import {selectUser} from "../../features/auth/authSlice";
 
 import {EditOutlined, SearchOutlined, TagOutlined, UnorderedListOutlined, UserOutlined} from '@ant-design/icons';
 
-import style from "./sidebar.module.scss";
+import styles from "./sidebar.module.scss";
 import React from "react";
 import {Paths} from "../../paths";
 
@@ -16,42 +16,42 @@ export const Sidebar = () => {
   const user = useSelector(selectUser);
 
   return ( // width={"max(310px, calc(100vw - (var(--white-container) + var(--white-sidebar))))"}
-    <Layout.Sider className={style.sidebar} width={"var(--white-sidebar)"}>
-      <Flex style={{position: 'sticky', top:'70px'}} className={style.sidebar_container} gap={"large"} vertical>
+    <Layout.Sider className={styles.sidebar} width={"var(--white-sidebar)"}>
+      <Flex style={{position: 'sticky', top:'70px'}} className={styles.sidebar_container} gap={"large"} vertical>
 
         <Flex gap={"small"} vertical>
-          <span className={style.sidebar_title}>меню</span>
-          <Link to={Paths.search} className={style.sidebar_link + ' ' + (currentPath === Paths.search ? style.active : '')}>
+          <span className={styles.sidebar_title}>меню</span>
+          <Link to={Paths.search} className={styles.sidebar_link + ' ' + (currentPath === Paths.search ? styles.active : '')}>
             <SearchOutlined style={{fontSize: '18px'}} rev="true"/>
-            <span className={style.sidebar_item}>Поиск</span>
+            <span className={styles.sidebar_item}>Поиск</span>
           </Link>
 
-          <Link to={`${Paths.forum}`} className={style.sidebar_link + ' ' + (currentPath === Paths.forum ? style.active : '')}>
+          <Link to={`${Paths.forum}`} className={styles.sidebar_link + ' ' + (currentPath === Paths.forum ? styles.active : '')}>
             <UnorderedListOutlined style={{fontSize: '18px'}} rev="true"/>
-            <span className={style.sidebar_item}>Форум</span>
+            <span className={styles.sidebar_item}>Форум</span>
           </Link>
 
-          <Link to={Paths.tags} className={style.sidebar_link + ' ' + (currentPath === Paths.tags ? style.active : '')}>
+          <Link to={Paths.tags} className={styles.sidebar_link + ' ' + (currentPath === Paths.tags ? styles.active : '')}>
             <TagOutlined style={{fontSize: '18px'}} rev="true"/>
-            <span className={style.sidebar_item}>Теги</span>
+            <span className={styles.sidebar_item}>Теги</span>
           </Link>
 
-          <Link to={Paths.users} className={style.sidebar_link + ' ' + (currentPath === Paths.users ? style.active : '')}>
+          <Link to={Paths.users} className={styles.sidebar_link + ' ' + (currentPath === Paths.users ? styles.active : '')}>
             <UserOutlined style={{fontSize: '18px'}} rev="true"/>
-            <span className={style.sidebar_item}>Пользователи</span>
+            <span className={styles.sidebar_item}>Пользователи</span>
           </Link>
 
         </Flex>
 
         <Flex gap={"small"} vertical>
-          <span className={style.sidebar_title}>ПЕРСОНАЛЬНЫЙ НАВИГАТОР</span>
+          <span className={styles.sidebar_title}>ПЕРСОНАЛЬНЫЙ НАВИГАТОР</span>
 
           {
             user ?
               <>
-                <Link to={Paths.addPost} className={style.sidebar_link + ' ' + (currentPath === Paths.addPost ? style.active : '')}>
+                <Link to={Paths.addPost} className={styles.sidebar_link + ' ' + (currentPath === Paths.addPost ? styles.active : '')}>
                   <EditOutlined style={{fontSize: '18px'}} rev="true"/>
-                  <span className={style.sidebar_item}>Добавить</span>
+                  <span className={styles.sidebar_item}>Добавить</span>
                 </Link>
               </>
               :

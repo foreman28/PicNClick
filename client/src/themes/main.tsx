@@ -12,9 +12,10 @@ export const theme: any = {
       titleMarginBottom: 0
     },
     List: {
-      colorPrimary: "var(--accent-2)",
       titleMarginBottom: 0,
-      metaMarginBottom: 0
+      metaMarginBottom: 0,
+      // colorText: "var(--accent-2)",
+      // colorPrimary: "var(--accent-2)",
     }
   }
 };
