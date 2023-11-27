@@ -12,7 +12,7 @@ const TagItem = ({tag}) => {
     <List.Item style={{padding: '12px'}} className={styles.item} key={tag.id}>
       <List.Item.Meta
         title={
-          <Link to={`${Paths.search}?search=@${tag.url}`} className={styles.title}>#{tag.name}</Link>
+          <Link to={`${Paths.search}?q=@${tag.url}`} className={styles.title}>#{tag.name}</Link>
         }
       />
       <Paragraph className={styles.description} ellipsis={{rows: 3, expandable: true, symbol: 'Раскрыть'}}>
