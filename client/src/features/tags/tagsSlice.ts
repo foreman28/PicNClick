@@ -14,16 +14,14 @@ const initialState: InitialState = {
 const slice = createSlice({
   name: "tags",
   initialState,
-  reducers: {
-    logout: () => initialState,
-  },
-  extraReducers: (builder) => {
-    builder
-      .addMatcher(tagsApi.endpoints.getAllTags.matchFulfilled, (state, action) => {
-        state.tags = action.payload;
-      });
-    // Add other matchers for additional tag-related actions if needed
-  },
+  reducers: {},
+  // extraReducers: (builder) => {
+  //   builder
+  //     .addMatcher(tagsApi.endpoints.getAllTags.matchFulfilled, (state, action) => {
+  //       state.tags = action.payload;
+  //     });
+  //   // Add other matchers for additional tag-related actions if needed
+  // },
 });
 
 export default slice.reducer;

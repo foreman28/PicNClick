@@ -26,7 +26,7 @@ function getRandomTag(tags: Tag[]): Tag {
     // Assuming you have retrieved the available tags from your database
     const allTags: Tag[] = await prisma.tags.findMany();
     
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 51; i <= 450; i++) {
       const randomTagCount = getRandomTagCount(3); // Change 3 to the maximum number of tags per post
       
       // @ts-ignore

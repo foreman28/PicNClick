@@ -37,12 +37,6 @@ export const postsApi = api.injectEndpoints({
         body: post,
       }),
     }),
-    searchPosts: builder.query<ForumPost[], { search: string }>({
-      query: ({ search }) => ({
-        url: `/posts/search?q=${search}`,
-        method: "GET",
-      }),
-    }),
   }),
 });
 
@@ -52,7 +46,6 @@ export const {
   useEditPostMutation,
   useRemovePostMutation,
   useAddPostMutation,
-  useSearchPostsQuery,
 } = postsApi;
 
 export const {
@@ -62,6 +55,5 @@ export const {
     editPost,
     removePost,
     addPost,
-    searchPosts,
   },
 } = postsApi;

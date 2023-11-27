@@ -5,10 +5,12 @@ import {Paths} from "../../paths";
 import styles from './custom-tag.module.scss';
 
 type Props = {
+  style?: React.CSSProperties;
   post: any;
 };
 
 export const CustomTag = ({
+                            style,
                             post
                           }: Props) => {
 
@@ -16,7 +18,7 @@ export const CustomTag = ({
     <Flex>
       {
         post.tags && post.tags.map((tag: any, index: any) => (
-          <Tag key={index} className={styles.tag}>
+          <Tag key={index} className={styles.tag} style={style}>
             <Link to={`${Paths.search}?q=@${tag.url}`}>{tag.name}</Link>
           </Tag>
         ))

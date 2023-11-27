@@ -51,7 +51,7 @@ const SearchComponent = (props: any) => {
             className={styles.list}
             size="small"
             bordered
-            dataSource={suggestions}
+            dataSource={suggestions.slice(0, 8)}
             renderItem={(item) => (
               <Link to={item.url ? `/forum/${item.url}` : `/search?q=${item.name}`}>
               <List.Item className={styles.item}>
@@ -61,14 +61,7 @@ const SearchComponent = (props: any) => {
                       <span className={styles.text}>{item.description}</span>
                     </Flex>
                     
-                    <Flex>
-                      {item.tags && item.tags.map((tag: any, index: any) => (
-                        <Tag key={index} className={styles.tag}>
-                           {tag.name}
-                        </Tag>
-                      ))}
-                    </Flex>
-                    {/*<CustomTag post={item} />*/}
+                    <CustomTag post={item} style={{fontSize:'12px', fontWeight: '500'}} />
                   </Flex>
               </List.Item>
               </Link>

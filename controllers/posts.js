@@ -26,6 +26,7 @@ const all = async (req, res) => {
     }
 
     if (search) {
+      console.log(search)
       if (search.startsWith('@')) {
         // Search by tag
         posts = await prisma.forumPost.findMany({
@@ -82,7 +83,7 @@ const all = async (req, res) => {
 
     res.status(200).json(posts);
   } catch (error) {
-    console.error('Error fetching posts:', error);
+    console.error(error);
     res.status(500).json({message: 'Не удалось получить посты'});
   }
 };

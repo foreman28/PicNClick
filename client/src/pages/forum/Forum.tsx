@@ -5,12 +5,13 @@ import {FeedPosts} from "../../components/feed-posts/feed-posts";
 
 import styles from './Forum.module.scss';
 import React, {useEffect} from "react";
+import {useGetAllPostsQuery} from "../../api/posts";
 
 export const Forum = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+  // const { data: allPosts, isLoading:allIsLoading, isError:allIsError } = useGetAllPostsQuery({});
   return (
     <Layout>
       <Flex gap={12} vertical>

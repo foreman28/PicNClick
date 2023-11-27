@@ -1,7 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ForumPost } from "@prisma/client";
-import {postsApi} from "../../api/posts";
-import {RootState} from "../../store/store";
+import { postsApi } from "../../api/posts";
+import { RootState } from "../../store/store";
+import {authApi} from "../../api/auth";
 
 interface InitialState {
   posts: ForumPost[] | null;
@@ -14,17 +15,24 @@ const initialState: InitialState = {
 const slice = createSlice({
   name: "posts",
   initialState,
-  reducers: {
-    logout: () => initialState,
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
-      .addMatcher(postsApi.endpoints.getAllPosts.matchFulfilled, (state, action) => {
-        state.posts = action.payload;
+      // .addMatcher(
+      //   postsApi.endpoints.getAllPosts.matchFulfilled,
+      //   (state, action: PayloadAction<ForumPost[]>) => {
+      //     state.posts = action.payload;
+      //   }
+      // )
+      // .addMatcher(
+      //   postsApi.endpoints.searchPosts.matchFulfilled,
+      //   (state, action: PayloadAction<ForumPost[]>) => {
+      //     state.posts = action.payload;
+      //   }
+      // )
+      .addMatcher(postsApi.endpoints.addPost.matchFulfilled, (state, action) => {
+        console.log('ADD POST!!!!!!!')
       })
-      .addMatcher(postsApi.endpoints.searchPosts.matchFulfilled, (state, action) => {
-        state.posts = action.payload;
-      });
   },
 });
 

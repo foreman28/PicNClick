@@ -9,13 +9,7 @@ import {useGetAllPostsQuery} from "../../api/posts";
 
 import styles from './feed-posts.module.scss';
 
-type Props = {
-  data?: any;
-};
-
-export const FeedPosts = ({ data }: Props) => {
-  console.log(1)
-  
+export const FeedPosts = () => {
   const { search } = useLocation();
   const navigate = useNavigate();
   
@@ -24,15 +18,17 @@ export const FeedPosts = ({ data }: Props) => {
   
   const searchS = new URLSearchParams(search).get('q') || '';
   
-  const { data: posts, isLoading, isError } = useGetAllPostsQuery({
+  const { data: posts, isLoading } = useGetAllPostsQuery({
     page: currentPage,
     pageSize: pageSize,
     q: searchS,
   });
   
   // console.log(posts)
-  const { data: allPosts, isLoading:allIsLoading, isError:allIsError } = useGetAllPostsQuery({});
-  const totalPosts = data?.length || allPosts?.length || 0;
+  const { data: allPosts, isLoading:allIsLoading } = useGetAllPostsQuery({
+    q: searchS,
+  });
+  const totalPosts = allPosts?.length || 0;
   
   const [searchParams]:any = useSearchParams();
   const pageParam:any = parseInt(searchParams.get('page')) || 1;

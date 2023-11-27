@@ -43,7 +43,7 @@ export const Search = () => {
       <Flex className={styles.main} vertical gap={"12px"}>
         <CustomBreadcrumb />
         
-        <FeedPosts data={suggestions}/>
+        <FeedPosts />
       </Flex>
     </Layout>
   );
