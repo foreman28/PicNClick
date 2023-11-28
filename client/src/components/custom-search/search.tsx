@@ -1,5 +1,5 @@
-import {useState} from 'react';
-import {ConfigProvider, Flex, Input, List, Tag} from 'antd';
+import {useEffect, useRef, useState} from 'react';
+import {Button, ConfigProvider, Flex, Input, List, Tag} from 'antd';
 import styles from './search.module.scss';
 import {Link, useNavigate} from 'react-router-dom';
 import {CustomTag} from "../custom-tag/custom-tag";
@@ -34,7 +34,7 @@ const SearchComponent = (props: any) => {
       navigate(`/search`);
     }
   };
-  
+
   return (
     <div className={styles.searchBox}>
       <ConfigProvider theme={props.theme}>
@@ -45,26 +45,25 @@ const SearchComponent = (props: any) => {
           onChange={(e) => handleSearch(e.target.value)}
           className={styles.search}
         />
-        
         {suggestions.length > 0 && (
           <List
             className={styles.list}
             size="small"
             bordered
-            dataSource={suggestions.slice(0, 8)}
+            dataSource={suggestions.slice(0, 6)}
             renderItem={(item) => (
-              <Link to={item.url ? `/forum/${item.url}` : `/search?q=${item.name}`}>
-              <List.Item className={styles.item}>
-                  <Flex vertical gap={8}>
-                    <Flex gap={8} align={"center"}>
-                      <span className={styles.title}>{item.title}</span>
-                      <span className={styles.text}>{item.description}</span>
-                    </Flex>
-                    
-                    <CustomTag post={item} style={{fontSize:'12px', fontWeight: '500'}} />
-                  </Flex>
+              <List.Item className={styles.item} key={item.id}>
+                <Flex vertical gap={4} align={"flex-start"}>
+                  <Link
+                    to={item.url ? `/forum/${item.url}` : `/search?q=${item.name}`}
+                    className={styles.title}
+                  >
+                    {item.title}
+                  </Link>
+                  <span className={styles.text}>{item.description}</span>
+                  <CustomTag post={item} style={{fontSize: '12px', fontWeight: '500'}}/>
+                </Flex>
               </List.Item>
-              </Link>
             )}
           />
         )}

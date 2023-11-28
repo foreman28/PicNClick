@@ -13,16 +13,14 @@ export const CustomTag = ({
                             style,
                             post
                           }: Props) => {
-
   return (
     <Flex>
-      {
-        post.tags && post.tags.map((tag: any, index: any) => (
+      {post.tags &&
+        post.tags.map((tag: any, index: any) => (
           <Tag key={index} className={styles.tag} style={style}>
             <Link to={`${Paths.search}?q=@${tag.url}`}>{tag.name}</Link>
           </Tag>
-        ))
-      }
+        ))}
     </Flex>
   );
 };

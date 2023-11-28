@@ -6,5 +6,18 @@
   font-weight: 400;
   line-height: normal;
   letter-spacing: 0.5px;
-  padding: 4px 8px;
+
+  display: flex;
+  padding: 0;
+
+  transition: background-color 0.2s ease-in, border-color 0.2s ease-in;
+
+  &:hover {
+    background-color: var(--white-1);
+    border-color: var(--accent-2);
+  }
+
+  &>a {
+    padding: 4px 8px;
+  }
 }

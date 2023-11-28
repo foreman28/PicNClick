@@ -8,6 +8,7 @@ import PostItem from "./post-item/post-item";
 import {useGetAllPostsQuery} from "../../api/posts";
 
 import styles from './feed-posts.module.scss';
+import {PaginationComponent} from "../custom-pagination/custom-pagination";
 
 export const FeedPosts = () => {
   const { search } = useLocation();
@@ -49,6 +50,13 @@ export const FeedPosts = () => {
     window.scrollTo(0, 0);
   }, [currentPage, handlePageChange]);
   
+  //     pagination={{
+  //       onChange: (page) => {
+  //         console.log(page);
+  //       },
+  //       pageSize: 3,
+  //     }}
+  
   return (
     <>
       {isLoading || allIsLoading ? (
@@ -65,6 +73,14 @@ export const FeedPosts = () => {
         <Flex vertical gap="12px">
           <List
             itemLayout="vertical"
+            // pagination={{
+            //   onChange: (page) => {
+            //     handlePageChange(page);
+            //   },
+            //   pageSize: 5,
+            //   current: currentPage,
+            //   total: totalPosts,
+            // }}
             size="large"
             dataSource={posts}
             renderItem={(item) => <PostItem post={item} />}
@@ -73,16 +89,13 @@ export const FeedPosts = () => {
         </Flex>
       )}
       
-      {totalPosts > pageSize && (
-        <Flex justify="center" style={{ marginTop: '16px' }}>
-          <Pagination
-            total={totalPosts}
-            pageSize={pageSize}
-            current={currentPage}
-            onChange={handlePageChange}
-          />
-        </Flex>
-      )}
+      <PaginationComponent
+        total={totalPosts}
+        pageSize={pageSize}
+        current={currentPage}
+        onChange={handlePageChange}
+      />
+      
     </>
   );
 };
