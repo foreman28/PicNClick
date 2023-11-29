@@ -32,7 +32,7 @@ export const AddPost = () => {
     }
     return fileList;
   };
-  
+
   const getBase64 = (file:any, callback:any) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result));
@@ -40,12 +40,13 @@ export const AddPost = () => {
   };
   
   const onFinish = async (values:any) => {
+    console.log(values.file)
     try {
       const postData:any = {
         title: values.title,
         description: values.description,
         content: values.content,
-        // image64: imageBase64, // изменить на сторонний сервис
+        image64: values.file, // изменить на сторонний сервис
         // tags: values.tags,
       };
       // console.log(postData)

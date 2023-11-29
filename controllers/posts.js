@@ -1,6 +1,8 @@
 const {prisma} = require("../prisma/prisma-client");
 const slugify = require('slugify');
 const {auth} = require("../middleware/auth");
+const multer = require('multer');
+// const moment = require('moment');
 
 /**
  * @route GET /api/posts
@@ -96,34 +98,25 @@ const all = async (req, res) => {
  */
 const add = async (req, res) => {
   try {
-    const data = req.body.postData; // postData postData postData postData
+    const data = req.body;
     console.log(data)
-    if (!data.title || !data.content || !data.description
-      // || !data.tags
-      // || !data.imageURL
-    ) {
+    if (!data.title || !data.content || !data.description) {
       return res.status(400).json({message: "Все поля обязательные"});
     }
-
     const slug = slugify(data.title, {lower: true, remove: /[*+~.()'"!:@]/g}); // Генерация уникального URL
-
-
-
     const post = await prisma.forumPost.create({
       data: {
         ...data,
         authorId: req.user.id,
+        image64: data.file ? data.file.path : '',
         // tags:[1,2],
         likesCount: 0,
         commentsCount: 0,
-        url: slug, // Сохранение уникального URL
+        url: slug,
       },
     });
-
-    // console.log(post)
     return res.status(201).json(post);
   } catch (err) {
-    // console.error(err);
     return res.status(500).json({message: "Что-то пошло не так"});
   }
 };
