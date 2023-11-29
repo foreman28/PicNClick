@@ -15,16 +15,17 @@ export const AddPost = () => {
     window.scrollTo(0, 0);
   }, []);
   
-  const [addPost, { isLoading }] = useAddPostMutation();
+  const [addPost, { isLoading }]:any = useAddPostMutation();
   const [imageBase64, setImageBase64] = useState(null);
-  
+  useEffect(() => {
+    // addPost({"title":"asd","description":"asd","content":"<p>asd</p>"})
+  }, []);
   const normFile = (e:any) => {
     if (Array.isArray(e)) {
       return e;
     }
     const fileList = e && e.fileList;
     if (fileList && fileList.length > 0) {
-      // Convert the image to base64 and set the base64 value in state
       getBase64(fileList[0].originFileObj, (base64:any) => {
         setImageBase64(base64);
       });
@@ -40,29 +41,22 @@ export const AddPost = () => {
   
   const onFinish = async (values:any) => {
     try {
-      const formData:any = new FormData();
-      formData.append('file', values.file[0].originFileObj);
-      
-      const postData = {
+      const postData:any = {
         title: values.title,
         description: values.description,
         content: values.content,
-        tags: values.tags,
-        // ... other fields
+        imageURL: imageBase64,
+        // tags: values.tags,
       };
-      
-      formData.append('postData', JSON.stringify(postData));
-      
-      await addPost(formData);
-      message.success('Пост успешно добавлен!');
+      await addPost({postData});
+      // message.success('Пост успешно добавлен!');
     } catch (error) {
-      console.error('Error adding post:', error);
-      message.error('Произошла ошибка при добавлении поста.');
+      console.error(error);
+      // message.error('Произошла ошибка при добавлении поста.');
     }
   };
   
   const handleImageClick = () => {
-    // Trigger the file input click when the image is clicked
     // @ts-ignore
     document.getElementById("file").click();
   };
@@ -75,13 +69,7 @@ export const AddPost = () => {
           <Flex vertical gap={4}>
           <CustomInput name="title" placeholder="Заголовок" />
           <CustomInput name="description" placeholder="Краткое описание" />
-          
-          {/*{imageBase64 ? (*/}
-          {/*  <img src={imageBase64} alt="Загруженное изображение" className={styles.img} />*/}
-          {/*):(*/}
-          {/*  <div className={styles.img} style={{height: '932px'}}></div>*/}
-          {/*)}*/}
-          
+
           <div style={{display: "flex"}} onClick={handleImageClick}>
             {imageBase64 ? (
               <img
@@ -119,7 +107,7 @@ export const AddPost = () => {
           
           <CustomTextarea name="content" />
           
-          <CustomSelect name="tags" placeholder="Теги" />
+          {/*<CustomSelect name="tags" placeholder="Теги" />*/}
           
           <ConfigProvider theme={button}>
             <Button type="primary" htmlType="submit" loading={isLoading}>

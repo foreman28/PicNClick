@@ -134,7 +134,6 @@ const tagsData: TagData[] = [
           .toLowerCase().replace(/\s+/g, '-')
       
       await prisma.tags.create({
-// @ts-ignore
         data: {
           name: tag.name,
           description: tag.description,

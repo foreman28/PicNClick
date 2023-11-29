@@ -17,7 +17,7 @@ const slice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder
+    // builder
       // .addMatcher(
       //   postsApi.endpoints.getAllPosts.matchFulfilled,
       //   (state, action: PayloadAction<ForumPost[]>) => {
@@ -30,9 +30,9 @@ const slice = createSlice({
       //     state.posts = action.payload;
       //   }
       // )
-      .addMatcher(postsApi.endpoints.addPost.matchFulfilled, (state, action) => {
-        console.log('ADD POST!!!!!!!')
-      })
+      // .addMatcher(postsApi.endpoints.addPost.matchFulfilled, (state, action) => {
+      //   console.log('ADD POST!!!!!!!')
+      // })
   },
 });
 

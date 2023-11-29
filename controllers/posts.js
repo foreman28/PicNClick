@@ -95,13 +95,13 @@ const all = async (req, res) => {
  * @access Private
  */
 const add = async (req, res) => {
-  if (auth) {
-    console.log(1)
-  }
   try {
     const data = req.body;
     console.log(data)
-    if (!data.title || !data.content || !data.tags) {
+    if (!data.title || !data.content || !data.description
+      // || !data.tags
+      // || !data.imageURL
+    ) {
       return res.status(400).json({message: "Все поля обязательные"});
     }
 
@@ -110,7 +110,6 @@ const add = async (req, res) => {
     const post = await prisma.forumPost.create({
       data: {
         ...data,
-        imageURL: req.imageURL ? req.imageURL : "/img/image-1.png",
         authorId: req.user.id,
         likesCount: 0,
         commentsCount: 0,
@@ -118,6 +117,7 @@ const add = async (req, res) => {
       },
     });
 
+    console.log(post)
     return res.status(201).json(post);
   } catch (err) {
     console.log(err);

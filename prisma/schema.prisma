@@ -30,7 +30,7 @@ model ForumPost {
   content       String
   authorId      Int
   tags          Tags[]
-  imageURL      String?
+  imageURL      Bytes?
   commentsCount Int
   likesCount    Int
   timestamp     DateTime @default(now())
