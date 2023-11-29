@@ -14,6 +14,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser()); // Промежуточное программное обеспечение для анализа файлов cookie.
 
+app.use('/uploads', express.static("uploads"))
+
 app.use('/api/user', require("./routes/users"));
 app.use('/api/posts', require("./routes/posts"));
 app.use('/api/tags', require("./routes/tags"));

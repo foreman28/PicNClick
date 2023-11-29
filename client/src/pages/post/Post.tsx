@@ -50,6 +50,7 @@ export const Post = () => {
   //   console.log("Добавлен комментарий:", comment);
   //   setComment(""); // Очистить поле комментария после отправки
   // };
+  console.log(process.env.REACT_APP_URL)
   
   return (<Layout>
     <Flex gap={12} vertical>
@@ -60,7 +61,7 @@ export const Post = () => {
           {post.image64 ? (
             <img
               className={styles.img}
-              srcSet={post.image64}
+              srcSet={process.env.REACT_APP_URL + post.image}
               alt={post.title}
               width={982}
               height={420}

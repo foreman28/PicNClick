@@ -7,7 +7,7 @@ import { CustomInput } from '../../components/custom-input/custom-input';
 import { button } from '../../themes/buttons';
 import styles from './Add-post.module.scss';
 import { CustomTextarea } from '../../components/custom-textarea/custom-textarea';
-import CustomSelect from '../../components/custom-select/custom-select';
+// import CustomSelect from '../../components/custom-select/custom-select';
 import {DownloadOutlined} from "@ant-design/icons";
 
 export const AddPost = () => {
@@ -51,10 +51,10 @@ export const AddPost = () => {
       };
       // console.log(postData)
       await addPost({postData});
-      // message.success('Пост успешно добавлен!');
+      message.success('Пост успешно добавлен!');
     } catch (error) {
       console.error(error);
-      // message.error('Произошла ошибка при добавлении поста.');
+      message.error('Произошла ошибка при добавлении поста.');
     }
   };
   
