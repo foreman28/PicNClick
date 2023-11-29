@@ -1,30 +1,31 @@
-import {useEffect, useRef, useState} from 'react';
-import {Button, ConfigProvider, Flex, Input, List, Tag} from 'antd';
+import {useState} from 'react';
+import {ConfigProvider, Flex, Input, List} from 'antd';
 import styles from './search.module.scss';
 import {Link, useNavigate} from 'react-router-dom';
 import {CustomTag} from "../custom-tag/custom-tag";
+import {useGetAllPostsQuery} from "../../api/posts";
 
 const {Search} = Input;
 
 const SearchComponent = (props: any) => {
-  const [suggestions, setSuggestions] = useState<any[]>([]);
+  const [search, setSearch] = useState('');
   const navigate = useNavigate();
+  
+  const { data: searchResults }  = useGetAllPostsQuery({
+    q: search,
+  });
+  
   
   const handleSearch = async (value: string) => {
     if (value) {
-      const apiUrl = `${process.env.REACT_APP_API_URL}/posts?q=${value}`;
       try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        
-        setSuggestions(data);
+        setSearch(value)
       } catch (error) {
         console.error('Error fetching search suggestions:', error);
       }
-    } else {
-      setSuggestions([]);
     }
   };
+
   
   
   const sendSearch = async (value: string) => {
@@ -45,17 +46,17 @@ const SearchComponent = (props: any) => {
           onChange={(e) => handleSearch(e.target.value)}
           className={styles.search}
         />
-        {suggestions.length > 0 && (
+        {searchResults && searchResults.length > 0 && (
           <List
             className={styles.list}
             size="small"
             bordered
-            dataSource={suggestions.slice(0, 6)}
+            dataSource={searchResults.slice(0, 6)}
             renderItem={(item) => (
               <List.Item className={styles.item} key={item.id}>
                 <Flex vertical gap={4} align={"flex-start"}>
                   <Link
-                    to={item.url ? `/forum/${item.url}` : `/search?q=${item.name}`}
+                    to={`/forum/${item.url}`}
                     className={styles.title}
                   >
                     {item.title}

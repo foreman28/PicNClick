@@ -99,8 +99,8 @@ const all = async (req, res) => {
 const add = async (req, res) => {
   try {
     const data = req.body;
-    // console.log(data)
-    // console.log(req.file)
+    console.log(data)
+    console.log(req.file)
 
     if (!data.title || !data.content || !data.description) {
       return res.status(400).json({message: "Все поля обязательные"});

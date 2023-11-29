@@ -1,14 +1,14 @@
 import {useEffect, useState} from 'react';
 import {useLocation, useNavigate, useSearchParams} from 'react-router-dom';
-import {List, Flex, Pagination} from 'antd';
+import {List, Flex} from 'antd';
 
 import SkeletonPost from "../skeleton-post/skeleton-post";
 import PostItem from "./post-item/post-item";
+import {PaginationComponent} from "../custom-pagination/custom-pagination";
 
 import {useGetAllPostsQuery} from "../../api/posts";
 
 import styles from './feed-posts.module.scss';
-import {PaginationComponent} from "../custom-pagination/custom-pagination";
 
 export const FeedPosts = () => {
   const { search } = useLocation();

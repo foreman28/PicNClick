@@ -17,13 +17,8 @@ export const AddPost = () => {
   
   const [addPost, { isLoading }]:any = useAddPostMutation();
   const [imageBase64, setImageBase64] = useState(null);
-  useEffect(() => {
-    // addPost({"title":"asd","description":"asd","content":"<p>asd</p>"})
-  }, []);
+
   const normFile = (e:any) => {
-    if (Array.isArray(e)) {
-      return e;
-    }
     const fileList = e && e.fileList;
     if (fileList && fileList.length > 0) {
       getBase64(fileList[0].originFileObj, (base64:any) => {
