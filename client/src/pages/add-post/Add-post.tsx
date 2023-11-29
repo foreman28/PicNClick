@@ -45,9 +45,10 @@ export const AddPost = () => {
         title: values.title,
         description: values.description,
         content: values.content,
-        imageURL: imageBase64,
+        // image64: imageBase64, // изменить на сторонний сервис
         // tags: values.tags,
       };
+      // console.log(postData)
       await addPost({postData});
       // message.success('Пост успешно добавлен!');
     } catch (error) {

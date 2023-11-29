@@ -96,7 +96,7 @@ const all = async (req, res) => {
  */
 const add = async (req, res) => {
   try {
-    const data = req.body;
+    const data = req.body.postData; // postData postData postData postData
     console.log(data)
     if (!data.title || !data.content || !data.description
       // || !data.tags
@@ -107,21 +107,24 @@ const add = async (req, res) => {
 
     const slug = slugify(data.title, {lower: true, remove: /[*+~.()'"!:@]/g}); // Генерация уникального URL
 
+
+
     const post = await prisma.forumPost.create({
       data: {
         ...data,
         authorId: req.user.id,
+        // tags:[1,2],
         likesCount: 0,
         commentsCount: 0,
         url: slug, // Сохранение уникального URL
       },
     });
 
-    console.log(post)
+    // console.log(post)
     return res.status(201).json(post);
   } catch (err) {
-    console.log(err);
-    res.status(500).json({message: "Что-то пошло не так"});
+    // console.error(err);
+    return res.status(500).json({message: "Что-то пошло не так"});
   }
 };
 

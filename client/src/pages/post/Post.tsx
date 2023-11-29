@@ -57,10 +57,10 @@ export const Post = () => {
       
       {isLoading ? (<p></p>) : post ? (
         <>
-          {post.imageURL ? (
+          {post.image64 ? (
             <img
               className={styles.img}
-              srcSet={post.imageURL}
+              srcSet={post.image64}
               alt={post.title}
               width={982}
               height={420}
