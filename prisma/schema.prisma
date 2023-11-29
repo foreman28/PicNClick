@@ -19,7 +19,7 @@ model User {
   updatedAt DateTime    @updatedAt
   posts     ForumPost[]
   Comment   Comment[]
-  Like      Like[]
+  // Like      Like[]
 }
 
 model ForumPost {
@@ -30,7 +30,7 @@ model ForumPost {
   content       String
   authorId      Int
   tags          Tags[]
-  image64       String?
+  image         String?
   commentsCount Int
   likesCount    Int
   timestamp     DateTime @default(now())
@@ -39,19 +39,19 @@ model ForumPost {
   author User @relation(fields: [authorId], references: [id])
 
   comments Comment[]
-  Like     Like[]
+  // Like     Like[]
 }
 
-model Like {
-  id        Int      @id @default(autoincrement())
-  postId    Int
-  userId    Int
-  createdAt DateTime @default(now())
-
-  // Связи с ForumPost и User
-  post ForumPost @relation(fields: [postId], references: [id])
-  user User      @relation(fields: [userId], references: [id])
-}
+// model Like {
+//   id        Int      @id @default(autoincrement())
+//   postId    Int
+//   userId    Int
+//   createdAt DateTime @default(now())
+//
+//   // Связи с ForumPost и User
+//   post ForumPost @relation(fields: [postId], references: [id])
+//   user User      @relation(fields: [userId], references: [id])
+// }
 
 model Comment {
   id        Int      @id @default(autoincrement())

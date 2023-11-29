@@ -16,42 +16,40 @@ export const AddPost = () => {
   }, []);
   
   const [addPost, { isLoading }]:any = useAddPostMutation();
-  const [imageBase64, setImageBase64] = useState(null);
+  const [image, setImage] = useState(null);
 
   const normFile = (e:any) => {
     const fileList = e && e.fileList;
     if (fileList && fileList.length > 0) {
-      getBase64(fileList[0].originFileObj, (base64:any) => {
-        setImageBase64(base64);
+      getImage(fileList[0].originFileObj, (e:any) => {
+        setImage(e);
       });
     }
     return fileList;
   };
 
-  const getBase64 = (file:any, callback:any) => {
+  const getImage = (file:any, callback:any) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result));
     reader.readAsDataURL(file);
   };
   
-  const onFinish = async (values:any) => {
-    console.log(values.file)
+  const onFinish = async (values: any) => {
     try {
-      const postData:any = {
-        title: values.title,
-        description: values.description,
-        content: values.content,
-        image64: values.file, // изменить на сторонний сервис
-        // tags: values.tags,
-      };
-      // console.log(postData)
-      await addPost({postData});
+      const formData = new FormData();
+      formData.append('title', values.title);
+      formData.append('description', values.description);
+      formData.append('content', values.content);
+      formData.append('image', values.file);
+      
+      await addPost(formData);
       message.success('Пост успешно добавлен!');
     } catch (error) {
       console.error(error);
       message.error('Произошла ошибка при добавлении поста.');
     }
   };
+
   
   const handleImageClick = () => {
     // @ts-ignore
@@ -68,9 +66,9 @@ export const AddPost = () => {
           <CustomInput name="description" placeholder="Краткое описание" />
 
           <div style={{display: "flex"}} onClick={handleImageClick}>
-            {imageBase64 ? (
+            {image ? (
               <img
-                src={imageBase64}
+                src={image}
                 alt="Загруженное изображение"
                 className={styles.img}
               />

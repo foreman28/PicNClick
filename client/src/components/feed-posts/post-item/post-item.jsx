@@ -60,10 +60,10 @@ const PostItem = ({post}) => {
             </Space>
 
             <Link style={{display: "contents"}} to={`/forum/${post.url}`}>
-              {`${process.env.REACT_APP_URL}${post.image64}` ?
+              {`${process.env.REACT_APP_URL}${post.image}` ?
                 <img
                   className={styles.img}
-                  srcSet={`${process.env.REACT_APP_URL}${post.image64}`}
+                  srcSet={`${process.env.REACT_APP_URL}${post.image}`}
                   width={932}
                   height={420}
                   alt={post.title}

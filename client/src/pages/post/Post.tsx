@@ -58,10 +58,10 @@ export const Post = () => {
       
       {isLoading ? (<p></p>) : post ? (
         <>
-          {`${process.env.REACT_APP_URL}${post.image64}` ? (
+          {`${process.env.REACT_APP_URL}${post.image}` ? (
             <img
               className={styles.img}
-              srcSet={`${process.env.REACT_APP_URL}${post.image64}`}
+              srcSet={`${process.env.REACT_APP_URL}${post.image}`}
               alt={post.title}
               width={982}
               height={420}

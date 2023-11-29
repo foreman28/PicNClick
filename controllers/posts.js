@@ -11,7 +11,7 @@ const multer = require('multer');
  */
 const all = async (req, res) => {
   try {
-    const { q:search, page, pageSize} = req.query;
+    const {q: search, page, pageSize} = req.query;
     // console.log(search)
     let posts;
 
@@ -99,35 +99,40 @@ const all = async (req, res) => {
 const add = async (req, res) => {
   try {
     const data = req.body;
-    console.log(data)
-    console.log(req.file)
+    const file = req.file; // Access the file information using req.file
+
+    console.log(data);
+    console.log(file);
 
     if (!data.title || !data.content || !data.description) {
       return res.status(400).json({message: "Все поля обязательные"});
     }
 
-    const slug = slugify(data.title, {lower: true, remove: /[*+~.()'"!:@]/g}); // Генерация уникального URL
-    const post = await prisma.forumPost.create({
-      data: {
-        title:data.title,
-        content:data.content,
-        description:data.description,
+    const slug = slugify(data.title, {lower: true, remove: /[*+~.()'"!:@]/g});
 
-        authorId: req.user.id,
-        image64: req.file ? req.file.path : '', // url ?
-        // tags:[1,2],
-        likesCount: 0,
-        commentsCount: 0,
-        url: slug,
-      },
-    });
-    console.log(post)
-    return res.status(201).json(post);
+    // Assuming you are using Prisma to interact with the database
+    // const post = await prisma.forumPost.create({
+    //   data: {
+    //     title: data.title,
+    //     content: data.content,
+    //     description: data.description,
+    //     authorId: req.user.id,
+    //     image: file ? file.path : '', // Use file.path to get the file path
+    //     likesCount: 0,
+    //     commentsCount: 0,
+    //     url: slug,
+    //   },
+    // });
+
+    console.log('post');
+
+    // return res.status(201).json(post);
   } catch (error) {
     console.error(error);
     return res.status(500).json({message: "Что-то пошло не так"});
   }
 };
+
 
 /**
  * @route POST /api/posts/remove/:id
