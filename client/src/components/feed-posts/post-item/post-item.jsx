@@ -13,6 +13,7 @@ import {format, formatDistanceToNow} from "date-fns";
 import {Paths} from "../../../paths";
 import TagItem from "../../tag-item/tag-item";
 import {CustomTag} from "../../custom-tag/custom-tag";
+import {LikeButton} from "../../custom-button/like-button/like-button";
 
 const {Paragraph} = Typography;
 
@@ -34,8 +35,9 @@ const PostItem = ({post}) => {
           <span>{post.commentCount}</span>
         </Space>,
         <Space>
-          <LikeOutlined key="like" rev="true"/>
-          <span>{post.likeCount}</span>
+          {/*<LikeOutlined key="like" rev="true"/>*/}
+          {/*<span>{post.likeCount}</span>*/}
+          <LikeButton postId={post.id} userId={post.author.id} />
         </Space>,
         <Space>
           <ClockCircleOutlined key="clock" rev="true"/>

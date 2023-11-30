@@ -22,6 +22,13 @@ export const likesApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
+    findLikeId: builder.query<number | null, { postId: number; userId: number }>({
+      query: ({ postId, userId }) => ({
+        url: `/likes/findId`,
+        method: "GET",
+        params: { postId, userId },
+      }),
+    }),
   }),
 });
 
@@ -29,6 +36,7 @@ export const {
   useAddLikeMutation,
   useRemoveLikeMutation,
   useGetLikesByUserQuery,
+  useFindLikeIdQuery,
 } = likesApi;
 
 export const {
@@ -36,5 +44,6 @@ export const {
     addLike,
     removeLike,
     getLikesByUser,
+    findLikeId,
   },
 } = likesApi;
