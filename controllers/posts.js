@@ -101,9 +101,9 @@ const add = async (req, res) => {
     const data = req.body;
     const file = req.file; // Access the file information using req.file
 
-    // console.log(req);
+    console.log(data);
     console.log(file);
-    //
+
     if (!data.title || !data.content || !data.description) {
       return res.status(400).json({message: "Все поля обязательные"});
     }
