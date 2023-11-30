@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {ChangeEvent, useEffect, useState} from 'react';
 import {Button, ConfigProvider, Flex, Form, message, Upload} from 'antd';
 import { Layout } from '../../components/layout/layout';
 import { useAddPostMutation } from '../../api/posts';
@@ -16,31 +16,32 @@ export const AddPost = () => {
   }, []);
   
   const [addPost, { isLoading }]:any = useAddPostMutation();
-  const [image, setImage] = useState(null);
+  const [image, setImage]:any = useState('');
 
-  const normFile = (e:any) => {
-    const fileList = e && e.fileList;
-    if (fileList && fileList.length > 0) {
-      getImage(fileList[0].originFileObj, (e:any) => {
-        setImage(e);
-      });
-    }
-    return fileList;
-  };
+  // const normFile = (e:any) => {
+  //   const fileList = e && e.fileList;
+  //   if (fileList && fileList.length > 0) {
+  //     getImage(fileList[0].originFileObj, (e:any) => {
+  //       setImage(e);
+  //     });
+  //   }
+  //   return fileList;
+  // };
 
-  const getImage = (file:any, callback:any) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result));
-    reader.readAsDataURL(file);
-  };
+  // const getImage = (file:any, callback:any) => {
+  //   const reader = new FileReader();
+  //   reader.addEventListener('load', () => callback(reader.result));
+  //   reader.readAsDataURL(file);
+  // };
   
   const onFinish = async (values: any) => {
     try {
+      // console.log(values.file)
       const formData = new FormData();
       formData.append('title', values.title);
       formData.append('description', values.description);
       formData.append('content', values.content);
-      formData.append('image', values.file);
+      formData.append('image', image);
       
       await addPost(formData);
       message.success('Пост успешно добавлен!');
@@ -50,6 +51,11 @@ export const AddPost = () => {
     }
   };
 
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setImage(e.target.files[0]);
+    }
+  };
   
   const handleImageClick = () => {
     // @ts-ignore
@@ -82,24 +88,16 @@ export const AddPost = () => {
             )}
           </div>
             
-            <input type="file" name="file" />
-          {/*<Form.Item*/}
-          {/*  name="file"*/}
-          {/*  valuePropName="fileList"*/}
-          {/*  getValueFromEvent={normFile}*/}
-          {/*  rules={[{ required: true, message: 'Обязательное поле' }]}*/}
-          {/*  style={{ display: 'none' }}*/}
-          {/*>*/}
-          {/*  <Upload*/}
-          {/*    name="img"*/}
-          {/*    listType="picture"*/}
-          {/*    maxCount={1}*/}
-          {/*    beforeUpload={() => false} // Prevent default upload behavior*/}
-          {/*    showUploadList={false} // Hide the file list*/}
-          {/*  >*/}
-          {/*    <input type="file" id="fileInput" />*/}
-          {/*  </Upload>*/}
-          {/*</Form.Item>*/}
+
+          <Form.Item
+            name="file"
+            // valuePropName="fileList"
+            // getValueFromEvent={normFile}
+            rules={[{ required: true, message: 'Обязательное поле' }]}>
+
+              <input type="file" name="file" id="file"  onChange={handleFileChange}/>
+
+          </Form.Item>
           
           <CustomTextarea name="content" />
           

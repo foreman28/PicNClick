@@ -34,9 +34,9 @@ export const postsApi = api.injectEndpoints({
       query: (postData) => ({
         url: "/posts/add",
         method: "POST",
-        headers: {
-          'Content-Type': 'multipart/form-data',  // Uncomment this line
-        },
+        // headers: {
+        //   // 'Content-Type': 'multipart/form-data',  // Uncomment this line
+        // },
         body: postData,
       }),
     }),
