@@ -81,24 +81,25 @@ export const AddPost = () => {
               </div>
             )}
           </div>
-          
-          <Form.Item
-            name="file"
-            valuePropName="fileList"
-            getValueFromEvent={normFile}
-            rules={[{ required: true, message: 'Обязательное поле' }]}
-            style={{ display: 'none' }}
-          >
-            <Upload
-              name="img"
-              listType="picture"
-              maxCount={1}
-              beforeUpload={() => false} // Prevent default upload behavior
-              showUploadList={false} // Hide the file list
-            >
-              <input type="file" id="fileInput" />
-            </Upload>
-          </Form.Item>
+            
+            <input type="file" name="file" />
+          {/*<Form.Item*/}
+          {/*  name="file"*/}
+          {/*  valuePropName="fileList"*/}
+          {/*  getValueFromEvent={normFile}*/}
+          {/*  rules={[{ required: true, message: 'Обязательное поле' }]}*/}
+          {/*  style={{ display: 'none' }}*/}
+          {/*>*/}
+          {/*  <Upload*/}
+          {/*    name="img"*/}
+          {/*    listType="picture"*/}
+          {/*    maxCount={1}*/}
+          {/*    beforeUpload={() => false} // Prevent default upload behavior*/}
+          {/*    showUploadList={false} // Hide the file list*/}
+          {/*  >*/}
+          {/*    <input type="file" id="fileInput" />*/}
+          {/*  </Upload>*/}
+          {/*</Form.Item>*/}
           
           <CustomTextarea name="content" />
           

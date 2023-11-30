@@ -35,11 +35,26 @@ export const postsApi = api.injectEndpoints({
         url: "/posts/add",
         method: "POST",
         headers: {
-          // 'Content-Type': 'multipart/form-data',
+          'Content-Type': 'multipart/form-data',  // Uncomment this line
         },
         body: postData,
       }),
     }),
+  //   addPost: builder.mutation<ForumPost, ForumPost>({
+    //       query: (postData) => {
+    //         // Generate a unique boundary string
+    //         const boundary = '----WebKitFormBoundary' + new Date().getTime();
+    //
+    //         return {
+    //           url: "/posts/add",
+    //           method: "POST",
+    //           headers: {
+    //             'Content-Type': `multipart/form-data; boundary=${boundary}`,
+    //           },
+    //           body: postData,
+    //         };
+    //       },
+    //     }),
   }),
 });
 
