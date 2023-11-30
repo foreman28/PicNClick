@@ -18,40 +18,46 @@ model User {
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   posts     ForumPost[]
-  Comment   Comment[]
+  comment   Comment[]
   // Like      Like[]
+  like      Like[]
 }
 
 model ForumPost {
-  id            Int      @id @default(autoincrement())
-  url           String   @unique
-  title         String   @unique
-  description   String
-  content       String
-  authorId      Int
-  tags          Tags[]
-  image         String?
-  commentsCount Int
-  likesCount    Int
-  timestamp     DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  url         String   @unique
+  title       String   @unique
+  description String
+  content     String
+  authorId    Int
+  image       String?
+  timestamp   DateTime @default(now())
+
+  tags Tags[]
+
+  likes     Like[]
+  likeCount Int    @default(0)
+
+  comments     Comment[]
+  commentCount Int       @default(0)
 
   // Отношение к User
   author User @relation(fields: [authorId], references: [id])
-
-  comments Comment[]
-  // Like     Like[]
 }
 
-// model Like {
-//   id        Int      @id @default(autoincrement())
-//   postId    Int
-//   userId    Int
-//   createdAt DateTime @default(now())
-//
-//   // Связи с ForumPost и User
-//   post ForumPost @relation(fields: [postId], references: [id])
-//   user User      @relation(fields: [userId], references: [id])
-// }
+model Like {
+  id        Int      @id @default(autoincrement())
+  postId    Int
+  userId    Int
+  createdAt DateTime @default(now())
+
+  // Relations
+  post ForumPost @relation(fields: [postId], references: [id])
+  user User      @relation(fields: [userId], references: [id])
+
+  // Add a unique constraint to ensure a user can like a post only once
+  @@unique([postId, userId])
+}
 
 model Comment {
   id        Int      @id @default(autoincrement())

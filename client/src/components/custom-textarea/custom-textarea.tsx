@@ -13,6 +13,7 @@ type Props = {
   theme?: any;
   modules?: any;
   formats?: any;
+  maxLength?: number;
 };
 
 export const CustomTextarea = ({
@@ -21,6 +22,7 @@ export const CustomTextarea = ({
                                  theme,
                                  modules: customModules,
                                  formats: customFormats,
+                                 maxLength = 100,
                                }: Props) => {
   
   let modules: any;
@@ -59,8 +61,6 @@ export const CustomTextarea = ({
   const [valueLength, setValueLength] = useState(true);
   
   const handleChange = (value: any, delta: any, source: any, editor: any) => {
-    const maxLength = 10;
-    
     // Получаем plainText
     const plainText = editor.getText();
     
@@ -74,20 +74,20 @@ export const CustomTextarea = ({
     const maxImageSize = 1024 * 1024;
     
     // Проверяем условия
-    const oversizedImages = images.filter((op: any) => {
+    const overSizedImages = images.filter((op: any) => {
       const imageSrc = op.insert.image;
       const imageSize = imageSrc.size || 0;
       return imageSize > maxImageSize;
     });
     
-    if (plainText.length <= maxLength && currentImageCount <= 10 && oversizedImages.length === 0) {
+    if (plainText.length <= maxLength && currentImageCount <= 10 && overSizedImages.length === 0) {
       // Устанавливаем контент и сбрасываем ошибку
       setContent(value);
       setError("Обязательное поле");
       setValueLength(true);
     } else {
       // Обрабатываем случай, когда есть изображения превышающие максимальный размер
-      if (oversizedImages.length > 0) {
+      if (overSizedImages.length > 0) {
         setError(`Некоторые изображения превышают максимальный размер ${maxImageSize / (1024 * 1024)} MB`);
       } else {
         setError(

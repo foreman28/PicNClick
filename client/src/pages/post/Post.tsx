@@ -72,9 +72,9 @@ export const Post = () => {
           }
           
           <h1 className={styles.title}>{post.title}</h1>
-
-            <CustomTag post={post} />
-
+          
+          <CustomTag post={post}/>
+          
           
           <div
             dangerouslySetInnerHTML={{__html: post.content}}
@@ -82,9 +82,14 @@ export const Post = () => {
           ></div>
           
           <Flex vertical gap={12} className={styles.comments}>
-            <Title>Comments:</Title>
+            <Title>Сообщения:</Title>
             <Form>
-              <CustomTextarea name={"comments"} placeholder="Напишите комментарий"/>
+              <CustomTextarea
+                name={"comments"}
+                placeholder={"Напишите сообщение"}
+                modules={modules}
+                formats={formats}
+              />
               <CustomButton type="primary">
                 Добавить комментарий
               </CustomButton>
@@ -102,7 +107,7 @@ export const Post = () => {
                     createdAt={comment.createdAt}
                   />
                 )}
-                locale={{ emptyText: "Нет сообщений" }}
+                locale={{emptyText: "Нет сообщений"}}
               />
             )}
           </Flex>

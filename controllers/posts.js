@@ -99,7 +99,7 @@ const all = async (req, res) => {
 const add = async (req, res) => {
   try {
     const data = req.body;
-    const file = req.file; // Access the file information using req.file
+    const file = req.file;
 
     console.log(data);
     console.log(file);
@@ -110,16 +110,13 @@ const add = async (req, res) => {
 
     const slug = slugify(data.title, {lower: true, remove: /[*+~.()'"!:@]/g});
 
-    // Assuming you are using Prisma to interact with the database
     const post = await prisma.forumPost.create({
       data: {
         title: data.title,
         content: data.content,
         description: data.description,
         authorId: req.user.id,
-        image: file ? file.path : 'stubs/stubs-image.png', // Use file.path to get the file path
-        likesCount: 0,
-        commentsCount: 0,
+        image: file ? file.path : 'stubs/stubs-image.png',
         url: slug,
       },
     });

@@ -31,11 +31,11 @@ const PostItem = ({post}) => {
       actions={[
         <Space>
           <MessageOutlined key="comments" rev="true"/>
-          <span>{post.commentsCount}</span>
+          <span>{post.commentCount}</span>
         </Space>,
         <Space>
           <LikeOutlined key="like" rev="true"/>
-          <span>{post.likesCount}</span>
+          <span>{post.likeCount}</span>
         </Space>,
         <Space>
           <ClockCircleOutlined key="clock" rev="true"/>
