@@ -2,11 +2,18 @@ import React from "react";
 import { Avatar, List } from "antd";
 import moment from "moment";
 
-const Comment = ({ author, content, createdAt }) => {
+
+type Props = {
+  author: string;
+  content: string;
+  createdAt: string;
+};
+
+export const Comments = ({ author, content, createdAt }:Props) => {
   return (
     <List.Item>
       <List.Item.Meta
-        avatar={<Avatar src="" alt={author} />}
+        avatar={<Avatar src={'../img/avatar.jpg'} alt={author} />}
         title={<span>{author}</span>}
         description={
           <div>
@@ -18,5 +25,3 @@ const Comment = ({ author, content, createdAt }) => {
     </List.Item>
   );
 };
-
-export default Comment;

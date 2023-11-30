@@ -8,14 +8,23 @@ const PORT = process.env.PORT;
 
 const app = express();
 
+// Добавьте middleware для CORS
 app.use(cors());
-app.use(logger('dev')); // Ведения журналов для регистрации HTTP-запросов на консоли.
+
+// Добавьте middleware для логгера
+app.use(logger('dev'));
+
+// Добавьте middleware для обработки JSON и URL-encoded данных
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser()); // Промежуточное программное обеспечение для анализа файлов cookie.
 
+// Добавьте middleware для анализа файлов cookie
+app.use(cookieParser());
+
+// Добавьте middleware для статических файлов (если требуется)
 app.use('/uploads', express.static("uploads"));
 
+// Маршруты
 app.use('/api/user', require("./routes/users"));
 app.use('/api/posts', require("./routes/posts"));
 app.use('/api/tags', require("./routes/tags"));

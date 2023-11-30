@@ -17,7 +17,7 @@ type Props = {
 
 export const CustomTextarea = ({
                                  name,
-                                 placeholder,
+                                 placeholder ='Содержание',
                                  theme,
                                  modules: customModules,
                                  formats: customFormats,
@@ -122,7 +122,7 @@ export const CustomTextarea = ({
         modules={modules}
         formats={formats}
         className="custom-textarea"
-        placeholder="Содержание"
+        placeholder={placeholder}
       />
     </Form.Item>
   );

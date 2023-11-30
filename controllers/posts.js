@@ -117,7 +117,7 @@ const add = async (req, res) => {
         content: data.content,
         description: data.description,
         authorId: req.user.id,
-        image: file ? file.path : '', // Use file.path to get the file path
+        image: file ? file.path : 'stubs/stubs-image.png', // Use file.path to get the file path
         likesCount: 0,
         commentsCount: 0,
         url: slug,

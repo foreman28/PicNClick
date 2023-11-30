@@ -6,7 +6,7 @@ import {Button, Flex, Form, List, Tag, Typography} from "antd";
 import {useGetPostQuery} from "../../api/posts";
 import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
 import {Paths} from "../../paths";
-import Comments from "../../components/comments/comments";
+import {Comments} from "../../components/comments/comments";
 import {CustomTextarea} from "../../components/custom-textarea/custom-textarea";
 import {CustomButton} from "../../components/custom-button/custom-button";
 import {CustomTag} from "../../components/custom-tag/custom-tag";
@@ -102,7 +102,7 @@ export const Post = () => {
                     createdAt={comment.createdAt}
                   />
                 )}
-                locale={{ emptyText: 'Нет комментариев' }}
+                locale={{ emptyText: "Нет сообщений" }}
               />
             )}
           </Flex>
