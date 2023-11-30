@@ -19,8 +19,7 @@ model User {
   updatedAt DateTime    @updatedAt
   posts     ForumPost[]
   comment   Comment[]
-  // Like      Like[]
-  like      Like[]
+  like      Likes[]
 }
 
 model ForumPost {
@@ -35,8 +34,8 @@ model ForumPost {
 
   tags Tags[]
 
-  likes     Like[]
-  likeCount Int    @default(0)
+  likes     Likes[]
+  likeCount Int     @default(0)
 
   comments     Comment[]
   commentCount Int       @default(0)
@@ -45,7 +44,7 @@ model ForumPost {
   author User @relation(fields: [authorId], references: [id])
 }
 
-model Like {
+model Likes {
   id        Int      @id @default(autoincrement())
   postId    Int
   userId    Int

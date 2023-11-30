@@ -42,7 +42,6 @@ const PostItem = ({post}) => {
           <span> {formattedTimestamp}</span>
         </Space>,
       ]}
-
     >
       <List.Item.Meta
         description={
@@ -83,13 +82,6 @@ const PostItem = ({post}) => {
               </Paragraph>
               <Flex>
                 <CustomTag post={post} />
-
-                {/*<List*/}
-                {/*  itemLayout="vertical"*/}
-                {/*  size="large"*/}
-                {/*  dataSource={post.tags}*/}
-                {/*  renderItem={(tag) => <Comments key={tag.id} tag={tag} />}*/}
-                {/*/>*/}
               </Flex>
             </Flex>
           </Flex>

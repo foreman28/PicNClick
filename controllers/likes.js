@@ -1,4 +1,4 @@
-const { prisma } = require("../prisma/prisma-client");
+const {prisma} = require("../prisma/prisma-client");
 
 /**
  * @route POST /api/likes/add
@@ -7,34 +7,39 @@ const { prisma } = require("../prisma/prisma-client");
  */
 const addLike = async (req, res) => {
   try {
-    const { postId, userId } = req.body;
+    const {postId, userId} = req.body;
 
-    if (!postId || !userId) {
-      return res.status(400).json({ message: "ID поста и пользователя обязательны" });
-    }
-
-    const existingLike = await prisma.like.findFirst({
+    // Check if the like already exists
+    const existingLike = await prisma.likes.findUnique({
       where: {
-        postId: +postId,
-        userId: +userId,
+        postId_userId: {
+          postId: +postId,
+          userId: +userId,
+        },
       },
     });
 
     if (existingLike) {
-      return res.status(400).json({ message: "Лайк уже существует" });
+      return res.status(400).json({message: "Лайк уже добавлен"});
     }
 
-    const like = await prisma.like.create({
+    // Create the like
+    const newLike = await prisma.likes.create({
       data: {
         postId: +postId,
         userId: +userId,
       },
     });
 
-    res.status(201).json(like);
+    // Increment the like count in ForumPost
+    await prisma.forumPost.update({
+      where: {id: +postId},
+      data: {likeCount: {increment: 1}},
+    });
+
+    res.status(201).json(newLike);
   } catch (error) {
-    console.error('Error adding like:', error);
-    res.status(500).json({ message: "Что-то пошло не так при добавлении лайка", error: error.message });
+    res.status(500).json({message: "Что-то пошло не так при добавлении лайка", error: error.message});
   }
 };
 
@@ -44,19 +49,32 @@ const addLike = async (req, res) => {
  * @access Private
  */
 const removeLike = async (req, res) => {
-  const { id } = req.params;
-
   try {
-    await prisma.like.delete({
-      where: {
-        id: +id,
-      },
+    const likeId = +(req.params.id);
+
+    // Get the like to check if it exists
+    const likes = await prisma.likes.findUnique({
+      where: {id: likeId},
+    });
+
+    if (!likes) {
+      return res.status(404).json({message: "Лайк не найден"});
+    }
+
+    // Delete the like
+    await prisma.likes.delete({
+      where: {id: likeId},
+    });
+
+    // Decrement the like count in ForumPost
+    await prisma.forumPost.update({
+      where: {id: likes.postId},
+      data: {likeCount: {decrement: 1}},
     });
 
     res.status(204).json("OK");
   } catch (error) {
-    console.error('Error removing like:', error);
-    res.status(500).json({ message: "Не удалось удалить лайк" });
+    res.status(500).json({message: "Не удалось удалить лайк", error: error.message});
   }
 };
 
@@ -66,19 +84,18 @@ const removeLike = async (req, res) => {
  * @access Public
  */
 const likesByUser = async (req, res) => {
-  const { userId } = req.params;
-
   try {
-    const likes = await prisma.like.findMany({
-      where: {
-        userId: +userId,
-      },
+    const userId = +(req.params.userId);
+
+    // Get all likes for the user
+    const userLikes = await prisma.likes.findMany({
+      where: {userId: userId},
+      include: {post: true},
     });
 
-    res.status(200).json(likes);
+    res.status(200).json(userLikes);
   } catch (error) {
-    console.error('Error fetching likes by user:', error);
-    res.status(500).json({ message: "Не удалось получить лайки пользователя" });
+    res.status(500).json({message: "Не удалось получить лайки пользователя", error: error.message});
   }
 };
 
