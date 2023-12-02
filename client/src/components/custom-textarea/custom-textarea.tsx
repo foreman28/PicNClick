@@ -1,5 +1,5 @@
 import {Form} from "antd";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -41,7 +41,6 @@ export const CustomTextarea = ({
     modules = customModules
   }
   
-  
   let formats: any;
   if (!customFormats) {
     formats = [
@@ -54,7 +53,6 @@ export const CustomTextarea = ({
   } else {
     formats = customFormats
   }
-  
   
   const [content, setContent] = useState("");
   const [error, setError] = useState("");

@@ -1,23 +1,22 @@
-import React, {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {Layout} from "../../components/layout/layout";
-import {Link, useParams} from "react-router-dom";
-import styles from "./Post.module.scss";
-import {Button, Flex, Form, List, Tag, Typography} from "antd";
+import {useParams} from "react-router-dom";
+import {Flex, Form, List, Typography} from "antd";
 import {useGetPostQuery} from "../../api/posts";
 import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
-import {Paths} from "../../paths";
+
 import {Comments} from "../../components/comments/comments";
 import {CustomTextarea} from "../../components/custom-textarea/custom-textarea";
 import {CustomButton} from "../../components/custom-button/custom-button";
 import {CustomTag} from "../../components/custom-tag/custom-tag";
-// import { useDispatch } from "react-redux";
+
+import styles from "./Post.module.scss";
 
 const {Title} = Typography;
 
 export const Post = () => {
   const {id}: any = useParams();
-  const {data: post, isLoading, isError}: any = useGetPostQuery(id);
-  // const dispatch = useDispatch();
+  const {data: post, isLoading}: any = useGetPostQuery(id);
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -36,21 +35,6 @@ export const Post = () => {
     'header',
     'bold', 'italic', 'underline', 'strike', 'blockquote',
   ];
-  
-  // const [comment, setComment] = useState("");
-  //
-  // const handleCommentChange = (e:any) => {
-  //   setComment(e.target.value);
-  // };
-  //
-  // const handleAddComment = () => {
-  //   // Здесь вы можете добавить логику для отправки комментария на сервер
-  //   // Например, вызвать функцию из вашего Redux-хранилища или использовать API для отправки комментария на сервер
-  //   // В этом примере используется просто вывод комментария в консоль
-  //   console.log("Добавлен комментарий:", comment);
-  //   setComment(""); // Очистить поле комментария после отправки
-  // };
-  console.log(process.env.REACT_APP_URL)
   
   return (<Layout>
     <Flex gap={12} vertical>

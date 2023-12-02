@@ -1,4 +1,4 @@
-import {Flex, List, Space, Tag, Typography} from 'antd';
+import {List, Typography} from 'antd';
 import {Link} from 'react-router-dom';
 import {Paths} from "../../paths";
 

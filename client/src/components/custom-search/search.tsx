@@ -1,9 +1,10 @@
 import {useState} from 'react';
 import {ConfigProvider, Flex, Input, List} from 'antd';
-import styles from './search.module.scss';
 import {Link, useNavigate} from 'react-router-dom';
 import {CustomTag} from "../custom-tag/custom-tag";
 import {useGetAllPostsQuery} from "../../api/posts";
+
+import styles from './search.module.scss';
 
 const {Search} = Input;
 

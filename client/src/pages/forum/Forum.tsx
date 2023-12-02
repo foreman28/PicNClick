@@ -3,9 +3,9 @@ import {Layout} from '../../components/layout/layout';
 import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
 import {FeedPosts} from "../../components/feed-posts/feed-posts";
 
-import styles from './Forum.module.scss';
-import React, {useEffect} from "react";
-import {useGetAllPostsQuery} from "../../api/posts";
+import {useEffect} from "react";
+
+// import styles from './Forum.module.scss';
 
 export const Forum = () => {
   useEffect(() => {

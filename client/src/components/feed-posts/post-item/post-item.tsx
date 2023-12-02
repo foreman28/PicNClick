@@ -1,25 +1,25 @@
-
 import {List, Space, Avatar, Flex, Typography} from 'antd';
 import {
   MessageOutlined,
   ClockCircleOutlined,
 } from '@ant-design/icons';
 import {Link} from 'react-router-dom';
-import styles from './post-item.module.scss';
 
 import {ru} from 'date-fns/locale';
 import {format, formatDistanceToNow} from "date-fns";
 import {CustomTag} from "../../custom-tag/custom-tag";
 import {LikeButton} from "../../custom-button/like-button/like-button";
-import {useEffect} from "react";
+
+import styles from './post-item.module.scss';
 
 const {Paragraph} = Typography;
 
-const PostItem = ({post}) => {
-  const createdDate = new Date(post.timestamp);
+const PostItem = ({post}:any) => {
+  const createdDate:any = new Date(post.timestamp);
+  const newDate:any = new Date();
 
   const formattedTimestamp =
-    new Date() - createdDate < 24 * 60 * 60 * 1000
+    newDate - createdDate < 24 * 60 * 60 * 1000
       ? formatDistanceToNow(createdDate, {locale: ru, addSuffix: true})
       : format(createdDate, 'MMMM d, yyyy HH:mm', {locale: ru});
 
@@ -29,18 +29,14 @@ const PostItem = ({post}) => {
       key={post.id}
       actions={[
         <Space>
-          <MessageOutlined key="comments" rev="true"/>
+          <MessageOutlined key="comments"/>
           <span>{post.comments ? post.comments.length : 0}</span>
         </Space>,
         <Space>
-          {/*<LikeOutlined key="like" rev="true"/>*/}
-          {/*<span>{post.likeCount}</span>*/}
-          <span>{post.likes ? post.likes.length : 0}</span>
-
-          <LikeButton post={post}/>
+          <LikeButton key="like" post={post}/>
         </Space>,
         <Space>
-          <ClockCircleOutlined key="clock" rev="true"/>
+          <ClockCircleOutlined key="clock"/>
           <span> {formattedTimestamp}</span>
         </Space>,
       ]}

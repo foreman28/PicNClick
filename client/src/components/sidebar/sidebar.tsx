@@ -5,9 +5,9 @@ import {selectUser} from "../../features/auth/authSlice";
 
 import {EditOutlined, SearchOutlined, TagOutlined, UnorderedListOutlined, UserOutlined} from '@ant-design/icons';
 
-import styles from "./sidebar.module.scss";
-import React from "react";
 import {Paths} from "../../paths";
+
+import styles from "./sidebar.module.scss";
 
 export const Sidebar = () => {
 
@@ -22,22 +22,22 @@ export const Sidebar = () => {
         <Flex gap={"small"} vertical>
           <span className={styles.sidebar_title}>меню</span>
           <Link to={Paths.search} className={styles.sidebar_link + ' ' + (currentPath === Paths.search ? styles.active : '')}>
-            <SearchOutlined style={{fontSize: '18px'}} rev="true"/>
+            <SearchOutlined style={{fontSize: '18px'}} />
             <span className={styles.sidebar_item}>Поиск</span>
           </Link>
 
           <Link to={`${Paths.forum}`} className={styles.sidebar_link + ' ' + (currentPath === Paths.forum ? styles.active : '')}>
-            <UnorderedListOutlined style={{fontSize: '18px'}} rev="true"/>
+            <UnorderedListOutlined style={{fontSize: '18px'}} />
             <span className={styles.sidebar_item}>Форум</span>
           </Link>
 
           <Link to={Paths.tags} className={styles.sidebar_link + ' ' + (currentPath === Paths.tags ? styles.active : '')}>
-            <TagOutlined style={{fontSize: '18px'}} rev="true"/>
+            <TagOutlined style={{fontSize: '18px'}} />
             <span className={styles.sidebar_item}>Теги</span>
           </Link>
 
           <Link to={Paths.users} className={styles.sidebar_link + ' ' + (currentPath === Paths.users ? styles.active : '')}>
-            <UserOutlined style={{fontSize: '18px'}} rev="true"/>
+            <UserOutlined style={{fontSize: '18px'}} />
             <span className={styles.sidebar_item}>Пользователи</span>
           </Link>
 
@@ -50,7 +50,7 @@ export const Sidebar = () => {
             user ?
               <>
                 <Link to={Paths.addPost} className={styles.sidebar_link + ' ' + (currentPath === Paths.addPost ? styles.active : '')}>
-                  <EditOutlined style={{fontSize: '18px'}} rev="true"/>
+                  <EditOutlined style={{fontSize: '18px'}} />
                   <span className={styles.sidebar_item}>Добавить</span>
                 </Link>
               </>
@@ -58,8 +58,6 @@ export const Sidebar = () => {
               ''
           }
         </Flex>
-
-
       </Flex>
     </Layout.Sider>
   );

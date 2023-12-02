@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {Header} from "../../components/header/header";
 import {Layout as AntLayout} from "antd";
 import styles from "./NotFound.module.scss";

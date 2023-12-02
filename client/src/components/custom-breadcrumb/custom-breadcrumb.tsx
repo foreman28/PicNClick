@@ -15,7 +15,6 @@ const CustomBreadcrumb = () => {
         search: 'Поиск',
         tags: 'Теги',
         users: 'Пользователи',
-        // Add other paths and their localized names
       };
       
       const pathKey = _.toLowerCase();

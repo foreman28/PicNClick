@@ -1,9 +1,9 @@
 import {Flex, Layout, List} from "antd";
 import {Link} from "react-router-dom";
 
-import styles from "./sidebar2.module.scss";
-
 import {LinkOutlined, StarOutlined} from '@ant-design/icons';
+
+import styles from "./sidebar2.module.scss";
 
 export const Sidebar2 = () => {
   
@@ -35,7 +35,7 @@ export const Sidebar2 = () => {
         
         <Flex gap={"small"} vertical>
           <Flex gap={"small"} align={"center"}>
-            <StarOutlined style={{fontSize: '18px'}} rev="true"/>
+            <StarOutlined style={{fontSize: '18px'}}/>
             <span className={styles.sidebar_title}>Стоит прочитать</span>
           </Flex>
           <List
@@ -53,7 +53,7 @@ export const Sidebar2 = () => {
         
         <Flex gap={"small"} vertical>
           <Flex gap={"small"} align={"center"}>
-            <LinkOutlined style={{fontSize: '18px'}} rev="true"/>
+            <LinkOutlined style={{fontSize: '18px'}} />
             <span className={styles.sidebar_title}>Рекомендуемые ссылки</span>
           </Flex>
           <List
