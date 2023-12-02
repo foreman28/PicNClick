@@ -18,65 +18,49 @@ model User {
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   posts     ForumPost[]
-  comment   Comment[]
-  like      Likes[]
+  Likes     Likes[]
+  Comment   Comment[]
 }
 
 model ForumPost {
-  id          Int      @id @default(autoincrement())
-  url         String   @unique
-  title       String   @unique
+  id          Int       @id @default(autoincrement())
+  url         String    @unique
+  title       String    @unique
   description String
   content     String
   authorId    Int
   image       String?
-  timestamp   DateTime @default(now())
-
-  tags Tags[]
-
-  likes     Likes[]
-  likeCount Int     @default(0)
-
-  comments     Comment[]
-  commentCount Int       @default(0)
-
-  // Отношение к User
-  author User @relation(fields: [authorId], references: [id])
+  timestamp   DateTime  @default(now())
+  tags        Tags[]
+  likes       Likes[]
+  comments    Comment[]
+  author      User      @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model Likes {
-  id        Int      @id @default(autoincrement())
-  postId    Int
-  userId    Int
-  createdAt DateTime @default(now())
-
-  // Relations
-  post ForumPost @relation(fields: [postId], references: [id])
-  user User      @relation(fields: [userId], references: [id])
-
-  // Add a unique constraint to ensure a user can like a post only once
-  @@unique([postId, userId])
+  id          Int       @id @default(autoincrement())
+  forumPostId Int
+  userId      Int // Add this field to track the user who created the like
+  createdAt   DateTime  @default(now())
+  post        ForumPost @relation(fields: [forumPostId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user        User      @relation(fields: [userId], references: [id])
 }
 
 model Comment {
-  id        Int      @id @default(autoincrement())
-  content   String
-  postId    Int
-  userId    Int
-  createdAt DateTime @default(now())
-
-  // Связь с ForumPost и User
-  post ForumPost @relation(fields: [postId], references: [id])
-  user User      @relation(fields: [userId], references: [id])
+  id          Int       @id @default(autoincrement())
+  content     String
+  forumPostId Int
+  userId      Int // Add this field to track the user who created the comment
+  createdAt   DateTime  @default(now())
+  post        ForumPost @relation(fields: [forumPostId], references: [id], onDelete: Cascade)
+  user        User      @relation(fields: [userId], references: [id])
 }
 
 model Tags {
-  id          Int      @id @default(autoincrement())
-  url         String   @unique
-  name        String   @unique
+  id          Int         @id @default(autoincrement())
+  url         String      @unique
+  name        String      @unique
   description String?
-  createdAt   DateTime @default(now())
-
-  // Добавляем обратное отношение к модели ForumPost
-  posts ForumPost[]
+  createdAt   DateTime    @default(now())
+  posts       ForumPost[]
 }
