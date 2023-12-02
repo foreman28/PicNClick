@@ -38,12 +38,12 @@ model ForumPost {
 }
 
 model Likes {
-  id          Int       @id @default(autoincrement())
-  forumPostId Int
-  userId      Int // Add this field to track the user who created the like
-  createdAt   DateTime  @default(now())
-  post        ForumPost @relation(fields: [forumPostId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  user        User      @relation(fields: [userId], references: [id])
+  id        Int       @id @default(autoincrement())
+  postId    Int
+  userId    Int // Add this field to track the user who created the like
+  createdAt DateTime  @default(now())
+  post      ForumPost @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user      User      @relation(fields: [userId], references: [id])
 }
 
 model Comment {

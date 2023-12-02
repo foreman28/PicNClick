@@ -1,8 +1,7 @@
-import React from 'react';
-import {List, Space, Tag, Avatar, Flex, Typography} from 'antd';
+
+import {List, Space, Avatar, Flex, Typography} from 'antd';
 import {
   MessageOutlined,
-  LikeOutlined,
   ClockCircleOutlined,
 } from '@ant-design/icons';
 import {Link} from 'react-router-dom';
@@ -10,10 +9,9 @@ import styles from './post-item.module.scss';
 
 import {ru} from 'date-fns/locale';
 import {format, formatDistanceToNow} from "date-fns";
-import {Paths} from "../../../paths";
-import TagItem from "../../tag-item/tag-item";
 import {CustomTag} from "../../custom-tag/custom-tag";
 import {LikeButton} from "../../custom-button/like-button/like-button";
+import {useEffect} from "react";
 
 const {Paragraph} = Typography;
 
@@ -32,12 +30,14 @@ const PostItem = ({post}) => {
       actions={[
         <Space>
           <MessageOutlined key="comments" rev="true"/>
-          <span>{post.commentCount}</span>
+          <span>{post.comments ? post.comments.length : 0}</span>
         </Space>,
         <Space>
           {/*<LikeOutlined key="like" rev="true"/>*/}
           {/*<span>{post.likeCount}</span>*/}
-          <LikeButton postId={post.id} userId={post.author.id} />
+          <span>{post.likes ? post.likes.length : 0}</span>
+
+          <LikeButton post={post}/>
         </Space>,
         <Space>
           <ClockCircleOutlined key="clock" rev="true"/>

@@ -1,71 +1,43 @@
-// LikeButton.jsx
-
-import React, { useState, useEffect } from 'react';
-import { LikeOutlined } from '@ant-design/icons';
-import { Space } from 'antd';
-import {
-  useAddLikeMutation,
-  useRemoveLikeMutation,
-  useGetLikesByUserQuery,
-} from '../../../api/likes';
+import {LikeOutlined} from '@ant-design/icons';
+import {Space} from 'antd';
+import {useToggleLikeMutation} from '../../../api/likes';
+import {useGetPostQuery} from "../../../api/posts";
 
 import styles from './like-button.module.scss';
 
+
 type Props = {
-  postId: number,
-  userId: number
+  post: any
 }
 
-export const LikeButton = ({ postId, userId }: Props) => {
-  const [addLike] = useAddLikeMutation();
-  const [removeLike] = useRemoveLikeMutation();
-  const { data: userLikes, refetch } = useGetLikesByUserQuery<any>(userId);
+export const LikeButton = ({post}: Props) => {
+  const [addLikeMutation] = useToggleLikeMutation();
+  const {data: updatedPost, isLoading, refetch}: any = useGetPostQuery(post.url);
   
-  const isPostLiked = userLikes && userLikes.some((like: any) => like.postId === postId);
-  const [isLiking, setIsLiking] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  
-  useEffect(() => {
-    // Перезапрашиваем данные после изменения лайков
-    refetch();
-  }, [isLiking]);
-  
-  const handleToggleLike = async () => {
+  const handleAddLike = async () => {
     try {
-      setIsLiking(true);
-      
-      if (isPostLiked) {
-        const likeId = userLikes.find((like: any) => like.postId === postId).id;
-        await removeLike(likeId);
-      } else {
-        await addLike({ postId, userId });
-        setIsVisible(true);
-      }
+      console.log(updatedPost)
+      const postId = post.id;
+      await addLikeMutation({postId});
+      refetch();
     } catch (error) {
-      console.error('Error toggling like:', error);
-    } finally {
-      setIsLiking(false);
-      
-      // Удаление класса через некоторое время для возможности повторного запуска анимации
-      if (!isPostLiked) {
-        setTimeout(() => {
-          setIsVisible(false);
-        }, 600); // Измените продолжительность, если необходимо
-      }
+      console.error('Error adding like:', error);
     }
   };
-
   
   return (
     <Space
       key="like"
-      onClick={handleToggleLike}
-      style={{ cursor: 'pointer' }}
-      rev={isPostLiked ? 'true' : 'false'}
+      onClick={() => handleAddLike()}
+      style={{cursor: 'pointer'}}
       className={styles.btn}
     >
-      <LikeOutlined className={` ${isVisible ? styles.like_animate : ''}`} />
-      <span>{userLikes ? userLikes.length : 0}</span>
+      <LikeOutlined/>
+      {!isLoading ?
+        <span>{updatedPost.likes ? updatedPost.likes.length : 0}</span>
+        :
+        ''
+      }
     </Space>
   );
 };

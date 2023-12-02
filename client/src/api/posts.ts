@@ -34,27 +34,16 @@ export const postsApi = api.injectEndpoints({
       query: (postData) => ({
         url: "/posts/add",
         method: "POST",
-        // headers: {
-        //   // 'Content-Type': 'multipart/form-data',  // Uncomment this line
-        // },
         body: postData,
       }),
     }),
-  //   addPost: builder.mutation<ForumPost, ForumPost>({
-    //       query: (postData) => {
-    //         // Generate a unique boundary string
-    //         const boundary = '----WebKitFormBoundary' + new Date().getTime();
-    //
-    //         return {
-    //           url: "/posts/add",
-    //           method: "POST",
-    //           headers: {
-    //             'Content-Type': `multipart/form-data; boundary=${boundary}`,
-    //           },
-    //           body: postData,
-    //         };
-    //       },
-    //     }),
+    likePost: builder.mutation<string, { postId: string }>({
+      query: ({ postId }) => ({
+        url: `/posts/like/${postId}`,
+        method: "POST",
+      }),
+    }),
+    
   }),
 });
 
@@ -64,6 +53,7 @@ export const {
   useEditPostMutation,
   useRemovePostMutation,
   useAddPostMutation,
+  useLikePostMutation
 } = postsApi;
 
 export const {
@@ -73,5 +63,6 @@ export const {
     editPost,
     removePost,
     addPost,
+    likePost
   },
 } = postsApi;

@@ -1,8 +1,6 @@
 const {prisma} = require("../prisma/prisma-client");
 const slugify = require('slugify');
 const {auth} = require("../middleware/auth");
-const multer = require('multer');
-// const moment = require('moment');
 
 /**
  * @route GET /api/posts
@@ -12,12 +10,12 @@ const multer = require('multer');
 const all = async (req, res) => {
   try {
     const {q: search, page, pageSize} = req.query;
-    // console.log(search)
     let posts;
 
     const findManyOptions = {
       include: {
         author: true,
+        likes: true,
         tags: true,
       },
     };
@@ -28,7 +26,7 @@ const all = async (req, res) => {
     }
 
     if (search) {
-      console.log(search)
+      // console.log(search)
       if (search.startsWith('@')) {
         // Search by tag
         posts = await prisma.forumPost.findMany({
@@ -90,7 +88,6 @@ const all = async (req, res) => {
   }
 };
 
-
 /**
  * @route POST /api/posts/add
  * @desc Добавление сотрудника
@@ -101,8 +98,8 @@ const add = async (req, res) => {
     const data = req.body;
     const file = req.file;
 
-    console.log(data);
-    console.log(file);
+    // console.log(data);
+    // console.log(file);
 
     if (!data.title || !data.content || !data.description) {
       return res.status(400).json({message: "Все поля обязательные"});
@@ -129,7 +126,6 @@ const add = async (req, res) => {
     return res.status(500).json({message: "Что-то пошло не так"});
   }
 };
-
 
 /**
  * @route POST /api/posts/remove/:id
@@ -215,16 +211,17 @@ const post = async (req, res) => {
             },
             post: true,
             userId: true,
-            postId: true,
+            forumPostId: true,
             createdAt: true,
           },
         },
+        likes: true,
         tags: true,
       },
     });
 
 
-    console.log(post)
+    // console.log(post)
 
     res.status(200).json(post);
   } catch {
@@ -232,10 +229,33 @@ const post = async (req, res) => {
   }
 };
 
+/**
+ * @route POST /api/posts/like/:postId
+ * @desc Поставить лайк под постом
+ * @access Private
+ */
+const likePost = async (req, res) => {
+  const { postId } = req.params;
+
+  try {
+    const like = await prisma.likes.create({
+      data: {
+        forumPostId: parseInt(postId, 10),
+        userId: req.user.id,
+      },
+    });
+
+    res.status(201).json(like);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Не удалось поставить лайк под постом" });
+  }
+};
 module.exports = {
   all,
   add,
   remove,
   edit,
   post,
+  likePost,
 };

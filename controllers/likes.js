@@ -1,46 +1,78 @@
 const {prisma} = require("../prisma/prisma-client");
 
 /**
+ * @route POST /api/likes/toggle
+ * @desc Toggle like (add if not exists, remove if exists)
+ * @access Private
+ */
+const toggleLike = async (req, res) => {
+  try {
+    const { postId } = req.body;
+    const userId = req.user.id;
+
+    // Check if the like already exists
+    const existingLike = await prisma.likes.findFirst({
+      where: {
+        postId: postId,
+        userId: userId,
+      },
+    });
+
+    if (existingLike) {
+      // If like exists, remove it
+      await prisma.likes.delete({
+        where: { id: existingLike.id },
+      });
+
+      res.status(200).json({ message: 'Лайк удален' });
+    } else {
+      // If like doesn't exist, add it
+      const newLike = await prisma.likes.create({
+        data: {
+          postId: postId,
+          userId: userId,
+        },
+      });
+
+      res.status(201).json(newLike);
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Что-то пошло не так при обработке лайка', error: error.message });
+  }
+};
+
+/**
  * @route POST /api/likes/add
  * @desc Add a like
  * @access Private
  */
 const addLike = async (req, res) => {
   try {
-    const { postId, userId } = req.body;
-
-    // Check if the like already exists
-    const existingLike = await prisma.likes.findUnique({
+    const { postId } = req.body;
+    console.log(postId)
+    console.log(req.user.id)
+    // Проверка, существует ли подобное уже
+    const existingLike = await prisma.likes.findFirst({
       where: {
-        postId_userId: {
-          postId: Number(postId),
-          userId: Number(userId),
-        },
+        postId: postId,
+        userId: req.user.id,
       },
     });
 
     if (existingLike) {
-      return res.status(400).json({ message: 'Like already added' });
+      return res.status(409).json({ message: 'Лайк уже есть' });
     }
 
-    // Create the like
-    const newLike = await prisma.likes.create({
+    const like = await prisma.likes.create({
       data: {
-        postId: Number(postId),
-        userId: Number(userId),
+        postId: postId,
+        userId: req.user.id,
       },
     });
 
-    // Increment the like count in ForumPost
-    await prisma.forumPost.update({
-      where: { id: Number(postId) },
-      data: { likeCount: { increment: 1 } },
-    });
-
-    res.status(201).json(newLike);
+    res.status(201).json(like);
   } catch (error) {
-    console.error('Error adding like:', error);
-    res.status(500).json({ message: 'Something went wrong while adding a like', error: error.message });
+    res.status(500).json({ message: 'Что-то пошло не так при добавлении лайка', error: error.message });
   }
 };
 
@@ -53,30 +85,24 @@ const removeLike = async (req, res) => {
   try {
     const likeId = Number(req.params.id);
 
-    // Get the like to check if it exists
+    // Проверка существует ли лайк
     const like = await prisma.likes.findUnique({
       where: { id: likeId },
     });
 
     if (!like) {
-      return res.status(404).json({ message: 'Like not found' });
+      return res.status(404).json({ message: 'Лайк не нашел' });
     }
 
-    // Delete the like
+    // Удалить лайк
     await prisma.likes.delete({
       where: { id: likeId },
     });
 
-    // Decrement the like count in ForumPost
-    await prisma.forumPost.update({
-      where: { id: like.postId },
-      data: { likeCount: { decrement: 1 } },
-    });
 
     res.status(204).json('OK');
   } catch (error) {
-    console.error('Error removing like:', error);
-    res.status(500).json({ message: 'Failed to remove like', error: error.message });
+    res.status(500).json({ message: 'Не удалось удалить лайк', error: error.message });
   }
 };
 
@@ -89,7 +115,7 @@ const getLikesByUser = async (req, res) => {
   try {
     const userId = Number(req.params.userId);
 
-    // Get all likes for the user
+    // Получите все лайки для пользователя
     const userLikes = await prisma.likes.findMany({
       where: { userId: userId },
       include: { post: true },
@@ -97,13 +123,13 @@ const getLikesByUser = async (req, res) => {
 
     res.status(200).json(userLikes);
   } catch (error) {
-    console.error('Error getting likes for user:', error);
-    res.status(500).json({ message: 'Failed to get likes for user', error: error.message });
+    res.status(500).json({ message: 'Не удалось получить лайки пользователю', error: error.message });
   }
 };
 
 
 module.exports = {
+  toggleLike,
   addLike,
   removeLike,
   getLikesByUser,

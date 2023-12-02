@@ -3,14 +3,21 @@ import { api } from "./apiConfig";
 
 export const likesApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    addLike: builder.mutation<Likes, { postId: number, userId: number }>({
-      query: ({ postId, userId }) => ({
-        url: "/likes/add",
+    toggleLike: builder.mutation<void, { postId: number }>({
+      query: ({ postId }) => ({
+        url: "/likes/toggle",
         method: "POST",
-        body: { postId, userId },
+        body: { postId },
       }),
     }),
-    removeLike: builder.mutation<void, number>({
+    addLike: builder.mutation<void, { postId: number }>({
+      query: ({ postId }) => ({
+        url: "/likes/add",
+        method: "POST",
+        body: { postId },
+      }),
+    }),
+    removeLike: builder.mutation<Likes, number>({
       query: (id) => ({
         url: `/likes/remove/${id}`,
         method: "DELETE",
@@ -22,28 +29,30 @@ export const likesApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
-    findLikeId: builder.query<number | null, { postId: number; userId: number }>({
-      query: ({ postId, userId }) => ({
-        url: `/likes/findId`,
-        method: "GET",
-        params: { postId, userId },
-      }),
-    }),
+    // findLikeId: builder.query<number | null, { postId: number; userId: number }>({
+    //   query: ({ postId, userId }) => ({
+    //     url: `/likes/findId`,
+    //     method: "GET",
+    //     params: { postId, userId },
+    //   }),
+    // }),
   }),
 });
 
 export const {
+  useToggleLikeMutation,
   useAddLikeMutation,
   useRemoveLikeMutation,
   useGetLikesByUserQuery,
-  useFindLikeIdQuery,
+  // useFindLikeIdQuery,
 } = likesApi;
 
 export const {
   endpoints: {
+    toggleLike,
     addLike,
     removeLike,
     getLikesByUser,
-    findLikeId,
+    // findLikeId,
   },
 } = likesApi;
