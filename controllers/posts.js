@@ -98,22 +98,32 @@ const add = async (req, res) => {
     const data = req.body;
     const file = req.file;
 
-    // console.log(data);
+    console.log(data);
     // console.log(file);
+
+    const tags = Array.isArray(data.tags) ? data.tags.join(',') : data.tags;
+    let tagsArray = data.tags;
+
+    if (typeof data.tags === 'string') {
+      tagsArray = tags.split(',').map(Number);
+    }
 
     if (!data.title || !data.content || !data.description) {
       return res.status(400).json({message: "Все поля обязательные"});
     }
 
     const slug = slugify(data.title, {lower: true, remove: /[*+~.()'"!:@]/g});
-
+    console.log(data.tags)
     const post = await prisma.forumPost.create({
       data: {
         title: data.title,
-        content: data.content,
         description: data.description,
+        image: file ? file.path : 'uploads/stubs/stubs-image.png',
+        content: data.content,
+        tags: {
+          connect: tagsArray.map((tagId) => ({ id: tagId })),
+        },
         authorId: req.user.id,
-        image: file ? file.path : 'stubs/stubs-image.png',
         url: slug,
       },
     });

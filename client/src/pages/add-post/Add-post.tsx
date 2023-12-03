@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, ConfigProvider, Flex, Form, message, Upload} from 'antd';
 import {Layout} from '../../components/layout/layout';
 import {useAddPostMutation} from '../../api/posts';
@@ -7,26 +7,30 @@ import {CustomInput} from '../../components/custom-input/custom-input';
 import {button} from '../../themes/buttons';
 import styles from './Add-post.module.scss';
 import {CustomTextarea} from '../../components/custom-textarea/custom-textarea';
-// import CustomSelect from '../../components/custom-select/custom-select';
+import CustomSelect from '../../components/custom-select/custom-select';
 import {DownloadOutlined} from "@ant-design/icons";
+import {useGetAllTagsQuery} from "../../api/tags";
 
 export const AddPost = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   
-  const [addPost, {isLoading}]: any = useAddPostMutation();
   const [imageFile, setImageFile]: any = useState('');
   const [showImage, setShowImage]: any = useState('');
   
+  const [addPost, {isLoading}]: any = useAddPostMutation();
+  
   const onFinish = async (values: any) => {
     try {
-      console.log(imageFile)
+      
+      console.log(values.tags)
       const formData = new FormData();
       formData.append('title', values.title);
       formData.append('description', values.description);
-      formData.append('content', values.content);
       formData.append('image', imageFile);
+      formData.append('content', values.content);
+      formData.append('tags', values.tags);
       
       await addPost(formData);
       message.success('Пост успешно добавлен!');
@@ -110,7 +114,7 @@ export const AddPost = () => {
             
             <CustomTextarea name="content"/>
             
-            {/*<CustomSelect name="tags" placeholder="Теги" />*/}
+            <CustomSelect name="tags" placeholder="Теги" />
             
             <ConfigProvider theme={button}>
               <Button type="primary" htmlType="submit" loading={isLoading}>

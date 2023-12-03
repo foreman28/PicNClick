@@ -1,4 +1,4 @@
-import {LikeOutlined} from '@ant-design/icons';
+import {LikeFilled, LikeOutlined} from '@ant-design/icons';
 import {Space} from 'antd';
 import {useToggleLikeMutation} from '../../../api/likes';
 import {useGetPostQuery} from "../../../api/posts";
@@ -38,7 +38,7 @@ export const LikeButton = ({post}: Props) => {
       className={styles['btn'] + " " + (userHasLiked ? styles['btn-active'] : '')}
     >
       {isLoading ? '' : <>
-        <LikeOutlined/>
+        {userHasLiked ? <LikeFilled/> : <LikeOutlined/>}
         <span>{updatedPost.likes ? updatedPost.likes.length : 0}</span>
       </>}
     </Space>

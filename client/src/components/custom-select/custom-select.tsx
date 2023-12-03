@@ -1,5 +1,7 @@
 import {ConfigProvider, Form, Select, SelectProps, Space} from 'antd';
 import styles from './custom-select.module.scss';
+import {useGetAllTagsQuery} from "../../api/tags";
+import {useEffect, useState} from "react";
 
 type Props = {
   name: string;
@@ -7,42 +9,24 @@ type Props = {
   theme?: any;
 };
 
-const SearchComponent = ({
-                           name,
-                           placeholder,
-                           theme,
-                         }: Props) => {
+const SelectComponent = ({name, placeholder, theme}: Props) => {
+  const [selectedValues, setSelectedValues] = useState<string[]>([]);
+  
   const handleChange = (value: string[]) => {
     console.log(`selected ${value}`);
+    setSelectedValues(value);
   };
-
-  const options: SelectProps['options'] = [
-    {
-      label: 'China',
-      value: 'china',
-      // emoji: '🇨🇳',
-      desc: 'China',
-    },
-    {
-      label: 'USA',
-      value: 'usa',
-      // emoji: '🇺🇸',
-      desc: 'USA',
-    },
-    {
-      label: 'Japan',
-      value: 'japan',
-      // emoji: '🇯🇵',
-      desc: 'Japan',
-    },
-    {
-      label: 'Korea',
-      value: 'korea',
-      // emoji: '🇰🇷',
-      desc: 'Korea',
-    },
-  ];
-
+  
+  const {data: tags, error, isLoading: isLoadingTags} = useGetAllTagsQuery();
+  
+  const selectOptions: SelectProps['options'] = tags
+    ? tags.map((tag) => ({
+      label: tag.name,
+      value: tag.id,
+      desc: tag.description,
+    }))
+    : [];
+  
   return (
     <ConfigProvider theme={theme}>
       <Form.Item
@@ -58,19 +42,19 @@ const SearchComponent = ({
           placeholder={placeholder}
           onChange={handleChange}
           optionLabelProp="label"
-          options={options}
+          options={selectOptions}
           optionRender={(option) => (
             <Space>
               <span role="img" aria-label={option.data.label}>
-                {option.data.emoji}
+                {option.data.label}
               </span>
-              {option.data.desc}
             </Space>
           )}
+          // notFoundContent={'Пусто'}
         />
       </Form.Item>
     </ConfigProvider>
   );
 };
 
-export default SearchComponent;
+export default SelectComponent;

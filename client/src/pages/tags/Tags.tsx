@@ -21,19 +21,13 @@ export const Tags = () => {
     <Layout>
       <Flex className={styles.main} gap={12} vertical>
         <CustomBreadcrumb/>
-        {/*<Title level={1}>Теги</Title>*/}
-        {/*<List*/}
-        {/*  itemLayout="vertical"*/}
-        {/*  size="large"*/}
-        {/*  dataSource={tags}*/}
-        {/*  renderItem={(tag) => <Comments key={tag.id} tag={tag} />}*/}
-        {/*/>*/}
           <List
             grid={{ gutter: 12, xs: 1, sm: 2, md: 3, lg: 4, xl: 4, xxl: 4 }}
             dataSource={tags}
             renderItem={(tag) => (
               <TagItem key={tag.id} tag={tag}/>
             )}
+            locale={{emptyText: 'Пусто'}}
           />
       </Flex>
     </Layout>
