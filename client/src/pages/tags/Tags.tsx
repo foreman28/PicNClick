@@ -16,23 +16,22 @@ export const Tags = () => {
     window.scrollTo(0, 0);
   }, []);
   
-  const { data: tags, error, isLoading } = useGetAllTagsQuery();
+  const { data: tags, error, isLoading }:any = useGetAllTagsQuery();
   
   const memoizedList = useMemo(() => {
     if (isLoading) {
       return <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />;
     }
     if (error) {
-      return <Alert message="Error loading tags" type="error" />;
+      return <Alert message="Ошибка загрузки тегов" type="error" />;
     }
     
     return (
-      <List
-        grid={{ gutter: 12, xs: 1, sm: 2, md: 3, lg: 4, xl: 4, xxl: 4 }}
-        dataSource={tags}
-        renderItem={({ id, ...tag }) => <TagItem key={id} tag={tag} />}
-        locale={{ emptyText: "Пусто" }}
-      />
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '12px' }}>
+      {tags && tags.map(({ id, ...tag }:any) => (
+        <TagItem key={id} tag={tag} />
+      ))}
+    </div>
     );
   }, [tags, isLoading, error]);
   

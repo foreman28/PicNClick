@@ -28,7 +28,7 @@ export const FeedPosts = () => {
   const {data: allPosts, isLoading: allIsLoading} = useGetAllPostsQuery({
     q: searchS,
   });
-  const totalPosts = useMemo(() => allPosts?.length || 0, [allPosts]);
+  const totalPosts = allPosts?.length || 0;
   
   const [searchParams]: any = useSearchParams();
   const pageParam = useMemo(() => parseInt(searchParams.get('page')) || 1, [searchParams]);
