@@ -3,13 +3,17 @@ const slugify = require('slugify');
 const {auth} = require("../middleware/auth");
 
 /**
- * @route GET /api/posts
+ * @route POST /api/posts
  * @desc Получение всех сотрудников
  * @access Private
  */
 const all = async (req, res) => {
+  console.log(
+    1
+  )
   try {
-    const {q: search, page, pageSize} = req.query;
+    const {q: search, page, pageSize} = req.body;
+    console.log(req.body)
     let posts;
 
     const findManyOptions = {

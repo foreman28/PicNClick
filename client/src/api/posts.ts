@@ -1,13 +1,19 @@
 import { ForumPost } from "@prisma/client";
 import { api } from "./apiConfig";
 
+interface filters{
+  page?: number;
+  pageSize?: number;
+  q?: string
+}
+
 export const postsApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getAllPosts: builder.query<ForumPost[], { page?: number; pageSize?: number; q?: string }>({
-      query: ({ page, pageSize, q}) => ({
+    getAllPosts: builder.query<ForumPost[], filters>({
+      query: ( filters ) => ({
         url: `/posts`,
-        method: "GET",
-        params: { page, pageSize, q }, // Pass page and pageSize as query parameters
+        method: "POST", // Change the method to POST
+        body: filters , // Send filters in the request body
       }),
     }),
     getPost: builder.query<ForumPost, string>({

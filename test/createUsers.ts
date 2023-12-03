@@ -12,7 +12,7 @@ const prisma = new PrismaClient();
 // @ts-ignore
 async function createUsers() {
   try {
-    for (let i = 1; i <= 1; i++) {
+    for (let i = 1; i <= 10; i++) {
       await prisma.user.create({
         data: {
           username: `asd${i}`,

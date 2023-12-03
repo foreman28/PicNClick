@@ -42,7 +42,7 @@ function getRandomTag(tags: Tag[]): Tag {
           tags: {
             connect: tagsToConnect.map((tag) => ({ id: tag.id })),
           },
-          image: `stubs/stubs-image.png`,
+          image: `uploads/stubs/stubs-image.png`,
           // commentsCount: 12,
           // likesCount: 33,
         },
