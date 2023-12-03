@@ -7,7 +7,6 @@ import {button, button2} from "../../themes/buttons";
 
 import {CustomButton} from "../custom-button/custom-button";
 import SearchComponent from "../custom-search/search";
-import {search} from "../../themes/search";
 
 import styles from "./header.module.scss";
 
@@ -36,7 +35,7 @@ export const Header = () => {
         </Flex>
 
 
-        <SearchComponent theme={search}/>
+        <SearchComponent/>
 
         <Flex className={styles.btns} justify={"end"}>
           {user ? (

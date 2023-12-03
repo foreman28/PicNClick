@@ -5,6 +5,7 @@ import {CustomTag} from "../custom-tag/custom-tag";
 import {useGetAllPostsQuery} from "../../api/posts";
 
 import styles from './search.module.scss';
+import {theme} from "../../themes/main";
 
 const {Search} = Input;
 
@@ -16,7 +17,6 @@ const SearchComponent = (props: any) => {
     q: search,
   });
   
-  
   const handleSearch = async (value: string) => {
     if (value) {
       try {
@@ -26,8 +26,6 @@ const SearchComponent = (props: any) => {
       }
     }
   };
-
-  
   
   const sendSearch = async (value: string) => {
     if (value) {
@@ -39,7 +37,7 @@ const SearchComponent = (props: any) => {
 
   return (
     <div className={styles.searchBox}>
-      <ConfigProvider theme={props.theme}>
+      <ConfigProvider theme={theme}>
         <Search
           placeholder="Поиск..."
           allowClear

@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import {useLocation, useNavigate, useSearchParams} from 'react-router-dom';
 import {List, Flex} from 'antd';
 
@@ -25,69 +25,66 @@ export const FeedPosts = () => {
     q: searchS,
   });
   
-  // console.log(posts)
-  const { data: allPosts, isLoading:allIsLoading } = useGetAllPostsQuery({
+  const { data: allPosts, isLoading: allIsLoading } = useGetAllPostsQuery({
     q: searchS,
   });
-  const totalPosts = allPosts?.length || 0;
+  const totalPosts = useMemo(() => allPosts?.length || 0, [allPosts]);
   
   const [searchParams]:any = useSearchParams();
-  const pageParam:any = parseInt(searchParams.get('page')) || 1;
+  const pageParam = useMemo(() => parseInt(searchParams.get('page')) || 1, [searchParams]);
   
   useEffect(() => {
     setCurrentPage(pageParam);
   }, [pageParam]);
   
-  const handlePageChange = (page: number) => {
-    const totalPages = Math.ceil(totalPosts / pageSize);
-    const validPage = Math.min(Math.max(1, page), totalPages);
-    searchParams.set('page', validPage.toString());
-    searchParams.set('q', searchS);
-    navigate(`?${searchParams.toString()}`);
-  };
+  const handlePageChange = useCallback(
+    (page:any) => {
+      const totalPages = Math.ceil(totalPosts / pageSize);
+      const validPage = Math.min(Math.max(1, page), totalPages);
+      searchParams.set('page', validPage.toString());
+      searchParams.set('q', searchS);
+      navigate(`?${searchParams.toString()}`);
+    },
+    [navigate, searchParams, searchS, totalPosts, pageSize]
+  );
   
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage, handlePageChange]);
   
-  //     pagination={{
-  //       onChange: (page) => {
-  //         console.log(page);
-  //       },
-  //       pageSize: 3,
-  //     }}
+  const skeletonList = useMemo(
+    () => (
+      <Flex vertical gap="12px">
+        <List
+          itemLayout="vertical"
+          size="large"
+          dataSource={[1, 2, 3]}
+          renderItem={() => <SkeletonPost />}
+          locale={{ emptyText: 'Пусто' }}
+        />
+      </Flex>
+    ),
+    []
+  );
+  
+  const postList = useMemo(
+    () => (
+      <Flex vertical gap="12px">
+        <List
+          itemLayout="vertical"
+          size="large"
+          dataSource={posts}
+          renderItem={(item) => <PostItem post={item} />}
+          locale={{ emptyText: 'Пусто' }}
+        />
+      </Flex>
+    ),
+    [posts]
+  );
   
   return (
     <>
-      {isLoading || allIsLoading ? (
-        <Flex vertical gap="12px">
-          <List
-            itemLayout="vertical"
-            size="large"
-            dataSource={[1, 2, 3]}
-            renderItem={() => <SkeletonPost />}
-            locale={{ emptyText: 'Пусто' }}
-          />
-        </Flex>
-      ) : (
-        <Flex vertical gap="12px">
-          <List
-            itemLayout="vertical"
-            // pagination={{
-            //   onChange: (page) => {
-            //     handlePageChange(page);
-            //   },
-            //   pageSize: 5,
-            //   current: currentPage,
-            //   total: totalPosts,
-            // }}
-            size="large"
-            dataSource={posts}
-            renderItem={(item) => <PostItem post={item} />}
-            locale={{ emptyText: 'Пусто' }}
-          />
-        </Flex>
-      )}
+      {isLoading || allIsLoading ? skeletonList : postList}
       
       <PaginationComponent
         total={totalPosts}
@@ -95,9 +92,9 @@ export const FeedPosts = () => {
         current={currentPage}
         onChange={handlePageChange}
       />
-      
     </>
   );
 };
+
 
 

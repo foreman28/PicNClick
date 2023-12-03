@@ -11,12 +11,11 @@ export const Forum = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  // const { data: allPosts, isLoading:allIsLoading, isError:allIsError } = useGetAllPostsQuery({});
+  
   return (
     <Layout>
       <Flex gap={12} vertical>
         <CustomBreadcrumb/>
-        
         <FeedPosts />
       </Flex>
     </Layout>

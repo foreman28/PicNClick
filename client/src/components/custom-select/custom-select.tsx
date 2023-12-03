@@ -13,7 +13,7 @@ const SelectComponent = ({name, placeholder, theme}: Props) => {
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
   
   const handleChange = (value: string[]) => {
-    console.log(`selected ${value}`);
+    // console.log(`selected ${value}`);
     setSelectedValues(value);
   };
   

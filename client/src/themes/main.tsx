@@ -16,6 +16,9 @@ export const theme: any = {
       metaMarginBottom: 0,
       // colorText: "var(--accent-2)",
       // colorPrimary: "var(--accent-2)",
+    },
+    Input: {
+      controlHeight: 40,
     }
   }
 };
