@@ -1,22 +1,20 @@
 import {useState} from 'react';
-import {ConfigProvider, Flex, Input, List} from 'antd';
+import {Flex, Input, List} from 'antd';
 import {Link, useNavigate} from 'react-router-dom';
 import {CustomTag} from "../custom-tag/custom-tag";
 import {useGetAllPostsQuery} from "../../api/posts";
 
 import styles from './search.module.scss';
-import {theme} from "../../themes/main";
 
 const {Search} = Input;
 
-const SearchComponent = (props: any) => {
+const SearchComponent = () => {
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
   
   const { data: searchResults }  = useGetAllPostsQuery({
     q: search,
   });
-  
   const handleSearch = async (value: string) => {
     if (value) {
       try {
@@ -24,6 +22,9 @@ const SearchComponent = (props: any) => {
       } catch (error) {
         console.error('Error fetching search suggestions:', error);
       }
+    }
+    else {
+      setSearch('')
     }
   };
   
@@ -37,7 +38,6 @@ const SearchComponent = (props: any) => {
 
   return (
     <div className={styles.searchBox}>
-      <ConfigProvider theme={theme}>
         <Search
           placeholder="Поиск..."
           allowClear
@@ -67,7 +67,6 @@ const SearchComponent = (props: any) => {
             )}
           />
         )}
-      </ConfigProvider>
     </div>
   );
   
