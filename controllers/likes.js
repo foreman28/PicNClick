@@ -113,7 +113,7 @@ const removeLike = async (req, res) => {
  */
 const getLikesByUser = async (req, res) => {
   try {
-    const userId = Number(req.params.userId);
+    const {userId} = req.body;
 
     // Получите все лайки для пользователя
     const userLikes = await prisma.likes.findMany({

@@ -33,7 +33,7 @@ const PostItem = ({post}:any) => {
           <span>{post.comments ? post.comments.length : 0}</span>
         </Space>,
         <Space>
-          <LikeButton key="like" post={post}/>
+          <LikeButton key="like" post={post} />
         </Space>,
         <Space>
           <ClockCircleOutlined key="clock"/>
