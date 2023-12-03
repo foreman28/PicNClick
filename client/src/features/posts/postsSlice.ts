@@ -38,4 +38,4 @@ const slice = createSlice({
 
 export default slice.reducer;
 
-export const selectPosts = (state: RootState) => state.posts.posts;
+// export const selectPosts = (state: RootState) => state.posts.posts;

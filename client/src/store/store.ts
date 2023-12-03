@@ -1,9 +1,9 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 
 import auth from '../features/auth/authSlice';
-import posts from '../features/posts/postsSlice';
-import likes from '../features/likes/likesSlice';
-import tags from '../features/tags/tagsSlice';
+// import posts from '../features/posts/postsSlice';
+// import likes from '../features/likes/likesSlice';
+// import tags from '../features/tags/tagsSlice';
 import { listenerMiddleware } from "../middleware/auth";
 import {api} from "../api/apiConfig";
 
@@ -11,9 +11,9 @@ export const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
     auth,
-    posts,
-    likes,
-    tags
+    // posts,
+    // likes,
+    // tags
   },
   devTools: true,
   middleware: (getDefaultMiddleware) =>

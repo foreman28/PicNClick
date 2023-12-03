@@ -26,4 +26,4 @@ const slice = createSlice({
 
 export default slice.reducer;
 
-export const selectTags = (state: RootState) => state.tags.tags;
+// export const selectTags = (state: RootState) => state.tags.tags;
