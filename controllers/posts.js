@@ -4,13 +4,10 @@ const {auth} = require("../middleware/auth");
 
 /**
  * @route POST /api/posts
- * @desc Получение всех сотрудников
+ * @desc Получение всех постов
  * @access Private
  */
 const all = async (req, res) => {
-  console.log(
-    1
-  )
   try {
     const {q: search, page, pageSize} = req.body;
     console.log(req.body)
@@ -18,7 +15,7 @@ const all = async (req, res) => {
 
     const findManyOptions = {
       include: {
-        author: true,
+        author: true, // edit
         likes: true,
         tags: true,
       },
@@ -32,7 +29,6 @@ const all = async (req, res) => {
     if (search) {
       // console.log(search)
       if (search.startsWith('@')) {
-        // Search by tag
         posts = await prisma.forumPost.findMany({
           ...findManyOptions,
           where: {
@@ -81,7 +77,6 @@ const all = async (req, res) => {
         });
       }
     } else {
-      // No search query provided, retrieve all posts
       posts = await prisma.forumPost.findMany(findManyOptions);
     }
 
@@ -94,7 +89,7 @@ const all = async (req, res) => {
 
 /**
  * @route POST /api/posts/add
- * @desc Добавление сотрудника
+ * @desc Добавление поста
  * @access Private
  */
 const add = async (req, res) => {
@@ -102,7 +97,7 @@ const add = async (req, res) => {
     const data = req.body;
     const file = req.file;
 
-    console.log(data);
+    // console.log(data);
     // console.log(file);
 
     const tags = Array.isArray(data.tags) ? data.tags.join(',') : data.tags;
@@ -117,7 +112,7 @@ const add = async (req, res) => {
     }
 
     const slug = slugify(data.title, {lower: true, remove: /[*+~.()'"!:@]/g});
-    console.log(data.tags)
+
     const post = await prisma.forumPost.create({
       data: {
         title: data.title,
@@ -143,7 +138,7 @@ const add = async (req, res) => {
 
 /**
  * @route POST /api/posts/remove/:id
- * @desc Удаление сотрудника
+ * @desc Удаление поста
  * @access Private
  */
 const remove = async (req, res) => {
@@ -164,7 +159,7 @@ const remove = async (req, res) => {
 
 /**
  * @route PUT /api/posts/edit/:id
- * @desc Редактирование сотрудника
+ * @desc Редактирование поста
  * @access Private
  */
 const edit = async (req, res) => {
@@ -187,7 +182,7 @@ const edit = async (req, res) => {
 
 /**
  * @route GET /api/posts/:id
- * @desc Получение сотрудника
+ * @desc Получение поста
  * @access Private
  */
 const post = async (req, res) => {

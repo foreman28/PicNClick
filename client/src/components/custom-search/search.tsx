@@ -8,13 +8,14 @@ import styles from './search.module.scss';
 
 const {Search} = Input;
 
-const SearchComponent = () => {
-  const [search, setSearch] = useState('');
+export const SearchComponent = () => {
+  const [search, setSearch] = useState<string>('');
   const navigate = useNavigate();
-  
-  const {data: searchResults} = useGetAllPostsQuery({
+
+  const {data: searchResults, isLoading} = useGetAllPostsQuery({
     q: search,
   });
+
   const handleSearch = async (value: string) => {
     if (value) {
       try {
@@ -26,7 +27,7 @@ const SearchComponent = () => {
       setSearch('')
     }
   };
-  
+
   const sendSearch = async (value: string) => {
     if (value) {
       navigate(`/search?q=${value}`);
@@ -34,7 +35,7 @@ const SearchComponent = () => {
       navigate(`/search`);
     }
   };
-  
+
   return (
     <div className={styles.searchBox}>
       <Search
@@ -68,7 +69,4 @@ const SearchComponent = () => {
       )}
     </div>
   );
-  
 };
-
-export default SearchComponent;

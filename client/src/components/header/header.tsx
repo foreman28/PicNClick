@@ -6,7 +6,7 @@ import {logout, selectUser} from "../../features/auth/authSlice";
 import {button, button2} from "../../themes/buttons";
 
 import {CustomButton} from "../custom-button/custom-button";
-import SearchComponent from "../custom-search/search";
+import {SearchComponent} from "../custom-search/search";
 
 import styles from "./header.module.scss";
 

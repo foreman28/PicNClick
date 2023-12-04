@@ -1,19 +1,23 @@
-import { ForumPost } from "@prisma/client";
-import { api } from "./apiConfig";
+import {ForumPost} from "@prisma/client";
+import {api} from "./apiConfig";
 
-interface filters{
+interface filters {
   page?: number;
   pageSize?: number;
-  q?: string
+  q?: string;
+
+  filters?: {
+    //
+  }
 }
 
 export const postsApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getAllPosts: builder.query<ForumPost[], filters>({
-      query: ( filters ) => ({
+      query: (filters) => ({
         url: `/posts`,
-        method: "POST", // Change the method to POST
-        body: filters , // Send filters in the request body
+        method: "POST",
+        body: filters,
       }),
     }),
     getPost: builder.query<ForumPost, string>({
@@ -33,7 +37,7 @@ export const postsApi = api.injectEndpoints({
       query: (id) => ({
         url: `/posts/remove/${id}`,
         method: "POST",
-        body: { id },
+        body: {id},
       }),
     }),
     addPost: builder.mutation<ForumPost, ForumPost>({
@@ -44,12 +48,12 @@ export const postsApi = api.injectEndpoints({
       }),
     }),
     likePost: builder.mutation<string, { postId: string }>({
-      query: ({ postId }) => ({
+      query: ({postId}) => ({
         url: `/posts/like/${postId}`,
         method: "POST",
       }),
     }),
-    
+
   }),
 });
 
