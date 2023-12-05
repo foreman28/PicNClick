@@ -1,15 +1,14 @@
 import React, {useEffect, useMemo} from "react";
-import {Alert, Col, Flex, Grid, List, Row, Spin} from "antd";
+import {Alert, Flex, Spin} from "antd";
 
 import {Layout} from "../../components/layout/layout";
 
-import styles from "./Tags.module.scss";
 import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
-import {Link} from "react-router-dom";
 import {useGetAllTagsQuery} from "../../api/tags";
 import TagItem from "../../components/tag-item/tag-item";
 import {LoadingOutlined} from "@ant-design/icons";
 
+import styles from "./Tags.module.scss";
 
 export const Tags = () => {
   useEffect(() => {

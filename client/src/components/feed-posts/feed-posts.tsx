@@ -13,31 +13,31 @@ import styles from './feed-posts.module.scss';
 export const FeedPosts = () => {
   const {search} = useLocation();
   const navigate = useNavigate();
-
+  
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 5;
-
+  
   const searchS = new URLSearchParams(search).get('q') || '';
-
+  
   const {data: posts, isLoading} = useGetAllPostsQuery({
     page: currentPage,
     pageSize: pageSize,
     q: searchS,
   });
-
+  
   const {data: allPosts, isLoading: allIsLoading} = useGetAllPostsQuery({
     q: searchS,
   });
-
+  
   const totalPosts = allPosts?.length || 0;
-
+  
   const [searchParams]: any = useSearchParams();
-  const pageParam = () => parseInt(searchParams.get('page')) || 1;
-
+  
   useEffect(() => {
-    setCurrentPage(pageParam);
-  }, [pageParam]);
+    setCurrentPage(() => parseInt(searchParams.get('page')) || 1);
+  }, [searchParams]);
 
+  
   const handlePageChange = useCallback(
     (page: any) => {
       const totalPages = Math.ceil(totalPosts / pageSize);
@@ -48,11 +48,11 @@ export const FeedPosts = () => {
     },
     [navigate, searchParams, searchS, totalPosts, pageSize]
   );
-
+  
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [currentPage, handlePageChange]);
-
+  }, [currentPage]);
+  
   const skeletonList = useMemo(
     () => (
       <Flex vertical gap="12px">
@@ -67,7 +67,7 @@ export const FeedPosts = () => {
     ),
     []
   );
-
+  
   const postList = useMemo(
     () => (
       <Flex vertical gap="12px">
@@ -85,8 +85,11 @@ export const FeedPosts = () => {
   
   return (
     <>
-      {isLoading || allIsLoading ? skeletonList : postList}
-
+      {isLoading || allIsLoading ?
+        skeletonList
+        :
+        postList
+      }
       <PaginationComponent
         total={totalPosts}
         pageSize={pageSize}
