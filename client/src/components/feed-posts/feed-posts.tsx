@@ -23,10 +23,10 @@ export const FeedPosts = () => {
     page: currentPage,
     pageSize: pageSize,
     q: searchS,
-    filters: {
-      sort: 'likes',
-      order: 'desc'
-    }
+    // filters: {
+    //   sort: 'likes',
+    //   order: 'desc'
+    // }
   });
   
   const {data: allPosts, isLoading: allIsLoading} = useGetAllPostsQuery({

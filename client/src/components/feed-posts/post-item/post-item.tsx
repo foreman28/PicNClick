@@ -11,6 +11,7 @@ import {CustomTag} from "../../custom-tag/custom-tag";
 import {LikeButton} from "../../custom-button/like-button/like-button";
 
 import styles from './post-item.module.scss';
+import {Paths} from "../../../paths";
 
 const {Paragraph} = Typography;
 
@@ -56,7 +57,7 @@ const PostItem = ({post}:any) => {
               </Flex>
             </Space>
 
-            <Link style={{display: "contents"}} to={`/forum/${post.url}`}>
+            <Link style={{display: "contents"}} to={`${Paths.forum}/${post.url}`}>
               {`${process.env.REACT_APP_URL}${post.image}` ?
                 <img
                   className={styles.img}

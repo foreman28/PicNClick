@@ -66,9 +66,9 @@ const all = async (req, res) => {
           _count: orderDirection,
         },
       };
-    }
 
-    posts = await prisma.forumPost.findMany(findManyOptions);
+      posts = await prisma.forumPost.findMany(findManyOptions);
+    }
 
     res.status(200).json(posts);
   } catch (error) {

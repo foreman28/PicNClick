@@ -42,19 +42,19 @@
 
   transition: color 0.2s ease-in;
 
-  &:before {
-    transition: background 0.2s ease-in;
-    position: absolute;
-    content: '';
-    left: 5px;
-    top: 16px;
-    width: 5px;
-    height: 5px;
-    border-radius: 999px;
-    background: var(--black-1);
-  }
-  &:hover:before {
-    background: var(--accent-2);
-  }
+  //&:before {
+  //  transition: background 0.2s ease-in;
+  //  position: absolute;
+  //  content: '';
+  //  left: 5px;
+  //  top: 16px;
+  //  width: 5px;
+  //  height: 5px;
+  //  border-radius: 999px;
+  //  background: var(--black-1);
+  //}
+  //&:hover:before {
+  //  background: var(--accent-2);
+  //}
   
 }
