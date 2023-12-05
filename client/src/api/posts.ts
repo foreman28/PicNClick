@@ -5,10 +5,12 @@ interface filters {
   page?: number;
   pageSize?: number;
   q?: string;
-
+  
   filters?: {
-    //
-  }
+    // minLikes?: number;
+    sort?: string;
+    order?: 'asc' | 'desc';
+  };
 }
 
 export const postsApi = api.injectEndpoints({

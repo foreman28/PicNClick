@@ -8,14 +8,13 @@ const {auth} = require("../middleware/auth");
  * @access Private
  */
 const all = async (req, res) => {
+  let posts;
   try {
-    const {q: search, page, pageSize} = req.body;
-    console.log(req.body)
-    let posts;
+    const { q: search, page, pageSize, filters } = req.body;
 
     const findManyOptions = {
       include: {
-        author: true, // edit
+        author: true,
         likes: true,
         tags: true,
       },
@@ -27,51 +26,28 @@ const all = async (req, res) => {
     }
 
     if (search) {
-      // console.log(search)
       if (search.startsWith('@')) {
+        const tagSearch = search.substring(1);
         posts = await prisma.forumPost.findMany({
           ...findManyOptions,
           where: {
             tags: {
               some: {
-
                 OR: [
-                  {
-                    url: {
-                      contains: search.substring(1), // Remove '@' symbol
-                      mode: 'insensitive',
-                    },
-
-                  },
-                  {
-                    name: {
-                      contains: search.substring(1), // Remove '@' symbol
-                      mode: 'insensitive',
-                    },
-                  }
-                ]
+                  { url: { contains: tagSearch, mode: 'insensitive' } },
+                  { name: { contains: tagSearch, mode: 'insensitive' } },
+                ],
               },
             },
           },
         });
       } else {
-        // Search by title or description
         posts = await prisma.forumPost.findMany({
           ...findManyOptions,
           where: {
             OR: [
-              {
-                title: {
-                  contains: search,
-                  mode: 'insensitive',
-                },
-              },
-              {
-                description: {
-                  contains: search,
-                  mode: 'insensitive',
-                },
-              },
+              { title: { contains: search, mode: 'insensitive' } },
+              { description: { contains: search, mode: 'insensitive' } },
             ],
           },
         });
@@ -80,12 +56,27 @@ const all = async (req, res) => {
       posts = await prisma.forumPost.findMany(findManyOptions);
     }
 
+    // Check if there are sorting filters
+    if (filters && filters.sort && filters.order) {
+      const orderByField = filters.sort;
+      const orderDirection = filters.order.toLowerCase();
+
+      findManyOptions.orderBy = {
+        [orderByField]: {
+          _count: orderDirection,
+        },
+      };
+    }
+
+    posts = await prisma.forumPost.findMany(findManyOptions);
+
     res.status(200).json(posts);
   } catch (error) {
     console.error(error);
-    res.status(500).json({message: 'Не удалось получить посты'});
+    res.status(500).json({ message: 'Не удалось получить посты' });
   }
 };
+
 
 /**
  * @route POST /api/posts/add

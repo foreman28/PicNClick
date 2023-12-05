@@ -23,6 +23,10 @@ export const FeedPosts = () => {
     page: currentPage,
     pageSize: pageSize,
     q: searchS,
+    filters: {
+      sort: 'likes',
+      order: 'desc'
+    }
   });
   
   const {data: allPosts, isLoading: allIsLoading} = useGetAllPostsQuery({
@@ -36,7 +40,7 @@ export const FeedPosts = () => {
   useEffect(() => {
     setCurrentPage(() => parseInt(searchParams.get('page')) || 1);
   }, [searchParams]);
-
+  
   
   const handlePageChange = useCallback(
     (page: any) => {

@@ -1,41 +1,90 @@
 import {Flex, Layout} from "antd";
 
-import styles from "./footer.module.css";
+import styles from "./footer.module.scss";
+import {Link} from "react-router-dom";
+
 export const Footer = () => {
-
-
+  
+  
   return (
     <Layout.Footer className={styles.footer} style={{height: 'auto'}}>
       <Layout className={styles.footer_container}>
-        <Flex vertical>
-          <p>1</p>
-          <p>2</p>
-          <p>3</p>
-          <p>4</p>
-          <p>5</p>
-          <p>6</p>
-          <p>7</p>
-          <p>2</p>
-          <p>3</p>
-          <p>4</p>
-          <p>5</p>
-          <p>6</p>
-          <p>7</p>
-          <p>2</p>
-          <p>3</p>
-          <p>4</p>
-          <p>5</p>
-          <p>6</p>
-          <p>7</p>
-          <p>2</p>
-          <p>3</p>
-          <p>4</p>
-          <p>5</p>
-          <p>6</p>
-          <p>7</p>
+        <Flex gap={64} justify={"space-between"} style={{width: '100%'}}>
+          <Flex gap={24} className={styles.logo_content} align={"center"}>
+            <Link to="/" className={styles.logo}>
+              <img srcSet={`${process.env.PUBLIC_URL}/logo.svg`} width={48} height={48} alt={"PicNClick"}/>
+            </Link>
+            <Link to="/">
+              <span>Pic<span>&</span>Click</span>
+            </Link>
+          </Flex>
+          
+          <Flex gap={48}>
+            <Flex vertical>
+              <h5 className={styles.footer__title}>Форум</h5>
+              <Flex vertical className={styles.footer__items}>
+                <ul>
+                  <li><Link to={''} className={styles.footer__item}>post13</Link></li>
+                  <li><Link to={''} className={styles.footer__item}>post21</Link></li>
+                  <li><Link to={''} className={styles.footer__item}>post34</Link></li>
+                  <li><Link to={''} className={styles.footer__item}>post41</Link></li>
+                </ul>
+              </Flex>
+            </Flex>
+            <Flex vertical>
+              <h5 className={styles.footer__title}>Теги</h5>
+              <Flex vertical className={styles.footer__items}>
+                <ul>
+                  <li><Link to={''} className={styles.footer__item}>#asd</Link></li>
+                  <li><Link to={''} className={styles.footer__item}>#123354</Link></li>
+                  <li><Link to={''} className={styles.footer__item}>#gnmbhu</Link></li>
+                  <li><Link to={''} className={styles.footer__item}>#fnbghft</Link></li>
+                </ul>
+              </Flex>
+            </Flex>
+            <Flex vertical>
+              <h5 className={styles.footer__title}>Популярное</h5>
+              <Flex vertical className={styles.footer__items}>
+                <ul>
+                  <li><Link to={''} className={styles.footer__item}>post321</Link></li>
+                  <li><Link to={''} className={styles.footer__item}>post322</Link></li>
+                  <li><Link to={''} className={styles.footer__item}>post323</Link></li>
+                  <li><Link to={''} className={styles.footer__item}>post324</Link></li>
+                </ul>
+              </Flex>
+            </Flex>
+            <Flex vertical>
+              <h5 className={styles.footer__title}>Новое</h5>
+              <Flex vertical className={styles.footer__items}>
+                <ul>
+                  <li><Link to={''} className={styles.footer__item}>post161</Link></li>
+                  <li><Link to={''} className={styles.footer__item}>post827</Link></li>
+                  <li><Link to={''} className={styles.footer__item}>post663</Link></li>
+                  <li><Link to={''} className={styles.footer__item}>post567</Link></li>
+                </ul>
+              </Flex>
+            </Flex>
+          </Flex>
+          
+          <Flex gap={24} className={styles.info__content} align={"center"} vertical>
+            <Flex className={styles.social_networks} align={"center"}>
+              <Link to={''} className={styles.social_network}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g id="github" clipPath="url(#clip0_248_4707)">
+                    <path
+                      d="M16 22.0001V18.1301C16.0375 17.6532 15.9731 17.1739 15.811 16.7239C15.6489 16.2738 15.3929 15.8635 15.06 15.5201C18.2 15.1701 21.5 13.9801 21.5 8.52006C21.4997 7.12389 20.9627 5.78126 20 4.77006C20.4559 3.54857 20.4236 2.19841 19.91 1.00006C19.91 1.00006 18.73 0.65006 16 2.48006C13.708 1.85888 11.292 1.85888 9 2.48006C6.27 0.65006 5.09 1.00006 5.09 1.00006C4.57638 2.19841 4.54414 3.54857 5 4.77006C4.03013 5.78876 3.49252 7.14352 3.5 8.55006C3.5 13.9701 6.8 15.1601 9.94 15.5501C9.611 15.89 9.35726 16.2955 9.19531 16.74C9.03335 17.1845 8.96681 17.6581 9 18.1301V22.0001M9 19.0001C4 20.5001 4 16.5001 2 16.0001L9 19.0001Z"
+                      stroke="#808080" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </g>
+                </svg>
+              </Link>
+            </Flex>
+            
+            <span className={styles.info} >2014-2023 © Pic&Click</span>
+          </Flex>
+        
         </Flex>
       </Layout>
-
+    
     </Layout.Footer>
   );
 };
