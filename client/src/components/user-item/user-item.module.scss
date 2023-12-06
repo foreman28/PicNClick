@@ -1,0 +1,60 @@
+.item {
+  border-radius: 5px;
+  border: 1px solid var(--white-2);
+  background: var(--white-1);
+
+  box-shadow: 2px 1px 5px 0 rgba(0, 0, 0, 0.15);
+
+  height: 100%;
+
+  //margin-block-end: -72px !important;
+  display: flex;
+}
+
+.title {
+  color: var(--black-1);
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.8px;
+
+  display: block;
+  margin-bottom: 4px;
+
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.description {
+  color: rgba(0, 0, 0, 0.45);
+  margin-bottom: 8px;
+  min-height: 66px;
+  //height: 100%;
+}
+
+.posts {
+  margin-top: auto;
+}
+
+.tags {
+  overflow: hidden;
+  height: auto;
+}
+
+.tag {
+  //color: var(--black-2);
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  //letter-spacing: 0.2px;
+  padding: 4px 8px;
+
+  margin-inline-end: 0;
+}

@@ -6,7 +6,7 @@ import CountUp from 'react-countup';
 
 import styles from './like-button.module.scss';
 import {useEffect} from "react";
-import {useAppSelector} from "../../../app/hooks";
+import {useAppSelector} from "../../../hooks/hooks";
 
 
 type Props = {

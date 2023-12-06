@@ -1,4 +1,4 @@
-import {User} from "@prisma/client";
+import {ForumPost, User} from "@prisma/client";
 import {api} from "./apiConfig";
 
 export type UserData = Omit<User, "id">;
@@ -6,6 +6,12 @@ type ResponseLoginData = User & { token: string };
 
 export const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
+    getAllUsers: builder.query<User[], void>({
+      query: () => ({
+        url: `/user/all`,
+        method: "GET",
+      }),
+    }),
     getUser: builder.query<User, any>({
       query: (user) => ({
         url: `/user/profile/${user.username}`,
@@ -35,9 +41,9 @@ export const authApi = api.injectEndpoints({
   }),
 });
 
-export const {useGetUserQuery, useRegisterMutation, useLoginMutation, useCurrentQuery} =
+export const {useGetAllUsersQuery, useGetUserQuery, useRegisterMutation, useLoginMutation, useCurrentQuery} =
   authApi;
 
 export const {
-  endpoints: {getUser, login, register, current},
+  endpoints: {getAllUsers, getUser, login, register, current},
 } = authApi;

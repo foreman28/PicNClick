@@ -6,7 +6,28 @@ const TOKEN_EXPIRATION = '1d';
 
 
 /**
- * @route GET /api/user/profile/:username
+ * @route GET /api/user/all
+ * @desс Users
+ * @access Public
+ */
+const allUser = async (req, res) => {
+  try {
+    const users = await prisma.user.findMany({
+      include: {
+        posts: true,
+        Comment: true,
+        Likes: true,
+      },
+    });
+
+    res.status(200).json(users);
+  } catch {
+    res.status(500).json({message: "Не удалось получить пользователя"});
+  }
+}
+
+/**
+ * @route GET /api/user/:username
  * @desс User
  * @access Public
  */
@@ -142,6 +163,7 @@ const current = async (req, res) => {
 }
 
 module.exports = {
+  allUser,
   user,
   login,
   register,

@@ -3,7 +3,7 @@ import {Flex, Typography} from "antd";
 
 import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
 import {useLocation, useNavigate} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../app/hooks";
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {selectUser} from "../../features/auth/authSlice";
 import {useGetUserQuery} from "../../api/auth";
 import {Paths} from "../../paths";
@@ -19,25 +19,20 @@ export const Profile = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const user = useAppSelector(selectUser);
   const location = useLocation()
   const navigate = useNavigate()
   const pathSnippets1 = location.pathname.split('/').filter((i) => i);
+
   let username: string = '';
-  if (pathSnippets1[0] == Paths.profile) {
-    username = pathSnippets1[1];
+
+  if (pathSnippets1[1] == undefined && user) {
+    username = user.username;
+  } else {
+    username = pathSnippets1[1]
   }
 
-  const user = useAppSelector(selectUser);
-  const dispatch = useAppDispatch();
-
-  if (username === '' && user) {
-    username = user.username
-  }
-  else {
-    navigate(Paths.login)
-  }
-
-  const {data: getUser, isLoading} = useGetUserQuery({username: username});
+  const {data, isLoading} = useGetUserQuery({username: username});
 
   return (
     <ProfileLayout>
@@ -49,7 +44,7 @@ export const Profile = () => {
           <p>Loading...</p>
         ) : (
           <>
-            <span>{getUser && getUser.username}</span>
+            <span>{data && data.username}</span>
           </>
         )}
       </Flex>

@@ -6,7 +6,7 @@ import CountUp from 'react-countup';
 
 import styles from './comment-button.module.scss';
 import {useEffect} from "react";
-import {useAppSelector} from "../../../app/hooks";
+import {useAppSelector} from "../../../hooks/hooks";
 import {Link, useNavigate} from "react-router-dom";
 import {Paths} from "../../../paths";
 
