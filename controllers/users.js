@@ -6,6 +6,32 @@ const TOKEN_EXPIRATION = '1d';
 
 
 /**
+ * @route GET /api/user/profile/:username
+ * @desс User
+ * @access Public
+ */
+const user = async (req, res) => {
+  const {username} = req.params;
+  console.log(username)
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        username: username,
+      },
+      include: {
+        posts: true,
+        Comment: true,
+        Likes: true,
+      },
+    });
+
+    res.status(200).json(user);
+  } catch {
+    res.status(500).json({message: "Не удалось получить пользователя"});
+  }
+}
+
+/**
  * @route POST /api/user/login
  * @desс Логин
  * @access Public
@@ -44,7 +70,6 @@ const login = async (req, res) => {
 }
 
 /**
- * 
  * @route POST /api/user/register
  * @desc Регистрация
  * @access Public
@@ -85,7 +110,8 @@ const register = async (req, res, next) => {
       data: {
         email,
         username,
-        password: hashedPassword
+        password: hashedPassword,
+        avatarURL: 'uploads/stubs/stubs-avatar.jpg'
       }
     });
 
@@ -107,7 +133,6 @@ const register = async (req, res, next) => {
 }
 
 /**
- * 
  * @route GET /api/user/current
  * @desc Текущий пользователь
  * @access Private
@@ -117,6 +142,7 @@ const current = async (req, res) => {
 }
 
 module.exports = {
+  user,
   login,
   register,
   current

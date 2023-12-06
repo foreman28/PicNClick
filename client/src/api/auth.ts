@@ -6,6 +6,12 @@ type ResponseLoginData = User & { token: string };
 
 export const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
+    getUser: builder.query<User, any>({
+      query: (user) => ({
+        url: `/user/profile/${user.username}`,
+        method: "GET",
+      }),
+    }),
     login: builder.mutation<ResponseLoginData, UserData>({
       query: (userData) => ({
         url: "/user/login",
@@ -29,9 +35,9 @@ export const authApi = api.injectEndpoints({
   }),
 });
 
-export const {useRegisterMutation, useLoginMutation, useCurrentQuery} =
+export const {useGetUserQuery, useRegisterMutation, useLoginMutation, useCurrentQuery} =
   authApi;
 
 export const {
-  endpoints: {login, register, current},
+  endpoints: {getUser, login, register, current},
 } = authApi;

@@ -3,7 +3,14 @@ import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {selectUser} from "../../features/auth/authSlice";
 
-import {EditOutlined, SearchOutlined, TagOutlined, UnorderedListOutlined, UserOutlined} from '@ant-design/icons';
+import {
+  EditOutlined,
+  ProfileFilled, ProfileOutlined,
+  SearchOutlined,
+  TagOutlined,
+  UnorderedListOutlined,
+  UserOutlined
+} from '@ant-design/icons';
 
 import {Paths} from "../../paths";
 
@@ -49,6 +56,11 @@ export const NavigationBar = () => {
           {
             user ?
               <>
+                <Link to={Paths.profile} className={styles.sidebar_link + ' ' + (currentPath === Paths.profile ? styles.active : '')}>
+                  <ProfileOutlined style={{fontSize: '18px'}} />
+                  <span className={styles.sidebar_item}>Профиль</span>
+                </Link>
+
                 <Link to={Paths.addPost} className={styles.sidebar_link + ' ' + (currentPath === Paths.addPost ? styles.active : '')}>
                   <EditOutlined style={{fontSize: '18px'}} />
                   <span className={styles.sidebar_item}>Добавить</span>

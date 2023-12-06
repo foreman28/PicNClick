@@ -1,27 +1,20 @@
 import {Flex, Layout, List} from "antd";
-import {Link} from "react-router-dom";
+import {Link, } from "react-router-dom";
 
 import {LinkOutlined, StarOutlined} from '@ant-design/icons';
 
-import styles from "./sidebar.module.scss";
 import {useGetAllPostsQuery} from "../../api/posts";
 import {LikeButton} from "../custom-button/like-button/like-button";
 import {Paths} from "../../paths";
 import {CommentButton} from "../custom-button/comment-button/comment-button";
 
+import styles from "./sidebar.module.scss";
 export const Sidebar = () => {
-
-  // const currentPath  = window.location.pathname;
-
-  // const user = useSelector(selectUser);
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
   // const onLogoutClick = () => {
   //   dispatch(logout());
   //   localStorage.removeItem("token");
   //   navigate("/login");
   // };
-
 
   const {data: likesPosts} = useGetAllPostsQuery({
     filters: {
@@ -61,7 +54,7 @@ export const Sidebar = () => {
                   </Link>
                   <Flex gap={16}>
                     <LikeButton post={item}/>
-                    <CommentButton post={item}/>
+                    {/*<CommentButton post={item}/>*/}
                   </Flex>
                 </Flex>
               </List.Item>
@@ -86,7 +79,7 @@ export const Sidebar = () => {
                     <span>{item.title}</span>
                   </Link>
                   <Flex gap={16}>
-                    <LikeButton post={item}/>
+                    {/*<LikeButton post={item}/>*/}
                     <CommentButton post={item}/>
                   </Flex>
                 </Flex>

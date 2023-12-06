@@ -5,7 +5,7 @@ import {Footer} from "../footer/footer";
 import {NavigationBar} from "../navigationBar/navigationBar";
 import {Sidebar} from "../sidebar/sidebar";
 
-import styles from "./layout.module.css";
+import styles from "./layout.module.scss";
 
 export const Layout = ({children}: any) => {
   return (

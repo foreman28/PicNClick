@@ -1,12 +1,17 @@
-import React, {useEffect} from 'react';
-import {Flex, List} from "antd";
-import {Layout} from "../../components/layout/layout";
+import {useEffect} from 'react';
+import {Flex, Typography} from "antd";
+
+import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
+import {useLocation, useNavigate} from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "../../app/hooks";
+import {selectUser} from "../../features/auth/authSlice";
+import {useGetUserQuery} from "../../api/auth";
+import {Paths} from "../../paths";
+import {ProfileLayout} from "../../components/layout/profile-layout/profile-layout";
 
 import styles from "./Profile.module.scss";
-// import FeedPosts from "../../components/post-item/post-item";
-// import {useDispatch, useSelector} from "react-redux";
-// import {useGetAllPostsQuery} from "../../api/posts";
-import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
+
+const {Title, Text} = Typography
 
 export const Profile = () => {
 
@@ -14,20 +19,40 @@ export const Profile = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const location = useLocation()
+  const navigate = useNavigate()
+  const pathSnippets1 = location.pathname.split('/').filter((i) => i);
+  let username: string = '';
+  if (pathSnippets1[0] == Paths.profile) {
+    username = pathSnippets1[1];
+  }
+
+  const user = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
+
+  if (username === '' && user) {
+    username = user.username
+  }
+  else {
+    navigate(Paths.login)
+  }
+
+  const {data: getUser, isLoading} = useGetUserQuery({username: username});
+
   return (
-    <Layout>
+    <ProfileLayout>
       <Flex gap={12} vertical>
         <CustomBreadcrumb/>
-        {/*<Title level={1}>Пользователи</Title>*/}
+        <Title level={4}>Профиль</Title>
 
-        {/*{isLoading ? (*/}
-        {/*  <p>Loading...</p>*/}
-        {/*) : (*/}
-        {/*  <>*/}
-        {/*    1*/}
-        {/*  </>*/}
-        {/*)}*/}
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <>
+            <span>{getUser && getUser.username}</span>
+          </>
+        )}
       </Flex>
-    </Layout>
+    </ProfileLayout>
   );
 };
