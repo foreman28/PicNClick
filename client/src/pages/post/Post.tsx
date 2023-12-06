@@ -18,12 +18,12 @@ export const Post = () => {
   const {id}: any = useParams();
   const {data: post, isLoading}: any = useGetPostQuery(id);
   
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [post]);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, [post]);
   
   // console.log(post)
-  
+
   const modules = {
     toolbar: [
       [{'header': [1, 2, 3, false]}],
@@ -65,7 +65,7 @@ export const Post = () => {
             className={"ql-editor " + styles.content}
           ></div>
           
-          <Flex vertical gap={12} className={styles.comments}>
+          <Flex vertical gap={12} className={styles.comments} id={'comments'}>
             <Title>Сообщения:</Title>
             <Form>
               <CustomTextarea

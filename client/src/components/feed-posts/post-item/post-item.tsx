@@ -12,6 +12,7 @@ import {LikeButton} from "../../custom-button/like-button/like-button";
 
 import styles from './post-item.module.scss';
 import {Paths} from "../../../paths";
+import {CommentButton} from "../../custom-button/comment-button/comment-button";
 
 const {Paragraph} = Typography;
 
@@ -30,14 +31,13 @@ const PostItem = ({post}:any) => {
       key={post.id}
       actions={[
         <Space>
-          <MessageOutlined key="comments"/>
-          <span>{post.comments ? post.comments.length : 0}</span>
+          <CommentButton post={post} />
         </Space>,
         <Space>
-          <LikeButton key="like" post={post} />
+          <LikeButton post={post} />
         </Space>,
         <Space>
-          <ClockCircleOutlined key="clock"/>
+          <ClockCircleOutlined />
           <span> {formattedTimestamp}</span>
         </Space>,
       ]}

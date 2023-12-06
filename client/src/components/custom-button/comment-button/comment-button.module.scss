@@ -1,0 +1,33 @@
+
+.btn {
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--accent-2);
+  }
+}
+
+.btn-active {
+  color: var(--accent-2);
+}
+
+//@keyframes rotate-in-2-tl-ccw {
+//  0% {
+//    transform: rotate(45deg);
+//    transform-origin: 0 0;
+//    opacity: 0;
+//  }
+//  100% {
+//    transform: rotate(0);
+//    transform-origin: 0 0;
+//    opacity: 1;
+//  }
+//}
+//
+//.like_animate {
+//  animation: rotate-in-2-tl-ccw 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+//}
+
+.link {
+  color: var(--black-2);
+}
