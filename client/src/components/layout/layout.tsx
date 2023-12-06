@@ -2,8 +2,8 @@ import {Flex, Layout as AntLayout} from "antd";
 
 import {Header} from "../header/header";
 import {Footer} from "../footer/footer";
+import {NavigationBar} from "../navigationBar/navigationBar";
 import {Sidebar} from "../sidebar/sidebar";
-import {Sidebar2} from "../sidebar2/sidebar2";
 
 import styles from "./layout.module.css";
 
@@ -12,13 +12,13 @@ export const Layout = ({children}: any) => {
     <>
       <Header/>
       <Flex justify={"space-between"} style={{height: '100%'}}>
-        <Sidebar/>
+        <NavigationBar/>
 
         <AntLayout.Content className={styles.main}>
           {children}
         </AntLayout.Content>
 
-        <Sidebar2/>
+        <Sidebar/>
       </Flex>
       <Footer/>
     </>

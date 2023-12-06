@@ -1,63 +1,101 @@
-import {Flex, Layout} from "antd";
-import {useSelector} from "react-redux";
+import {Flex, Layout, List} from "antd";
 import {Link} from "react-router-dom";
-import {selectUser} from "../../features/auth/authSlice";
 
-import {EditOutlined, SearchOutlined, TagOutlined, UnorderedListOutlined, UserOutlined} from '@ant-design/icons';
-
-import {Paths} from "../../paths";
+import {LinkOutlined, StarOutlined} from '@ant-design/icons';
 
 import styles from "./sidebar.module.scss";
+import {useGetAllPostsQuery} from "../../api/posts";
+import {LikeButton} from "../custom-button/like-button/like-button";
+import {Paths} from "../../paths";
+import {CommentButton} from "../custom-button/comment-button/comment-button";
 
 export const Sidebar = () => {
 
-  const currentPath = window.location.pathname;
+  // const currentPath  = window.location.pathname;
 
-  const user = useSelector(selectUser);
+  // const user = useSelector(selectUser);
+  // const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // const onLogoutClick = () => {
+  //   dispatch(logout());
+  //   localStorage.removeItem("token");
+  //   navigate("/login");
+  // };
 
-  return ( // width={"max(310px, calc(100vw - (var(--white-container) + var(--white-sidebar))))"}
-    <Layout.Sider className={styles.sidebar} width={"var(--white-sidebar)"}>
-      <Flex style={{position: 'sticky', top:'70px'}} className={styles.sidebar_container} gap={"large"} vertical>
+
+  const {data: likesPosts} = useGetAllPostsQuery({
+    filters: {
+      sort: 'likes',
+      order: 'desc'
+    }
+  });
+
+  const {data: commentsPosts} = useGetAllPostsQuery({
+    filters: {
+      sort: 'comments',
+      order: 'desc'
+    }
+  });
+
+  return (
+    <Layout.Sider className={styles.sidebar} width={"var(--white-navigationBar)"}>
+      <Flex style={{
+        position: 'sticky',
+        top: '82px'
+      }} className={styles.sidebar_container} gap={"middle"} vertical>
 
         <Flex gap={"small"} vertical>
-          <span className={styles.sidebar_title}>меню</span>
-          <Link to={Paths.search} className={styles.sidebar_link + ' ' + (currentPath === Paths.search ? styles.active : '')}>
-            <SearchOutlined style={{fontSize: '18px'}} />
-            <span className={styles.sidebar_item}>Поиск</span>
-          </Link>
-
-          <Link to={`${Paths.forum}`} className={styles.sidebar_link + ' ' + (currentPath === Paths.forum ? styles.active : '')}>
-            <UnorderedListOutlined style={{fontSize: '18px'}} />
-            <span className={styles.sidebar_item}>Форум</span>
-          </Link>
-
-          <Link to={Paths.tags} className={styles.sidebar_link + ' ' + (currentPath === Paths.tags ? styles.active : '')}>
-            <TagOutlined style={{fontSize: '18px'}} />
-            <span className={styles.sidebar_item}>Теги</span>
-          </Link>
-
-          <Link to={Paths.users} className={styles.sidebar_link + ' ' + (currentPath === Paths.users ? styles.active : '')}>
-            <UserOutlined style={{fontSize: '18px'}} />
-            <span className={styles.sidebar_item}>Пользователи</span>
-          </Link>
-
+          <Flex gap={"small"} align={"center"}>
+            <StarOutlined style={{fontSize: '18px'}}/>
+            <span className={styles.sidebar_title}>Стоит прочитать</span>
+          </Flex>
+          <List
+            size="small"
+            dataSource={likesPosts?.slice(0, 6)}
+            className={styles.sidebar_list}
+            renderItem={(item) =>
+              <List.Item className={styles.sidebar_item}>
+                <Flex justify={"space-between"} style={{width: '100%'}}>
+                  <Link to={`${Paths.forum}/${item.url}`} className={styles.sidebar_link}>
+                    <span>{item.title}</span>
+                  </Link>
+                  <Flex gap={16}>
+                    <LikeButton post={item}/>
+                    <CommentButton post={item}/>
+                  </Flex>
+                </Flex>
+              </List.Item>
+            }
+            locale={{emptyText: 'Пусто'}}
+          />
         </Flex>
 
         <Flex gap={"small"} vertical>
-          <span className={styles.sidebar_title}>ПЕРСОНАЛЬНЫЙ НАВИГАТОР</span>
-
-          {
-            user ?
-              <>
-                <Link to={Paths.addPost} className={styles.sidebar_link + ' ' + (currentPath === Paths.addPost ? styles.active : '')}>
-                  <EditOutlined style={{fontSize: '18px'}} />
-                  <span className={styles.sidebar_item}>Добавить</span>
-                </Link>
-              </>
-              :
-              ''
-          }
+          <Flex gap={"small"} align={"center"}>
+            <LinkOutlined style={{fontSize: '18px'}}/>
+            <span className={styles.sidebar_title}>Рекомендуемые ссылки</span>
+          </Flex>
+          <List
+            size="small"
+            dataSource={commentsPosts?.slice(0, 6)}
+            className={styles.sidebar_list}
+            renderItem={(item) =>
+              <List.Item className={styles.sidebar_item}>
+                <Flex justify={"space-between"} style={{width: '100%'}}>
+                  <Link to={`${Paths.forum}/${item.url}`} className={styles.sidebar_link}>
+                    <span>{item.title}</span>
+                  </Link>
+                  <Flex gap={16}>
+                    <LikeButton post={item}/>
+                    <CommentButton post={item}/>
+                  </Flex>
+                </Flex>
+              </List.Item>
+            }
+            locale={{emptyText: 'Пусто'}}
+          />
         </Flex>
+
       </Flex>
     </Layout.Sider>
   );

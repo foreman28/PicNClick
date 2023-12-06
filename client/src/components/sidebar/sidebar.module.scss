@@ -1,81 +1,60 @@
 .sidebar {
-  background-color: var(--white-1);
-  position: relative;
+  padding: 12px 12px 12px 0;
   width: 100%;
+}
 
-  &>div{
-    height: 100%;
-    //position: sticky;
-    //top: 0; // headerHeight
-  }
+.sidebar > div {
+  height: 100%;
 }
 
 .sidebar_container {
-  /*width: 100%;*/
-  /*max-width: var(--white-container);*/
-  /*margin-inline: auto;*/
 
-  padding: 40px 0;
+  padding: 20px 20px;
   background-color: var(--white-1);
+  border-radius: 5px;
 }
 
 
-.sidebar_search {
-  padding: 0 50px;
+.sidebar_list {
+  border-top: 1px solid var(--black-2);
 }
 
 .sidebar_title {
-  color: var(--black-2);
+  color: var(--black-1);
   font-family: var(--font-family);
-  font-size: 12px;
+  font-size: 13px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   line-height: normal;
   //letter-spacing: 0.02rem;
-  text-transform: uppercase;
+}
 
-  padding: 0 50px;
+.sidebar_item {
+  position: relative;
 }
 
 .sidebar_link {
-  padding: 12px 50px;
+  color: initial;
+  font-family: var(--font-family);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
 
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  gap: 12px;
+  transition: color 0.2s ease-in;
 
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: var(--white-2);
-  }
-
-  & span {
-    color: var(--black-1);
-    font-family: var(--font-family);
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    //letter-spacing: 0.02rem;
-  }
-
-  &.active {
-    position: relative;
-    background-color: var(--accent-2-1);
-
-    &:before {
-      content: '';
-      position: absolute;
-      left: 0;
-      height: 100%;
-      width: 5px;
-      background-color: var(--accent-2);
-    }
-
-    & span {
-      font-weight: 600;
-    }
-  }
+  //&:before {
+  //  transition: background 0.2s ease-in;
+  //  position: absolute;
+  //  content: '';
+  //  left: 5px;
+  //  top: 16px;
+  //  width: 5px;
+  //  height: 5px;
+  //  border-radius: 999px;
+  //  background: var(--black-1);
+  //}
+  //&:hover:before {
+  //  background: var(--accent-2);
+  //}
+  
 }
