@@ -17,11 +17,11 @@ const {Title} = Typography;
 export const Post = () => {
   const {id}: any = useParams();
   const {data: post, isLoading}: any = useGetPostQuery(id);
-  
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, [post]);
-  
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [post]);
+
   // console.log(post)
 
   const modules = {
@@ -30,16 +30,16 @@ export const Post = () => {
       ['bold', 'italic', 'underline', 'strike', 'blockquote'],
     ],
   };
-  
+
   const formats = [
     'header',
     'bold', 'italic', 'underline', 'strike', 'blockquote',
   ];
-  
+
   return (<Layout>
     <Flex gap={12} vertical>
       <CustomBreadcrumb/>
-      
+
       {isLoading ? (<p></p>) : post ? (
         <>
           {`${process.env.REACT_APP_URL}${post.image}` ? (
@@ -54,17 +54,17 @@ export const Post = () => {
               className={styles.img}
             />)
           }
-          
+
           <h1 className={styles.title}>{post.title}</h1>
-          
+
           <CustomTag post={post}/>
-          
-          
+
+
           <div
             dangerouslySetInnerHTML={{__html: post.content}}
             className={"ql-editor " + styles.content}
           ></div>
-          
+
           <Flex vertical gap={12} className={styles.comments} id={'comments'}>
             <Title>Сообщения:</Title>
             <Form>
@@ -78,7 +78,7 @@ export const Post = () => {
                 Добавить комментарий
               </CustomButton>
             </Form>
-            
+
             {post.comments && (
               <List
                 itemLayout="horizontal"

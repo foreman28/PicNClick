@@ -15,8 +15,9 @@ const CustomBreadcrumb = () => {
         search: 'Поиск',
         tags: 'Теги',
         users: 'Пользователи',
+        profile: 'Профиль',
       };
-      
+
       const pathKey = _.toLowerCase();
       const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
       

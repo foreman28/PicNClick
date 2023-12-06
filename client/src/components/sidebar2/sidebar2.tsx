@@ -7,6 +7,7 @@ import styles from "./sidebar2.module.scss";
 import {useGetAllPostsQuery} from "../../api/posts";
 import {LikeButton} from "../custom-button/like-button/like-button";
 import {Paths} from "../../paths";
+import {CommentButton} from "../custom-button/comment-button/comment-button";
 
 export const Sidebar2 = () => {
   
@@ -28,10 +29,17 @@ export const Sidebar2 = () => {
     'Man charged over missing wedding girl.',
     'Los Angeles battles huge wildfires.',
   ];
-  
-  const {data: posts, isLoading} = useGetAllPostsQuery({
+
+  const {data: likesPosts} = useGetAllPostsQuery({
     filters: {
       sort: 'likes',
+      order: 'desc'
+    }
+  });
+
+  const {data: commentsPosts} = useGetAllPostsQuery({
+    filters: {
+      sort: 'comments',
       order: 'desc'
     }
   });
@@ -50,7 +58,7 @@ export const Sidebar2 = () => {
           </Flex>
           <List
             size="small"
-            dataSource={posts?.slice(0, 6)}
+            dataSource={likesPosts?.slice(0, 6)}
             className={styles.sidebar_list}
             renderItem={(item) =>
               <List.Item className={styles.sidebar_item}>
@@ -58,7 +66,10 @@ export const Sidebar2 = () => {
                   <Link to={`${Paths.forum}/${item.url}`} className={styles.sidebar_link}>
                     <span>{item.title}</span>
                   </Link>
-                  <LikeButton post={item}/>
+                  <Flex gap={16}>
+                    <LikeButton post={item}/>
+                    <CommentButton post={item}/>
+                  </Flex>
                 </Flex>
               </List.Item>
             }
@@ -73,11 +84,19 @@ export const Sidebar2 = () => {
           </Flex>
           <List
             size="small"
-            dataSource={data}
+            dataSource={commentsPosts?.slice(0, 6)}
             className={styles.sidebar_list}
             renderItem={(item) =>
               <List.Item className={styles.sidebar_item}>
-                <Link to={'/'} className={styles.sidebar_link}>{item}</Link>
+                <Flex justify={"space-between"} style={{width: '100%'}}>
+                  <Link to={`${Paths.forum}/${item.url}`} className={styles.sidebar_link}>
+                    <span>{item.title}</span>
+                  </Link>
+                  <Flex gap={16}>
+                    <LikeButton post={item}/>
+                    <CommentButton post={item}/>
+                  </Flex>
+                </Flex>
               </List.Item>
             }
             locale={{emptyText: 'Пусто'}}

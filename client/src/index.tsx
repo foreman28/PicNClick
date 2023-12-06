@@ -29,6 +29,7 @@ import ruRU from 'antd/lib/locale/ru_RU';
 
 import {theme} from "./themes/main";
 import "./index.scss";
+import {Profile} from "./pages/profile/Profile";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,11 @@ const router = createBrowserRouter([
   },
 
   {
+    path: `${Paths.forum}/:id`,
+    element: <Post/>,
+  },
+
+  {
     path: Paths.tags,
     element: <Tags/>,
   },
@@ -57,9 +63,10 @@ const router = createBrowserRouter([
     path: Paths.users,
     element: <Users/>,
   },
+
   {
-    path: `${Paths.forum}/:id`,
-    element: <Post/>,
+    path: `${Paths.profile}/:id`,
+    element: <Profile/>,
   },
 
   {

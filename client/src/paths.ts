@@ -10,6 +10,8 @@ export const Paths = {
   forum: '/forum',
   addPost: '/forum/add-post',
 
+  profile: '/profile',
+
   tags: '/tags',
   users: '/users',
 } as const;
