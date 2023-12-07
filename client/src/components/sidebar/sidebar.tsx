@@ -9,6 +9,7 @@ import {Paths} from "../../paths";
 import {CommentButton} from "../custom-button/comment-button/comment-button";
 
 import styles from "./sidebar.module.scss";
+import Paragraph from "antd/es/typography/Paragraph";
 export const Sidebar = () => {
   // const onLogoutClick = () => {
   //   dispatch(logout());
@@ -40,7 +41,7 @@ export const Sidebar = () => {
         <Flex gap={"small"} vertical>
           <Flex gap={"small"} align={"center"}>
             <StarOutlined style={{fontSize: '18px'}}/>
-            <span className={styles.sidebar_title}>Стоит прочитать</span>
+            <span className={styles.sidebar_title}>В фокусе</span>
           </Flex>
           <List
             size="small"
@@ -48,10 +49,12 @@ export const Sidebar = () => {
             className={styles.sidebar_list}
             renderItem={(item) =>
               <List.Item className={styles.sidebar_item}>
-                <Flex justify={"space-between"} style={{width: '100%'}}>
-                  <Link to={`${Paths.forum}/${item.url}`} className={styles.sidebar_link}>
-                    <span>{item.title}</span>
-                  </Link>
+                <Flex justify={"space-between"} style={{width: '100%'}} gap={12} align={"center"}>
+                  <Paragraph ellipsis={{rows: 1}} style={{margin: 0}}>
+                    <Link to={`${Paths.forum}/${item.url}`} className={styles.sidebar_link}>
+                      {item.title}
+                    </Link>
+                  </Paragraph>
                   <Flex gap={16}>
                     <LikeButton post={item}/>
                     {/*<CommentButton post={item}/>*/}
@@ -66,7 +69,7 @@ export const Sidebar = () => {
         <Flex gap={"small"} vertical>
           <Flex gap={"small"} align={"center"}>
             <LinkOutlined style={{fontSize: '18px'}}/>
-            <span className={styles.sidebar_title}>Рекомендуемые ссылки</span>
+            <span className={styles.sidebar_title}>Стоит прочитать</span>
           </Flex>
           <List
             size="small"
@@ -74,10 +77,12 @@ export const Sidebar = () => {
             className={styles.sidebar_list}
             renderItem={(item) =>
               <List.Item className={styles.sidebar_item}>
-                <Flex justify={"space-between"} style={{width: '100%'}}>
+                <Flex justify={"space-between"} style={{width: '100%'}} gap={12} align={"center"}>
+                  <Paragraph ellipsis={{rows: 1}} style={{margin: 0}}>
                   <Link to={`${Paths.forum}/${item.url}`} className={styles.sidebar_link}>
-                    <span>{item.title}</span>
+                      {item.title}
                   </Link>
+                  </Paragraph>
                   <Flex gap={16}>
                     {/*<LikeButton post={item}/>*/}
                     <CommentButton post={item}/>
