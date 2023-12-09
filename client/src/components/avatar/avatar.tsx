@@ -1,33 +1,34 @@
-import {Avatar} from "antd";
-import styles from "./avatar.module.scss";
 import {Link} from "react-router-dom";
 import {Paths} from "../../paths";
+import {User} from "@prisma/client";
+
+import styles from "./avatar.module.scss";
 
 type Props = {
-  data: any
+  user: User
   width?: number
   height?: number
 }
 
 export const CustomAvatar = (
   {
-    data,
+    user,
     width = 32,
     height = 32
   }: Props) => {
-  
   return (
-    <Link to={`${Paths.profile}/${data.author.username}`}>
+    <Link to={`${Paths.profile}/${user.username}`}>
       <img
         className={styles.avatar}
-        srcSet={data.author.avatarURL !== null ?
-          `${process.env.REACT_APP_URL}${data.author.avatarURL}`
+        srcSet={user.avatarURL !== null ?
+          `${process.env.REACT_APP_URL}${user.avatarURL}`
           :
           `${process.env.REACT_APP_URL}/uploads/stubs/stubs-avatar.jpg`
         }
-        alt={data.username}
+        alt={user.username}
         width={width}
         height={height}
+        loading={"lazy"}
       />
     </Link>
   );

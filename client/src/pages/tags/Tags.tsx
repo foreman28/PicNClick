@@ -1,12 +1,11 @@
-import React, {useEffect, useMemo} from "react";
-import {Alert, Flex, Spin} from "antd";
+import {useEffect} from "react";
+import {Flex} from "antd";
 
 import {Layout} from "../../components/layout/layout";
 
 import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
 import {useGetAllTagsQuery} from "../../api/tags";
 import TagItem from "../../components/tag-item/tag-item";
-import {LoadingOutlined} from "@ant-design/icons";
 
 import styles from "./Tags.module.scss";
 

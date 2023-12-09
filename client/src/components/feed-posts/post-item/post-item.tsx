@@ -14,6 +14,7 @@ import styles from './post-item.module.scss';
 import {Paths} from "../../../paths";
 import {CommentButton} from "../../custom-button/comment-button/comment-button";
 import {CustomAvatar} from "../../avatar/avatar";
+import {useEffect} from "react";
 
 const {Paragraph} = Typography;
 
@@ -48,7 +49,7 @@ const PostItem = ({post}: any) => {
           <Flex gap={8} vertical>
             <Space>
               <Flex gap={16} align={"center"}>
-                <CustomAvatar data={post}/>
+                <CustomAvatar user={post.author}/>
                 <Flex vertical>
                   <Link to={`${Paths.profile}/` + post.author.username} className={styles.username}>{post.author.username}</Link>
                 </Flex>

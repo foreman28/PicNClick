@@ -1,5 +1,5 @@
 import {Flex, Layout} from "antd";
-import {useLocation, useNavigate,} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 import {Paths} from "../../../paths";
 
@@ -8,17 +8,18 @@ import {useGetUserQuery} from "../../../api/auth";
 
 import styles from "./profile-sidebar.module.scss";
 import {CustomAvatar} from "../../avatar/avatar";
+import {useAppSelector} from "../../../hooks/hooks";
 
 export const ProfileSidebar = () => {
 
   const location = useLocation()
-  const navigate = useNavigate()
+  
+  const userS = useAppSelector(selectUser);
   
   const pathSnippets = location.pathname.split('/').filter((i) => i);
-  const username = pathSnippets[1] || undefined;
+  const username = pathSnippets[1] || userS?.username;
   
-  // const { data, isLoading } = useGetUserQuery({ username });
-  const { data, isLoading } = useGetUserQuery(username);
+  const { data:user, isLoading } = useGetUserQuery(username);
 
   return (
     <Layout.Sider className={styles.sidebar} width={"var(--white-navigationBar)"}>
@@ -33,15 +34,12 @@ export const ProfileSidebar = () => {
             {/*<StarOutlined style={{fontSize: '18px'}}/>*/}
             {/*<span className={styles.sidebar_title}>Информация</span>*/}
           </Flex>
-          {data && (
+          {user && (
             <>
-              <img
-                className={styles.avatar} srcSet={`${process.env.REACT_APP_URL}${data.avatarURL}`} alt={data.username} />
-              
-              {/*<CustomAvatar post={post} />*/}
-              <span>{data.username}</span>
-              <span>{data.fullName}</span>
-              <span>{data.email}</span>
+              <CustomAvatar user={user} width={258} height={258} />
+              <span>{user.username}</span>
+              <span>{user.fullName}</span>
+              <span>{user.email}</span>
             </>
           )}
         </Flex>

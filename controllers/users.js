@@ -33,12 +33,11 @@ const allUser = async (req, res) => {
  */
 const getUser = async (req, res) => {
   try {
-    const { username: requestedUsername } = req.params;
-    const username = (requestedUsername === 'undefined') ? req.user.username : requestedUsername;
+    const { username } = req.params;
 
     const user = await prisma.user.findUnique({
       where: {
-        username: username,
+        username,
       },
       include: {
         posts: true,
@@ -68,7 +67,7 @@ const login = async (req, res) => {
     // console.log(req.body)
 
     if (!username || !password) {
-      return res.status(400).json({ message: 'Пожалуйста, заполните обязятельные поля' })
+      return res.status(400).json({ message: 'Пожалуйста, заполните обязательные поля' })
     }
 
     const user = await prisma.user.findFirst({

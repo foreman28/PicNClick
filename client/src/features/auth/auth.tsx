@@ -9,7 +9,7 @@ export const Auth = ({children}: { children: JSX.Element }) => {
     return (
       <Flex justify={'center'} align={'center'} style={{height: '100vh'}}>
 
-        <img srcSet={`${process.env.PUBLIC_URL}/logo512.png`} width={120} height={120} alt={'logo'}
+        <img srcSet={`${process.env.PUBLIC_URL}/logo192.png`} width={192} height={192} alt={'logo'}
              style={{animation: 'rotateAnimation 4s linear infinite'}}/>
       </Flex>
     )

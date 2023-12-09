@@ -17,88 +17,89 @@ const {Title} = Typography;
 export const Post = () => {
   const {id}: any = useParams();
   const {data: post, isLoading}: any = useGetPostQuery(id);
-
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [post]);
-
+  
   // console.log(post)
-
+  
   const modules = {
     toolbar: [
       [{'header': [1, 2, 3, false]}],
       ['bold', 'italic', 'underline', 'strike', 'blockquote'],
     ],
   };
-
+  
   const formats = [
     'header',
     'bold', 'italic', 'underline', 'strike', 'blockquote',
   ];
-
-  return (<Layout>
-    <Flex gap={12} vertical>
-      <CustomBreadcrumb/>
-
-      {isLoading ? (<p></p>) : post ? (
-        <>
-          {`${process.env.REACT_APP_URL}${post.image}` ? (
-            <img
-              className={styles.img}
-              srcSet={`${process.env.REACT_APP_URL}${post.image}`}
-              alt={post.title}
-              width={982}
-              height={420}
-            />) : (
+  
+  return (
+    <Layout>
+      <Flex gap={12} vertical>
+        <CustomBreadcrumb/>
+        
+        {isLoading ? (<p></p>) : post ? (
+          <>
+            {`${process.env.REACT_APP_URL}${post.image}` ? (
+              <img
+                className={styles.img}
+                srcSet={`${process.env.REACT_APP_URL}${post.image}`}
+                alt={post.title}
+                width={982}
+                height={420}
+              />) : (
+              <div
+                className={styles.img}
+              />)
+            }
+            
+            <h1 className={styles.title}>{post.title}</h1>
+            
+            <CustomTag post={post}/>
+            
+            
             <div
-              className={styles.img}
-            />)
-          }
-
-          <h1 className={styles.title}>{post.title}</h1>
-
-          <CustomTag post={post}/>
-
-
-          <div
-            dangerouslySetInnerHTML={{__html: post.content}}
-            className={"ql-editor " + styles.content}
-          ></div>
-
-          <Flex vertical gap={12} className={styles.comments} id={'comments'}>
-            <Title>Сообщения:</Title>
-            <Form>
-              <CustomTextarea
-                name={"comments"}
-                placeholder={"Напишите сообщение"}
-                modules={modules}
-                formats={formats}
-              />
-              <CustomButton type="primary">
-                Добавить комментарий
-              </CustomButton>
-            </Form>
-
-            {post.comments && (
-              <List
-                itemLayout="horizontal"
-                dataSource={post.comments}
-                renderItem={(comment: any) => (
-                  <Comments
-                    key={comment.id}
-                    author={comment.user.username}
-                    content={comment.content}
-                    createdAt={comment.createdAt}
-                  />
-                )}
-                locale={{emptyText: "Нет сообщений"}}
-              />
-            )}
-          </Flex>
-        </>
-      ) : (
-        <p>Запись не найдена</p>
-      )}
-    </Flex>
-  </Layout>);
+              dangerouslySetInnerHTML={{__html: post.content}}
+              className={"ql-editor " + styles.content}
+            ></div>
+            
+            <Flex vertical gap={12} className={styles.comments} id={'comments'}>
+              <Title>Сообщения:</Title>
+              <Form>
+                <CustomTextarea
+                  name={"comments"}
+                  placeholder={"Напишите сообщение"}
+                  modules={modules}
+                  formats={formats}
+                />
+                <CustomButton type="primary">
+                  Добавить комментарий
+                </CustomButton>
+              </Form>
+              
+              {post.comments && (
+                <List
+                  itemLayout="horizontal"
+                  dataSource={post.comments}
+                  renderItem={(comment: any) => (
+                    <Comments
+                      key={comment.id}
+                      author={comment.user.username}
+                      content={comment.content}
+                      createdAt={comment.createdAt}
+                    />
+                  )}
+                  locale={{emptyText: "Нет сообщений"}}
+                />
+              )}
+            </Flex>
+          </>
+        ) : (
+          <p>Запись не найдена</p>
+        )}
+      </Flex>
+    </Layout>);
 };
