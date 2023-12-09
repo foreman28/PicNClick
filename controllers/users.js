@@ -137,7 +137,7 @@ const register = async (req, res, next) => {
         email,
         username,
         password: hashedPassword,
-        avatarURL: 'uploads/stubs/stubs-avatar.jpg'
+        avatarURL: '/uploads/stubs/stubs-avatar.jpg'
       }
     });
 

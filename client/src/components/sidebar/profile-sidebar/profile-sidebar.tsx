@@ -7,6 +7,7 @@ import {selectUser} from "../../../features/auth/authSlice";
 import {useGetUserQuery} from "../../../api/auth";
 
 import styles from "./profile-sidebar.module.scss";
+import {CustomAvatar} from "../../avatar/avatar";
 
 export const ProfileSidebar = () => {
 
@@ -34,7 +35,10 @@ export const ProfileSidebar = () => {
           </Flex>
           {data && (
             <>
-              <img className={styles.avatar} srcSet={`${process.env.REACT_APP_URL}${data.avatarURL}`} alt={data.username} />
+              <img
+                className={styles.avatar} srcSet={`${process.env.REACT_APP_URL}${data.avatarURL}`} alt={data.username} />
+              
+              {/*<CustomAvatar post={post} />*/}
               <span>{data.username}</span>
               <span>{data.fullName}</span>
               <span>{data.email}</span>

@@ -108,7 +108,7 @@ const add = async (req, res) => {
       data: {
         title: data.title,
         description: data.description,
-        image: file ? file.path : '/uploads/stubs/stubs-image.png',
+        image: file ? `/${file.path}` : '/uploads/stubs/stubs-image.png',
         content: data.content,
         tags: {
           connect: tagsArray.map((tagId) => ({ id: tagId })),

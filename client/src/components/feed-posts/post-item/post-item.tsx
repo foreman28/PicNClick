@@ -17,28 +17,28 @@ import {CustomAvatar} from "../../avatar/avatar";
 
 const {Paragraph} = Typography;
 
-const PostItem = ({post}:any) => {
-  const createdDate:any = new Date(post.timestamp);
-  const newDate:any = new Date();
-
+const PostItem = ({post}: any) => {
+  const createdDate: any = new Date(post.timestamp);
+  const newDate: any = new Date();
+  
   const formattedTimestamp =
     newDate - createdDate < 24 * 60 * 60 * 1000
       ? formatDistanceToNow(createdDate, {locale: ru, addSuffix: true})
       : format(createdDate, 'MMMM d, yyyy HH:mm', {locale: ru});
-
+  
   return (
     <List.Item
       className={styles.item}
       key={post.id}
       actions={[
         <Space>
-          <CommentButton post={post} />
+          <CommentButton post={post}/>
         </Space>,
         <Space>
-          <LikeButton post={post} />
+          <LikeButton post={post}/>
         </Space>,
         <Space>
-          <ClockCircleOutlined />
+          <ClockCircleOutlined/>
           <span> {formattedTimestamp}</span>
         </Space>,
       ]}
@@ -48,15 +48,13 @@ const PostItem = ({post}:any) => {
           <Flex gap={8} vertical>
             <Space>
               <Flex gap={16} align={"center"}>
-                <Link to={"/user/" + post.author.id}>
-                  <CustomAvatar post={post} />
-                </Link>
+                <CustomAvatar data={post}/>
                 <Flex vertical>
-                  <Link to={"/user/" + post.author.id} className={styles.username}>{post.author.username}</Link>
+                  <Link to={`${Paths.profile}/` + post.author.username} className={styles.username}>{post.author.username}</Link>
                 </Flex>
               </Flex>
             </Space>
-
+            
             <Link style={{display: "contents"}} to={`${Paths.forum}/${post.url}`}>
               {`${process.env.REACT_APP_URL}${post.image}` ?
                 <img
@@ -71,7 +69,7 @@ const PostItem = ({post}:any) => {
                 ""
               }
             </Link>
-
+            
             <Flex gap={0} vertical>
               <Link className={styles.title} to={`/forum/${post.url}`}>
                 {post.title}
@@ -80,7 +78,7 @@ const PostItem = ({post}:any) => {
                 {post.description}
               </Paragraph>
               <Flex>
-                <CustomTag post={post} />
+                <CustomTag post={post}/>
               </Flex>
             </Flex>
           </Flex>

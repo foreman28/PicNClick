@@ -1,17 +1,34 @@
 import {Avatar} from "antd";
+import styles from "./avatar.module.scss";
+import {Link} from "react-router-dom";
+import {Paths} from "../../paths";
 
 type Props = {
-  post: any
+  data: any
+  width?: number
+  height?: number
 }
 
-export const CustomAvatar = ({post}: Props) => {
+export const CustomAvatar = (
+  {
+    data,
+    width = 32,
+    height = 32
+  }: Props) => {
+  
   return (
-    <Avatar
-      src={post.author.avatarURL !== null ?
-        `${process.env.REACT_APP_URL}${post.author.avatarURL}`
-        :
-        `${process.env.REACT_APP_URL}/uploads/stubs/stubs-avatar.jpg`
-      }
-    />
+    <Link to={`${Paths.profile}/${data.author.username}`}>
+      <img
+        className={styles.avatar}
+        srcSet={data.author.avatarURL !== null ?
+          `${process.env.REACT_APP_URL}${data.author.avatarURL}`
+          :
+          `${process.env.REACT_APP_URL}/uploads/stubs/stubs-avatar.jpg`
+        }
+        alt={data.username}
+        width={width}
+        height={height}
+      />
+    </Link>
   );
 };
