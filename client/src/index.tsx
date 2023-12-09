@@ -1,4 +1,4 @@
-import React from "react";
+import React, {StrictMode} from "react";
 import reportWebVitals from "./reportWebVitals";
 
 // Store & Router
@@ -88,7 +88,7 @@ const container = document.getElementById("root")!;
 const root = createRoot(container);
 
 root.render(
-  <>
+    <>
     <Provider store={store}>
       <ConfigProvider
         theme={theme}
@@ -99,7 +99,7 @@ root.render(
         </Auth>
       </ConfigProvider>
     </Provider>
-  </>
+    </>
 );
 
 reportWebVitals();

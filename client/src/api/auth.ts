@@ -13,8 +13,8 @@ export const authApi = api.injectEndpoints({
       }),
     }),
     getUser: builder.query<User, any>({
-      query: (user) => ({
-        url: `/user/profile/${user.username}`,
+      query: (username) => ({
+        url: `/user/profile/${username}`,
         method: "GET",
       }),
     }),

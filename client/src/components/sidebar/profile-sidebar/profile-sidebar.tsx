@@ -3,7 +3,6 @@ import {useLocation, useNavigate,} from "react-router-dom";
 
 import {Paths} from "../../../paths";
 
-import {useAppDispatch, useAppSelector} from "../../../hooks/hooks";
 import {selectUser} from "../../../features/auth/authSlice";
 import {useGetUserQuery} from "../../../api/auth";
 
@@ -13,19 +12,12 @@ export const ProfileSidebar = () => {
 
   const location = useLocation()
   const navigate = useNavigate()
-
-  const pathSnippets1 = location.pathname.split('/').filter((i) => i);
-  let username: string = '';
-
-  const user = useAppSelector(selectUser);
-
-  if (pathSnippets1[1] == undefined && user) {
-    username = user.username;
-  } else {
-    username = pathSnippets1[1]
-  }
-
-  const {data, isLoading} = useGetUserQuery({username: username});
+  
+  const pathSnippets = location.pathname.split('/').filter((i) => i);
+  const username = pathSnippets[1] || undefined;
+  
+  // const { data, isLoading } = useGetUserQuery({ username });
+  const { data, isLoading } = useGetUserQuery(username);
 
   return (
     <Layout.Sider className={styles.sidebar} width={"var(--white-navigationBar)"}>
@@ -40,10 +32,14 @@ export const ProfileSidebar = () => {
             {/*<StarOutlined style={{fontSize: '18px'}}/>*/}
             {/*<span className={styles.sidebar_title}>Информация</span>*/}
           </Flex>
-          <img className={styles.avatar} srcSet={`${process.env.REACT_APP_URL}${data?.avatarURL}`} alt={`${data?.username}`}/>
-          <span>{data?.username}</span>
-          <span>{data?.fullName}</span>
-          <span>{data?.email}</span>
+          {data && (
+            <>
+              <img className={styles.avatar} srcSet={`${process.env.REACT_APP_URL}${data.avatarURL}`} alt={data.username} />
+              <span>{data.username}</span>
+              <span>{data.fullName}</span>
+              <span>{data.email}</span>
+            </>
+          )}
         </Flex>
       </Flex>
     </Layout.Sider>

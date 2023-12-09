@@ -9,8 +9,9 @@ import {CustomButton} from "../custom-button/custom-button";
 import {SearchComponent} from "../custom-search/search";
 
 import styles from "./header.module.scss";
+import React from "react";
 
-export const Header = () => {
+export const Header = React.memo(() => {
   const user = useSelector(selectUser);
   // const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -63,4 +64,5 @@ export const Header = () => {
 
     </Layout.Header>
   );
-};
+}
+)

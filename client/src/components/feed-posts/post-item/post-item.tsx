@@ -13,6 +13,7 @@ import {LikeButton} from "../../custom-button/like-button/like-button";
 import styles from './post-item.module.scss';
 import {Paths} from "../../../paths";
 import {CommentButton} from "../../custom-button/comment-button/comment-button";
+import {CustomAvatar} from "../../avatar/avatar";
 
 const {Paragraph} = Typography;
 
@@ -48,8 +49,7 @@ const PostItem = ({post}:any) => {
             <Space>
               <Flex gap={16} align={"center"}>
                 <Link to={"/user/" + post.author.id}>
-                  <Avatar
-                    src={post.author.avatarURL !== null ? post.author.avatarURL : `${process.env.PUBLIC_URL}/img/avatar.jpg`}/>
+                  <CustomAvatar post={post} />
                 </Link>
                 <Flex vertical>
                   <Link to={"/user/" + post.author.id} className={styles.username}>{post.author.username}</Link>

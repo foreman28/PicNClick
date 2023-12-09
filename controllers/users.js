@@ -31,10 +31,11 @@ const allUser = async (req, res) => {
  * @desс User
  * @access Public
  */
-const user = async (req, res) => {
-  const {username} = req.params;
-  console.log(username)
+const getUser = async (req, res) => {
   try {
+    const { username: requestedUsername } = req.params;
+    const username = (requestedUsername === 'undefined') ? req.user.username : requestedUsername;
+
     const user = await prisma.user.findUnique({
       where: {
         username: username,
@@ -46,8 +47,12 @@ const user = async (req, res) => {
       },
     });
 
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
     res.status(200).json(user);
-  } catch {
+  } catch (error) {
     res.status(500).json({message: "Не удалось получить пользователя"});
   }
 }
@@ -164,7 +169,7 @@ const current = async (req, res) => {
 
 module.exports = {
   allUser,
-  user,
+  getUser,
   login,
   register,
   current

@@ -15,32 +15,22 @@ export const Tags = () => {
     window.scrollTo(0, 0);
   }, []);
   
-  const { data: tags, error, isLoading }:any = useGetAllTagsQuery();
+  const {data: tags}: any = useGetAllTagsQuery();
   
-  const memoizedList = useMemo(() => {
-    if (isLoading) {
-      return <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />;
-    }
-    if (error) {
-      return <Alert message="Ошибка загрузки тегов" type="error" />;
-    }
-    
-    return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '12px' }}>
-      {tags && tags.map(({ id, ...tag }:any) => (
-        <TagItem key={id} tag={tag} />
+  const memoizedList = (
+    <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '12px'}}>
+      {tags && tags.map(({id, ...tag}: any) => (
+        <TagItem key={id} tag={tag}/>
       ))}
     </div>
-    );
-  }, [tags, isLoading, error]);
+  )
   
   return (
     <Layout>
       <Flex className={styles.main} gap={12} vertical>
-        <CustomBreadcrumb />
+        <CustomBreadcrumb/>
         {memoizedList}
       </Flex>
     </Layout>
   );
-
 };

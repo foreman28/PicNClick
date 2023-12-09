@@ -15,8 +15,9 @@ import {
 import {Paths} from "../../paths";
 
 import styles from "./navigationBar.module.scss";
+import React from "react";
 
-export const NavigationBar = () => {
+export const NavigationBar = React.memo(() => {
 
   const currentPath = window.location.pathname;
 
@@ -73,4 +74,4 @@ export const NavigationBar = () => {
       </Flex>
     </Layout.Sider>
   );
-};
+})

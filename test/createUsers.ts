@@ -18,6 +18,7 @@ async function createUsers() {
           username: `asd${i}`,
           email: `asd${i}@gmail.com`,
           password: `$2b$10$id.9tqKri3aXqKGChDm51OEZ7wKJXEExAyXriGCgpszUgKPlOMVQS`,
+          avatarURL: `uploads/stubs/stubs-avatar.jpg`,
         },
       });
     }

@@ -19,35 +19,35 @@ export const Profile = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const user = useAppSelector(selectUser);
-  const location = useLocation()
-  const navigate = useNavigate()
-  const pathSnippets1 = location.pathname.split('/').filter((i) => i);
-
-  let username: string = '';
-
-  if (pathSnippets1[1] == undefined && user) {
-    username = user.username;
-  } else {
-    username = pathSnippets1[1]
-  }
-
-  const {data, isLoading} = useGetUserQuery({username: username});
+  // const user = useAppSelector(selectUser);
+  // const location = useLocation()
+  // const navigate = useNavigate()
+  // const pathSnippets1 = location.pathname.split('/').filter((i) => i);
+  //
+  // let username: string = '';
+  //
+  // if (pathSnippets1[1] == undefined && user) {
+  //   username = user.username;
+  // } else {
+  //   username = pathSnippets1[1]
+  // }
+  //
+  // const {data, isLoading} = useGetUserQuery({username: username});
 
   return (
     <ProfileLayout>
-      <Flex gap={12} vertical>
-        <CustomBreadcrumb/>
-        <Title level={4}>Профиль</Title>
-
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : (
-          <>
-            <span>{data && data.username}</span>
-          </>
-        )}
-      </Flex>
+      {/*<Flex gap={12} vertical>*/}
+      {/*  <CustomBreadcrumb/>*/}
+      {/*  <Title level={4}>Профиль</Title>*/}
+      
+      {/*  {isLoading ? (*/}
+      {/*    <p>Loading...</p>*/}
+      {/*  ) : (*/}
+      {/*    <>*/}
+      {/*      <span>{data && data.username}</span>*/}
+      {/*    </>*/}
+      {/*  )}*/}
+      {/*</Flex>*/}
     </ProfileLayout>
   );
 };
