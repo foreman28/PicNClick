@@ -73,7 +73,6 @@ export const Post = () => {
                   name={"comments"}
                   placeholder={"Напишите сообщение"}
                   modules={modules}
-                  formats={formats}
                 />
                 <CustomButton type="primary">
                   Добавить комментарий

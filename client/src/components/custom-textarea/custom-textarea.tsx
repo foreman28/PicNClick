@@ -1,7 +1,7 @@
 import {Form} from "antd";
 import {useState} from "react";
 
-import ReactQuill from 'react-quill';
+import ReactQuill from 'react-quill'; // or quill
 import 'react-quill/dist/quill.snow.css';
 
 import './custom-textarea.scss';
@@ -16,14 +16,15 @@ type Props = {
   maxLength?: number;
 };
 
-export const CustomTextarea = ({
-                                 name,
-                                 placeholder ='Содержание',
-                                 theme,
-                                 modules: customModules,
-                                 formats: customFormats,
-                                 maxLength = 100,
-                               }: Props) => {
+export const CustomTextarea = (
+  {
+    name,
+    placeholder = 'Содержание',
+    theme,
+    modules: customModules,
+    formats: customFormats,
+    maxLength = 100,
+  }: Props) => {
   
   let modules: any;
   if (!customModules) {
@@ -55,7 +56,7 @@ export const CustomTextarea = ({
   }
   
   const [content, setContent] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState("Обязательное поле");
   const [valueLength, setValueLength] = useState(true);
   
   const handleChange = (value: any, delta: any, source: any, editor: any) => {

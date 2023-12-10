@@ -9,7 +9,6 @@ import styles from './Add-post.module.scss';
 import {CustomTextarea} from '../../components/custom-textarea/custom-textarea';
 import CustomSelect from '../../components/custom-select/custom-select';
 import {DownloadOutlined} from "@ant-design/icons";
-import {useGetAllTagsQuery} from "../../api/tags";
 
 export const AddPost = () => {
   useEffect(() => {

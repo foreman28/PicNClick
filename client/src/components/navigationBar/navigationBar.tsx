@@ -5,7 +5,7 @@ import {selectUser} from "../../features/auth/authSlice";
 
 import {
   EditOutlined,
-  ProfileFilled, ProfileOutlined,
+  ProfileOutlined,
   SearchOutlined,
   TagOutlined,
   UnorderedListOutlined,
@@ -17,7 +17,7 @@ import {Paths} from "../../paths";
 import styles from "./navigationBar.module.scss";
 import React from "react";
 
-export const NavigationBar = React.memo(() => {
+export const NavigationBar = () => {
 
   const currentPath = window.location.pathname;
 
@@ -74,4 +74,4 @@ export const NavigationBar = React.memo(() => {
       </Flex>
     </Layout.Sider>
   );
-})
+}
