@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, ConfigProvider, Flex, Form, message, Upload} from 'antd';
+import {Button, ConfigProvider, Flex, Form, message, Typography, Upload} from 'antd';
 import {Layout} from '../../components/layout/layout';
 import {useAddPostMutation} from '../../api/posts';
 import CustomBreadcrumb from '../../components/custom-breadcrumb/custom-breadcrumb';
@@ -9,6 +9,9 @@ import styles from './Add-post.module.scss';
 import {CustomTextarea} from '../../components/custom-textarea/custom-textarea';
 import CustomSelect from '../../components/custom-select/custom-select';
 import {DownloadOutlined} from "@ant-design/icons";
+import {CustomTitle} from "../../components/custom-title/custom-title";
+
+const {Title, Text} = Typography
 
 export const AddPost = () => {
   useEffect(() => {
@@ -69,6 +72,9 @@ export const AddPost = () => {
     <Layout>
       <Flex vertical gap={12}>
         <CustomBreadcrumb/>
+
+        <CustomTitle title={"Добавить пост"} level={1}/>
+        
         <Form className={styles.item} layout="vertical" onFinish={onFinish}>
           <Flex vertical gap={4}>
             <CustomInput name="title" placeholder="Заголовок"/>

@@ -1,7 +1,11 @@
 .content {
   width: 100%;
   /*max-width: 580px;*/
-  padding: 180px 320px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .image {

@@ -23,7 +23,7 @@ export const CustomTextarea = (
     theme,
     modules: customModules,
     formats: customFormats,
-    maxLength = 100,
+    maxLength = 10000,
   }: Props) => {
   
   let modules: any;

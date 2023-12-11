@@ -36,7 +36,7 @@ export const ProfileSidebar = () => {
           </Flex>
           {user && (
             <>
-              <CustomAvatar user={user} width={258} height={258} />
+              <CustomAvatar user={user} width={258} height={258} link={false}/>
               <span>{user.username}</span>
               <span>{user.fullName}</span>
               <span>{user.email}</span>

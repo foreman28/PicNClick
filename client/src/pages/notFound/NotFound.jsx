@@ -4,7 +4,7 @@ import {Layout as AntLayout} from "antd";
 import styles from "./NotFound.module.scss";
 import {Footer} from "../../components/footer/footer";
 
-const NotFound = () => {
+export const NotFound = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -20,5 +20,3 @@ const NotFound = () => {
     </>
   );
 };
-
-export default NotFound;

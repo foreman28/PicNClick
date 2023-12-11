@@ -1,13 +1,15 @@
 import {useEffect} from 'react';
-import {Flex} from "antd";
+import {Flex, Typography} from "antd";
 import {Layout} from "../../components/layout/layout";
 import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
 
 import {useGetAllUsersQuery} from "../../api/auth";
-import TagItem from "../../components/tag-item/tag-item";
 import UserItem from "../../components/user-item/user-item";
+import {CustomTitle} from "../../components/custom-title/custom-title";
 
 import styles from "./Users.module.scss";
+
+const {Title, Text} = Typography;
 
 export const Users = () => {
 
@@ -21,8 +23,9 @@ export const Users = () => {
     <Layout>
       <Flex gap={12} vertical>
         <CustomBreadcrumb/>
-        {/*<Title level={1}>Пользователи</Title>*/}
-
+        
+        <CustomTitle title={"Пользователи"} level={1}/>
+        
         {isLoading ? (
           <p>Loading...</p>
         ) : (

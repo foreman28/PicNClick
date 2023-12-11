@@ -74,6 +74,10 @@ a {
   width: 100%;
 }
 
+.auth-loading{
+  animation: rotateAnimation 4s linear infinite;
+}
+
 @keyframes rotateAnimation {
   from {
     transform: rotate(0deg); /* Начальное положение (0 градусов) */
@@ -84,3 +88,12 @@ a {
 }
 
 
+.item {
+  border-radius: 5px;
+  border: 1px solid var(--white-2);
+  background: var(--white-1);
+
+  box-shadow: 2px 1px 5px 0 rgba(0, 0, 0, 0.15);
+
+  padding: 16px 24px;
+}

@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {Flex, Typography} from "antd";
 
 import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
@@ -10,6 +10,7 @@ import {ProfileLayout} from "../../components/layout/profile-layout/profile-layo
 import styles from "./Profile.module.scss";
 import {useAppSelector} from "../../hooks/hooks";
 import {selectUser} from "../../features/auth/authSlice";
+import {CustomTitle} from "../../components/custom-title/custom-title";
 
 const {Title, Text} = Typography
 
@@ -31,9 +32,10 @@ export const Profile = () => {
     <ProfileLayout>
       <Flex gap={12} vertical>
         <CustomBreadcrumb/>
+
+        <CustomTitle title={"Профиль"} level={1}/>
+        
         <Flex className={styles.profile} vertical>
-          
-          <Title level={4}>Профиль</Title>
           
           {isLoading ? (
             <p>Loading...</p>

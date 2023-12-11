@@ -1,11 +1,16 @@
-import React, {StrictMode} from "react";
-import reportWebVitals from "./reportWebVitals";
+import React from "react";
 
 // Store & Router
-import {createRoot} from "react-dom/client";
-import {Provider} from "react-redux";
-import {store} from "./store/store";
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ConfigProvider } from "antd";
+import ruRU from 'antd/lib/locale/ru_RU';
+
+import { store } from "./store/store";
+import { Paths } from "./paths";
+import { Auth } from "./features/auth/auth";
+import { theme } from "./themes/main";
 
 // Pages
 import {Register} from "./pages/register/Register";
@@ -14,22 +19,13 @@ import {Home} from "./pages/home/Home";
 import {Forum} from "./pages/forum/Forum";
 import {Search} from "./pages/search/Search";
 import {Tags} from "./pages/tags/Tags";
-import NotFound from "./pages/notFound/NotFound";
+import {NotFound} from "./pages/notFound/NotFound";
 import {Post} from "./pages/post/Post";
 import {Users} from "./pages/users/Users";
 import {AddPost} from "./pages/add-post/Add-post";
-
-// Пути
-import {Paths} from "./paths";
-
-import {Auth} from "./features/auth/auth";
-
-import {ConfigProvider} from "antd";
-import ruRU from 'antd/lib/locale/ru_RU';
-
-import {theme} from "./themes/main";
-import "./index.scss";
 import {Profile} from "./pages/profile/Profile";
+
+import "./index.scss";
 
 const router = createBrowserRouter([
   {
@@ -102,4 +98,3 @@ root.render(
     </>
 );
 
-reportWebVitals();

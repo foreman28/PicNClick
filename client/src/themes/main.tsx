@@ -7,7 +7,10 @@ export const theme: any = {
     Typography: {
       lineHeightHeading1: 1.5,
       fontSizeHeading1: 28,
+      fontSizeHeading2: 24,
+      fontSizeHeading3: 20,
       fontWeightStrong: 700,
+      fontFamily: "var(--font-family)",
       fontFamilyCode: "var(--font-family)",
       titleMarginBottom: 0
     },
