@@ -64,7 +64,7 @@ export const AddPost = () => {
       console.error('Error reading file:', error);
     }
   };
-
+  
   return (
     <Layout>
       <Flex vertical gap={12}>
@@ -73,6 +73,7 @@ export const AddPost = () => {
           <Flex vertical gap={4}>
             <CustomInput name="title" placeholder="Заголовок"/>
             <CustomInput name="description" placeholder="Краткое описание"/>
+            
             
             <div style={{display: "flex"}} onClick={handleImageClick}>
               {showImage ? (
@@ -91,7 +92,6 @@ export const AddPost = () => {
               )}
             </div>
             
-            
             <Form.Item
               name="file"
               valuePropName="fileList"
@@ -99,21 +99,21 @@ export const AddPost = () => {
               rules={[{ required: true, message: 'Обязательное поле' }]}
               style={{display: "none"}}
             >
-              <Upload
-                id={"addFile"}
-                customRequest={() => {}}
-                beforeUpload={handleFileChange}
-                listType="picture"
-                maxCount={1}
-                accept="image/*"
-              >
-                <Button>Выберите файл</Button>
-              </Upload>
+                <Upload
+                  id={"addFile"}
+                  customRequest={() => {}}
+                  beforeUpload={handleFileChange}
+                  listType="picture"
+                  maxCount={1}
+                  accept="image/jpeg, image/png"
+                >
+                  <Button>Выберите файл</Button>
+                </Upload>
             </Form.Item>
             
             <CustomTextarea name="content"/>
             
-            <CustomSelect name="tags" placeholder="Теги" />
+            <CustomSelect name="tags" placeholder="Теги"/>
             
             <ConfigProvider theme={button}>
               <Button type="primary" htmlType="submit" loading={isLoading}>
