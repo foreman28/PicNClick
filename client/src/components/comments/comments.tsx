@@ -1,27 +1,36 @@
 import React from "react";
-import { Avatar, List } from "antd";
+import {Avatar, Flex, List} from "antd";
 import moment from "moment";
+import styles from "./comments.module.scss";
+import {CustomAvatar} from "../avatar/avatar";
+import {User} from "@prisma/client";
+import {Link} from "react-router-dom";
+import {Paths} from "../../paths";
 
 
 type Props = {
-  author: string;
+  author: User;
   content: string;
   createdAt: string;
 };
 
-export const Comments = ({ author, content, createdAt }:Props) => {
+export const Comments = ({author, content, createdAt}: Props) => {
   return (
     <List.Item>
-      <List.Item.Meta
-        avatar={<Avatar src={'../img/avatar.jpg'} alt={author} />}
-        title={<span>{author}</span>}
-        description={
-          <div>
-            <p>{content}</p>
-            <span>{moment(createdAt).format("MMMM Do YYYY, h:mm:ss a")}</span>
-          </div>
-        }
-      />
+      <div>
+        <Flex gap={12} align={"center"}>
+          <CustomAvatar user={author}/>
+          <Flex vertical>
+            <Link to={`${Paths.profile}/` + author.username} className={styles.username}>{author.username}</Link>
+          </Flex>
+        </Flex>
+        <div
+          dangerouslySetInnerHTML={{__html: content}}
+          className={"ql-editor " + styles.content}
+          style={{minHeight: "auto"}}
+        />
+        <span>{moment(createdAt).format("MMMM Do YYYY, h:mm:ss a")}</span>
+      </div>
     </List.Item>
   );
 };

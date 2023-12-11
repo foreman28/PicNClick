@@ -1,13 +1,11 @@
-import {LikeFilled, LikeOutlined, MessageFilled, MessageOutlined} from '@ant-design/icons';
+import {MessageFilled, MessageOutlined} from '@ant-design/icons';
 import {Space} from 'antd';
-import {useToggleLikeMutation} from '../../../api/likes';
 import {useGetPostQuery} from "../../../api/posts";
 import CountUp from 'react-countup';
 
 import styles from './comment-button.module.scss';
-import {useEffect} from "react";
 import {useAppSelector} from "../../../hooks/hooks";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {Paths} from "../../../paths";
 
 

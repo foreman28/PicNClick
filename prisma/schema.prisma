@@ -19,22 +19,22 @@ model User {
   updatedAt DateTime    @updatedAt
   posts     ForumPost[]
   Likes     Likes[]
-  Comment   Comment[]
+  Comment   Comments[]
 }
 
 model ForumPost {
-  id          Int       @id @default(autoincrement())
-  url         String    @unique
-  title       String    @unique
+  id          Int        @id @default(autoincrement())
+  url         String     @unique
+  title       String     @unique
   description String
   content     String
   authorId    Int
   image       String?
-  timestamp   DateTime  @default(now())
+  timestamp   DateTime   @default(now())
   tags        Tags[]
   likes       Likes[]
-  comments    Comment[]
-  author      User      @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  comments    Comments[]
+  author      User       @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model Likes {
@@ -46,7 +46,7 @@ model Likes {
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model Comment {
+model Comments {
   id          Int       @id @default(autoincrement())
   content     String
   forumPostId Int

@@ -1,8 +1,8 @@
 import {useEffect} from "react";
 import {Layout} from "../../components/layout/layout";
 import {useParams} from "react-router-dom";
-import {Flex, Form, List, Typography} from "antd";
-import {useGetPostQuery} from "../../api/posts";
+import {Button, ConfigProvider, Flex, Form, List, Typography} from "antd";
+import {useAddPostMutation, useGetAllPostsQuery, useGetPostQuery} from "../../api/posts";
 import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
 
 import {Comments} from "../../components/comments/comments";
@@ -11,12 +11,14 @@ import {CustomButton} from "../../components/custom-button/custom-button";
 import {CustomTag} from "../../components/custom-tag/custom-tag";
 
 import styles from "./Post.module.scss";
+import {button} from "../../themes/buttons";
+import {useAddCommentMutation} from "../../api/comment";
 
 const {Title} = Typography;
 
 export const Post = () => {
   const {id}: any = useParams();
-  const {data: post, isLoading}: any = useGetPostQuery(id);
+  const {data: post, isLoading: isLoadingPost, refetch}: any = useGetPostQuery(id);
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -36,12 +38,28 @@ export const Post = () => {
     'bold', 'italic', 'underline', 'strike', 'blockquote',
   ];
   
+  const [addComment, {isLoading:isLoadingComment}] = useAddCommentMutation();
+
+  const onFinish = async (data:any) => {
+    try {
+      data = {
+        ...data,
+        forumPostId: post.id
+      }
+      
+      await addComment(data);
+      refetch();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
   return (
     <Layout>
       <Flex gap={12} vertical>
         <CustomBreadcrumb/>
         
-        {isLoading ? (<p></p>) : post ? (
+        {isLoadingPost ? (<p></p>) : post ? (
           <>
             {`${process.env.REACT_APP_URL}${post.image}` ? (
               <img
@@ -60,23 +78,25 @@ export const Post = () => {
             
             <CustomTag post={post}/>
             
-            
             <div
               dangerouslySetInnerHTML={{__html: post.content}}
               className={"ql-editor " + styles.content}
-            ></div>
+            />
             
             <Flex vertical gap={12} className={styles.comments} id={'comments'}>
               <Title>Сообщения:</Title>
-              <Form>
+              <Form onFinish={onFinish}>
                 <CustomTextarea
-                  name={"comments"}
+                  name={"content"}
                   placeholder={"Напишите сообщение"}
                   modules={modules}
                 />
-                <CustomButton type="primary">
-                  Добавить комментарий
-                </CustomButton>
+                
+                <ConfigProvider theme={button}>
+                  <Button type="primary" htmlType="submit" loading={isLoadingComment}>
+                    Добавить пост
+                  </Button>
+                </ConfigProvider>
               </Form>
               
               {post.comments && (
@@ -86,7 +106,7 @@ export const Post = () => {
                   renderItem={(comment: any) => (
                     <Comments
                       key={comment.id}
-                      author={comment.user.username}
+                      author={comment.user}
                       content={comment.content}
                       createdAt={comment.createdAt}
                     />

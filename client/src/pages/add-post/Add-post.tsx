@@ -1,15 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Button, ConfigProvider, Flex, Form, message, Typography, Upload} from 'antd';
 import {Layout} from '../../components/layout/layout';
 import {useAddPostMutation} from '../../api/posts';
 import CustomBreadcrumb from '../../components/custom-breadcrumb/custom-breadcrumb';
 import {CustomInput} from '../../components/custom-input/custom-input';
 import {button} from '../../themes/buttons';
-import styles from './Add-post.module.scss';
 import {CustomTextarea} from '../../components/custom-textarea/custom-textarea';
 import CustomSelect from '../../components/custom-select/custom-select';
 import {DownloadOutlined} from "@ant-design/icons";
 import {CustomTitle} from "../../components/custom-title/custom-title";
+
+import styles from './Add-post.module.scss';
 
 const {Title, Text} = Typography
 
@@ -79,7 +80,6 @@ export const AddPost = () => {
           <Flex vertical gap={4}>
             <CustomInput name="title" placeholder="Заголовок"/>
             <CustomInput name="description" placeholder="Краткое описание"/>
-            
             
             <div style={{display: "flex"}} onClick={handleImageClick}>
               {showImage ? (

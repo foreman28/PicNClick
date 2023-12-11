@@ -7,6 +7,6 @@ router.get("/", allTags);
 router.get("/:url", tagById);
 router.post("/add", auth, addTag);
 router.post("/remove/:id", auth, removeTag);
-router.put("/edit/:id", auth, editTag); // Uncomment this line
+router.put("/edit/:id", auth, editTag);
 
 module.exports = router;

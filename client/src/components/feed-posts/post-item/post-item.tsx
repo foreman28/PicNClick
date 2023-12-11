@@ -48,7 +48,7 @@ const PostItem = ({post}: any) => {
         description={
           <Flex gap={8} vertical>
             <Space>
-              <Flex gap={16} align={"center"}>
+              <Flex gap={12} align={"center"}>
                 <CustomAvatar user={post.author}/>
                 <Flex vertical>
                   <Link to={`${Paths.profile}/` + post.author.username} className={styles.username}>{post.author.username}</Link>

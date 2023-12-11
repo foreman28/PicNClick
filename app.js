@@ -29,6 +29,7 @@ app.use('/api/user', require("./routes/users"));
 app.use('/api/posts', require("./routes/posts"));
 app.use('/api/tags', require("./routes/tags"));
 app.use('/api/likes', require("./routes/likes"));
+app.use('/api/comments', require("./routes/comments"));
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
