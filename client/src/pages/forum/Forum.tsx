@@ -1,6 +1,6 @@
 import {Flex} from 'antd';
 import {Layout} from '../../components/layout/layout';
-import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
+import {CustomBreadcrumb} from "../../components/custom-breadcrumb/custom-breadcrumb";
 import {FeedPosts} from "../../components/feed-posts/feed-posts";
 
 import {useEffect} from "react";

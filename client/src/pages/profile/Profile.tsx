@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
-import {Flex, Typography} from "antd";
+import {useEffect} from 'react';
+import {Flex} from "antd";
 
-import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
+import {CustomBreadcrumb} from "../../components/custom-breadcrumb/custom-breadcrumb";
 import {useLocation} from "react-router-dom";
 import {useGetUserQuery} from "../../api/auth";
 import {Paths} from "../../paths";
@@ -12,7 +12,7 @@ import {useAppSelector} from "../../hooks/hooks";
 import {selectUser} from "../../features/auth/authSlice";
 import {CustomTitle} from "../../components/custom-title/custom-title";
 
-const {Title, Text} = Typography
+// const {Title, Text} = Typography
 
 export const Profile = () => {
   useEffect(() => {

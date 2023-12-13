@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import {Flex} from "antd";
 import {Layout} from "../../components/layout/layout";
-import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
+import {CustomBreadcrumb} from "../../components/custom-breadcrumb/custom-breadcrumb";
 
 import {useGetAllUsersQuery} from "../../api/auth";
 import UserItem from "../../components/user-item/user-item";

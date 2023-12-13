@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import {Flex, List} from "antd";
 import {Layout} from "../../components/layout/layout";
-import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
+import {CustomBreadcrumb} from "../../components/custom-breadcrumb/custom-breadcrumb";
 import {CustomTitle} from "../../components/custom-title/custom-title";
 
 import {useGetAllPostsQuery} from "../../api/posts";

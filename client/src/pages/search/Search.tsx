@@ -1,10 +1,10 @@
 import { Flex } from "antd";
 import { Layout } from "../../components/layout/layout";
 import styles from "./Search.module.scss";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import queryString from "query-string";
 import { useNavigate } from "react-router-dom";
-import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
+import {CustomBreadcrumb} from "../../components/custom-breadcrumb/custom-breadcrumb";
 import {FeedPosts} from "../../components/feed-posts/feed-posts";
 
 export const Search = () => {
@@ -32,7 +32,7 @@ export const Search = () => {
         setSuggestions(data);
         // console.log(data)
       } catch (error) {
-        console.error('Error fetching search suggestions:', error);
+        console.error('Error search:', error);
       }
     
   };

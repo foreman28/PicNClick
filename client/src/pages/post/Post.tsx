@@ -3,7 +3,7 @@ import {Layout} from "../../components/layout/layout";
 import {useParams} from "react-router-dom";
 import {Button, ConfigProvider, Flex, Form, List, Typography} from "antd";
 import {useAddPostMutation, useGetAllPostsQuery, useGetPostQuery} from "../../api/posts";
-import CustomBreadcrumb from "../../components/custom-breadcrumb/custom-breadcrumb";
+import {CustomBreadcrumb} from "../../components/custom-breadcrumb/custom-breadcrumb";
 
 import {Comments} from "../../components/comments/comments";
 import {CustomTextarea} from "../../components/custom-textarea/custom-textarea";

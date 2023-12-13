@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Breadcrumb } from 'antd';
 import { Link, useLocation } from 'react-router-dom';
 
-const CustomBreadcrumb = () => {
+export const CustomBreadcrumb = () => {
   const location = useLocation();
   const [breadcrumbs, setBreadcrumbs] = useState<any[]>([]);
   
@@ -46,5 +46,3 @@ const CustomBreadcrumb = () => {
     />
   );
 };
-
-export default CustomBreadcrumb;
