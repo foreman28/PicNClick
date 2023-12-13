@@ -79,7 +79,7 @@ export const FeedPosts = () => {
           itemLayout="vertical"
           size="large"
           dataSource={posts}
-          renderItem={(item) => <PostItem post={item}/>}
+          renderItem={(item) => <PostItem key={item.id} post={item}/>}
           locale={{emptyText: 'Пусто'}}
         />
       </Flex>

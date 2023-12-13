@@ -62,9 +62,14 @@ export const NavigationBar = () => {
                   <span className={styles.sidebar_item}>Профиль</span>
                 </Link>
 
+                <Link to={Paths.yourPosts} className={styles.sidebar_link + ' ' + (currentPath === Paths.yourPosts ? styles.active : '')}>
+                  <UnorderedListOutlined style={{fontSize: '18px'}} />
+                  <span className={styles.sidebar_item}>Ваши посты</span>
+                </Link>
+
                 <Link to={Paths.addPost} className={styles.sidebar_link + ' ' + (currentPath === Paths.addPost ? styles.active : '')}>
                   <EditOutlined style={{fontSize: '18px'}} />
-                  <span className={styles.sidebar_item}>Добавить</span>
+                  <span className={styles.sidebar_item}>Добавить пост</span>
                 </Link>
               </>
               :

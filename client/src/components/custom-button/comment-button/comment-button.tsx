@@ -14,20 +14,21 @@ type Props = {
   post: any
 }
 
-export const CommentButton =  React.memo(({post}: Props) => {
+export const CommentButton = React.memo(({post}: Props) => {
+  const navigate = useNavigate()
   const {data: updatedPost, isLoading}: any = useGetPostQuery(post.url);
-
   const currentUserId = useAppSelector((state) => state.auth.user && state.auth.user.id);
 
-  const userHasLiked = updatedPost && updatedPost.comments ? updatedPost.comments.some((like: any) => like.userId === currentUserId) : false;
+  const userHasLiked = updatedPost && updatedPost.comments ?
+    updatedPost.comments.some(
+      (like: any) => like.userId === currentUserId
+    ) : false;
 
-
-  const navigate = useNavigate()
   const handleAddLike = async () => {
     try {
       navigate(`${Paths.forum}/${post.url}`)
     } catch (error) {
-      console.error('Error adding like:', error);
+      console.error('Ошибка при добавлении лайка:', error);
     }
   };
 

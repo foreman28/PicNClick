@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {Flex, Typography} from "antd";
+import {Flex} from "antd";
 
 import {Layout} from "../../components/layout/layout";
 
@@ -11,7 +11,7 @@ import {CustomTitle} from "../../components/custom-title/custom-title";
 
 import styles from "./Tags.module.scss";
 
-const {Title, Text} = Typography;
+// const {Title, Text} = Typography;
 
 export const Tags = () => {
   useEffect(() => {

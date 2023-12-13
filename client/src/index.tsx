@@ -26,6 +26,7 @@ import {AddPost} from "./pages/add-post/Add-post";
 import {Profile} from "./pages/profile/Profile";
 
 import "./index.scss";
+import {YourPosts} from "./pages/yourPosts/YourPosts";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: Paths.forum,
     element: <Forum/>,
+  },
+  {
+    path: Paths.yourPosts,
+    element: <YourPosts/>,
   },
   {
     path: Paths.addPost,

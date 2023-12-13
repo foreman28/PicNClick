@@ -1,6 +1,5 @@
 const {prisma} = require("../prisma/prisma-client");
 const slugify = require('slugify');
-const {auth} = require("../middleware/auth");
 
 /**
  * @route POST /api/posts
@@ -10,15 +9,21 @@ const {auth} = require("../middleware/auth");
 const all = async (req, res) => {
   let posts;
   try {
-    const { q: search, page, pageSize, filters } = req.body;
-
+    const {q: search, page, pageSize, filters} = req.body;
     const findManyOptions = {
+      where: {},
       include: {
         author: true,
         likes: true,
         tags: true,
       },
     };
+
+    if (filters?.where?.authorId || filters?.where?.authorId === 0) {
+      findManyOptions.where = {
+        authorId: filters.where.authorId
+      }
+    }
 
     if (!page && pageSize) {
       findManyOptions.take = +pageSize;
@@ -38,8 +43,8 @@ const all = async (req, res) => {
             tags: {
               some: {
                 OR: [
-                  { url: { contains: tagSearch, mode: 'insensitive' } },
-                  { name: { contains: tagSearch, mode: 'insensitive' } },
+                  {url: {contains: tagSearch, mode: 'insensitive'}},
+                  {name: {contains: tagSearch, mode: 'insensitive'}},
                 ],
               },
             },
@@ -50,14 +55,16 @@ const all = async (req, res) => {
           ...findManyOptions,
           where: {
             OR: [
-              { title: { contains: search, mode: 'insensitive' } },
-              { description: { contains: search, mode: 'insensitive' } },
+              {title: {contains: search, mode: 'insensitive'}},
+              {description: {contains: search, mode: 'insensitive'}},
             ],
           },
         });
       }
     } else {
-      posts = await prisma.forumPost.findMany(findManyOptions);
+      posts = await prisma.forumPost.findMany({
+        ...findManyOptions,
+      });
     }
 
     // Check if there are sorting filters
@@ -77,7 +84,7 @@ const all = async (req, res) => {
     res.status(200).json(posts);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Не удалось получить посты' });
+    res.status(500).json({message: 'Не удалось получить посты'});
   }
 };
 
@@ -115,7 +122,7 @@ const add = async (req, res) => {
         image: file ? `/${file.path}` : '/uploads/stubs/stubs-image.png',
         content: data.content,
         tags: {
-          connect: tagsArray.map((tagId) => ({ id: tagId })),
+          connect: tagsArray.map((tagId) => ({id: tagId})),
         },
         authorId: req.user.id,
         url: slug,
@@ -146,7 +153,7 @@ const remove = async (req, res) => {
       }
     });
 
-    if (req.user.role === "ADMIN" || post.authorId === req.user.id){
+    if (req.user.role === "ADMIN" || post.authorId === req.user.id) {
       await prisma.forumPost.delete({
         where: {
           id: +id,
@@ -154,8 +161,7 @@ const remove = async (req, res) => {
       });
 
       res.status(204).json("OK");
-    }
-    else {
+    } else {
       res.status(401).json("Отказ в доступе");
     }
   } catch {
@@ -192,7 +198,6 @@ const edit = async (req, res) => {
  * @access Private
  */
 const post = async (req, res) => {
-  // console.log(req.params)
   const {url} = req.params; // http://localhost:8000/api/posts/1
 
   try {
@@ -235,42 +240,16 @@ const post = async (req, res) => {
       },
     });
 
-
-    // console.log(post)
-
     res.status(200).json(post);
   } catch {
     res.status(500).json({message: "Не удалось получить пост"});
   }
 };
 
-/**
- * @route POST /api/posts/like/:postId
- * @desc Поставить лайк под постом
- * @access Private
- */
-const likePost = async (req, res) => {
-  const { postId } = req.params;
-
-  try {
-    const like = await prisma.likes.create({
-      data: {
-        forumPostId: parseInt(postId, 10),
-        userId: req.user.id,
-      },
-    });
-
-    res.status(201).json(like);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Не удалось поставить лайк под постом" });
-  }
-};
 module.exports = {
   all,
   add,
   remove,
   edit,
-  post,
-  likePost,
+  post
 };

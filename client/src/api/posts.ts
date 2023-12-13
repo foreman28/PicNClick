@@ -10,6 +10,10 @@ interface filters {
     // minLikes?: number;
     sort?: string;
     order?: 'asc' | 'desc';
+
+    where?: {
+      authorId: number
+    }
   };
 }
 
@@ -47,14 +51,7 @@ export const postsApi = api.injectEndpoints({
         method: "POST",
         body: postData,
       }),
-    }),
-    likePost: builder.mutation<string, { postId: string }>({
-      query: ({postId}) => ({
-        url: `/posts/like/${postId}`,
-        method: "POST",
-      }),
-    }),
-
+    })
   }),
 });
 
@@ -63,8 +60,7 @@ export const {
   useGetPostQuery,
   useEditPostMutation,
   useRemovePostMutation,
-  useAddPostMutation,
-  useLikePostMutation
+  useAddPostMutation
 } = postsApi;
 
 export const {
@@ -73,7 +69,6 @@ export const {
     getPost,
     editPost,
     removePost,
-    addPost,
-    likePost
+    addPost
   },
 } = postsApi;

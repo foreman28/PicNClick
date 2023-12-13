@@ -16,7 +16,6 @@ type Props = {
 export const LikeButton = React.memo(({post}: Props) => {
   const [addLikeMutation] = useToggleLikeMutation();
   const {data: updatedPost, isLoading, refetch}: any = useGetPostQuery(post.url);
-  console.log(1)
   const currentUserId = useAppSelector((state) => state.auth.user && state.auth.user.id);
   
   const userHasLiked = updatedPost && updatedPost.likes ? updatedPost.likes.some((like: any) => like.userId === currentUserId) : false;
