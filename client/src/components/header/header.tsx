@@ -13,8 +13,7 @@ import React from "react";
 
 export const Header = React.memo(() => {
     const user = useSelector(selectUser);
-    console.log(user)
-
+    
     // const navigate = useNavigate();
     const dispatch = useDispatch();
     const onLogoutClick = () => {
@@ -22,11 +21,11 @@ export const Header = React.memo(() => {
       localStorage.removeItem("token");
       // navigate("/login");
     };
-
+    
     return (
       <Layout.Header className={styles.header} style={{height: 'auto'}}>
         <Flex justify={"space-between"} align={"center"} className={styles.header_container}>
-
+          
           <Flex gap={16} align={"center"} className={styles.logo_content}>
             <Link to="/" className={styles.logo}>
               <img srcSet={`${process.env.PUBLIC_URL}/logo.svg`} width={40} height={40} alt={"PicNClick"}/>
@@ -35,16 +34,23 @@ export const Header = React.memo(() => {
               <span>Pic<span>&</span>Click</span>
             </Link>
           </Flex>
-
+          
           <SearchComponent/>
-
+          
           <Flex className={styles.btns} justify={"end"} gap={12}>
             {user ? (
               <>
-                <CustomButton theme={button2} type="primary" style={{background:"var(--color-success)"}}>
+                <CustomButton
+                  theme={button2}
+                  type="primary"
+                  style={user.role === "ADMIN" ?
+                    {background: "var(--color-error-200)"} :
+                    {background: "var(--color-success-300)"}
+                  }
+                >
                   {user.role}
                 </CustomButton>
-
+                
                 <CustomButton theme={button2} type="primary" onClick={onLogoutClick}>
                   Выйти
                 </CustomButton>
@@ -56,7 +62,7 @@ export const Header = React.memo(() => {
                     Зарегистрироваться
                   </CustomButton>
                 </Link>
-
+                
                 <Link to="/login" style={{lineHeight: 0}}>
                   <CustomButton theme={button2} type="primary">
                     Войти

@@ -1,11 +1,11 @@
 import {LikeFilled, LikeOutlined} from '@ant-design/icons';
-import {Space} from 'antd';
+import {Flex, Space} from 'antd';
 import {useToggleLikeMutation} from '../../../api/likes';
 import {useGetPostQuery} from "../../../api/posts";
-import CountUp from 'react-countup';
+// import CountUp from 'react-countup';
 
 import styles from './like-button.module.scss';
-import React, {useEffect} from "react";
+import React from "react";
 import {useAppSelector} from "../../../hooks/hooks";
 
 
@@ -31,17 +31,16 @@ export const LikeButton = React.memo(({post}: Props) => {
   };
 
   return (
-    <Space
+    <Flex
       key="like"
       onClick={() => handleAddLike()}
-      style={{cursor: 'pointer'}}
       className={styles['btn'] + " " + (userHasLiked ? styles['btn-active'] : '')}
+      justify={"space-between"}
     >
       {isLoading ? '' : <>
-        {userHasLiked ? <LikeFilled/> : <LikeOutlined/>}
-        <span>{updatedPost?.likes ? updatedPost?.likes?.length : 0}</span>
-        {/*<CountUp end={updatedPost.likes ? updatedPost.likes.length : 0} separator="," />*/}
+        {userHasLiked ? <LikeFilled/> : <LikeOutlined className={styles.icon}/>}
+        <span className={styles.number}>{updatedPost?.likes ? updatedPost?.likes?.length : 0}</span>
       </>}
-    </Space>
+    </Flex>
   );
 })

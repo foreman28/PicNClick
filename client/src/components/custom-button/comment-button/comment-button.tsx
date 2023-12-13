@@ -1,7 +1,6 @@
 import {MessageFilled, MessageOutlined} from '@ant-design/icons';
 import {Space} from 'antd';
 import {useGetPostQuery} from "../../../api/posts";
-import CountUp from 'react-countup';
 
 import styles from './comment-button.module.scss';
 import {useAppSelector} from "../../../hooks/hooks";
@@ -40,9 +39,8 @@ export const CommentButton = React.memo(({post}: Props) => {
         className={styles['btn'] + " " + (userHasLiked ? styles['btn-active'] : '')}
       >
         {isLoading ? '' : <>
-          {userHasLiked ? <MessageFilled/> : <MessageOutlined/>}
+          {userHasLiked ? <MessageFilled/> : <MessageOutlined className={styles.icon}/>}
           <span>{updatedPost?.comments ? updatedPost?.comments?.length : 0}</span>
-          {/*<CountUp end={updatedPost.likes ? updatedPost.likes.length : 0} separator="," />*/}
         </>}
       </Space>
     </a>

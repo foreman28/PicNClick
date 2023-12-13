@@ -84,10 +84,10 @@ body {
 
 
 a {
+  transition: color 0.2s ease;
   text-decoration: none;
-color: var(--color-black);
   &:hover {
-    color: var(--color-primary);
+    color: var(--color-primary) !important;
   }
 }
 

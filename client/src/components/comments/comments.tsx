@@ -27,7 +27,7 @@ export const Comments = ({author, content, createdAt}: Props) => {
 
   return (
     <List.Item>
-      <div>
+      <div className={"ql-container"} style={{width: "100%"}}>
         <Flex gap={12} align={"center"}>
           <CustomAvatar user={author}/>
           <Flex vertical>

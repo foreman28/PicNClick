@@ -1,5 +1,6 @@
 export const theme: any = {
   components: {
+    defaultColor: "var(--color-black)",
     fontFamily: "var(--font-family)",
     Tag: {
       defaultColor: "var(--color-black)",
@@ -18,7 +19,6 @@ export const theme: any = {
     List: {
       titleMarginBottom: 0,
       metaMarginBottom: 0,
-      colorLink: 'red'
       // colorText: "var(--color-primary)",
       // colorPrimary: "var(--color-primary)",
     },

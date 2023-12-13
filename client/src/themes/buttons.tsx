@@ -19,7 +19,7 @@ const values:any = {};
 variables.forEach((variable) => {
   values[variable] = getComputedStyle(document.documentElement).getPropertyValue(`${variable}`);
 });
-console.log()
+
 export const button: any =  {
   token: {
     colorPrimary: values['--color-primary'],
