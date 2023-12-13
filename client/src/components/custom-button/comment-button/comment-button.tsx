@@ -7,14 +7,14 @@ import styles from './comment-button.module.scss';
 import {useAppSelector} from "../../../hooks/hooks";
 import {useNavigate} from "react-router-dom";
 import {Paths} from "../../../paths";
+import React from "react";
 
 
 type Props = {
   post: any
 }
 
-export const CommentButton = ({post}: Props) => {
-  // const [addLikeMutation] = useToggleLikeMutation();
+export const CommentButton =  React.memo(({post}: Props) => {
   const {data: updatedPost, isLoading}: any = useGetPostQuery(post.url);
 
   const currentUserId = useAppSelector((state) => state.auth.user && state.auth.user.id);
@@ -40,10 +40,10 @@ export const CommentButton = ({post}: Props) => {
       >
         {isLoading ? '' : <>
           {userHasLiked ? <MessageFilled/> : <MessageOutlined/>}
-          <span>{updatedPost.comments ? updatedPost.comments.length : 0}</span>
+          <span>{updatedPost?.comments ? updatedPost?.comments?.length : 0}</span>
           {/*<CountUp end={updatedPost.likes ? updatedPost.likes.length : 0} separator="," />*/}
         </>}
       </Space>
     </a>
   );
-};
+})

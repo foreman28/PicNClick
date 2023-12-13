@@ -6,6 +6,8 @@ import {CustomAvatar} from "../avatar/avatar";
 import {User} from "@prisma/client";
 import {Link} from "react-router-dom";
 import {Paths} from "../../paths";
+import {format, formatDistanceToNow} from "date-fns";
+import {ru} from "date-fns/locale";
 
 
 type Props = {
@@ -15,6 +17,14 @@ type Props = {
 };
 
 export const Comments = ({author, content, createdAt}: Props) => {
+  const createdDate: any = new Date(createdAt);
+  const newDate: any = new Date();
+
+  const formattedTimestamp =
+    newDate - createdDate < 24 * 60 * 60 * 1000
+      ? formatDistanceToNow(createdDate, {locale: ru, addSuffix: true})
+      : format(createdDate, 'MMMM d, yyyy HH:mm', {locale: ru});
+
   return (
     <List.Item>
       <div>
@@ -29,7 +39,7 @@ export const Comments = ({author, content, createdAt}: Props) => {
           className={"ql-editor " + styles.content}
           style={{minHeight: "auto"}}
         />
-        <span>{moment(createdAt).format("MMMM Do YYYY, h:mm:ss a")}</span>
+        <span>{formattedTimestamp}</span>
       </div>
     </List.Item>
   );

@@ -1,9 +1,8 @@
-import {List, Space, Avatar, Flex, Typography} from 'antd';
+import {List, Space, Flex, Typography, Button, Dropdown, MenuProps} from 'antd';
 import {
-  MessageOutlined,
-  ClockCircleOutlined,
+  ClockCircleOutlined, MoreOutlined,
 } from '@ant-design/icons';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 import {ru} from 'date-fns/locale';
 import {format, formatDistanceToNow} from "date-fns";
@@ -14,19 +13,60 @@ import styles from './post-item.module.scss';
 import {Paths} from "../../../paths";
 import {CommentButton} from "../../custom-button/comment-button/comment-button";
 import {CustomAvatar} from "../../avatar/avatar";
-import {useEffect} from "react";
+import {CustomButton} from "../../custom-button/custom-button";
+import {useSelector} from "react-redux";
+import {selectUser} from "../../../features/auth/authSlice";
+import {useRemovePostMutation} from "../../../api/posts";
 
 const {Paragraph} = Typography;
 
 const PostItem = ({post}: any) => {
   const createdDate: any = new Date(post.timestamp);
   const newDate: any = new Date();
-  
+
   const formattedTimestamp =
     newDate - createdDate < 24 * 60 * 60 * 1000
       ? formatDistanceToNow(createdDate, {locale: ru, addSuffix: true})
       : format(createdDate, 'MMMM d, yyyy HH:mm', {locale: ru});
-  
+
+  const user = useSelector(selectUser)
+  const [removePost] = useRemovePostMutation()
+
+  const items: MenuProps['items'] =
+    (user?.id === post.authorId || user?.role === "ADMIN") ? (
+        [
+          {
+            key: '1',
+            label: "Поделиться",
+            onClick: () => {
+              console.log("Поделиться") // TODO
+            }
+          },
+          {
+            key: '2',
+            label: 'Изменить',
+            onClick: () => {
+              console.log("Изменить") // TODO
+            }
+          },
+          {
+            key: '3',
+            label: 'Удалить',
+            onClick: () => {
+              removePost(post.id)
+            },
+            danger: true
+            // className: styles.dropdown_item,
+          }
+        ])
+      :
+      [
+        {
+          key: '1',
+          label: "Поделиться"
+        }
+      ];
+
   return (
     <List.Item
       className={styles.item}
@@ -40,22 +80,31 @@ const PostItem = ({post}: any) => {
         </Space>,
         <Space>
           <ClockCircleOutlined/>
-          <span> {formattedTimestamp}</span>
+          <span>{formattedTimestamp}</span>
         </Space>,
       ]}
     >
       <List.Item.Meta
         description={
           <Flex gap={8} vertical>
-            <Space>
+            <Flex justify={"space-between"}>
               <Flex gap={12} align={"center"}>
                 <CustomAvatar user={post.author}/>
                 <Flex vertical>
-                  <Link to={`${Paths.profile}/` + post.author.username} className={styles.username}>{post.author.username}</Link>
+                  <Link
+                    to={`${Paths.profile}/` + post.author.username}
+                    className={styles.username}
+                  >
+                    {post.author.username}
+                  </Link>
                 </Flex>
               </Flex>
-            </Space>
-            
+
+              <Dropdown menu={{items}} trigger={['click']} placement="bottomRight">
+                <MoreOutlined className={styles.icon}/>
+              </Dropdown>
+            </Flex>
+
             <Link style={{display: "contents"}} to={`${Paths.forum}/${post.url}`}>
               {`${process.env.REACT_APP_URL}${post.image}` ?
                 <img
@@ -70,7 +119,7 @@ const PostItem = ({post}: any) => {
                 ""
               }
             </Link>
-            
+
             <Flex gap={0} vertical>
               <Link className={styles.title} to={`/forum/${post.url}`}>
                 {post.title}

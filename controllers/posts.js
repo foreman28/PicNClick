@@ -20,6 +20,10 @@ const all = async (req, res) => {
       },
     };
 
+    if (!page && pageSize) {
+      findManyOptions.take = +pageSize;
+    }
+
     if (page && pageSize) {
       findManyOptions.skip = ((+page) - 1) * (+pageSize);
       findManyOptions.take = +pageSize;
@@ -133,16 +137,27 @@ const add = async (req, res) => {
  * @access Private
  */
 const remove = async (req, res) => {
-  const {id} = req.body;
-
+  const {id} = req.params;
+  console.log(req.params)
   try {
-    await prisma.forumPost.delete({
+    const post = await prisma.forumPost.findFirst({
       where: {
-        id,
-      },
+        id: +id,
+      }
     });
 
-    res.status(204).json("OK");
+    if (req.user.role === "ADMIN" || post.authorId === req.user.id){
+      await prisma.forumPost.delete({
+        where: {
+          id: +id,
+        },
+      });
+
+      res.status(204).json("OK");
+    }
+    else {
+      res.status(401).json("Отказ в доступе");
+    }
   } catch {
     res.status(500).json({message: "Не удалось удалить пост"});
   }

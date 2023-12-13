@@ -12,13 +12,14 @@ const prisma = new PrismaClient();
 // @ts-ignore
 async function createUsers() {
   try {
-    for (let i = 1; i <= 100; i++) {
+    for (let i = 1; i <= 10; i++) {
       await prisma.user.create({
         data: {
           username: `asd${i}`,
           email: `asd${i}@gmail.com`,
           password: `$2b$10$id.9tqKri3aXqKGChDm51OEZ7wKJXEExAyXriGCgpszUgKPlOMVQS`,
-          avatarURL: `uploads/stubs/stubs-avatar.jpg`,
+          avatarURL: `/uploads/stubs/stubs-avatar.jpg`,
+          role: `USER`
         },
       });
     }

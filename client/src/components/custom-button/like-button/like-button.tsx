@@ -5,7 +5,7 @@ import {useGetPostQuery} from "../../../api/posts";
 import CountUp from 'react-countup';
 
 import styles from './like-button.module.scss';
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {useAppSelector} from "../../../hooks/hooks";
 
 
@@ -13,10 +13,10 @@ type Props = {
   post: any
 }
 
-export const LikeButton = ({post}: Props) => {
+export const LikeButton = React.memo(({post}: Props) => {
   const [addLikeMutation] = useToggleLikeMutation();
   const {data: updatedPost, isLoading, refetch}: any = useGetPostQuery(post.url);
-  
+  console.log(1)
   const currentUserId = useAppSelector((state) => state.auth.user && state.auth.user.id);
   
   const userHasLiked = updatedPost && updatedPost.likes ? updatedPost.likes.some((like: any) => like.userId === currentUserId) : false;
@@ -30,7 +30,7 @@ export const LikeButton = ({post}: Props) => {
       console.error('Error adding like:', error);
     }
   };
-  
+
   return (
     <Space
       key="like"
@@ -40,9 +40,9 @@ export const LikeButton = ({post}: Props) => {
     >
       {isLoading ? '' : <>
         {userHasLiked ? <LikeFilled/> : <LikeOutlined/>}
-        <span>{updatedPost.likes ? updatedPost.likes.length : 0}</span>
+        <span>{updatedPost?.likes ? updatedPost?.likes?.length : 0}</span>
         {/*<CountUp end={updatedPost.likes ? updatedPost.likes.length : 0} separator="," />*/}
       </>}
     </Space>
   );
-};
+})

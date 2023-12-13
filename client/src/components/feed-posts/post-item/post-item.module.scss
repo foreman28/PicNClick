@@ -66,3 +66,15 @@
   border-radius: 6px;
   aspect-ratio: 31 / 14;
 }
+
+.icon {
+  font-size: 24px;
+  cursor: pointer;
+  &:hover{
+    color: var(--accent-2);
+  }
+}
+
+.dropdown_item {
+  //background: var(-);
+}

@@ -84,7 +84,8 @@ const login = async (req, res) => {
         id: user.id,
         username: user.username,
         email: user.email,
-        token: jwt.sign({ id: user.id }, secret, { expiresIn: TOKEN_EXPIRATION })
+        token: jwt.sign({ id: user.id }, secret, { expiresIn: TOKEN_EXPIRATION }),
+        role: user.role,
       })
     } else {
       return res.status(400).json({ message: 'Неверно введен логин или пароль' })
@@ -136,7 +137,8 @@ const register = async (req, res, next) => {
         email,
         username,
         password: hashedPassword,
-        avatarURL: '/uploads/stubs/stubs-avatar.jpg'
+        avatarURL: '/uploads/stubs/stubs-avatar.jpg',
+        role: "USER",
       }
     });
 
@@ -147,7 +149,8 @@ const register = async (req, res, next) => {
         id: user.id,
         email: user.email,
         username,
-        token: jwt.sign({ id: user.id }, secret, { expiresIn: TOKEN_EXPIRATION })
+        token: jwt.sign({ id: user.id }, secret, { expiresIn: TOKEN_EXPIRATION }),
+        role: user.role,
       })
     } else {
       return res.status(400).json({ message: 'Не удалось создать пользователя' })

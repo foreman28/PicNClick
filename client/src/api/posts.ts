@@ -38,8 +38,7 @@ export const postsApi = api.injectEndpoints({
     removePost: builder.mutation<string, string>({
       query: (id) => ({
         url: `/posts/remove/${id}`,
-        method: "POST",
-        body: {id},
+        method: "DELETE",
       }),
     }),
     addPost: builder.mutation<ForumPost, ForumPost>({

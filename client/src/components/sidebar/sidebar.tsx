@@ -1,5 +1,5 @@
 import {Flex, Layout, List} from "antd";
-import {Link, } from "react-router-dom";
+import {Link,} from "react-router-dom";
 
 import {LinkOutlined, StarOutlined} from '@ant-design/icons';
 
@@ -10,6 +10,7 @@ import {CommentButton} from "../custom-button/comment-button/comment-button";
 
 import styles from "./sidebar.module.scss";
 import Paragraph from "antd/es/typography/Paragraph";
+
 export const Sidebar = () => {
   // const onLogoutClick = () => {
   //   dispatch(logout());
@@ -17,14 +18,15 @@ export const Sidebar = () => {
   //   navigate("/login");
   // };
 
-  const {data: likesPosts} = useGetAllPostsQuery({
+  const {data: likesPosts, isLoading: isLoadingLikes} = useGetAllPostsQuery({
+    pageSize: 3,
     filters: {
       sort: 'likes',
       order: 'desc'
     }
   });
-
-  const {data: commentsPosts} = useGetAllPostsQuery({
+  const {data: commentsPosts, isLoading: isLoadingPosts} = useGetAllPostsQuery({
+    pageSize: 3,
     filters: {
       sort: 'comments',
       order: 'desc'
@@ -43,27 +45,29 @@ export const Sidebar = () => {
             <StarOutlined style={{fontSize: '18px'}}/>
             <span className={styles.sidebar_title}>В фокусе</span>
           </Flex>
-          <List
-            size="small"
-            dataSource={likesPosts?.slice(0, 6)}
-            className={styles.sidebar_list}
-            renderItem={(item) =>
-              <List.Item className={styles.sidebar_item}>
-                <Flex justify={"space-between"} style={{width: '100%'}} gap={12} align={"center"}>
-                  <Paragraph ellipsis={{rows: 1}} style={{margin: 0}}>
-                    <Link to={`${Paths.forum}/${item.url}`} className={styles.sidebar_link}>
-                      {item.title}
-                    </Link>
-                  </Paragraph>
-                  <Flex gap={16}>
-                    <LikeButton post={item}/>
-                    {/*<CommentButton post={item}/>*/}
+          {isLoadingLikes ? "" :
+            <List
+              size="small"
+              dataSource={likesPosts}
+              className={styles.sidebar_list}
+              renderItem={(item) =>
+                <List.Item className={styles.sidebar_item} key={item.id}>
+                  <Flex justify={"space-between"} style={{width: '100%'}} gap={12} align={"center"}>
+                    <Paragraph ellipsis={{rows: 1}} style={{margin: 0}}>
+                      <Link to={`${Paths.forum}/${item.url}`} className={styles.sidebar_link}>
+                        {item.title}
+                      </Link>
+                    </Paragraph>
+                    <Flex gap={16}>
+                      <LikeButton post={item}/>
+                      {/*<CommentButton post={item}/>*/}
+                    </Flex>
                   </Flex>
-                </Flex>
-              </List.Item>
-            }
-            locale={{emptyText: 'Пусто'}}
-          />
+                </List.Item>
+              }
+              locale={{emptyText: 'Пусто'}}
+            />
+          }
         </Flex>
 
         <Flex gap={"small"} vertical>
@@ -71,27 +75,29 @@ export const Sidebar = () => {
             <LinkOutlined style={{fontSize: '18px'}}/>
             <span className={styles.sidebar_title}>Стоит прочитать</span>
           </Flex>
-          <List
-            size="small"
-            dataSource={commentsPosts?.slice(0, 6)}
-            className={styles.sidebar_list}
-            renderItem={(item) =>
-              <List.Item className={styles.sidebar_item}>
-                <Flex justify={"space-between"} style={{width: '100%'}} gap={12} align={"center"}>
-                  <Paragraph ellipsis={{rows: 1}} style={{margin: 0}}>
-                  <Link to={`${Paths.forum}/${item.url}`} className={styles.sidebar_link}>
-                      {item.title}
-                  </Link>
-                  </Paragraph>
-                  <Flex gap={16}>
-                    {/*<LikeButton post={item}/>*/}
-                    <CommentButton post={item}/>
+          {isLoadingPosts ? "" :
+            <List
+              size="small"
+              dataSource={commentsPosts}
+              className={styles.sidebar_list}
+              renderItem={(item) =>
+                <List.Item className={styles.sidebar_item} key={item.id}>
+                  <Flex justify={"space-between"} style={{width: '100%'}} gap={12} align={"center"}>
+                    <Paragraph ellipsis={{rows: 1}} style={{margin: 0}}>
+                      <Link to={`${Paths.forum}/${item.url}`} className={styles.sidebar_link}>
+                        {item.title}
+                      </Link>
+                    </Paragraph>
+                    <Flex gap={16}>
+                      {/*<LikeButton post={item}/>*/}
+                      <CommentButton post={item}/>
+                    </Flex>
                   </Flex>
-                </Flex>
-              </List.Item>
-            }
-            locale={{emptyText: 'Пусто'}}
-          />
+                </List.Item>
+              }
+              locale={{emptyText: 'Пусто'}}
+            />
+          }
         </Flex>
 
       </Flex>

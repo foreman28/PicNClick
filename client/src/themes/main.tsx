@@ -1,5 +1,6 @@
 export const theme: any = {
   components: {
+    fontFamily: "var(--font-family)",
     Tag: {
       defaultColor: "var(--black-1)",
       colorFillTertiary: "var(--accent-1)"
@@ -22,6 +23,9 @@ export const theme: any = {
     },
     Input: {
       controlHeight: 40,
+    },
+    Dropdown: {
+      fontSize: 14,
     }
   }
 };

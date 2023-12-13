@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {Paths} from "../../paths";
 
 import styles from './custom-tag.module.scss';
+import React from "react";
 
 type Props = {
   style?: React.CSSProperties;
