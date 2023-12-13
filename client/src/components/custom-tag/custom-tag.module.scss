@@ -1,5 +1,5 @@
 .tag {
-  //color: var(--black-2);
+  //color: var(--color-black-100);
   font-family: var(--font-family);
   font-size: 16px;
   font-style: normal;
@@ -13,8 +13,8 @@
   transition: background-color 0.2s ease-in, border-color 0.2s ease-in;
 
   &:hover {
-    background-color: var(--white-1);
-    border-color: var(--accent-2);
+    background-color: var(--color-white);
+    border-color: var(--color-primary);
   }
 
   &>a {

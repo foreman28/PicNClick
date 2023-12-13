@@ -1,7 +1,7 @@
 .item {
   border-radius: 5px;
-  border: 1px solid var(--white-2);
-  background: var(--white-1);
+  border: 1px solid var(--color-white-100);
+  background: var(--color-white);
 
   box-shadow: 2px 1px 5px 0 rgba(0, 0, 0, 0.15);
 
@@ -9,7 +9,7 @@
 }
 
 .username {
-  color: var(--black-1);
+  color: var(--color-black);
   font-family: var(--font-family);
   font-size: 16px;
   font-style: normal;
@@ -19,7 +19,7 @@
 }
 
 .title {
-  color: var(--black-1);
+  color: var(--color-black);
   font-family: var(--font-family);
   font-size: 32px;
   font-style: normal;
@@ -35,7 +35,7 @@
 }
 
 .text {
-  color: var(--black-1);
+  color: var(--color-black);
   font-family: var(--font-family);
   font-size: 18px;
   font-style: normal;
@@ -48,7 +48,7 @@
 }
 
 //.tag {
-//  //color: var(--black-2);
+//  //color: var(--color-black-100);
 //  font-family: var(--font-family);
 //  font-size: 16px;
 //  font-style: normal;
@@ -71,7 +71,7 @@
   font-size: 24px;
   cursor: pointer;
   &:hover{
-    color: var(--accent-2);
+    color: var(--color-primary);
   }
 }
 

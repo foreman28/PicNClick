@@ -3,12 +3,12 @@
   transition: color 0.2s ease;
 
   &:hover {
-    color: var(--accent-2);
+    color: var(--color-primary);
   }
 }
 
 .btn-active {
-  color: var(--accent-2);
+  color: var(--color-primary);
 }
 
 @keyframes rotate-in-2-tl-ccw {

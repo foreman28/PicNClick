@@ -1,6 +1,7 @@
 import React from "react";
 import {Button, ConfigProvider} from "antd";
 import styles from "./custom-button.module.scss"
+import "./../../index.scss"
 
 type Props = {
   theme?:any,

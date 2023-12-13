@@ -34,13 +34,13 @@
   padding: 10px 0;
 
   &:hover {
-    background: var(--bg);
+    background: var(--color-bg);
   }
 }
 
 .title {
   display: flex;
-  color: var(--black-1);
+  color: var(--color-black);
   font-family: var(--font-family);
   font-size: 16px;
   font-style: normal;
@@ -50,7 +50,7 @@
 }
 
 .text {
-  color: var(--black-1);
+  color: var(--color-black);
   font-family: var(--font-family);
   font-size: 14px;
   font-style: normal;

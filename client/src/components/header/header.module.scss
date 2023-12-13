@@ -1,6 +1,6 @@
 .header {
-  background-color: var(--white-1);
-  border-bottom: 1px solid var(--white-2);
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-white-100);
   margin-bottom: -1px;
   z-index: 100;
 
@@ -37,7 +37,7 @@
   display: flex;
   align-items: center;
 
-  color: var(--black-1);
+  color: var(--color-black);
   font-family: var(--font-family), sans-serif;
   font-size: 22px;
   font-style: normal;
@@ -48,7 +48,7 @@
 
 .logo_content span span {
   font-weight: 700;
-  color: var(--accent-2);
+  color: var(--color-primary);
 }
 
 .header_items {

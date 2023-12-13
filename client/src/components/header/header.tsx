@@ -41,7 +41,7 @@ export const Header = React.memo(() => {
           <Flex className={styles.btns} justify={"end"} gap={12}>
             {user ? (
               <>
-                <CustomButton theme={button2} type="primary" style={{background:"var(--accent-3)"}}>
+                <CustomButton theme={button2} type="primary" style={{background:"var(--color-success)"}}>
                   {user.role}
                 </CustomButton>
 

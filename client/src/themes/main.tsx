@@ -2,8 +2,8 @@ export const theme: any = {
   components: {
     fontFamily: "var(--font-family)",
     Tag: {
-      defaultColor: "var(--black-1)",
-      colorFillTertiary: "var(--accent-1)"
+      defaultColor: "var(--color-black)",
+      colorFillTertiary: "var(--color-accent)"
     },
     Typography: {
       lineHeightHeading1: 1.5,
@@ -18,8 +18,9 @@ export const theme: any = {
     List: {
       titleMarginBottom: 0,
       metaMarginBottom: 0,
-      // colorText: "var(--accent-2)",
-      // colorPrimary: "var(--accent-2)",
+      colorLink: 'red'
+      // colorText: "var(--color-primary)",
+      // colorPrimary: "var(--color-primary)",
     },
     Input: {
       controlHeight: 40,

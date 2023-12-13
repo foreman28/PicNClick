@@ -1,5 +1,5 @@
 .sidebar {
-  background-color: var(--white-1);
+  background-color: var(--color-white);
   position: relative;
   width: 100%;
 
@@ -16,7 +16,7 @@
   /*margin-inline: auto;*/
 
   padding: 40px 0;
-  background-color: var(--white-1);
+  background-color: var(--color-white);
 }
 
 
@@ -25,7 +25,7 @@
 }
 
 .sidebar_title {
-  color: var(--black-2);
+  color: var(--color-black-100);
   font-family: var(--font-family);
   font-size: 12px;
   font-style: normal;
@@ -48,11 +48,11 @@
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: var(--white-2);
+    background-color: var(--color-white-100);
   }
 
   & span {
-    color: var(--black-1);
+    color: var(--color-black);
     font-family: var(--font-family);
     font-size: 13px;
     font-style: normal;
@@ -63,7 +63,7 @@
 
   &.active {
     position: relative;
-    background-color: var(--accent-2-1);
+    background-color: var(--color-primary-500);
 
     &:before {
       content: '';
@@ -71,7 +71,7 @@
       left: 0;
       height: 100%;
       width: 5px;
-      background-color: var(--accent-2);
+      background-color: var(--color-primary);
     }
 
     & span {

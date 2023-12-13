@@ -10,17 +10,17 @@
 .sidebar_container {
 
   padding: 20px 20px;
-  background-color: var(--white-1);
+  background-color: var(--color-white);
   border-radius: 5px;
 }
 
 
 .sidebar_list {
-  border-top: 1px solid var(--black-2);
+  border-top: 1px solid var(--color-black-100);
 }
 
 .sidebar_title {
-  color: var(--black-1);
+  color: var(--color-black);
   font-family: var(--font-family);
   font-size: 13px;
   font-style: normal;
@@ -51,10 +51,10 @@
   //  width: 5px;
   //  height: 5px;
   //  border-radius: 999px;
-  //  background: var(--black-1);
+  //  background: var(--color-black);
   //}
   //&:hover:before {
-  //  background: var(--accent-2);
+  //  background: var(--color-primary);
   //}
   
 }

@@ -1,37 +1,35 @@
 import '../index.scss';
 
 const variables = [
-  'accent-1',
-  'accent-1-1',
-  'accent-2',
-  'accent-2-1',
+  '--color-primary',
+  '--color-primary-500',
 
-  'white-1',
-  'white-2',
+  '--color-white',
+  '--color-white-100',
 
-  'text-1',
-  'text-2',
+  '--color-black',
+  '--color-black-100',
 
-  'error',
-  'good',
+  '--color-error',
+  '--color-success',
 ];
 
 const values:any = {};
 
 variables.forEach((variable) => {
-  values[variable] = getComputedStyle(document.documentElement).getPropertyValue(`--${variable}`);
+  values[variable] = getComputedStyle(document.documentElement).getPropertyValue(`${variable}`);
 });
-
+console.log()
 export const button: any =  {
   token: {
-    colorPrimary: values['accent-2'],
+    colorPrimary: values['--color-primary'],
     controlHeight: '40',
   },
 };
 
 export const button2: any =  {
   token: {
-    colorPrimary: values['text-1'],
+    colorPrimary: values['--color-black'],
     controlHeight: '40',
   },
 };

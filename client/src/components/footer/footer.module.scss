@@ -1,5 +1,5 @@
 .footer {
-  background-color: var(--black-1);
+  background-color: var(--color-black);
 }
 
 .footer_container {
@@ -36,7 +36,7 @@
   display: flex;
   align-items: center;
 
-  color: var(--black-2);
+  color: var(--color-black-100);
   font-family: var(--font-family), sans-serif;
   font-size: 24px;
   font-style: normal;
@@ -47,10 +47,10 @@
   transition: color 0.2s ease;
 
   &:hover {
-    color: var(--white-2);
+    color: var(--color-white-100);
 
     & > span {
-      color: var(--accent-2);
+      color: var(--color-primary);
     }
   }
 
@@ -58,13 +58,13 @@
     transform: rotate(0deg);
     display: inline-flex;
     font-weight: 700;
-    color: var(--black-2);
+    color: var(--color-black-100);
   }
 }
 
 
 .footer__title {
-  color: var(--white-2);
+  color: var(--color-white-100);
   font-family: var(--font-family);
   font-size: 14px;
   font-style: normal;
@@ -81,7 +81,7 @@
 }
 
 .footer__item {
-  color: var(--black-2);
+  color: var(--color-black-100);
   font-family: var(--font-family);
   font-size: 14px;
   font-style: normal;
@@ -90,7 +90,7 @@
   letter-spacing: 0.05rem;
 
   &:hover{
-    color: var(--white-2);
+    color: var(--color-white-100);
   }
 }
 
@@ -101,7 +101,7 @@
 }
 
 .info {
-  color: var(--black-2);
+  color: var(--color-black-100);
   font-family: var(--font-family);
   font-size: 12px;
   font-style: normal;
@@ -116,8 +116,8 @@
 
 .social_network path{
   transition: stroke 0.2s ease;
-  stroke: var(--black-2);
+  stroke: var(--color-black-100);
 }
 .social_network:hover path{
-  stroke: var(--white-1);
+  stroke: var(--color-white);
 }
