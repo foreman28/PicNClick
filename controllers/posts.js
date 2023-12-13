@@ -3,7 +3,7 @@ const slugify = require('slugify');
 
 /**
  * @route POST /api/posts
- * @desc Получение всех постов
+ * @desc Получение всех постов // поиск // поиск по тегу // фильтры // сортировка
  * @access Private
  */
 const all = async (req, res) => {
