@@ -13,20 +13,20 @@ import { Auth } from "./features/auth/auth";
 import { theme } from "./themes/main";
 
 // Pages
-import {Register} from "./pages/register/Register";
-import {Login} from "./pages/login/Login";
-import {Home} from "./pages/home/Home";
-import {Forum} from "./pages/forum/Forum";
-import {Search} from "./pages/search/Search";
-import {Tags} from "./pages/tags/Tags";
-import {NotFound} from "./pages/notFound/NotFound";
-import {Post} from "./pages/post/Post";
-import {Users} from "./pages/users/Users";
-import {AddPost} from "./pages/add-post/Add-post";
-import {Profile} from "./pages/profile/Profile";
+import {Register} from "./pages/Register/Register";
+import {Login} from "./pages/Login/Login";
+import {Home} from "./pages/Home/Home";
+import {Forum} from "./pages/Forum/Forum";
+import {Search} from "./pages/Search/Search";
+import {Tags} from "./pages/Tags/Tags";
+import {NotFound} from "./pages/NotFound/NotFound";
+import {Post} from "./pages/Post/Post";
+import {Users} from "./pages/Users/Users";
+import {AddPost} from "./pages/Add-post/Add-post";
+import {Profile} from "./pages/Profile/Profile";
 
 import "./index.scss";
-import {YourPosts} from "./pages/yourPosts/YourPosts";
+import {YourPosts} from "./pages/YourPosts/YourPosts";
 
 const router = createBrowserRouter([
   {

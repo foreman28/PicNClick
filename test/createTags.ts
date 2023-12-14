@@ -142,7 +142,7 @@ const tagsData: TagData[] = [
       });
     }
   } catch (error) {
-    console.error('Error creating tags:', error);
+    console.error('Error creating Tags:', error);
   } finally {
     await prisma.$disconnect();
   }

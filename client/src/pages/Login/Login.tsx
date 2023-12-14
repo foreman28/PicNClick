@@ -77,7 +77,7 @@ export const Login = () => {
               <ErrorMessage message={error}/>
             </Space>
           </div>
-          <img srcSet={"./img/login-img.png"} alt={'photo'} className={styles.image}/>
+          <img srcSet={"./img/Login-img.png"} alt={'photo'} className={styles.image}/>
         </Flex>
       </Layout.Content>
       <Footer/>

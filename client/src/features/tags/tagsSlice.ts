@@ -18,7 +18,7 @@ const slice = createSlice({
   // extraReducers: (builder) => {
   //   builder
   //     .addMatcher(tagsApi.endpoints.getAllTags.matchFulfilled, (state, action) => {
-  //       state.tags = action.payload;
+  //       state.Tags = action.payload;
   //     });
   //   // Add other matchers for additional tag-related actions if needed
   // },
@@ -26,4 +26,4 @@ const slice = createSlice({
 
 export default slice.reducer;
 
-// export const selectTags = (state: RootState) => state.tags.tags;
+// export const selectTags = (state: RootState) => state.Tags.Tags;

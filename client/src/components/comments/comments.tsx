@@ -1,46 +1,85 @@
 import React from "react";
-import {Avatar, Flex, List} from "antd";
-import moment from "moment";
-import styles from "./comments.module.scss";
-import {CustomAvatar} from "../avatar/avatar";
-import {User} from "@prisma/client";
-import {Link} from "react-router-dom";
-import {Paths} from "../../paths";
-import {format, formatDistanceToNow} from "date-fns";
-import {ru} from "date-fns/locale";
+import {Flex, Form, List, Typography} from "antd";
+import {Comment} from "../comment/comment";
+import styles from "../../pages/Post/Post.module.scss";
+import {CustomTextarea} from "../custom-textarea/custom-textarea";
+import {button} from "../../themes/buttons";
+import {useAddCommentMutation} from "../../api/comment";
+import {CustomButton} from "../custom-button/custom-button";
 
+const {Title} = Typography;
 
 type Props = {
-  author: User;
-  content: string;
-  createdAt: string;
+  post: any;
+  refetch: any;
 };
 
-export const Comments = ({author, content, createdAt}: Props) => {
-  const createdDate: any = new Date(createdAt);
-  const newDate: any = new Date();
-
-  const formattedTimestamp =
-    newDate - createdDate < 24 * 60 * 60 * 1000
-      ? formatDistanceToNow(createdDate, {locale: ru, addSuffix: true})
-      : format(createdDate, 'MMMM d, yyyy HH:mm', {locale: ru});
-
+export const Comments = ({post, refetch}: Props) => {
+  const modules = {
+    toolbar: [
+      [{'header': [1, 2, 3, false]}],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    ],
+  };
+  
+  const formats = [
+    'header',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+  ];
+  
+  
+  const [addComment, {isLoading: isLoadingComment}] = useAddCommentMutation();
+  
+  const onFinish = async (data: any) => {
+    try {
+      data = {
+        ...data,
+        forumPostId: post.id
+      }
+      await addComment(data);
+      refetch();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
   return (
-    <List.Item>
-      <div className={"ql-container"} style={{width: "100%"}}>
-        <Flex gap={12} align={"center"}>
-          <CustomAvatar user={author}/>
-          <Flex vertical>
-            <Link to={`${Paths.profile}/` + author.username} className={styles.username}>{author.username}</Link>
-          </Flex>
-        </Flex>
-        <div
-          dangerouslySetInnerHTML={{__html: content}}
-          className={"ql-editor " + styles.content}
-          style={{minHeight: "auto"}}
+    <Flex vertical gap={12} className={styles.comments} id={'comments'}>
+      <Title>Сообщения:</Title>
+      <Form onFinish={onFinish}>
+        <CustomTextarea
+          name={"content"}
+          placeholder={"Напишите сообщение"}
+          modules={modules}
+          formats={formats}
         />
-        <span>{formattedTimestamp}</span>
-      </div>
-    </List.Item>
+        
+        <CustomButton
+          type={"primary"}
+          htmlType={"submit"}
+          loading={isLoadingComment}
+          theme={button}
+        >
+          Добавить пост
+        </CustomButton>
+      
+      </Form>
+      
+      {post.comments && (
+        <List
+          itemLayout="horizontal"
+          dataSource={post.comments}
+          renderItem={(comment: any) => (
+            <Comment
+              key={comment.id}
+              author={comment.user}
+              content={comment.content}
+              createdAt={comment.createdAt}
+            />
+          )}
+          locale={{emptyText: "Нет сообщений"}}
+        />
+      )}
+    </Flex>
   );
 };

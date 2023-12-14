@@ -23,7 +23,7 @@ export const Search = () => {
   const handleSearch = async (value: any) => {
     const API_URL = process.env.REACT_APP_API_URL;
 
-      // Treat it as a regular text-based search
+      // Treat it as a regular text-based Search
       const apiUrl = value ? `${API_URL}/posts?q=${value}` : `${API_URL}/posts`;
     // console.log(apiUrl)
       try {
@@ -32,7 +32,7 @@ export const Search = () => {
         setSuggestions(data);
         // console.log(data)
       } catch (error) {
-        console.error('Error search:', error);
+        console.error('Error Search:', error);
       }
     
   };

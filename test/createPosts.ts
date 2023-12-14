@@ -10,12 +10,12 @@ interface Tag {
   id: number;
 }
 
-// Function to get a random number of tags to connect
+// Function to get a random number of Tags to connect
 function getRandomTagCount(maxCount: number): number {
   return Math.floor(Math.random() * maxCount) + 1;
 }
 
-// Function to get a random tag ID from an array of tags
+// Function to get a random tag ID from an array of Tags
 function getRandomTag(tags: Tag[]): Tag {
   const randomIndex = Math.floor(Math.random() * tags.length);
   return tags[randomIndex];
@@ -23,11 +23,11 @@ function getRandomTag(tags: Tag[]): Tag {
 // @ts-ignore
 (async () => {
   try {
-    // Assuming you have retrieved the available tags from your database
+    // Assuming you have retrieved the available Tags from your database
     const allTags: Tag[] = await prisma.tags.findMany();
     
     for (let i = 1; i <= 100; i++) {
-      const randomTagCount = getRandomTagCount(3); // Change 3 to the maximum number of tags per post
+      const randomTagCount = getRandomTagCount(3); // Change 3 to the maximum number of Tags per Post
       
       // @ts-ignore
       const tagsToConnect: Tag[] = Array.from({ length: randomTagCount }, () => getRandomTag(allTags));

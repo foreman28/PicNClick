@@ -129,7 +129,7 @@ const add = async (req, res) => {
       },
     });
 
-    // console.log(post);
+    // console.log(Post);
 
     return res.status(201).json(post);
   } catch (error) {

@@ -2,18 +2,18 @@ export const Paths = {
   home: '/',
   all: '/*',
 
-  login: '/login',
-  register: '/register',
+  login: '/Login',
+  register: '/Register',
 
-  search: '/search',
+  search: '/Search',
 
-  forum: '/forum',
-  yourPosts: '/forum/yours-post',
-  addPost: '/forum/add-post',
-  editPost: '/forum/edit-post',
+  forum: '/Forum',
+  yourPosts: '/Forum/yours-Post',
+  addPost: '/Forum/Add-Post',
+  editPost: '/Forum/edit-Post',
 
-  profile: '/profile',
+  profile: '/Profile',
 
-  tags: '/tags',
-  users: '/users',
+  tags: '/Tags',
+  users: '/Users',
 } as const;

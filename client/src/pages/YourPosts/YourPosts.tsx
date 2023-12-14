@@ -41,8 +41,8 @@ export const YourPosts = () => {
           <p>Loading...</p>
         ) : (
           <>
-            {/*{posts && posts.map(({id, ...post}: any) => (*/}
-            {/*  <PostItem key={id} post={post}/>*/}
+            {/*{posts && posts.map(({id, ...Post}: any) => (*/}
+            {/*  <PostItem key={id} Post={Post}/>*/}
             {/*))}*/}
             <List
               itemLayout="vertical"

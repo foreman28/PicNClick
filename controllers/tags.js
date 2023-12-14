@@ -2,7 +2,7 @@ const {prisma} = require("../prisma/prisma-client");
 const transliteration = require("transliteration");
 
 /**
- * @route GET /api/tags
+ * @route GET /api/Tags
  * @desc Получение всех тегов
  * @access Public
  */
@@ -16,14 +16,14 @@ const allTags = async (req, res) => {
 
     res.status(200).json(tags);
   } catch (error) {
-    console.error('Error fetching tags:', error);
+    console.error('Error fetching Tags:', error);
     res.status(500).json({message: "Не удалось получить теги"});
   }
 };
 
 
 /**
- * @route GET /api/tags/:id
+ * @route GET /api/Tags/:id
  * @desc Получение тега по ID
  * @access Public
  */
@@ -53,7 +53,7 @@ const tagById = async (req, res) => {
 };
 
 /**
- * @route POST /api/tags/add
+ * @route POST /api/Tags/add
  * @desc Добавление тега
  * @access Private
  */
@@ -86,7 +86,7 @@ const addTag = async (req, res) => {
 };
 
 /**
- * @route DELETE /api/tags/remove/:id
+ * @route DELETE /api/Tags/remove/:id
  * @desc Удаление тега
  * @access Private
  */
@@ -108,7 +108,7 @@ const removeTag = async (req, res) => {
 };
 
 /**
- * @route PUT /api/tags/edit/:id
+ * @route PUT /api/Tags/edit/:id
  * @desc Редактирование тега
  * @access Private
  */

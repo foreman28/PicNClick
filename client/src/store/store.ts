@@ -3,7 +3,7 @@ import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import auth from '../features/auth/authSlice';
 // import posts from '../features/posts/postsSlice';
 // import likes from '../features/likes/likesSlice';
-// import tags from '../features/tags/tagsSlice';
+// import Tags from '../features/Tags/tagsSlice';
 import { listenerMiddleware } from "../middleware/auth";
 import {api} from "../api/apiConfig";
 
@@ -13,7 +13,7 @@ export const store = configureStore({
     auth,
     // posts,
     // likes,
-    // tags
+    // Tags
   },
   devTools: true,
   middleware: (getDefaultMiddleware) =>

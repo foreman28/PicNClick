@@ -15,7 +15,7 @@ export const Sidebar = () => {
   // const onLogoutClick = () => {
   //   dispatch(logout());
   //   localStorage.removeItem("token");
-  //   navigate("/login");
+  //   navigate("/Login");
   // };
 
   const {data: likesPosts, isLoading: isLoadingLikes} = useGetAllPostsQuery({
@@ -60,7 +60,7 @@ export const Sidebar = () => {
                     </Paragraph>
                     <Flex gap={16}>
                       <LikeButton post={item}/>
-                      {/*<CommentButton post={item}/>*/}
+                      {/*<CommentButton Post={item}/>*/}
                     </Flex>
                   </Flex>
                 </List.Item>
@@ -89,7 +89,7 @@ export const Sidebar = () => {
                       </Link>
                     </Paragraph>
                     <Flex gap={16}>
-                      {/*<LikeButton post={item}/>*/}
+                      {/*<LikeButton Post={item}/>*/}
                       <CommentButton post={item}/>
                     </Flex>
                   </Flex>

@@ -1,7 +1,7 @@
 const {prisma} = require("../prisma/prisma-client");
 
 /**
- * @route GET /api/comments
+ * @route GET /api/comment
  * @desc Получение всех комментариев
  * @access Public
  */
@@ -9,7 +9,7 @@ const allComments = async (req, res) => {
   try {
     const comments = await prisma.comments.findMany({
       // include: {
-      //   post: true,
+      //   Post: true,
       //   user: true
       // },
     });
@@ -22,7 +22,7 @@ const allComments = async (req, res) => {
 
 
 /**
- * @route GET /api/comments/:id
+ * @route GET /api/comment/:id
  * @desc Получение комментария по ID
  * @access Public
  */
@@ -36,7 +36,7 @@ const commentById = async (req, res) => {
         id: +id,
       },
       // include: {
-      //   post: true,
+      //   Post: true,
       //   user: true
       // },
     });
@@ -52,11 +52,12 @@ const commentById = async (req, res) => {
 };
 
 /**
- * @route POST /api/comments/add
+ * @route POST /api/comment/add
  * @desc Добавление комментария
  * @access Private
  */
 const addComment = async (req, res) => {
+  console.log(req.body)
   try {
     const { forumPostId, content } = req.body;
     // console.log(req.body)
@@ -75,7 +76,7 @@ const addComment = async (req, res) => {
 };
 
 /**
- * @route DELETE /api/comments/remove/:id
+ * @route DELETE /api/comment/remove/:id
  * @desc Удаление комментария
  * @access Private
  */
@@ -96,7 +97,7 @@ const removeComment = async (req, res) => {
 };
 
 /**
- * @route PUT /api/comments/edit/:id
+ * @route PUT /api/comment/edit/:id
  * @desc Редактирование комментария
  * @access Private
  */

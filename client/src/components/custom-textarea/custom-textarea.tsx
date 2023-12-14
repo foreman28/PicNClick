@@ -4,6 +4,8 @@ import {useState} from "react";
 import ReactQuill from 'react-quill'; // or quill
 import 'react-quill/dist/quill.snow.css';
 
+
+
 import './custom-textarea.scss';
 
 
@@ -55,6 +57,7 @@ export const CustomTextarea = (
     formats = customFormats
   }
   
+  // const [value, setValue] = useState("123");
   const [content, setContent] = useState("");
   const [error, setError] = useState("Обязательное поле");
   const [valueLength, setValueLength] = useState(true);

@@ -21,7 +21,7 @@ export const SearchComponent = () => {
       try {
         setSearch(value)
       } catch (error) {
-        console.error('Error fetching search suggestions:', error);
+        console.error('Error fetching Search suggestions:', error);
       }
     } else {
       setSearch('')

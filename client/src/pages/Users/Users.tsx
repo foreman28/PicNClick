@@ -18,7 +18,7 @@ export const Users = () => {
   }, []);
 
   const {data: users, isLoading, isError} = useGetAllUsersQuery();
-  // console.log(users)
+  // console.log(Users)
   return (
     <Layout>
       <Flex gap={12} vertical>

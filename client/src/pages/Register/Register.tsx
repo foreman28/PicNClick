@@ -76,7 +76,7 @@ export const Register = () => {
               <ErrorMessage message={error}/>
             </Space>
           </div>
-          <img srcSet={"./img/register-img.png"} alt={'photo'} className={styles.image}/>
+          <img srcSet={"./img/Register-img.png"} alt={'photo'} className={styles.image}/>
         </Flex>
       </Layout.Content>
       <Footer/>

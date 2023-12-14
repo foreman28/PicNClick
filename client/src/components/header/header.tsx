@@ -19,7 +19,7 @@ export const Header = React.memo(() => {
     const onLogoutClick = () => {
       dispatch(logout());
       localStorage.removeItem("token");
-      // navigate("/login");
+      // navigate("/Login");
     };
     
     return (
