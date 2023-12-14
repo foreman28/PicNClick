@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, ConfigProvider, Flex, Form, message, Upload} from 'antd';
 import {Layout} from '../../components/layout/layout';
 import {useAddPostMutation} from '../../api/posts';
@@ -69,11 +69,13 @@ export const AddPost = () => {
     }
   };
   
+  const [content, setContent] = useState(""); // Textarea
+  
   return (
     <Layout>
       <Flex vertical gap={12}>
         <CustomBreadcrumb/>
-
+        
         <CustomTitle title={"Добавить пост"} level={1}/>
         
         <Form className={styles.item} layout="vertical" onFinish={onFinish}>
@@ -102,22 +104,43 @@ export const AddPost = () => {
               name="file"
               valuePropName="fileList"
               getValueFromEvent={normFile}
-              rules={[{ required: true, message: 'Обязательное поле' }]}
+              rules={[{required: true, message: 'Обязательное поле'}]}
               style={{display: "none"}}
             >
-                <Upload
-                  id={"addFile"}
-                  customRequest={() => {}}
-                  beforeUpload={handleFileChange}
-                  listType="picture"
-                  maxCount={1}
-                  accept="image/jpeg, image/png"
-                >
-                  <Button>Выберите файл</Button>
-                </Upload>
+              <Upload
+                id={"addFile"}
+                customRequest={() => {
+                }}
+                beforeUpload={handleFileChange}
+                listType="picture"
+                maxCount={1}
+                accept="image/jpeg, image/png"
+              >
+                <Button>Выберите файл</Button>
+              </Upload>
             </Form.Item>
             
-            <CustomTextarea name="content"/>
+            <Form.Item
+              className={"custom-textarea-box"}
+              name={'content'}
+              rules={[
+                {
+                  required: true,
+                  validator: (_, value) => {
+                    if (value && value.trim() !== "<p><br></p>") {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(new Error('Обязательное поле'));
+                  },
+                },
+              ]}
+              shouldUpdate={true}
+            >
+              <CustomTextarea
+                value={content}
+                onChange={setContent}
+              />
+            </Form.Item>
             
             <CustomSelect name="tags" placeholder="Теги"/>
             

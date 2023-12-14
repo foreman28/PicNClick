@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Flex, Form, List, Typography} from "antd";
 import {Comment} from "../comment/comment";
 import styles from "../../pages/Post/Post.module.scss";
@@ -27,32 +27,45 @@ export const Comments = ({post, refetch}: Props) => {
     'bold', 'italic', 'underline', 'strike', 'blockquote',
   ];
   
-  
+  const [form] = Form.useForm();
   const [addComment, {isLoading: isLoadingComment}] = useAddCommentMutation();
   
   const onFinish = async (data: any) => {
     try {
-      data = {
-        ...data,
-        forumPostId: post.id
+      if (data.content.trim() !== "<p><br></p>") {
+        data = {
+          ...data,
+          forumPostId: post.id
+        }
+        await addComment(data);
+        refetch();
+        form.resetFields(['content']);
       }
-      await addComment(data);
-      refetch();
     } catch (error) {
       console.error(error);
     }
   };
   
+  const [content, setContent] = useState(""); // Textarea
+
   return (
     <Flex vertical gap={12} className={styles.comments} id={'comments'}>
       <Title>Сообщения:</Title>
-      <Form onFinish={onFinish}>
+      <Form
+        form={form} onFinish={onFinish}>
+        <Form.Item
+          className={"custom-textarea-box"}
+          name={'content'}
+          shouldUpdate={true}
+        >
         <CustomTextarea
-          name={"content"}
+          value={content}
+          onChange={setContent}
           placeholder={"Напишите сообщение"}
           modules={modules}
           formats={formats}
         />
+        </Form.Item>
         
         <CustomButton
           type={"primary"}
