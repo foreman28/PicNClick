@@ -19,10 +19,6 @@ const allPosts = async (req, res) => {
       },
     };
 
-    const countOptions = {
-      where: {},
-    };
-
     if (filters?.where?.authorId) { // || filters?.where?.authorId === 0
       findManyOptions.where = {
         authorId: filters.where.authorId
@@ -41,11 +37,30 @@ const allPosts = async (req, res) => {
       findManyOptions.take = +pageSize;
     }
 
+    let count;
+
+    const countOptions = {
+      where: {},
+    };
+
     if (search) {
       if (search.startsWith('@')) {
         const tagSearch = search.substring(1);
         posts = await prisma.forumPost.findMany({
           ...findManyOptions,
+          where: {
+            tags: {
+              some: {
+                OR: [
+                  {url: {contains: tagSearch, mode: 'insensitive'}},
+                  {name: {contains: tagSearch, mode: 'insensitive'}},
+                ],
+              },
+            },
+          },
+        });
+        count = await prisma.forumPost.count({
+          ...countOptions,
           where: {
             tags: {
               some: {
@@ -67,10 +82,22 @@ const allPosts = async (req, res) => {
             ],
           },
         });
+        count = await prisma.forumPost.count({
+          ...countOptions,
+          where: {
+            OR: [
+              {title: {contains: search, mode: 'insensitive'}},
+              {description: {contains: search, mode: 'insensitive'}},
+            ],
+          },
+        });
       }
     } else {
       posts = await prisma.forumPost.findMany({
         ...findManyOptions,
+      });
+      count = await prisma.forumPost.count({
+        ...countOptions,
       });
     }
 
@@ -88,7 +115,6 @@ const allPosts = async (req, res) => {
       posts = await prisma.forumPost.findMany(findManyOptions);
     }
 
-    const count = await prisma.forumPost.count(countOptions);
     console.log({count})
     res.status(200).json({posts, count});
   } catch (error) {
@@ -104,7 +130,7 @@ const getPostsCount = async (req, res) => {
     console.log(1)
 
     let findManyOptions = undefined
-    if (authorId){
+    if (authorId) {
       findManyOptions = {
         where: {
           authorId: +authorId || 0
@@ -115,10 +141,10 @@ const getPostsCount = async (req, res) => {
     const count = await prisma.forumPost.count({
       ...findManyOptions
     });
-    res.json({ count });
+    res.json({count});
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({error: 'Internal Server Error'});
   }
 };
 

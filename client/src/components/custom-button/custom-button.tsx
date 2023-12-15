@@ -4,7 +4,7 @@ import styles from "./custom-button.module.scss"
 import "./../../index.scss"
 
 type Props = {
-  theme?:any,
+  theme?: any,
   children: React.ReactNode;
   htmlType?: "button" | "submit" | "reset" | undefined;
   onClick?: () => void;
@@ -14,23 +14,26 @@ type Props = {
   shape?: "circle" | "default" | "round" | undefined;
   icon?: React.ReactNode;
   style?: React.CSSProperties;
+  disabled?: boolean
 };
 
-export const CustomButton = ({
-  theme,
-  children,
-  type,
-  danger,
-  loading,
-  htmlType = 'button',
-  onClick,
-  shape,
-  icon,
-  style
-}: Props) => {
+export const CustomButton = (
+  {
+    theme,
+    children,
+    type,
+    danger,
+    loading,
+    htmlType = 'button',
+    onClick,
+    shape,
+    icon,
+    style,
+    disabled = false
+  }: Props) => {
   return (
     // <Form.Item>
-      <ConfigProvider theme={theme}>
+    <ConfigProvider theme={theme}>
       <Button
         className={styles.btn}
         type={type}
@@ -38,14 +41,15 @@ export const CustomButton = ({
         danger={danger}
         loading={loading}
         // size="large"
-        shape={ shape }
-        onClick={ onClick }
-        icon={ icon }
+        shape={shape}
+        onClick={onClick}
+        icon={icon}
         style={style}
+        disabled={disabled}
       >
         {children}
       </Button>
-      </ConfigProvider>
+    </ConfigProvider>
     // </Form.Item>
   );
 };
