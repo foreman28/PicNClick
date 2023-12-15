@@ -6,11 +6,15 @@ import SkeletonPost from "../skeleton-post/skeleton-post";
 import PostItem from "./post-item/post-item";
 import {PaginationComponent} from "../custom-pagination/custom-pagination";
 
-import {useGetAllPostsQuery, useGetPostsCountQuery} from "../../api/posts";
+import {useGetAllPostsQuery} from "../../api/posts";
 
 import styles from './feed-posts.module.scss';
 
-export const FeedPosts = () => {
+type Props = {
+  authorId?: number
+}
+
+export const FeedPosts = ({authorId}: Props) => {
   const {search} = useLocation();
   const navigate = useNavigate();
   
@@ -19,22 +23,17 @@ export const FeedPosts = () => {
   
   const searchS = new URLSearchParams(search).get('q') || '';
   
-  const {data: posts, isLoading, refetch:refetchAllPosts} = useGetAllPostsQuery({
+  const {data: posts, isLoading, refetch: refetchAllPosts} = useGetAllPostsQuery({
     page: currentPage,
     pageSize: pageSize,
     q: searchS,
-    // filters: {
-    //   sort: 'likes',
-    //   order: 'desc'
-    // }
+    filters: {
+      where: {
+        authorId: authorId || 0,
+      },
+    }
   });
-  const { data: postCount, refetch:refetchPostsCount } = useGetPostsCountQuery();
-  const totalPosts = postCount?.count || 0;
-  
-  const combinedRefetch = useCallback(() => {
-    refetchAllPosts();
-    refetchPostsCount();
-  }, [refetchAllPosts, refetchPostsCount]);
+  const totalPosts = posts?.count || 0;
   
   const [searchParams]: any = useSearchParams();
   
@@ -43,16 +42,15 @@ export const FeedPosts = () => {
   }, [searchParams]);
   
   
-  const handlePageChange = useCallback(
+  const handlePageChange =
     (page: any) => {
       const totalPages = Math.ceil(totalPosts / pageSize);
       const validPage = Math.min(Math.max(1, page), totalPages);
       searchParams.set('page', validPage.toString());
       searchParams.set('q', searchS);
       navigate(`?${searchParams.toString()}`);
-    },
-    [navigate, searchParams, searchS, totalPosts, pageSize]
-  );
+      console.log(123)
+    }
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -64,7 +62,7 @@ export const FeedPosts = () => {
         <List
           itemLayout="vertical"
           size="large"
-          dataSource={[1, 2, 3]}
+          dataSource={[1, 2]}
           renderItem={() => <SkeletonPost/>}
           locale={{emptyText: 'Пусто'}}
         />
@@ -79,8 +77,8 @@ export const FeedPosts = () => {
         <List
           itemLayout="vertical"
           size="large"
-          dataSource={posts}
-          renderItem={(item) => <PostItem key={item.id} post={item} refetch={combinedRefetch}/>}
+          dataSource={posts && posts.posts}
+          renderItem={(item) => <PostItem key={item.id} post={item} refetch={refetchAllPosts}/>}
           locale={{emptyText: 'Пусто'}}
         />
       </Flex>

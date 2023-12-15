@@ -17,6 +17,7 @@ import {CustomButton} from "../../custom-button/custom-button";
 import {useSelector} from "react-redux";
 import {selectUser} from "../../../features/auth/authSlice";
 import {useRemovePostMutation} from "../../../api/posts";
+import copy from 'clipboard-copy';
 
 const {Paragraph} = Typography;
 
@@ -43,7 +44,11 @@ const PostItem = ({post, refetch}: Props) => {
       {
         key: '1',
         label: "Поделиться",
-        onClick: () => console.log("Поделиться") // TODO
+        onClick: () => {
+          console.log("Поделиться")
+          copy(`${process.env.REACT_APP_CLIENT_URL}${Paths.forum}/${post.url}`)
+          
+        } // TODO
       },
       {
         key: '2',
@@ -62,7 +67,12 @@ const PostItem = ({post, refetch}: Props) => {
     ] : [
       {
         key: '1',
-        label: "Поделиться"
+        label: "Поделиться",
+        onClick: () => {
+          console.log("Поделиться")
+          copy(`${process.env.REACT_APP_CLIENT_URL}${Paths.forum}/${post.url}`)
+          
+        } // TODO
       }
     ];
   

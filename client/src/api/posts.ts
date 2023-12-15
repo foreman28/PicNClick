@@ -19,19 +19,25 @@ interface filters {
 
 export const postsApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getAllPosts: builder.query<ForumPost[], filters>({
+    getAllPosts: builder.query<{ posts:ForumPost[], count:number }, filters>({
       query: (filters) => ({
         url: `/posts`,
         method: "POST",
         body: filters,
       }),
     }),
-    getPostsCount: builder.query<any,void>({
-      query: () => ({
-        url: 'posts/count',
-        method: "GET"
-      }),
-    }),
+    // getPostsCount: builder.query<any, void>({
+    //   query: () => ({
+    //     url: `posts/count`,
+    //     method: "GET"
+    //   }),
+    // }),
+    // getPostCount: builder.query<any, number>({
+    //   query: (authorId) => ({
+    //     url: `posts/count/${authorId}`,
+    //     method: "GET"
+    //   }),
+    // }),
     getPost: builder.query<ForumPost, string>({
       query: (url) => ({
         url: `/posts/${url}`,
@@ -63,7 +69,8 @@ export const postsApi = api.injectEndpoints({
 
 export const {
   useGetAllPostsQuery,
-  useGetPostsCountQuery,
+  // useGetPostsCountQuery,
+  // useGetPostCountQuery,
   useGetPostQuery,
   useEditPostMutation,
   useRemovePostMutation,
@@ -73,7 +80,8 @@ export const {
 export const {
   endpoints: {
     getAllPosts,
-    getPostsCount,
+    // getPostsCount,
+    // getPostCount,
     getPost,
     editPost,
     removePost,

@@ -62,7 +62,7 @@ export const NavigationBar = () => {
                   <span className={styles.sidebar_item}>Профиль</span>
                 </Link>
 
-                <Link to={Paths.yourPosts} className={styles.sidebar_link + ' ' + (currentPath === Paths.yourPosts ? styles.active : '')}>
+                <Link to={Paths.userPosts} className={styles.sidebar_link + ' ' + (currentPath === Paths.userPosts ? styles.active : '')}>
                   <UnorderedListOutlined style={{fontSize: '18px'}} />
                   <span className={styles.sidebar_item}>Ваши посты</span>
                 </Link>

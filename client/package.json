@@ -20,6 +20,7 @@
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
     "antd": "^5.1.5",
+    "clipboard-copy": "^4.0.1",
     "date-fns": "^2.30.0",
     "moment": "^2.29.4",
     "react": "^18.2.0",

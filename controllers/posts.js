@@ -19,8 +19,15 @@ const allPosts = async (req, res) => {
       },
     };
 
-    if (filters?.where?.authorId || filters?.where?.authorId === 0) {
+    const countOptions = {
+      where: {},
+    };
+
+    if (filters?.where?.authorId) { // || filters?.where?.authorId === 0
       findManyOptions.where = {
+        authorId: filters.where.authorId
+      }
+      countOptions.where = {
         authorId: filters.where.authorId
       }
     }
@@ -81,7 +88,9 @@ const allPosts = async (req, res) => {
       posts = await prisma.forumPost.findMany(findManyOptions);
     }
 
-    res.status(200).json(posts);
+    const count = await prisma.forumPost.count(countOptions);
+    console.log({count})
+    res.status(200).json({posts, count});
   } catch (error) {
     console.error(error);
     res.status(500).json({message: 'Не удалось получить посты'});
@@ -90,7 +99,22 @@ const allPosts = async (req, res) => {
 
 const getPostsCount = async (req, res) => {
   try {
-    const count = await prisma.forumPost.count();
+    const {authorId} = req.params
+    console.log(authorId)
+    console.log(1)
+
+    let findManyOptions = undefined
+    if (authorId){
+      findManyOptions = {
+        where: {
+          authorId: +authorId || 0
+        }
+      }
+    }
+
+    const count = await prisma.forumPost.count({
+      ...findManyOptions
+    });
     res.json({ count });
   } catch (error) {
     console.error(error);

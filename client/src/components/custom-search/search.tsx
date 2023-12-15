@@ -46,12 +46,12 @@ export const SearchComponent = () => {
         onChange={(e) => handleSearch(e.target.value)}
         className={styles.search}
       />
-      {searchResults && searchResults.length > 0 && (
+      {searchResults && searchResults.count > 0 && (
         <List
           className={styles.list}
           size="small"
           bordered
-          dataSource={searchResults}
+          dataSource={searchResults.posts}
           renderItem={(item) => (
             <List.Item className={styles.item} key={item.id}>
               <Flex vertical gap={4} align={"flex-start"}>

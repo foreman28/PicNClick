@@ -6,7 +6,7 @@ const { auth } = require('../middleware/auth');
 const upload = require('../middleware/upload')
 
 router.post("/", allPosts);
-router.get('/count', getPostsCount);
+router.get('/count/:authorId?', getPostsCount);
 router.get("/:url", post);
 router.post("/add", auth, upload.single('image'), add);
 router.put("/edit/:id", auth, upload.single('image'), edit);

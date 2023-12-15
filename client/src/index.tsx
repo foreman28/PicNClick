@@ -26,7 +26,7 @@ import {AddPost} from "./pages/Add-post/Add-post";
 import {Profile} from "./pages/Profile/Profile";
 
 import "./index.scss";
-import {YourPosts} from "./pages/YourPosts/YourPosts";
+import {UserPosts} from "./pages/UserPosts/UserPosts";
 
 const router = createBrowserRouter([
   {
@@ -43,8 +43,8 @@ const router = createBrowserRouter([
     element: <Forum/>,
   },
   {
-    path: Paths.yourPosts,
-    element: <YourPosts/>,
+    path: Paths.userPosts,
+    element: <UserPosts/>,
   },
   {
     path: Paths.addPost,

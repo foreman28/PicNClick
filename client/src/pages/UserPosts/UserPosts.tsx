@@ -10,50 +10,33 @@ import {useSelector} from "react-redux";
 import {selectUser} from "../../features/auth/authSlice";
 import PostItem from "../../components/feed-posts/post-item/post-item";
 
-import styles from "./YourPosts.module.scss";
+import styles from "./UserPosts.module.scss";
+import {FeedPosts} from "../../components/feed-posts/feed-posts";
 
 // const {Title, Text} = Typography;
 
-export const YourPosts = () => {
-
+export const UserPosts = () => {
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
+  
   const user = useSelector(selectUser)
-
-  const {data: posts, isLoading, refetch} = useGetAllPostsQuery({
-    pageSize: 5,
-    filters: {
-      where: {
-        authorId: user?.id || 0,
-      },
-    }
-  });
-
+  
+  
   return (
     <Layout>
       <Flex gap={12} vertical>
         <CustomBreadcrumb/>
-
+        
         <CustomTitle title={"Ваши посты"} level={1}/>
-
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : (
-          <>
-            {/*{posts && posts.map(({id, ...Post}: any) => (*/}
-            {/*  <PostItem key={id} Post={Post}/>*/}
-            {/*))}*/}
-            <List
-              itemLayout="vertical"
-              size="large"
-              dataSource={posts}
-              renderItem={(item) => <PostItem key={item.id} post={item} refetch={refetch}/>}
-              locale={{emptyText: 'Пусто'}}
-            />
-          </>
-        )}
+        
+        {
+          user ? (
+            <FeedPosts authorId={user.id}/>
+          ) : undefined
+        }
+      
       </Flex>
     </Layout>
   );

@@ -48,7 +48,7 @@ export const Sidebar = () => {
           {isLoadingLikes ? "" :
             <List
               size="small"
-              dataSource={likesPosts}
+              dataSource={likesPosts?.posts}
               className={styles.sidebar_list}
               renderItem={(item) =>
                 <List.Item className={styles.sidebar_item} key={item.id}>
@@ -78,7 +78,7 @@ export const Sidebar = () => {
           {isLoadingPosts ? "" :
             <List
               size="small"
-              dataSource={commentsPosts}
+              dataSource={commentsPosts?.posts}
               className={styles.sidebar_list}
               renderItem={(item) =>
                 <List.Item className={styles.sidebar_item} key={item.id}>
