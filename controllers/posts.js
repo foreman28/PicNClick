@@ -1,5 +1,6 @@
 const {prisma} = require("../prisma/prisma-client");
 const slugify = require('slugify');
+const {processImage} = require("../middleware/upload");
 
 /**
  * @route POST /api/posts
@@ -158,45 +159,49 @@ const add = async (req, res) => {
   try {
     const data = req.body;
     const file = req.file;
-
-    // console.log(data);
-    // console.log(file);
-
-    const tags = Array.isArray(data.tags) ? data.tags.join(',') : data.tags;
-    let tagsArray = data.tags;
-
-    if (typeof data.tags === 'string') {
-      tagsArray = tags.split(',').map(Number);
-    }
-
+    console.log(req.file.originalname)
     if (!data.title || !data.content || !data.description) {
-      return res.status(400).json({message: "Все поля обязательные"});
+      return res.status(400).json({ message: "Все поля обязательные" });
     }
 
-    const slug = slugify(data.title, {lower: true, remove: /[*+~.()'"!:@]/g});
+    // Process the image using your function
+    processImage(req.file.buffer, req.file.originalname, async (err, filename) => {
+      if (err) {
+        return res.status(500).json({ error: 'Error processing image' });
+      }
 
-    const post = await prisma.forumPost.create({
-      data: {
-        title: data.title,
-        description: data.description,
-        image: file ? `/${file.path}` : '/uploads/stubs/stubs-image.png',
-        content: data.content,
-        tags: {
-          connect: tagsArray.map((tagId) => ({id: tagId})),
+      const tags = Array.isArray(data.tags) ? data.tags.join(',') : data.tags;
+      let tagsArray = data.tags;
+
+      if (typeof data.tags === 'string') {
+        tagsArray = tags.split(',').map(Number);
+      }
+
+      const slug = slugify(data.title, { lower: true, remove: /[*+~.()'"!:@]/g });
+      const imageUrl = file ? `/uploads/${filename}` : '/uploads/stubs/stubs-image.png';
+
+      const post = await prisma.forumPost.create({
+        data: {
+          title: data.title,
+          description: data.description,
+          image: imageUrl,
+          content: data.content,
+          tags: {
+            connect: tagsArray.map((tagId) => ({ id: tagId })),
+          },
+          authorId: req.user.id,
+          url: slug,
         },
-        authorId: req.user.id,
-        url: slug,
-      },
+      });
+
+      return res.status(201).json(post);
     });
-
-    // console.log(Post);
-
-    return res.status(201).json(post);
   } catch (error) {
     console.error(error);
-    return res.status(500).json({message: "Что-то пошло не так"});
+    return res.status(500).json({ message: "Что-то пошло не так" });
   }
 };
+
 
 /**
  * @route POST /api/posts/remove/:id
