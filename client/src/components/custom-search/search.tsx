@@ -11,12 +11,12 @@ const {Search} = Input;
 export const SearchComponent = () => {
   const [search, setSearch] = useState<string>('');
   const navigate = useNavigate();
-
+  
   const {data: searchResults} = useGetAllPostsQuery({
     q: search,
     pageSize: 6,
   });
-
+  
   const handleSearch = async (value: string) => {
     if (value) {
       try {
@@ -28,7 +28,7 @@ export const SearchComponent = () => {
       setSearch('')
     }
   };
-
+  
   const sendSearch = async (value: string) => {
     if (value) {
       navigate(`/search?q=${value}`);
@@ -36,17 +36,18 @@ export const SearchComponent = () => {
       navigate(`/search`);
     }
   };
-
+  
   return (
     <div className={styles.searchBox}>
       <Search
         placeholder="Поиск..."
         allowClear
         onSearch={sendSearch}
-        onChange={(e) => handleSearch(e.target.value)}
+        onChange={(e) => handleSearch(e?.target.value)}
         className={styles.search}
       />
-      {searchResults && searchResults.count > 0 && (
+      
+      {searchResults && (
         <List
           className={styles.list}
           size="small"
