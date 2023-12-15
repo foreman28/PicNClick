@@ -10,12 +10,12 @@ const UserItem = ({user}) => {
 
   return (
     <div
-      style={{padding: '12px', display: 'flex', flexDirection: 'column', alignItems: 'stretch'}}
       className={styles.item}
       key={user.id}>
 
-      <Link to={`${Paths.profile}/${user.username}`} className={styles.title}>
+      <Link to={`${Paths.profile}/${user.username}`}>
         <img
+          className={styles.img}
           src={`${process.env.REACT_APP_URL}${user.avatarURL}`}
           alt={`${user.username}`}
           width={48}
