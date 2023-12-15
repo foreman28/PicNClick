@@ -44,11 +44,12 @@ export const Header = React.memo(() => {
                   theme={button2}
                   type="primary"
                   disabled={true}
-                  // style={
-                  //   user.role === "ADMIN" ?
-                  //     {background: "var(--color-error-200)"} :
-                  //     {background: "var(--color-success-300)"}
-                  // }
+                  style={
+                    {cursor: "default"}
+                    //   user.role === "ADMIN" ?
+                    //     {background: "var(--color-error-200)"} :
+                    //     {background: "var(--color-success-300)"}
+                  }
                 >
                   {user.role}
                 </CustomButton>

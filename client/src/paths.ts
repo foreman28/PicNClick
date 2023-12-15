@@ -8,9 +8,9 @@ export const Paths = {
   search: '/search',
 
   forum: '/forum',
-  userPosts: '/forum/user-post',
-  addPost: '/forum/add-post',
-  editPost: '/forum/edit-post',
+  userPosts: '/user-post',
+  addPost: '/add-post',
+  editPost: '/edit-post',
 
   profile: '/profile',
 

@@ -1,7 +1,7 @@
 import {useEffect} from "react";
 import {Layout} from "../../components/layout/layout";
 import {useParams} from "react-router-dom";
-import {Flex} from "antd";
+import {Flex, Typography} from "antd";
 import {useGetPostQuery} from "../../api/posts";
 import {CustomBreadcrumb} from "../../components/custom-breadcrumb/custom-breadcrumb";
 import {CustomTag} from "../../components/custom-tag/custom-tag";
@@ -10,9 +10,13 @@ import {Comments} from "../../components/comments/comments";
 import styles from "./Post.module.scss";
 
 
+const {Title, Text} = Typography;
+// import { Link, Element } from "react-scroll";
+
+
 export const Post = () => {
   const {id}: any = useParams();
-  const {data: post, isLoading: isLoadingPost, refetch}:any = useGetPostQuery(id);
+  const {data: post, isLoading: isLoadingPost, refetch}: any = useGetPostQuery(id);
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -38,7 +42,7 @@ export const Post = () => {
               />)
             }
             
-            <h1 className={styles.title}>{post.title}</h1>
+            <Title className={styles.title}>{post.title}</Title>
             
             <CustomTag post={post}/>
             
@@ -47,7 +51,7 @@ export const Post = () => {
               className={"ql-editor " + styles.content}
             />
             
-              <Comments post={post} refetch={refetch}/>
+            <Comments post={post} refetch={refetch}/>
           </>
         ) : (
           <p>Запись не найдена</p>

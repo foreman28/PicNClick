@@ -19,6 +19,10 @@ const allPosts = async (req, res) => {
       },
     };
 
+    const countOptions = {
+      where: {},
+    };
+
     if (filters?.where?.authorId) { // || filters?.where?.authorId === 0
       findManyOptions.where = {
         authorId: filters.where.authorId
@@ -38,10 +42,6 @@ const allPosts = async (req, res) => {
     }
 
     let count;
-
-    const countOptions = {
-      where: {},
-    };
 
     if (search) {
       if (search.startsWith('@')) {

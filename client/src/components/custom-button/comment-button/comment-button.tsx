@@ -32,7 +32,7 @@ export const CommentButton = React.memo(({post}: Props) => {
   };
 
   return (
-    <a href={"#comment"} className={styles.link}>
+    <a href={"#comments"} className={styles.link}>
       <Space
         onClick={() => handleAddLike()}
         style={{cursor: 'pointer'}}

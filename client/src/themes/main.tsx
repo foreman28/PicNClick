@@ -14,7 +14,9 @@ export const theme: any = {
       fontWeightStrong: 700,
       fontFamily: "var(--font-family)",
       fontFamilyCode: "var(--font-family)",
-      titleMarginBottom: 0
+      titleMarginBottom: 0,
+      
+      colorLink: "var(--color-black)",
     },
     List: {
       titleMarginBottom: 0,

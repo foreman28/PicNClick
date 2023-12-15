@@ -1,5 +1,5 @@
 import {Form} from "antd";
-import React, { useState} from "react";
+import React, {useState} from "react";
 
 import ReactQuill from 'react-quill'; // or quill
 import 'react-quill/dist/quill.snow.css';
@@ -19,15 +19,16 @@ type CustomTextareaProps = {
   maxLength?: number;
 };
 
-export const CustomTextarea: React.FC<CustomTextareaProps> = ({
-                                                         value,
-                                                         onChange,
-                                                         placeholder = 'Содержание',
-                                                         theme,
-                                                         modules: customModules,
-                                                         formats: customFormats,
-                                                         maxLength = 10000,
-                                                       }) => {
+export const CustomTextarea: React.FC<CustomTextareaProps> = (
+  {
+    value,
+    onChange,
+    placeholder = 'Содержание',
+    theme,
+    modules: customModules,
+    formats: customFormats,
+    maxLength = 10000,
+  }) => {
   
   let modules: any;
   if (!customModules) {

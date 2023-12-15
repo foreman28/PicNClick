@@ -19,7 +19,7 @@ import {selectUser} from "../../../features/auth/authSlice";
 import {useRemovePostMutation} from "../../../api/posts";
 import copy from 'clipboard-copy';
 
-const {Paragraph} = Typography;
+const {Paragraph, Title} = Typography;
 
 type Props = {
   post: any,
@@ -131,9 +131,11 @@ const PostItem = ({post, refetch}: Props) => {
             </Link>
 
             <Flex gap={0} vertical>
-              <Link className={styles.title} to={`/forum/${post.url}`}>
-                {post.title}
-              </Link>
+                <Title ellipsis={true}>
+                  <Link className={styles.title} to={`/forum/${post.url}`}>
+                  {post.title}
+                  </Link>
+                </Title>
               <Paragraph className={styles.text} ellipsis={{rows: 2}}>
                 {post.description}
               </Paragraph>
