@@ -1,8 +1,8 @@
-import {List, Space, Flex, Typography, Button, Dropdown, MenuProps} from 'antd';
+import {List, Space, Flex, Typography, Dropdown, MenuProps} from 'antd';
 import {
   ClockCircleOutlined, MoreOutlined,
 } from '@ant-design/icons';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import {ru} from 'date-fns/locale';
 import {format, formatDistanceToNow} from "date-fns";
@@ -20,9 +20,15 @@ import {useRemovePostMutation} from "../../../api/posts";
 
 const {Paragraph} = Typography;
 
-const PostItem = ({post}: any) => {
+type Props = {
+  post: any,
+  refetch: any
+}
+
+const PostItem = ({post, refetch}: Props) => {
   const createdDate: any = new Date(post.timestamp);
   const newDate: any = new Date();
+  
 
   const formattedTimestamp =
     newDate - createdDate < 24 * 60 * 60 * 1000
@@ -31,42 +37,36 @@ const PostItem = ({post}: any) => {
 
   const user = useSelector(selectUser)
   const [removePost] = useRemovePostMutation()
-
+  
   const items: MenuProps['items'] =
-    (user?.id === post.authorId || user?.role === "ADMIN") ? (
-        [
-          {
-            key: '1',
-            label: "Поделиться",
-            onClick: () => {
-              console.log("Поделиться") // TODO
-            }
-          },
-          {
-            key: '2',
-            label: 'Изменить',
-            onClick: () => {
-              console.log("Изменить") // TODO
-            }
-          },
-          {
-            key: '3',
-            label: 'Удалить',
-            onClick: () => {
-              removePost(post.id)
-            },
-            danger: true
-            // className: styles.dropdown_item,
-          }
-        ])
-      :
-      [
-        {
-          key: '1',
-          label: "Поделиться"
-        }
-      ];
-
+    (user?.id === post.authorId || user?.role === "ADMIN") ? [
+      {
+        key: '1',
+        label: "Поделиться",
+        onClick: () => console.log("Поделиться") // TODO
+      },
+      {
+        key: '2',
+        label: 'Изменить',
+        onClick: () => console.log("Изменить") // TODO
+      },
+      {
+        key: '3',
+        label: 'Удалить',
+        onClick: () => {
+          removePost(post.id)
+          refetch()
+        },
+        danger: true
+      }
+    ] : [
+      {
+        key: '1',
+        label: "Поделиться"
+      }
+    ];
+  
+  
   return (
     <List.Item
       className={styles.item}

@@ -6,7 +6,7 @@ const slugify = require('slugify');
  * @desc Получение всех постов // поиск // поиск по тегу // фильтры // сортировка
  * @access Private
  */
-const all = async (req, res) => {
+const allPosts = async (req, res) => {
   let posts;
   try {
     const {q: search, page, pageSize, filters} = req.body;
@@ -85,6 +85,16 @@ const all = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({message: 'Не удалось получить посты'});
+  }
+};
+
+const getPostsCount = async (req, res) => {
+  try {
+    const count = await prisma.forumPost.count();
+    res.json({ count });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
@@ -247,7 +257,8 @@ const post = async (req, res) => {
 };
 
 module.exports = {
-  all,
+  allPosts,
+  getPostsCount,
   add,
   remove,
   edit,

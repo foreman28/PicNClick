@@ -53,5 +53,6 @@ export const Post = () => {
           <p>Запись не найдена</p>
         )}
       </Flex>
-    </Layout>);
+    </Layout>
+  );
 };

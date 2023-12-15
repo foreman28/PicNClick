@@ -44,9 +44,6 @@ export const AddPost = () => {
   };
   
   const normFile = (e: any) => {
-    if (Array.isArray(e)) {
-      return e;
-    }
     return e && e.fileList;
   };
   
@@ -126,11 +123,12 @@ export const AddPost = () => {
               rules={[
                 {
                   required: true,
+                  message: 'Обязательное поле',
                   validator: (_, value) => {
                     if (value && value.trim() !== "<p><br></p>") {
                       return Promise.resolve();
                     }
-                    return Promise.reject(new Error('Обязательное поле'));
+                    return Promise.reject();
                   },
                 },
               ]}

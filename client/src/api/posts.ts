@@ -3,14 +3,14 @@ import {api} from "./apiConfig";
 
 interface filters {
   page?: number;
-  pageSize?: number;
+  pageSize: number;
   q?: string;
   
   filters?: {
     // minLikes?: number;
     sort?: string;
     order?: 'asc' | 'desc';
-
+    
     where?: {
       authorId: number
     }
@@ -24,6 +24,12 @@ export const postsApi = api.injectEndpoints({
         url: `/posts`,
         method: "POST",
         body: filters,
+      }),
+    }),
+    getPostsCount: builder.query<any,void>({
+      query: () => ({
+        url: 'posts/count',
+        method: "GET"
       }),
     }),
     getPost: builder.query<ForumPost, string>({
@@ -57,6 +63,7 @@ export const postsApi = api.injectEndpoints({
 
 export const {
   useGetAllPostsQuery,
+  useGetPostsCountQuery,
   useGetPostQuery,
   useEditPostMutation,
   useRemovePostMutation,
@@ -66,6 +73,7 @@ export const {
 export const {
   endpoints: {
     getAllPosts,
+    getPostsCount,
     getPost,
     editPost,
     removePost,

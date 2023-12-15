@@ -6,7 +6,7 @@ import SkeletonPost from "../skeleton-post/skeleton-post";
 import PostItem from "./post-item/post-item";
 import {PaginationComponent} from "../custom-pagination/custom-pagination";
 
-import {useGetAllPostsQuery} from "../../api/posts";
+import {useGetAllPostsQuery, useGetPostsCountQuery} from "../../api/posts";
 
 import styles from './feed-posts.module.scss';
 
@@ -19,7 +19,7 @@ export const FeedPosts = () => {
   
   const searchS = new URLSearchParams(search).get('q') || '';
   
-  const {data: posts, isLoading} = useGetAllPostsQuery({
+  const {data: posts, isLoading, refetch:refetchAllPosts} = useGetAllPostsQuery({
     page: currentPage,
     pageSize: pageSize,
     q: searchS,
@@ -28,12 +28,13 @@ export const FeedPosts = () => {
     //   order: 'desc'
     // }
   });
+  const { data: postCount, refetch:refetchPostsCount } = useGetPostsCountQuery();
+  const totalPosts = postCount?.count || 0;
   
-  const {data: allPosts, isLoading: allIsLoading} = useGetAllPostsQuery({
-    q: searchS,
-  });
-  
-  const totalPosts = allPosts?.length || 0;
+  const combinedRefetch = useCallback(() => {
+    refetchAllPosts();
+    refetchPostsCount();
+  }, [refetchAllPosts, refetchPostsCount]);
   
   const [searchParams]: any = useSearchParams();
   
@@ -79,7 +80,7 @@ export const FeedPosts = () => {
           itemLayout="vertical"
           size="large"
           dataSource={posts}
-          renderItem={(item) => <PostItem key={item.id} post={item}/>}
+          renderItem={(item) => <PostItem key={item.id} post={item} refetch={combinedRefetch}/>}
           locale={{emptyText: 'Пусто'}}
         />
       </Flex>
@@ -89,7 +90,7 @@ export const FeedPosts = () => {
   
   return (
     <>
-      {isLoading || allIsLoading ?
+      {isLoading ?
         skeletonList
         :
         postList

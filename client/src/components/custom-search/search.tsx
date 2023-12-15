@@ -12,8 +12,9 @@ export const SearchComponent = () => {
   const [search, setSearch] = useState<string>('');
   const navigate = useNavigate();
 
-  const {data: searchResults, isLoading} = useGetAllPostsQuery({
+  const {data: searchResults} = useGetAllPostsQuery({
     q: search,
+    pageSize: 6,
   });
 
   const handleSearch = async (value: string) => {
@@ -21,7 +22,7 @@ export const SearchComponent = () => {
       try {
         setSearch(value)
       } catch (error) {
-        console.error('Error fetching Search suggestions:', error);
+        console.error('Ошибка при получении постов (поиск):', error);
       }
     } else {
       setSearch('')
@@ -50,7 +51,7 @@ export const SearchComponent = () => {
           className={styles.list}
           size="small"
           bordered
-          dataSource={searchResults.slice(0, 6)}
+          dataSource={searchResults}
           renderItem={(item) => (
             <List.Item className={styles.item} key={item.id}>
               <Flex vertical gap={4} align={"flex-start"}>

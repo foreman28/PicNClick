@@ -22,7 +22,8 @@ export const YourPosts = () => {
 
   const user = useSelector(selectUser)
 
-  const {data: posts, isLoading} = useGetAllPostsQuery({
+  const {data: posts, isLoading, refetch} = useGetAllPostsQuery({
+    pageSize: 5,
     filters: {
       where: {
         authorId: user?.id || 0,
@@ -48,7 +49,7 @@ export const YourPosts = () => {
               itemLayout="vertical"
               size="large"
               dataSource={posts}
-              renderItem={(item) => <PostItem key={item.id} post={item}/>}
+              renderItem={(item) => <PostItem key={item.id} post={item} refetch={refetch}/>}
               locale={{emptyText: 'Пусто'}}
             />
           </>
