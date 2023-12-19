@@ -16,6 +16,7 @@ import {useAppSelector} from "../../hooks/hooks";
 
 import styles from './post-item.module.scss';
 import {ForumPost} from "@prisma/client";
+
 const {Paragraph, Title} = Typography;
 
 type Props = {
@@ -37,11 +38,14 @@ const PostItem = ({post, refetch}: Props) => {
           copy(`${process.env.REACT_APP_CLIENT_URL}${Paths.forum}/${post.url}`)
         }
       },
-      // {
-      //   key: '2',
-      //   label: 'Изменить',
-      //   onClick: () => console.log("Изменить")
-      // },
+      {
+        key: '2',
+        label: 'Изменить',
+        onClick: () => {
+          console.log("Изменить")
+          
+        }
+      },
       {
         key: '3',
         label: 'Удалить',
@@ -94,12 +98,12 @@ const PostItem = ({post, refetch}: Props) => {
                   </Link>
                 </Flex>
               </Flex>
-
+              
               <Dropdown menu={{items}} trigger={['click']} placement="bottomRight">
                 <MoreOutlined className={styles.icon}/>
               </Dropdown>
             </Flex>
-
+            
             <Link style={{display: "contents"}} to={`${Paths.forum}/${post.url}`}>
               {`${process.env.REACT_APP_URL}${post.image}` ?
                 <img
@@ -114,13 +118,13 @@ const PostItem = ({post, refetch}: Props) => {
                 ""
               }
             </Link>
-
+            
             <Flex gap={0} vertical>
-                <Title ellipsis={true}>
-                  <Link className={styles.title} to={`/forum/${post.url}`}>
+              <Title ellipsis={true}>
+                <Link className={styles.title} to={`/forum/${post.url}`}>
                   {post.title}
-                  </Link>
-                </Title>
+                </Link>
+              </Title>
               <Paragraph className={styles.text} ellipsis={{rows: 2}}>
                 {post.description}
               </Paragraph>

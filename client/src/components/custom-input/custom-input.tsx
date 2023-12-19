@@ -1,6 +1,6 @@
 import React from "react";
-import { ConfigProvider, Form, Input } from "antd";
-import { NamePath } from "antd/es/form/interface";
+import {ConfigProvider, Form, Input} from "antd";
+import {NamePath} from "antd/es/form/interface";
 
 type Props = {
   name: string;
@@ -8,27 +8,31 @@ type Props = {
   type?: string;
   dependencies?: NamePath[];
   theme?: any;
+  defaultValue?: string;
 };
 
-export const CustomInput = ({
-                       type = 'text',
-                       name,
-                       placeholder,
-                       dependencies,
-                       theme,
-                     }: Props) => {
+export const CustomInput = (
+  {
+    type = 'text',
+    name,
+    placeholder,
+    dependencies,
+    theme,
+    defaultValue
+  }: Props) => {
   return (
     <ConfigProvider theme={theme}>
       <Form.Item
         name={name}
         dependencies={dependencies}
+        initialValue={defaultValue}
         hasFeedback={type === 'password'}
         rules={[
           {
             required: true,
             message: 'Обязательное поле',
           },
-          ({ getFieldValue }) => ({
+          ({getFieldValue}) => ({
             validator(_, value) {
               if (!value) {
                 return Promise.resolve();
@@ -52,9 +56,9 @@ export const CustomInput = ({
         ]}
       >
         {type === 'password' ? (
-          <Input.Password placeholder={placeholder} size="large" />
+          <Input.Password placeholder={placeholder} size="large"/>
         ) : (
-          <Input placeholder={placeholder} type={type} size="middle" />
+          <Input defaultValue={defaultValue} placeholder={placeholder} type={type} size="middle"/>
         )}
       </Form.Item>
     </ConfigProvider>

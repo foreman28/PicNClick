@@ -22,7 +22,7 @@ import {Tags} from "./pages/Tags/Tags";
 import {NotFound} from "./pages/NotFound/NotFound";
 import {Post} from "./pages/Post/Post";
 import {Users} from "./pages/Users/Users";
-import {AddPost} from "./pages/Add-post/Add-post";
+import {PostForm} from "./pages/Post-form/Post-form";
 import {Profile} from "./pages/Profile/Profile";
 
 import "./index.scss";
@@ -48,7 +48,11 @@ const router = createBrowserRouter([
   },
   {
     path: Paths.addPost,
-    element: <AddPost/>,
+    element: <PostForm/>,
+  },
+  {
+    path: Paths.editPost,
+    element: <PostForm/>,
   },
 
   {

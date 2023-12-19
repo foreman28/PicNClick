@@ -9,7 +9,7 @@ router.post("/", allPosts);
 router.get('/count/:authorId?', getPostsCount);
 router.get("/:url", post);
 router.post("/add", auth, upload.single('image'), add);
-router.put("/edit/:id", auth, upload.single('image'), edit);
+router.put("/edit/:url", auth, upload.single('image'), edit);
 router.delete("/remove/:id", auth, remove);
 
 module.exports = router;

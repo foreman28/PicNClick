@@ -10,6 +10,8 @@ listenerMiddleware.startListening({
 
     if (action.payload.token) {
       localStorage.setItem('token', action.payload.token);
+      
+      console.log(action.payload.token)
       // localStorage.setItem('role', String(action.payload.role));
     }
   },

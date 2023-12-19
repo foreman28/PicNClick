@@ -116,7 +116,6 @@ const allPosts = async (req, res) => {
       posts = await prisma.forumPost.findMany(findManyOptions);
     }
 
-    console.log({count})
     res.status(200).json({posts, count});
   } catch (error) {
     console.error(error);
@@ -127,8 +126,6 @@ const allPosts = async (req, res) => {
 const getPostsCount = async (req, res) => {
   try {
     const {authorId} = req.params
-    console.log(authorId)
-    console.log(1)
 
     let findManyOptions = undefined
     if (authorId) {
@@ -159,26 +156,43 @@ const add = async (req, res) => {
   try {
     const data = req.body;
     const file = req.file;
-    console.log(req.file.originalname)
     if (!data.title || !data.content || !data.description) {
       return res.status(400).json({ message: "Все поля обязательные" });
     }
 
-    // Process the image using your function
-    processImage(req.file.buffer, req.file.originalname, async (err, filename) => {
-      if (err) {
-        return res.status(500).json({ error: 'Error processing image' });
-      }
 
-      const tags = Array.isArray(data.tags) ? data.tags.join(',') : data.tags;
-      let tagsArray = data.tags;
+    const tags = Array.isArray(data.tags) ? data.tags.join(',') : data.tags;
+    let tagsArray = data.tags;
 
-      if (typeof data.tags === 'string') {
-        tagsArray = tags.split(',').map(Number);
-      }
+    if (typeof data.tags === 'string') {
+      tagsArray = tags.split(',').map(Number);
+    }
+    console.log(data.tags)
+    const slug = slugify(data.title, { lower: true, remove: /[*+~.()'"!:@]/g });
 
-      const slug = slugify(data.title, { lower: true, remove: /[*+~.()'"!:@]/g });
-      const imageUrl = file ? `/uploads/${filename}` : '/uploads/stubs/stubs-image.png';
+    if (file){
+      processImage(req.file.buffer, req.file.originalname, async (err, filename) => {
+        const imageUrl = `/uploads/${filename}`;
+
+        const post = await prisma.forumPost.create({
+          data: {
+            title: data.title,
+            description: data.description,
+            image: imageUrl,
+            content: data.content,
+            tags: {
+              connect: tagsArray.map((tagId) => ({ id: tagId })),
+            },
+            authorId: req.user.id,
+            url: slug,
+          },
+        });
+
+        return res.status(201).json(post);
+      });
+    }
+    else {
+      const imageUrl = '/uploads/stubs/stubs-image.png';
 
       const post = await prisma.forumPost.create({
         data: {
@@ -195,7 +209,7 @@ const add = async (req, res) => {
       });
 
       return res.status(201).json(post);
-    });
+    }
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Что-то пошло не так" });
@@ -210,7 +224,7 @@ const add = async (req, res) => {
  */
 const remove = async (req, res) => {
   const {id} = req.params;
-  console.log(req.params)
+
   try {
     const post = await prisma.forumPost.findFirst({
       where: {
@@ -240,25 +254,79 @@ const remove = async (req, res) => {
  * @access Private
  */
 const edit = async (req, res) => {
-  const data = req.body;
-  const id = data.id;
-
   try {
-    await prisma.forumPost.update({
-      where: {
-        id,
-      },
-      data,
-    });
+    const {url} = req.params;
+    console.log(req.file)
+    const data = req.body;
+    const file = req.file;
+    if (!data.title || !data.content || !data.description) {
+      return res.status(400).json({ message: "Все поля обязательные" });
+    }
 
-    res.status(204).json("OK");
-  } catch (err) {
+    const tags = Array.isArray(data.tags) ? data.tags.join(',') : data.tags;
+    let tagsArray = data.tags;
+
+    if (typeof data.tags === 'string') {
+      tagsArray = tags.split(',').map(Number);
+    }
+    console.log(data.tags)
+    const slug = slugify(data.title, { lower: true, remove: /[*+~.()'"!:@]/g });
+
+    if (file){
+      processImage(req.file.buffer, req.file.originalname, async (err, filename) => {
+        const imageUrl = `/uploads/${filename}`;
+
+        await prisma.forumPost.update({
+          where: {
+            url: url,
+          },
+          data: {
+            title: data.title,
+            description: data.description,
+            image: imageUrl,
+            content: data.content,
+            tags: {
+              connect: tagsArray.map((tagId) => ({ id: tagId })),
+            },
+            // authorId: req.user.id,
+            url: slug,
+          },
+        });
+
+        res.status(204).json("OK");
+      });
+    }
+    else {
+      const imageUrl = '/uploads/stubs/stubs-image.png';
+
+      await prisma.forumPost.update({
+        where: {
+          url: url,
+        },
+        data: {
+          title: data.title,
+          description: data.description,
+          image: imageUrl,
+          content: data.content,
+          tags: {
+            connect: tagsArray.map((tagId) => ({ id: tagId })),
+          },
+          // authorId: req.user.id,
+          url: slug,
+        },
+      });
+
+      res.status(204).json("OK");
+    }
+
+  } catch (error) {
+    console.error(error);
     res.status(500).json({message: "Не удалось редактировать пост"});
   }
 };
 
 /**
- * @route GET /api/posts/:id
+ * @route GET /api/posts/:url
  * @desc Получение поста
  * @access Private
  */

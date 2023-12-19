@@ -2,13 +2,23 @@ import {ConfigProvider, Form, Select, Space} from 'antd';
 import styles from './custom-select.module.scss';
 
 type Props = {
+  selectedValues?: any;
   selectOptions: any;
   name: string;
+  // initialValue?: any;
   placeholder?: string;
   theme?: any;
 };
 
-const SelectComponent = ({selectOptions, name, placeholder, theme}: Props) => {
+const SelectComponent = (
+  {
+    selectedValues,
+    selectOptions,
+    name,
+    // initialValue,
+    placeholder,
+    theme
+  }: Props) => {
   // const [selectedValues, setSelectedValues] = useState<string[]>([]);
   
   // const handleChange = (value: string[]) => {
@@ -21,6 +31,7 @@ const SelectComponent = ({selectOptions, name, placeholder, theme}: Props) => {
       <Form.Item
         className={"custom-textarea-box"}
         name={name}
+        initialValue={selectedValues}
         rules={[{required: true, message: 'Обязательное поле'}]}
         shouldUpdate={true}
       >
@@ -29,6 +40,7 @@ const SelectComponent = ({selectOptions, name, placeholder, theme}: Props) => {
           style={{width: '100%'}}
           className={styles.select}
           placeholder={placeholder}
+          defaultValue={selectedValues}
           // onChange={handleChange}
           optionLabelProp="label"
           options={selectOptions}

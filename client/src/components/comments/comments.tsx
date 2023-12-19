@@ -63,7 +63,7 @@ export const Comments = ({post, refetch}: Props) => {
           shouldUpdate={true}
         >
         <CustomTextarea
-          value={content}
+          defaultValue={content}
           onChange={setContent}
           placeholder={"Напишите сообщение"}
           modules={modules}

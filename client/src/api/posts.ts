@@ -45,11 +45,18 @@ export const postsApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
-    editPost: builder.mutation<string, ForumPost>({
-      query: (post) => ({
-        url: `/posts/edit/${post.id}`,
+    addPost: builder.mutation<ForumPost, ForumPost>({
+      query: (postData) => ({
+        url: "/posts/add",
+        method: "POST",
+        body: postData,
+      }),
+    }),
+    editPost: builder.mutation<ForumPost, { url:string, postData:any }>({
+      query: ({url, postData}) => ({
+        url: `/posts/edit/${url}`,
         method: "PUT",
-        body: post,
+        body: postData,
       }),
     }),
     removePost: builder.mutation<ForumPost, any>({
@@ -58,13 +65,6 @@ export const postsApi = api.injectEndpoints({
         method: "DELETE",
       }),
     }),
-    addPost: builder.mutation<ForumPost, ForumPost>({
-      query: (postData) => ({
-        url: "/posts/add",
-        method: "POST",
-        body: postData,
-      }),
-    })
   }),
 });
 
