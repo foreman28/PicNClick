@@ -51,7 +51,7 @@ const router = createBrowserRouter([
     element: <PostForm/>,
   },
   {
-    path: Paths.editPost,
+    path: `${Paths.editPost}/:url`,
     element: <PostForm/>,
   },
 
@@ -68,9 +68,9 @@ const router = createBrowserRouter([
     path: Paths.users,
     element: <Users/>,
   },
-
+  
   {
-    path: `${Paths.profile}?/:id`,
+    path: `${Paths.profile}/:id?`,
     element: <Profile/>,
   },
 

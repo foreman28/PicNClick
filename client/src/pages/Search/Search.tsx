@@ -1,41 +1,15 @@
 import { Flex } from "antd";
 import { Layout } from "../../components/layout/layout";
-import styles from "./Search.module.scss";
-import { useEffect, useState } from "react";
-import queryString from "query-string";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import {CustomBreadcrumb} from "../../components/custom-breadcrumb/custom-breadcrumb";
 import {FeedPosts} from "../../components/feed-posts/feed-posts";
 
+import styles from "./Search.module.scss";
+
 export const Search = () => {
-  const [suggestions, setSuggestions] = useState<any[]>([]);
-  const queryParams = queryString.parse(window.location.search);
-  const navigate = useNavigate();
-  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
-  useEffect(() => {
-    handleSearch(queryParams.q);
-  }, [queryParams.q, navigate]);
-
-  const handleSearch = async (value: any) => {
-    const API_URL = process.env.REACT_APP_API_URL;
-
-      // Treat it as a regular text-based Search
-      const apiUrl = value ? `${API_URL}/posts?q=${value}` : `${API_URL}/posts`;
-    // console.log(apiUrl)
-      try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        setSuggestions(data);
-        // console.log(data)
-      } catch (error) {
-        console.error('Error Search:', error);
-      }
-    
-  };
   
   return (
     <Layout>

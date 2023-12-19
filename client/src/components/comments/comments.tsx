@@ -56,14 +56,16 @@ export const Comments = ({post, refetch}: Props) => {
     <Flex vertical gap={12} className={styles.comments} id={'comments'}>
       <Title>Сообщения:</Title>
       <Form
-        form={form} onFinish={onFinish}>
+        form={form}
+        onFinish={onFinish}
+      >
         <Form.Item
           className={"custom-textarea-box"}
           name={'content'}
           shouldUpdate={true}
         >
         <CustomTextarea
-          defaultValue={content}
+          defaultValueTextarea={content}
           onChange={setContent}
           placeholder={"Напишите сообщение"}
           modules={modules}

@@ -10,7 +10,7 @@ export const Paths = {
   forum: '/forum',
   userPosts: '/user-post',
   addPost: '/add-post',
-  editPost: '/edit-post/:url',
+  editPost: '/edit-post',
 
   profile: '/profile',
 

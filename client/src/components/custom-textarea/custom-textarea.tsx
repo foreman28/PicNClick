@@ -11,7 +11,7 @@ import './custom-textarea.scss';
 
 type CustomTextareaProps = {
   // value?: string;
-  defaultValue?: string;
+  defaultValueTextarea?: string;
   onChange: (value: string) => void;
   placeholder?: string;
   modules?: any;
@@ -21,7 +21,7 @@ type CustomTextareaProps = {
 export const CustomTextarea: React.FC<CustomTextareaProps> = (
   {
     // value,
-    defaultValue,
+    defaultValueTextarea,
     onChange,
     placeholder = 'Содержание',
     modules: customModules,
@@ -56,7 +56,7 @@ export const CustomTextarea: React.FC<CustomTextareaProps> = (
   return (
     <ReactQuill
       // value={value}
-      defaultValue={defaultValue}
+      defaultValue={defaultValueTextarea}
       onChange={handleChange}
       theme="snow"
       modules={modules}

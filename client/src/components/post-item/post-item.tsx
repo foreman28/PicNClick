@@ -2,7 +2,7 @@ import {List, Space, Flex, Typography, Dropdown, MenuProps} from 'antd';
 import {
   ClockCircleOutlined, MoreOutlined,
 } from '@ant-design/icons';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {CustomTag} from "../custom-tag/custom-tag";
 import {LikeButton} from "../custom-button/like-button/like-button";
 import {Paths} from "../../paths";
@@ -25,6 +25,7 @@ type Props = {
 }
 
 const PostItem = ({post, refetch}: Props) => {
+  const navigate = useNavigate()
   const user = useAppSelector(selectUser)
   const [removePost] = useRemovePostMutation()
   
@@ -43,7 +44,7 @@ const PostItem = ({post, refetch}: Props) => {
         label: 'Изменить',
         onClick: () => {
           console.log("Изменить")
-          
+          navigate(`${Paths.editPost}/${post.url}`)
         }
       },
       {
@@ -115,7 +116,7 @@ const PostItem = ({post, refetch}: Props) => {
                   loading="lazy"
                 />
                 :
-                ""
+                undefined
               }
             </Link>
             

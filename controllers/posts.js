@@ -256,7 +256,6 @@ const remove = async (req, res) => {
 const edit = async (req, res) => {
   try {
     const {url} = req.params;
-    console.log(req.file)
     const data = req.body;
     const file = req.file;
     if (!data.title || !data.content || !data.description) {
@@ -269,12 +268,38 @@ const edit = async (req, res) => {
     if (typeof data.tags === 'string') {
       tagsArray = tags.split(',').map(Number);
     }
-    console.log(data.tags)
     const slug = slugify(data.title, { lower: true, remove: /[*+~.()'"!:@]/g });
 
-    if (file){
-      processImage(req.file.buffer, req.file.originalname, async (err, filename) => {
-        const imageUrl = `/uploads/${filename}`;
+    const post = await prisma.forumPost.findMany({
+      where: {
+        url: url
+      }
+    })
+    console.log(req.user.id)
+    if (req.user.role === "ADMIN" || post[0].authorId === req.user.id) {
+      if (file) {
+        processImage(req.file.buffer, req.file.originalname, async (err, filename) => {
+          const imageUrl = `/uploads/${filename}`;
+
+          await prisma.forumPost.update({
+            where: {
+              url: url,
+            },
+            data: {
+              title: data.title,
+              description: data.description,
+              image: imageUrl,
+              content: data.content,
+              tags: {
+                set: tagsArray.map((tagId) => ({id: tagId})),
+              },
+              url: slug,
+            },
+          });
+
+          res.status(204).json("OK");
+        });
+      } else {
 
         await prisma.forumPost.update({
           where: {
@@ -283,40 +308,16 @@ const edit = async (req, res) => {
           data: {
             title: data.title,
             description: data.description,
-            image: imageUrl,
             content: data.content,
             tags: {
-              connect: tagsArray.map((tagId) => ({ id: tagId })),
+              set: tagsArray.map((tagId) => ({id: tagId})),
             },
-            // authorId: req.user.id,
             url: slug,
           },
         });
 
         res.status(204).json("OK");
-      });
-    }
-    else {
-      const imageUrl = '/uploads/stubs/stubs-image.png';
-
-      await prisma.forumPost.update({
-        where: {
-          url: url,
-        },
-        data: {
-          title: data.title,
-          description: data.description,
-          image: imageUrl,
-          content: data.content,
-          tags: {
-            connect: tagsArray.map((tagId) => ({ id: tagId })),
-          },
-          // authorId: req.user.id,
-          url: slug,
-        },
-      });
-
-      res.status(204).json("OK");
+      }
     }
 
   } catch (error) {

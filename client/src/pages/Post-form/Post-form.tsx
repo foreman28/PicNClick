@@ -13,10 +13,13 @@ import {CustomTitle} from "../../components/custom-title/custom-title";
 import styles from './Post-form.module.scss';
 import {useGetAllTagsQuery} from "../../api/tags";
 import {useNavigate, useParams} from "react-router-dom";
+import {selectUser} from "../../features/auth/authSlice";
+import {useAppSelector} from "../../hooks/hooks";
 
 // const {Title, Text} = Typography
 
 export const PostForm = () => {
+  const user = useAppSelector(selectUser)
   const navigate = useNavigate()
   const { url } = useParams();
   const [imageFile, setImageFile]:any = useState('');
@@ -29,13 +32,13 @@ export const PostForm = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     setIsLoading(url ? editPostLoading : addPostLoading);
+    
+    if (url && (user?.role != 'ADMIN' && user?.id != post?.authorId)) {
+      navigate('/')
+    }
   }, []);
   
-  // const [title, setTitle] = useState('');
-  // const [description, setDescription] = useState('');
-  // const [image, setImage] = useState('');
   const [content, setContent] = useState('');
-  // const [tags, setTags] = useState(undefined);
   
   useEffect(() => {
     if (url && post) {
@@ -53,15 +56,6 @@ export const PostForm = () => {
   const onFinish = async (values: any) => {
     console.log(values)
     try {
-      // const postData = {
-      //   title: values.title,
-      //   description: values.description,
-      //   content: values.content,
-      //   tags: values.tags,
-      // };
-
-      // console.log(postData);
-      
       const postData = new FormData();
       postData.append('title', values.title);
       postData.append('description', values.description);
@@ -69,7 +63,6 @@ export const PostForm = () => {
       postData.append('content', values.content);
       postData.append('tags', values.tags);
       
-      // console.log(postData);
       if (url) {
         await editPost({url, postData});
         message.success('Пост успешно изменен!');
@@ -202,7 +195,7 @@ export const PostForm = () => {
                 shouldUpdate={true}
               >
                 <CustomTextarea
-                  defaultValue={post && post.content}
+                  defaultValueTextarea={post && post.content}
                   onChange={setContent}
                 />
               </Form.Item>

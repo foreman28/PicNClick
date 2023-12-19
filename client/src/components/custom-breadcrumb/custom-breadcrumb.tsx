@@ -14,6 +14,7 @@ export const CustomBreadcrumb = () => {
         [Paths.forum.substring(1)]: 'Форум',
         [Paths.userPosts.substring(1)]: 'Посты пользователя',
         [Paths.addPost.substring(1)]: 'Добавить пост',
+        [Paths.editPost.substring(1)]: 'Изменить пост',
         [Paths.search.substring(1)]: 'Поиск',
         [Paths.tags.substring(1)]: 'Теги',
         [Paths.users.substring(1)]: 'Пользователи',
