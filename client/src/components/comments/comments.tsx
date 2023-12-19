@@ -6,7 +6,6 @@ import {CustomTextarea} from "../custom-textarea/custom-textarea";
 import {button} from "../../themes/buttons";
 import {useAddCommentMutation} from "../../api/comment";
 import {CustomButton} from "../custom-button/custom-button";
-import {ForumPost, User, Comments as CommentsT} from "@prisma/client";
 import {CommentsWithUser, ForumPostWithAuthorAndComments} from "../../types";
 
 const {Title} = Typography;
@@ -19,15 +18,18 @@ type Props = {
 export const Comments = ({post, refetch}: Props) => {
   const modules = {
     toolbar: [
-      [{'header': [1, 2, 3, false]}],
+      [{'header': [2, 3, false]}],
       ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [{'list': 'ordered'}, {'list': 'bullet'}],
+      [
+        'link',
+        // 'image',
+        'video'
+      ],
+      [{'color': []}, {'background': []}],
+      ['clean'],
     ],
   };
-  
-  const formats = [
-    'header',
-    'bold', 'italic', 'underline', 'strike', 'blockquote',
-  ];
   
   const [form] = Form.useForm();
   const [addComment, {isLoading: isLoadingComment}] = useAddCommentMutation();
@@ -65,7 +67,6 @@ export const Comments = ({post, refetch}: Props) => {
           onChange={setContent}
           placeholder={"Напишите сообщение"}
           modules={modules}
-          formats={formats}
         />
         </Form.Item>
         

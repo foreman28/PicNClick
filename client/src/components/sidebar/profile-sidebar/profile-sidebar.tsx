@@ -11,7 +11,7 @@ import {CustomAvatar} from "../../avatar/avatar";
 import {useAppSelector} from "../../../hooks/hooks";
 
 export const ProfileSidebar = () => {
-
+  
   const location = useLocation()
   
   const userS = useAppSelector(selectUser);
@@ -19,8 +19,8 @@ export const ProfileSidebar = () => {
   const pathSnippets = location.pathname.split('/').filter((i) => i);
   const username = pathSnippets[1] || userS?.username;
   
-  const { data:user, isLoading } = useGetUserQuery(username);
-
+  const {data: user, isLoading} = useGetUserQuery(username);
+  
   return (
     <Layout.Sider className={styles.sidebar} width={"var(--white-navigationBar)"}>
       <Flex
@@ -29,17 +29,20 @@ export const ProfileSidebar = () => {
         gap={"middle"}
         vertical
       >
-        <Flex gap={"small"} vertical>
-          <Flex gap={"small"} align={"center"}>
+        <Flex gap={12} vertical>
+          <Flex gap={12} align={"center"}>
             {/*<StarOutlined style={{fontSize: '18px'}}/>*/}
             {/*<span className={styles.sidebar_title}>Информация</span>*/}
           </Flex>
           {user && (
             <>
               <CustomAvatar user={user} width={258} height={258} link={false}/>
-              <span>{user.username}</span>
-              <span>{user.fullName}</span>
-              <span>{user.email}</span>
+              <span className={styles.username}>{user.username}</span>
+              {user.fullName ?
+                <span className={styles.fullName}>{user.fullName}</span>
+                : undefined}
+              
+              <span className={styles.email}>{user.email}</span>
             </>
           )}
         </Flex>

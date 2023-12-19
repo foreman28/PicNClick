@@ -13,7 +13,6 @@ import {CommentsWithUser} from "../../types";
 import {PrefetchOptions} from "@reduxjs/toolkit/query";
 
 
-
 type Props = {
   comment: CommentsWithUser;
   refetch: any
@@ -25,11 +24,11 @@ export const Comment = ({comment, refetch}: Props) => {
   
   const items: MenuProps['items'] =
     (user?.id === comment.userId || user?.role === "ADMIN") ? [
-      {
-        key: '2',
-        label: 'Изменить',
-        onClick: () => console.log("Изменить")
-      },
+      // {
+      //   key: '2',
+      //   label: 'Изменить',
+      //   onClick: () => console.log("Изменить")
+      // },
       {
         key: '3',
         label: 'Удалить',
@@ -39,18 +38,20 @@ export const Comment = ({comment, refetch}: Props) => {
         },
         danger: true
       }
-    ] : [
-    
-    ];
+    ] : [];
   
   return (
     <List.Item>
       <div style={{width: "100%"}}>
-        <Flex gap={12} align={"center"}>
-          <CustomAvatar user={comment.user}/>
-          <Flex vertical>
-            <Link to={`${Paths.profile}/` + comment.user.username} className={styles.username}>{comment.user.username}</Link>
+        <Flex justify={"space-between"}>
+          <Flex gap={12} align={"center"}>
+            <CustomAvatar user={comment.user}/>
+            <Flex vertical>
+              <Link to={`${Paths.profile}/` + comment.user.username}
+                    className={styles.username}>{comment.user.username}</Link>
+            </Flex>
           </Flex>
+          
           <Dropdown menu={{items}} trigger={['click']} placement="bottomRight">
             <MoreOutlined className={styles.icon}/>
           </Dropdown>

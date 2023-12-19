@@ -1,3 +1,18 @@
+.item {
+  border-radius: 5px;
+  border: 1px solid var(--color-white-100);
+  background: var(--color-white);
+
+  box-shadow: 2px 1px 5px 0 rgba(0, 0, 0, 0.15);
+
+  padding: 16px 24px;
+}
+
+.content {
+  //margin-bottom: 16px;
+  padding: 0 !important;
+}
+
 .img {
   width: 100%;
 
@@ -10,6 +25,8 @@
 
   object-fit: cover;
   aspect-ratio: 31 / 14;
+
+  border: 1px solid var(--color-white-100);
 }
 
 .title {
@@ -27,10 +44,6 @@
   width: fit-content;
 }
 
-.content {
-  font-family: var(--font-family);
-  //margin-bottom: 16px;
-}
 
 .tag {
   //color: var(--color-black-100);

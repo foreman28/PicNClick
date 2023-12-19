@@ -39,9 +39,10 @@
 
 
 .ql-editor {
+  font-family: var(--font-family);
   font-style: normal;
+  font-size: 16px;
   font-weight: 400;
-
   min-height: 300px;
 
   img {
@@ -49,6 +50,17 @@
     height: 400px;
     object-fit: cover;
   }
+
+  .ql-video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 4px;
+  }
+
+  blockquote {
+    border-left: 4px solid var(--color-primary) !important;
+  }
+
 }
 
 .ql-toolbar.ql-snow {

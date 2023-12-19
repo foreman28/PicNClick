@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, ConfigProvider, Flex, Form, message, Upload} from 'antd';
+import {Button, ConfigProvider, Flex, Form, message, SelectProps, Upload} from 'antd';
 import {Layout} from '../../components/layout/layout';
 import {useAddPostMutation} from '../../api/posts';
 import {CustomBreadcrumb} from '../../components/custom-breadcrumb/custom-breadcrumb';
@@ -11,6 +11,7 @@ import {DownloadOutlined} from "@ant-design/icons";
 import {CustomTitle} from "../../components/custom-title/custom-title";
 
 import styles from './Add-post.module.scss';
+import {useGetAllTagsQuery} from "../../api/tags";
 
 // const {Title, Text} = Typography
 
@@ -65,6 +66,16 @@ export const AddPost = () => {
       console.error('Error reading file:', error);
     }
   };
+  
+  const {data:tags} = useGetAllTagsQuery();
+  
+  const selectOptions: SelectProps['options'] = tags
+    ? tags.map((tag) => ({
+      label: tag.name,
+      value: tag.id,
+      desc: tag.description,
+    }))
+    : [];
   
   const [content, setContent] = useState(""); // Textarea
   
@@ -140,7 +151,7 @@ export const AddPost = () => {
               />
             </Form.Item>
             
-            <CustomSelect name="tags" placeholder="Теги"/>
+            <CustomSelect selectOptions={selectOptions} name="tags" placeholder="Теги"/>
             
             <ConfigProvider theme={button}>
               <Button type="primary" htmlType="submit" loading={isLoading}>

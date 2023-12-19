@@ -13,9 +13,7 @@ type CustomTextareaProps = {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
-  theme?: any;
   modules?: any;
-  formats?: any;
   maxLength?: number;
 };
 
@@ -24,9 +22,7 @@ export const CustomTextarea: React.FC<CustomTextareaProps> = (
     value,
     onChange,
     placeholder = 'Содержание',
-    theme,
     modules: customModules,
-    formats: customFormats,
     maxLength = 10000,
   }) => {
   
@@ -37,7 +33,11 @@ export const CustomTextarea: React.FC<CustomTextareaProps> = (
         [{'header': [1, 2, 3, false]}],
         ['bold', 'italic', 'underline', 'strike', 'blockquote'],
         [{'list': 'ordered'}, {'list': 'bullet'}],
-        ['link', 'image', 'video'],
+        [
+          'link',
+          // 'image',
+          'video'
+        ],
         [{'color': []}, {'background': []}],
         ['clean'],
       ],
@@ -45,20 +45,6 @@ export const CustomTextarea: React.FC<CustomTextareaProps> = (
   } else {
     modules = customModules
   }
-  
-  let formats: any;
-  if (!customFormats) {
-    formats = [
-      'header',
-      'bold', 'italic', 'underline', 'strike', 'blockquote',
-      'list', 'bullet',
-      'link', 'image', 'video',
-      'color', 'background',
-    ];
-  } else {
-    formats = customFormats
-  }
-  
   
   const handleChange = (value: any, delta: any, source: any, editor: any) => {
     // onChange(value)
@@ -71,7 +57,6 @@ export const CustomTextarea: React.FC<CustomTextareaProps> = (
       onChange={onChange}
       theme="snow"
       modules={modules}
-      formats={formats}
       className="custom-textarea"
       placeholder={placeholder}
     />

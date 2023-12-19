@@ -11,8 +11,6 @@ import styles from "./Post.module.scss";
 
 
 const {Title, Text} = Typography;
-// import { Link, Element } from "react-scroll";
-
 
 export const Post = () => {
   const {id}: any = useParams();
@@ -46,10 +44,12 @@ export const Post = () => {
             
             <CustomTag post={post}/>
             
-            <div
-              dangerouslySetInnerHTML={{__html: post.content}}
-              className={"ql-editor " + styles.content}
-            />
+            <div className={"ql-snow " + styles.item}>
+              <div
+                dangerouslySetInnerHTML={{__html: post.content}}
+                className={"ql-editor " + styles.content}
+              />
+            </div>
             
             <Comments post={post} refetch={refetch}/>
           </>

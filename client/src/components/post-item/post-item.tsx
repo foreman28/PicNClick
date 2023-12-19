@@ -37,11 +37,11 @@ const PostItem = ({post, refetch}: Props) => {
           copy(`${process.env.REACT_APP_CLIENT_URL}${Paths.forum}/${post.url}`)
         }
       },
-      {
-        key: '2',
-        label: 'Изменить',
-        onClick: () => console.log("Изменить")
-      },
+      // {
+      //   key: '2',
+      //   label: 'Изменить',
+      //   onClick: () => console.log("Изменить")
+      // },
       {
         key: '3',
         label: 'Удалить',
