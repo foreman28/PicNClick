@@ -29,7 +29,7 @@ export const commentsApi = api.injectEndpoints({
         body: comment,
       }),
     }),
-    removeComment: builder.mutation<string, string>({
+    removeComment: builder.mutation<number, number>({
       query: (id) => ({
         url: `/comments/remove/${id}`,
         method: "POST",

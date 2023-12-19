@@ -3,7 +3,7 @@ import {useLocation, useNavigate, useSearchParams} from 'react-router-dom';
 import {List, Flex} from 'antd';
 
 import SkeletonPost from "../skeleton-post/skeleton-post";
-import PostItem from "./post-item/post-item";
+import PostItem from "../post-item/post-item";
 import {PaginationComponent} from "../custom-pagination/custom-pagination";
 
 import {useGetAllPostsQuery} from "../../api/posts";

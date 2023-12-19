@@ -1,46 +1,68 @@
-import React from "react";
-import {Flex, List} from "antd";
-import styles from "./comment.module.scss";
+import {Dropdown, Flex, List, MenuProps} from "antd";
 import {CustomAvatar} from "../avatar/avatar";
-import {User} from "@prisma/client";
 import {Link} from "react-router-dom";
 import {Paths} from "../../paths";
-import {format, formatDistanceToNow} from "date-fns";
-import {ru} from "date-fns/locale";
+import TimeDisplay from "../time-display/time-display";
+
+import styles from "./comment.module.scss";
+import {MoreOutlined} from "@ant-design/icons";
+import {useSelector} from "react-redux";
+import {selectUser} from "../../features/auth/authSlice";
+import {useRemoveCommentMutation} from "../../api/comment";
+import {CommentsWithUser} from "../../types";
+import {PrefetchOptions} from "@reduxjs/toolkit/query";
+
 
 
 type Props = {
-  author: User;
-  content: string;
-  createdAt: string;
+  comment: CommentsWithUser;
+  refetch: any
 };
 
-export const Comment = ({author, content, createdAt}: Props) => {
-  const createdDate: any = new Date(createdAt);
-  const newDate: any = new Date();
+export const Comment = ({comment, refetch}: Props) => {
+  const user = useSelector(selectUser)
+  const [removeComment] = useRemoveCommentMutation()
   
-  const formattedTimestamp =
-    newDate - createdDate < 24 * 60 * 60 * 1000
-      ? formatDistanceToNow(createdDate, {locale: ru, addSuffix: true})
-      : format(createdDate, 'MMMM d, yyyy HH:mm', {locale: ru});
+  const items: MenuProps['items'] =
+    (user?.id === comment.userId || user?.role === "ADMIN") ? [
+      {
+        key: '2',
+        label: 'Изменить',
+        onClick: () => console.log("Изменить")
+      },
+      {
+        key: '3',
+        label: 'Удалить',
+        onClick: () => {
+          removeComment(comment.id)
+          // refetch()
+        },
+        danger: true
+      }
+    ] : [
+    
+    ];
   
   return (
     <List.Item>
       <div style={{width: "100%"}}>
         <Flex gap={12} align={"center"}>
-          <CustomAvatar user={author}/>
+          <CustomAvatar user={comment.user}/>
           <Flex vertical>
-            <Link to={`${Paths.profile}/` + author.username} className={styles.username}>{author.username}</Link>
+            <Link to={`${Paths.profile}/` + comment.user.username} className={styles.username}>{comment.user.username}</Link>
           </Flex>
+          <Dropdown menu={{items}} trigger={['click']} placement="bottomRight">
+            <MoreOutlined className={styles.icon}/>
+          </Dropdown>
         </Flex>
         <div className={"ql-snow"}>
           <div
-            dangerouslySetInnerHTML={{__html: content}}
+            dangerouslySetInnerHTML={{__html: comment.content}}
             className={"ql-editor " + styles.content}
             style={{minHeight: "auto"}}
           />
         </div>
-        <span>{formattedTimestamp}</span>
+        <TimeDisplay createdAt={comment.createdAt}/>
       </div>
     </List.Item>
   );

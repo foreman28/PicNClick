@@ -3,40 +3,28 @@ import {
   ClockCircleOutlined, MoreOutlined,
 } from '@ant-design/icons';
 import {Link} from 'react-router-dom';
-
-import {ru} from 'date-fns/locale';
-import {format, formatDistanceToNow} from "date-fns";
-import {CustomTag} from "../../custom-tag/custom-tag";
-import {LikeButton} from "../../custom-button/like-button/like-button";
+import {CustomTag} from "../custom-tag/custom-tag";
+import {LikeButton} from "../custom-button/like-button/like-button";
+import {Paths} from "../../paths";
+import {CommentButton} from "../custom-button/comment-button/comment-button";
+import {CustomAvatar} from "../avatar/avatar";
+import {selectUser} from "../../features/auth/authSlice";
+import {useRemovePostMutation} from "../../api/posts";
+import copy from 'clipboard-copy';
+import TimeDisplay from "../time-display/time-display";
+import {useAppSelector} from "../../hooks/hooks";
 
 import styles from './post-item.module.scss';
-import {Paths} from "../../../paths";
-import {CommentButton} from "../../custom-button/comment-button/comment-button";
-import {CustomAvatar} from "../../avatar/avatar";
-import {CustomButton} from "../../custom-button/custom-button";
-import {useSelector} from "react-redux";
-import {selectUser} from "../../../features/auth/authSlice";
-import {useRemovePostMutation} from "../../../api/posts";
-import copy from 'clipboard-copy';
-
+import {ForumPost} from "@prisma/client";
 const {Paragraph, Title} = Typography;
 
 type Props = {
-  post: any,
+  post: ForumPost | any,
   refetch: any
 }
 
 const PostItem = ({post, refetch}: Props) => {
-  const createdDate: any = new Date(post.timestamp);
-  const newDate: any = new Date();
-  
-
-  const formattedTimestamp =
-    newDate - createdDate < 24 * 60 * 60 * 1000
-      ? formatDistanceToNow(createdDate, {locale: ru, addSuffix: true})
-      : format(createdDate, 'MMMM d, yyyy HH:mm', {locale: ru});
-
-  const user = useSelector(selectUser)
+  const user = useAppSelector(selectUser)
   const [removePost] = useRemovePostMutation()
   
   const items: MenuProps['items'] =
@@ -47,13 +35,12 @@ const PostItem = ({post, refetch}: Props) => {
         onClick: () => {
           console.log("Поделиться")
           copy(`${process.env.REACT_APP_CLIENT_URL}${Paths.forum}/${post.url}`)
-          
-        } // TODO
+        }
       },
       {
         key: '2',
         label: 'Изменить',
-        onClick: () => console.log("Изменить") // TODO
+        onClick: () => console.log("Изменить")
       },
       {
         key: '3',
@@ -71,11 +58,9 @@ const PostItem = ({post, refetch}: Props) => {
         onClick: () => {
           console.log("Поделиться")
           copy(`${process.env.REACT_APP_CLIENT_URL}${Paths.forum}/${post.url}`)
-          
-        } // TODO
+        }
       }
     ];
-  
   
   return (
     <List.Item
@@ -90,7 +75,7 @@ const PostItem = ({post, refetch}: Props) => {
         </Space>,
         <Space>
           <ClockCircleOutlined/>
-          <span>{formattedTimestamp}</span>
+          <TimeDisplay createdAt={post.timestamp}/>
         </Space>,
       ]}
     >

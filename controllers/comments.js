@@ -82,7 +82,7 @@ const addComment = async (req, res) => {
  */
 const removeComment = async (req, res) => {
   const {id} = req.params;
-
+  console.log(id)
   try {
     await prisma.comments.delete({
       where: {

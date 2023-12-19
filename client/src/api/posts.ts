@@ -1,5 +1,6 @@
 import {ForumPost} from "@prisma/client";
 import {api} from "./apiConfig";
+import {sv} from "date-fns/locale";
 
 interface filters {
   page?: number;
@@ -51,7 +52,7 @@ export const postsApi = api.injectEndpoints({
         body: post,
       }),
     }),
-    removePost: builder.mutation<string, string>({
+    removePost: builder.mutation<ForumPost, any>({
       query: (id) => ({
         url: `/posts/remove/${id}`,
         method: "DELETE",

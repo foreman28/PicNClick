@@ -8,7 +8,7 @@ import {useGetAllPostsQuery} from "../../api/posts";
 
 import {useSelector} from "react-redux";
 import {selectUser} from "../../features/auth/authSlice";
-import PostItem from "../../components/feed-posts/post-item/post-item";
+import PostItem from "../../components/post-item/post-item";
 
 import styles from "./UserPosts.module.scss";
 import {FeedPosts} from "../../components/feed-posts/feed-posts";

@@ -6,11 +6,13 @@ import {CustomTextarea} from "../custom-textarea/custom-textarea";
 import {button} from "../../themes/buttons";
 import {useAddCommentMutation} from "../../api/comment";
 import {CustomButton} from "../custom-button/custom-button";
+import {ForumPost, User, Comments as CommentsT} from "@prisma/client";
+import {CommentsWithUser, ForumPostWithAuthorAndComments} from "../../types";
 
 const {Title} = Typography;
 
 type Props = {
-  post: any;
+  post: ForumPostWithAuthorAndComments;
   refetch: any;
 };
 
@@ -82,12 +84,14 @@ export const Comments = ({post, refetch}: Props) => {
         <List
           itemLayout="horizontal"
           dataSource={post.comments}
-          renderItem={(comment: any) => (
+          renderItem={(comment) => (
             <Comment
               key={comment.id}
-              author={comment.user}
-              content={comment.content}
-              createdAt={comment.createdAt}
+              comment={comment as CommentsWithUser}
+              refetch={refetch}
+              // author={comment.author}
+              // content={comment.content}
+              // createdAt={comment.createdAt}
             />
           )}
           locale={{emptyText: "Нет сообщений"}}
