@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {Layout} from "../../components/layout/layout";
 import {useParams} from "react-router-dom";
 import {Flex, Typography} from "antd";
@@ -18,7 +18,8 @@ export const Post = () => {
   
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [id]);
+  
   
   return (
     <Layout>

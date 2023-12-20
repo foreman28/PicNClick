@@ -11,8 +11,8 @@ export const Auth = ({children}: { children: JSX.Element }) => {
         <img
           className={"auth-loading"}
           srcSet={`${process.env.PUBLIC_URL}/logo192.png`}
-          width={192}
-          height={192}
+          width={128}
+          height={128}
           alt={'logo'}
         />
       </Flex>

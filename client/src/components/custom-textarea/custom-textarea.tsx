@@ -8,7 +8,6 @@ import 'react-quill/dist/quill.snow.css';
 
 import './custom-textarea.scss';
 
-
 type CustomTextareaProps = {
   // value?: string;
   defaultValueTextarea?: string;
@@ -30,6 +29,7 @@ export const CustomTextarea: React.FC<CustomTextareaProps> = (
     maxLength = 10000,
   }) => {
   
+  
   let modules: any;
   if (!customModules) {
     modules = {
@@ -49,7 +49,7 @@ export const CustomTextarea: React.FC<CustomTextareaProps> = (
   } else {
     modules = customModules
   }
-
+  
   
   return (
     <Form.Item
@@ -71,13 +71,15 @@ export const CustomTextarea: React.FC<CustomTextareaProps> = (
       shouldUpdate={true}
     >
       <ReactQuill
-      // value={value}
-      // defaultValue={defaultValueTextarea}
-      theme="snow"
-      modules={modules}
-      className="custom-textarea"
-      placeholder={placeholder}
-    />
+        // value={value}
+        // defaultValue={defaultValueTextarea}
+        // readOnly={true}
+        theme="snow"
+        modules={modules}
+        className="custom-textarea"
+        placeholder={placeholder}
+      />
     </Form.Item>
+  
   );
 };

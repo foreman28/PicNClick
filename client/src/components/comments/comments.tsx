@@ -7,6 +7,8 @@ import {button} from "../../themes/buttons";
 import {useAddCommentMutation} from "../../api/comment";
 import {CustomButton} from "../custom-button/custom-button";
 import {CommentsWithUser, ForumPostWithAuthorAndComments} from "../../types";
+import {useAppSelector} from "../../hooks/hooks";
+import {selectIsAuthenticated} from "../../features/auth/authSlice";
 
 const {Title} = Typography;
 
@@ -30,6 +32,7 @@ export const Comments = ({post, refetch}: Props) => {
   //     ['clean'],
   //   ],
   // };
+  const isAuthenticated = useAppSelector(selectIsAuthenticated)
   
   const [form] = Form.useForm();
   const [addComment, {isLoading: isLoadingComment}] = useAddCommentMutation();
@@ -55,6 +58,8 @@ export const Comments = ({post, refetch}: Props) => {
   return (
     <Flex vertical gap={12} className={styles.comments} id={'comments'}>
       <Title>Сообщения:</Title>
+      
+      {isAuthenticated ? (
       <Form
         form={form}
         onFinish={onFinish}
@@ -75,8 +80,10 @@ export const Comments = ({post, refetch}: Props) => {
         >
           Добавить пост
         </CustomButton>
-      
       </Form>
+      ) :
+        undefined
+      }
       
       {post.comments && (
         <List
