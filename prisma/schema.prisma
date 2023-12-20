@@ -24,8 +24,8 @@ model User {
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   posts     ForumPost[]
-  Likes     Likes[]
-  Comment   Comments[]
+  likes     Likes[]
+  comments  Comments[]
 }
 
 model ForumPost {

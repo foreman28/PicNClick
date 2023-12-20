@@ -15,8 +15,8 @@ const allUser = async (req, res) => {
     const users = await prisma.user.findMany({
       include: {
         posts: true,
-        Comment: true,
-        Likes: true,
+        comments: true,
+        likes: true,
       },
     });
 
@@ -41,8 +41,8 @@ const getUser = async (req, res) => {
       },
       include: {
         posts: true,
-        Comment: true,
-        Likes: true,
+        comments: true,
+        likes: true,
       },
     });
 

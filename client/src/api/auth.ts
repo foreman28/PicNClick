@@ -1,5 +1,6 @@
 import {User} from "@prisma/client";
 import {api} from "./apiConfig";
+import {UserAll} from "../types";
 
 export type UserData = Omit<User, "id">;
 type ResponseLoginData = User & { token: string };
@@ -12,7 +13,7 @@ export const authApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
-    getUser: builder.query<User, any>({
+    getUser: builder.query<UserAll, any>({
       query: (username) => ({
         url: `/user/profile/${username}`,
         method: "GET",

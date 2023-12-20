@@ -1,18 +1,19 @@
-import { ForumPost, User, Comments as CommentsT } from "@prisma/client";
+import {ForumPost, User, Comments, Likes} from "@prisma/client";
 
 export type Role = 'USER' | 'ADMIN';
 
-export type UserWithCommentsAndPosts = User & {
-  comments: CommentsT[];
+export type UserAll = User & {
+  likes: Likes[];
+  comments: Comments[];
   posts: ForumPost[];
 };
 
 export type ForumPostWithAuthorAndComments = ForumPost & {
   author: User;
-  comments: CommentsT[];
+  comments: Comments[];
 };
 
-export type CommentsWithUser = CommentsT & {
+export type CommentsWithUser = Comments & {
   user: User;
 };
 
