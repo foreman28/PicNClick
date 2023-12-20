@@ -10,7 +10,7 @@ import {useSelector} from "react-redux";
 import {selectUser} from "../../features/auth/authSlice";
 import {useRemoveCommentMutation} from "../../api/comment";
 import {CommentsWithUser} from "../../types";
-import {PrefetchOptions} from "@reduxjs/toolkit/query";
+// import {PrefetchOptions} from "@reduxjs/toolkit/query";
 
 
 type Props = {
