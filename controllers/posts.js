@@ -167,8 +167,19 @@ const add = async (req, res) => {
     if (typeof data.tags === 'string') {
       tagsArray = tags.split(',').map(Number);
     }
-    console.log(data.tags)
+
     const slug = slugify(data.title, { lower: true, remove: /[*+~.()'"!:@]/g });
+
+    const postChecker = await prisma.forumPost.findMany({
+      where: {
+        url: slug
+      }
+    })
+
+    if (postChecker !== [] && postChecker[0]?.id) {
+      console.log('postChecker')
+      return res.status(409).json({ message: 'Название занято!' })
+    }
 
     if (file){
       processImage(req.file.buffer, req.file.originalname, async (err, filename) => {
@@ -268,14 +279,26 @@ const edit = async (req, res) => {
     if (typeof data.tags === 'string') {
       tagsArray = tags.split(',').map(Number);
     }
-    const slug = slugify(data.title, { lower: true, remove: /[*+~.()'"!:@]/g });
 
     const post = await prisma.forumPost.findMany({
       where: {
         url: url
       }
     })
-    console.log(req.user.id)
+
+    const slug = slugify(data.title, { lower: true, remove: /[*+~.()'"!:@]/g });
+
+    const postChecker = await prisma.forumPost.findMany({
+      where: {
+        url: slug
+      }
+    })
+
+    if (postChecker !== [] && postChecker[0]?.id) {
+      console.log('postChecker')
+      return res.status(409).json({ message: 'Название занято!' })
+    }
+
     if (req.user.role === "ADMIN" || post[0].authorId === req.user.id) {
       if (file) {
         processImage(req.file.buffer, req.file.originalname, async (err, filename) => {
@@ -300,7 +323,6 @@ const edit = async (req, res) => {
           res.status(204).json("OK");
         });
       } else {
-
         await prisma.forumPost.update({
           where: {
             url: url,
@@ -315,7 +337,6 @@ const edit = async (req, res) => {
             url: slug,
           },
         });
-
         res.status(204).json("OK");
       }
     }

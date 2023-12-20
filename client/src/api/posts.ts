@@ -12,6 +12,8 @@ interface filters {
     sort?: string;
     order?: 'asc' | 'desc';
     
+    url?: string;
+    
     where?: {
       authorId: number
     }
@@ -45,7 +47,7 @@ export const postsApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
-    addPost: builder.mutation<ForumPost, ForumPost>({
+    addPost: builder.mutation<ForumPost, any>({
       query: (postData) => ({
         url: "/posts/add",
         method: "POST",

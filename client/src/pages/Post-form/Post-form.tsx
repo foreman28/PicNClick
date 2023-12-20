@@ -10,11 +10,13 @@ import CustomSelect from '../../components/custom-select/custom-select';
 import {DownloadOutlined} from "@ant-design/icons";
 import {CustomTitle} from "../../components/custom-title/custom-title";
 
-import styles from './Post-form.module.scss';
 import {useGetAllTagsQuery} from "../../api/tags";
 import {useNavigate, useParams} from "react-router-dom";
 import {selectUser} from "../../features/auth/authSlice";
 import {useAppSelector} from "../../hooks/hooks";
+
+import styles from './Post-form.module.scss';
+import {response} from "express";
 
 // const {Title, Text} = Typography
 
@@ -24,8 +26,8 @@ export const PostForm = () => {
   const { url } = useParams();
   const [imageFile, setImageFile]:any = useState('');
   const [showImage, setShowImage]:any = useState('');
-  const [addPost, { isLoading: addPostLoading }]:any = useAddPostMutation();
-  const [editPost, { isLoading: editPostLoading }]:any = useEditPostMutation();
+  const [addPost, { isLoading: addPostLoading }] = useAddPostMutation();
+  const [editPost, { isLoading: editPostLoading, isError }] = useEditPostMutation();
   const [isLoading, setIsLoading] = useState(true)
   const { data: post, isLoading: getPostLoading }:any = useGetPostQuery(url || '0');
   
@@ -64,17 +66,15 @@ export const PostForm = () => {
       postData.append('tags', values.tags);
       
       if (url) {
-        await editPost({url, postData});
+        await editPost({url, postData}).unwrap();
         message.success('Пост успешно изменен!');
-        navigate(`/user-post`);
       } else {
-        await addPost(postData);
+        await addPost(postData).unwrap();
         message.success('Пост успешно добавлен!');
-        navigate(`/user-post`);
       }
-    } catch (error) {
-      console.error(error);
-      message.error('Произошла ошибка при сохранении поста.');
+      navigate(`/user-post`);
+    } catch (error:any) {
+      message.error(error.data.message);
     }
   };
   
