@@ -29,6 +29,9 @@ export const theme: any = {
     },
     Dropdown: {
       fontSize: 14,
+    },
+    Menu: {
+      colorPrimary:'var(--color-primary)',
     }
   }
 };

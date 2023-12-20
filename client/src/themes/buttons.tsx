@@ -1,4 +1,4 @@
-import '../index.scss';
+import '../App.scss';
 
 const variables = [
   '--color-primary',

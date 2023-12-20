@@ -40,7 +40,7 @@
   --color-bg: #F3F3F3;
 
   --color-white: #FFFFFF;
-  --color-white-100: #d9d9d9;
+  --color-white-100: #e7e7e7;
 
   --color-black: #16181A;
   --color-black-100: #808080;
@@ -65,6 +65,12 @@
 *::selection {
   color: var(--color-white);
   background: var(--color-primary);
+}
+
+.ant-layout-sider-children{
+  position: sticky;
+  top: 70px;
+  min-height: 100vh;
 }
 
 html {

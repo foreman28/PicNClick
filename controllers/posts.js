@@ -181,8 +181,7 @@ const add = async (req, res) => {
       }
     })
 
-    if (postChecker !== [] && postChecker[0]?.id) {
-      console.log('postChecker')
+    if (postChecker[0] !== undefined) {
       return res.status(409).json({ message: 'Название занято!' })
     }
 
@@ -267,8 +266,7 @@ const edit = async (req, res) => {
       }
     })
 
-    if (postChecker !== [] && postChecker[0]?.id) {
-      console.log('postChecker')
+    if (postChecker[0] !== undefined && postChecker[0]?.url !== url) {
       return res.status(409).json({ message: 'Название занято!' })
     }
 

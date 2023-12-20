@@ -38,7 +38,7 @@ export const Comment = ({comment, refetch}: Props) => {
         },
         danger: true
       }
-    ] : [];
+    ] : undefined;
   
   return (
     <List.Item>
@@ -52,9 +52,12 @@ export const Comment = ({comment, refetch}: Props) => {
             </Flex>
           </Flex>
           
-          <Dropdown menu={{items}} trigger={['click']} placement="bottomRight">
-            <MoreOutlined className={styles.icon}/>
-          </Dropdown>
+          {items ?
+            <Dropdown menu={{items}} trigger={['click']} placement="bottomRight">
+              <MoreOutlined className={styles.icon}/>
+            </Dropdown>
+            :
+            undefined}
         </Flex>
         <div className={"ql-snow"}>
           <div

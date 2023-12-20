@@ -2,12 +2,8 @@
   background-color: var(--color-white);
   position: relative;
   width: 100%;
+min-height: 100%;
 
-  &>div{
-    height: 100%;
-    //position: sticky;
-    //top: 0; // headerHeight
-  }
 }
 
 .sidebar_container {
@@ -15,6 +11,7 @@
   /*max-width: var(--white-container);*/
   /*margin-inline: auto;*/
 
+  height: 100%;
   padding: 40px 0;
   background-color: var(--color-white);
 }
@@ -78,4 +75,17 @@
       font-weight: 600;
     }
   }
+}
+
+.toggleButton {
+  width: 100%;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.02);
+  cursor: pointer;
+  position: sticky;
+  top: 100px;
+}
+
+.collapsed {
+  //background-color: red;
 }
