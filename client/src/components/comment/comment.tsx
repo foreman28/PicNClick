@@ -34,7 +34,7 @@ export const Comment = ({comment, refetch}: Props) => {
         label: 'Удалить',
         onClick: () => {
           removeComment(comment.id)
-          // refetch()
+          refetch()
         },
         danger: true
       }

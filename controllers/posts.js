@@ -2,6 +2,13 @@ const {prisma} = require("../prisma/prisma-client");
 const slugify = require('slugify');
 const {processImage} = require("../middleware/upload");
 
+function generateSlug(input, options = {}) {
+  const defaultOptions = { lower: true, remove: /[*+~.()'"!:@]/g };
+  const mergedOptions = { ...defaultOptions, ...options };
+  return slugify(input, mergedOptions);
+}
+
+
 /**
  * @route POST /api/posts
  * @desc Получение всех постов // поиск // поиск по тегу // фильтры // сортировка
@@ -122,7 +129,6 @@ const allPosts = async (req, res) => {
     res.status(500).json({message: 'Не удалось получить посты'});
   }
 };
-
 const getPostsCount = async (req, res) => {
   try {
     const {authorId} = req.params
@@ -146,7 +152,6 @@ const getPostsCount = async (req, res) => {
   }
 };
 
-
 /**
  * @route POST /api/posts/add
  * @desc Добавление поста
@@ -168,7 +173,7 @@ const add = async (req, res) => {
       tagsArray = tags.split(',').map(Number);
     }
 
-    const slug = slugify(data.title, { lower: true, remove: /[*+~.()'"!:@]/g });
+    const slug = generateSlug(data.title, { lower: true, remove: /[*+~.()'"!:@]/g });
 
     const postChecker = await prisma.forumPost.findMany({
       where: {
@@ -227,38 +232,6 @@ const add = async (req, res) => {
   }
 };
 
-
-/**
- * @route POST /api/posts/remove/:id
- * @desc Удаление поста
- * @access Private
- */
-const remove = async (req, res) => {
-  const {id} = req.params;
-
-  try {
-    const post = await prisma.forumPost.findFirst({
-      where: {
-        id: +id,
-      }
-    });
-
-    if (req.user.role === "ADMIN" || post.authorId === req.user.id) {
-      await prisma.forumPost.delete({
-        where: {
-          id: +id,
-        },
-      });
-
-      res.status(204).json("OK");
-    } else {
-      res.status(401).json("Отказ в доступе");
-    }
-  } catch {
-    res.status(500).json({message: "Не удалось удалить пост"});
-  }
-};
-
 /**
  * @route PUT /api/posts/edit/:id
  * @desc Редактирование поста
@@ -286,7 +259,7 @@ const edit = async (req, res) => {
       }
     })
 
-    const slug = slugify(data.title, { lower: true, remove: /[*+~.()'"!:@]/g });
+    const slug = generateSlug(data.title, { lower: true, remove: /[*+~.()'"!:@]/g });
 
     const postChecker = await prisma.forumPost.findMany({
       where: {
@@ -344,6 +317,37 @@ const edit = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({message: "Не удалось редактировать пост"});
+  }
+};
+
+/**
+ * @route POST /api/posts/remove/:id
+ * @desc Удаление поста
+ * @access Private
+ */
+const remove = async (req, res) => {
+  const {id} = req.params;
+
+  try {
+    const post = await prisma.forumPost.findFirst({
+      where: {
+        id: +id,
+      }
+    });
+
+    if (req.user.role === "ADMIN" || post.authorId === req.user.id) {
+      await prisma.forumPost.delete({
+        where: {
+          id: +id,
+        },
+      });
+
+      res.status(204).json("OK");
+    } else {
+      res.status(401).json("Отказ в доступе");
+    }
+  } catch {
+    res.status(500).json({message: "Не удалось удалить пост"});
   }
 };
 

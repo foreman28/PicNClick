@@ -58,7 +58,7 @@ export const CustomInput = (
         {type === 'password' ? (
           <Input.Password placeholder={placeholder} size="large"/>
         ) : (
-          <Input defaultValue={defaultValue} placeholder={placeholder} type={type} size="middle"/>
+          <Input placeholder={placeholder} type={type} size="middle"/>
         )}
       </Form.Item>
     </ConfigProvider>

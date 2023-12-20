@@ -1,4 +1,4 @@
-import {Form} from "antd";
+import {Form, Input} from "antd";
 import React, {useState} from "react";
 
 import ReactQuill from 'react-quill'; // or quill
@@ -12,7 +12,8 @@ import './custom-textarea.scss';
 type CustomTextareaProps = {
   // value?: string;
   defaultValueTextarea?: string;
-  onChange: (value: string) => void;
+  name: string;
+  required?: boolean;
   placeholder?: string;
   modules?: any;
   maxLength?: number;
@@ -22,7 +23,8 @@ export const CustomTextarea: React.FC<CustomTextareaProps> = (
   {
     // value,
     defaultValueTextarea,
-    onChange,
+    name,
+    required = true,
     placeholder = 'Содержание',
     modules: customModules,
     maxLength = 10000,
@@ -47,104 +49,35 @@ export const CustomTextarea: React.FC<CustomTextareaProps> = (
   } else {
     modules = customModules
   }
-  
-  const handleChange = (value: any, delta: any, source: any, editor: any) => {
-    onChange(value)
-    console.log(value)
-  };
+
   
   return (
-    <ReactQuill
+    <Form.Item
+      className={"custom-textarea-box"}
+      name={name}
+      initialValue={defaultValueTextarea}
+      rules={[
+        {
+          required: true,
+          message: 'Обязательное поле',
+          validator: (_, value) => {
+            if (value && value.trim() !== "<p><br></p>") {
+              return Promise.resolve();
+            }
+            return Promise.reject();
+          },
+        },
+      ]}
+      shouldUpdate={true}
+    >
+      <ReactQuill
       // value={value}
-      defaultValue={defaultValueTextarea}
-      onChange={handleChange}
+      // defaultValue={defaultValueTextarea}
       theme="snow"
       modules={modules}
       className="custom-textarea"
       placeholder={placeholder}
     />
+    </Form.Item>
   );
 };
-
-
-// import { Form } from "antd";
-// import Quill from 'quill'; // import Quill library
-// import 'quill/dist/quill.snow.css'; // import Quill styles
-//
-// import './custom-textarea.scss';
-// import React from "react";
-//
-// type Props = {
-//   name: string;
-//   placeholder?: string;
-//   theme?: any;
-//   modules?: any;
-//   formats?: any;
-//   maxLength?: number;
-// };
-//
-// export const CustomTextarea = ({
-//                                  name,
-//                                  placeholder = 'Содержание',
-//                                  theme,
-//                                  modules: customModules,
-//                                  formats: customFormats,
-//                                  maxLength = 10000,
-//                                }: Props) => {
-//   let modules: any;
-//   if (!customModules) {
-//     modules = {
-//       toolbar: [
-//         [{ 'header': [1, 2, 3, false] }],
-//         ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-//         [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-//         ['link', 'image', 'video'],
-//         [{ 'color': [] }, { 'background': [] }],
-//         ['clean'],
-//       ],
-//     };
-//   } else {
-//     modules = customModules;
-//   }
-//
-//   const quillRef = React.useRef(null);
-//
-//   React.useEffect(() => {
-//     if (quillRef.current) {
-//       const quill = new Quill(quillRef.current, {
-//         theme: 'snow',
-//         modules: modules,
-//       });
-//
-//       // Add event listener for value change
-//       quill.on('text-change', () => {
-//         // Get HTML content
-//         const htmlContent = quill.root.innerHTML;
-//
-//         // You can use this content as needed
-//         console.log(htmlContent);
-//       });
-//     }
-//   }, [modules]);
-//
-//   return (
-//     <Form.Item
-//       className={"custom-textarea-box"}
-//       name={name}
-//       rules={[
-//         {
-//           required: true,
-//           validator: (_, value) => {
-//             if (value && value.trim() !== "<p><br></p>") {
-//               return Promise.resolve();
-//             }
-//             return Promise.reject(new Error('ERROR'));
-//           },
-//         },
-//       ]}
-//       shouldUpdate={true}
-//     >
-//       <div ref={quillRef} className="custom-textarea" />
-//     </Form.Item>
-//   );
-// };

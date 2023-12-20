@@ -16,20 +16,20 @@ type Props = {
 };
 
 export const Comments = ({post, refetch}: Props) => {
-  const modules = {
-    toolbar: [
-      [{'header': [2, 3, false]}],
-      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-      [{'list': 'ordered'}, {'list': 'bullet'}],
-      [
-        'link',
-        // 'image',
-        'video'
-      ],
-      [{'color': []}, {'background': []}],
-      ['clean'],
-    ],
-  };
+  // const modules = {
+  //   toolbar: [
+  //     [{'header': [2, 3, false]}],
+  //     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+  //     [{'list': 'ordered'}, {'list': 'bullet'}],
+  //     [
+  //       'link',
+  //       // 'image',
+  //       'video'
+  //     ],
+  //     [{'color': []}, {'background': []}],
+  //     ['clean'],
+  //   ],
+  // };
   
   const [form] = Form.useForm();
   const [addComment, {isLoading: isLoadingComment}] = useAddCommentMutation();
@@ -50,7 +50,7 @@ export const Comments = ({post, refetch}: Props) => {
     }
   };
   
-  const [content, setContent] = useState(""); // Textarea
+  // const [content, setContent] = useState(""); // Textarea
 
   return (
     <Flex vertical gap={12} className={styles.comments} id={'comments'}>
@@ -59,18 +59,13 @@ export const Comments = ({post, refetch}: Props) => {
         form={form}
         onFinish={onFinish}
       >
-        <Form.Item
-          className={"custom-textarea-box"}
-          name={'content'}
-          shouldUpdate={true}
-        >
         <CustomTextarea
-          defaultValueTextarea={content}
-          onChange={setContent}
+          // defaultValueTextarea={content}
+          name={"content"}
+          required={false}
           placeholder={"Напишите сообщение"}
-          modules={modules}
+          // modules={modules}
         />
-        </Form.Item>
         
         <CustomButton
           type={"primary"}

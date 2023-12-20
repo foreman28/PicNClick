@@ -16,20 +16,19 @@ import {selectUser} from "../../features/auth/authSlice";
 import {useAppSelector} from "../../hooks/hooks";
 
 import styles from './Post-form.module.scss';
-import {response} from "express";
 
 // const {Title, Text} = Typography
 
 export const PostForm = () => {
   const user = useAppSelector(selectUser)
   const navigate = useNavigate()
-  const { url } = useParams();
-  const [imageFile, setImageFile]:any = useState('');
-  const [showImage, setShowImage]:any = useState('');
-  const [addPost, { isLoading: addPostLoading }] = useAddPostMutation();
-  const [editPost, { isLoading: editPostLoading, isError }] = useEditPostMutation();
+  const {url} = useParams();
+  const [imageFile, setImageFile]: any = useState('');
+  const [showImage, setShowImage]: any = useState('');
+  const [addPost, {isLoading: addPostLoading}] = useAddPostMutation();
+  const [editPost, {isLoading: editPostLoading, isError}] = useEditPostMutation();
   const [isLoading, setIsLoading] = useState(true)
-  const { data: post, isLoading: getPostLoading }:any = useGetPostQuery(url || '0');
+  const {data: post, isLoading: getPostLoading}: any = useGetPostQuery(url || '0');
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -73,7 +72,7 @@ export const PostForm = () => {
         message.success('Пост успешно добавлен!');
       }
       navigate(`/user-post`);
-    } catch (error:any) {
+    } catch (error: any) {
       message.error(error.data.message);
     }
   };
@@ -102,7 +101,7 @@ export const PostForm = () => {
     }
   };
   
-  const {data:dataTags} = useGetAllTagsQuery();
+  const {data: dataTags} = useGetAllTagsQuery();
   
   const selectOptions: SelectProps['options'] = dataTags
     ? dataTags.map((tag) => ({
@@ -111,14 +110,14 @@ export const PostForm = () => {
       desc: tag.description,
     }))
     : [];
-
+  
   return (
     <Layout>
       <Flex vertical gap={12}>
         <CustomBreadcrumb/>
         
         {/*<CustomTitle title={"Добавить пост"} level={1}/>*/}
-        <CustomTitle title={url ? 'Изменить пост' : 'Добавить пост'} level={1} />
+        <CustomTitle title={url ? 'Изменить пост' : 'Добавить пост'} level={1}/>
         
         {getPostLoading ? undefined :
           <Form
@@ -136,7 +135,7 @@ export const PostForm = () => {
             onFinish={onFinish}
           >
             <Flex vertical gap={4}>
-              <CustomInput defaultValue={post && post.title} name="title" placeholder="Заголовок" />
+              <CustomInput defaultValue={post && post.title} name="title" placeholder="Заголовок"/>
               <CustomInput defaultValue={post && post.description} name="description" placeholder="Краткое описание"/>
               
               <div style={{display: "flex"}} onClick={handleImageClick}>
@@ -176,32 +175,14 @@ export const PostForm = () => {
                 </Upload>
               </Form.Item>
               
-              <Form.Item
-                className={"custom-textarea-box"}
-                name={'content'}
-                initialValue={post && post.content}
-                rules={[
-                  {
-                    required: true,
-                    message: 'Обязательное поле',
-                    validator: (_, value) => {
-                      if (value && value.trim() !== "<p><br></p>") {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject();
-                    },
-                  },
-                ]}
-                shouldUpdate={true}
-              >
-                <CustomTextarea
-                  defaultValueTextarea={post && post.content}
-                  onChange={setContent}
-                />
-              </Form.Item>
+              
+              <CustomTextarea
+                defaultValueTextarea={post?.content}
+                name={"content"}
+              />
               
               <CustomSelect
-                selectedValues={post ? post.tags.map((tag:any) => tag.id) : undefined}
+                selectedValues={post ? post.tags.map((tag: any) => tag.id) : undefined}
                 selectOptions={selectOptions}
                 name="tags"
                 placeholder="Теги"
@@ -215,7 +196,7 @@ export const PostForm = () => {
             </Flex>
           </Form>
         }
-        
+      
       </Flex>
     </Layout>
   );
