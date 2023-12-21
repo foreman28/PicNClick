@@ -22,6 +22,7 @@ const allPosts = async (req, res) => {
       where: {},
       include: {
         author: true,
+        comments: true,
         likes: true,
         tags: true,
       },

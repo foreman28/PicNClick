@@ -1,46 +1,42 @@
-import {Flex, List, Typography} from 'antd';
-import {Link} from 'react-router-dom';
-import {Paths} from "../../paths";
+import React from "react";
+import {Flex, Typography} from 'antd';
 
 import styles from './card-item.module.scss';
-import React from "react";
 
+const {Paragraph} = Typography;
 
 type Props = {
-  color: string,
+  title: string,
   count: number | undefined,
+  color: string,
   icon: React.ReactNode;
 }
 
 const CardItem = (
   {
-    color,
+    title,
     count = 0,
+    color,
     icon
   }: Props) => {
   
   return (
     <Flex
       align={"center"}
+      justify={"space-between"}
+      gap={12}
       style={{
         background: color,
         boxShadow: `2px 1px 5px 0 ${color}`
     }}
       className={styles.item}
     >
-      <span className={styles.title}>{count}</span>
-      
+      <Flex vertical>
+        <span className={styles.count}>{count}</span>
+        <Paragraph ellipsis={{rows: 2}} className={styles.title}>{title}</Paragraph>
+      </Flex>
+
       <div className={styles.icon}>{icon}</div>
-      
-      {/*<Link to={`${Paths.search}?q=@${tag.url}`} className={styles.title}>*/}
-      {/*  #{tag.name}*/}
-      {/*</Link>*/}
-      {/*<Paragraph className={styles.description} ellipsis={{rows: 3, expandable: true, symbol: 'Раскрыть'}}>*/}
-      {/*  {tag.description}*/}
-      {/*</Paragraph>*/}
-      {/*<div className={styles.posts}>*/}
-      {/*  {tag.posts.length} {tag.posts.length > 1 ? 'Темы' : 'Тема'}*/}
-      {/*</div>*/}
     </Flex>
   );
 };

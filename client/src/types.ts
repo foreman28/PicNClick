@@ -11,6 +11,7 @@ export type UserAll = User & {
 export type ForumPostWithAuthorAndComments = ForumPost & {
   author: User;
   comments: Comments[];
+  likes: Comments[];
 };
 
 export type CommentsWithUser = Comments & {

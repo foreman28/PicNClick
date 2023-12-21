@@ -4,7 +4,7 @@ import {sv} from "date-fns/locale";
 
 interface filters {
   page?: number;
-  pageSize: number;
+  pageSize?: number;
   q?: string;
   
   filters?: {
