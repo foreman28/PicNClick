@@ -121,7 +121,7 @@ const PostItem = ({post, refetch}: Props) => {
             </Link>
             
             <Flex gap={0} vertical>
-              <Title ellipsis={true}>
+              <Title ellipsis={{rows: 1}}>
                 <Link className={styles.title} to={`/forum/${post.url}`}>
                   {post.title}
                 </Link>

@@ -14,21 +14,25 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  line-height: 1.5;
   letter-spacing: 0.65px;
 }
 
 .title {
+
+
   color: var(--color-black);
   font-family: var(--font-family);
-  font-size: 32px;
+  font-size: 28px;
   font-style: normal;
   font-weight: 700;
-  line-height: normal;
+  line-height: 1.5;
   letter-spacing: 0.8px;
   word-break: break-all;
 
   display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin-bottom: 4px;
 
   width: 100%;
@@ -40,7 +44,7 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 300;
-  line-height: 25px; /* 178.571% */
+  line-height: 1.5;
   letter-spacing: 0.7px;
   word-break: break-all;
 
