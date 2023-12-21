@@ -42,7 +42,6 @@ export const Profile = () => {
   const [sumLikes, setSumLikes] = useState(0)
   const [sumComments, setSumComments] = useState(0)
   useEffect(() => {
-    console.log(dataPosts)
     dataPosts && dataPosts.posts && dataPosts.posts.map((post:any)=>{
       setSumLikes(prev => prev + +post?.likes?.length)
       setSumComments(prev => prev + +post?.comments?.length)
@@ -85,15 +84,15 @@ export const Profile = () => {
                 icon={<FileTextFilled/>}
               />
               <CardItem
-                title={"Количество лайков на ваших темах"}
+                title={"Количество лайков в ваших постах"}
                 count={sumLikes}
-                color={"var(--color-primary-100)"}
+                color={"var(--color-secondary-200)"}
                 icon={<FileTextOutlined/>}
               />
               <CardItem
-                title={"Количество сообщений на ваших темах"}
+                title={"Количество сообщений в ваших постах"}
                 count={sumComments}
-                color={"var(--color-success-100)"}
+                color={"var(--color-error-200)"}
                 icon={<MessageOutlined/>}
               />
             </>

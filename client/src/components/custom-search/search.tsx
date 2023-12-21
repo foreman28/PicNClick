@@ -1,12 +1,14 @@
 import {useState} from 'react';
-import {Flex, Input, List} from 'antd';
+import {Flex, Input, List, Typography} from 'antd';
 import {Link, useNavigate} from 'react-router-dom';
 import {CustomTag} from "../custom-tag/custom-tag";
 import {useGetAllPostsQuery} from "../../api/posts";
 
 import styles from './search.module.scss';
+import Paragraph from "antd/es/typography/Paragraph";
 
 const {Search} = Input;
+const {Title, Text} = Typography;
 
 export const SearchComponent = () => {
   const [search, setSearch] = useState<string>('');
@@ -55,14 +57,16 @@ export const SearchComponent = () => {
           dataSource={searchResults.posts}
           renderItem={(item) => (
             <List.Item className={styles.item} key={item.id}>
-              <Flex vertical gap={4} align={"flex-start"}>
+              <Flex vertical gap={8} align={"flex-start"}>
+                
                 <Link
                   to={`/forum/${item.url}`}
                   className={styles.title}
                 >
-                  {item.title}
+                  <Title level={5}>{item.title}</Title>
+                  
                 </Link>
-                <span className={styles.text}>{item.description}</span>
+                <Paragraph className={styles.text} ellipsis={{rows: 2}}>{item.description}</Paragraph>
                 <CustomTag post={item} style={{fontSize: '12px', fontWeight: '500'}}/>
               </Flex>
             </List.Item>
