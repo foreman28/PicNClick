@@ -66,10 +66,10 @@ export const PostForm = () => {
       
       if (url) {
         await editPost({url, postData}).unwrap();
-        message.success('Пост успешно изменен!');
+        message.success('Рубрика успешна изменен!');
       } else {
         await addPost(postData).unwrap();
-        message.success('Пост успешно добавлен!');
+        message.success('Рубрика успешна добавлен!');
       }
       navigate(`/user-post`);
     } catch (error: any) {
@@ -97,7 +97,7 @@ export const PostForm = () => {
       };
       reader.readAsDataURL(file);
     } catch (error) {
-      console.error('Error reading file:', error);
+      console.error(error);
     }
   };
   
@@ -117,7 +117,7 @@ export const PostForm = () => {
         <CustomBreadcrumb/>
         
         {/*<CustomTitle title={"Добавить пост"} level={1}/>*/}
-        <CustomTitle title={url ? 'Изменить пост' : 'Добавить пост'} level={1}/>
+        <CustomTitle title={url ? 'Изменить рубрику' : 'Добавить рубрику'} level={1}/>
         
         {getPostLoading ? undefined :
           <Form
@@ -190,7 +190,7 @@ export const PostForm = () => {
               
               <ConfigProvider theme={button}>
                 <Button type="primary" htmlType="submit" loading={isLoading}>
-                  Добавить пост
+                  Опубликовать
                 </Button>
               </ConfigProvider>
             </Flex>

@@ -6,8 +6,29 @@ import {NavigationBar} from "../navigationBar/navigationBar";
 import {Sidebar} from "../sidebar/sidebar";
 
 import styles from "./layout.module.scss";
+import {useEffect, useLayoutEffect, useState} from "react";
 
 export const Layout = ({children}: any) => {
+  
+  const [isSidebarVisible, setSidebarVisible] = useState(true);
+  const checkWindowWidth = () => {
+    const screenWidth = window.innerWidth;
+    const shouldHideSidebar = screenWidth <= 1440;
+    
+    if (shouldHideSidebar !== isSidebarVisible) {
+      setSidebarVisible(shouldHideSidebar);
+    }
+  };
+  
+  useLayoutEffect(() => {
+    checkWindowWidth();
+    window.addEventListener('resize', checkWindowWidth);
+    
+    return () => {
+      window.removeEventListener('resize', checkWindowWidth);
+    };
+  }, [isSidebarVisible]);
+  
   return (
     <>
       <Header/>
@@ -17,8 +38,8 @@ export const Layout = ({children}: any) => {
         <AntLayout.Content className={styles.main}>
           {children}
         </AntLayout.Content>
-
-        <Sidebar/>
+        
+        {isSidebarVisible ? null : <Sidebar />}
       </Flex>
       <Footer/>
     </>

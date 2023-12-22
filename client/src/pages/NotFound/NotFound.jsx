@@ -3,6 +3,7 @@ import {Header} from "../../components/header/header";
 import {Layout as AntLayout} from "antd";
 import styles from "./NotFound.module.scss";
 import {Footer} from "../../components/footer/footer";
+import {Layout} from "../../components/layout/layout";
 
 export const NotFound = () => {
   useEffect(() => {
@@ -10,13 +11,21 @@ export const NotFound = () => {
   }, []);
 
   return (
-    <>
-      <Header/>
-      <AntLayout.Content className={styles.main}>
-        <h1 className={styles.title}>404</h1>
-        <p className={styles.text}>Sorry, the page you are looking for does not exist.</p>
-      </AntLayout.Content>
-      <Footer/>
-    </>
+    <Layout>
+      <div className={styles.main}>
+        <h1 className={styles.title}>
+          4
+          <img
+            className={"auth-loading"}
+            srcSet={`${process.env.PUBLIC_URL}/logo.svg`}
+            width={96}
+            height={96}
+            alt={'logo'}
+          />
+          4
+        </h1>
+        <p className={styles.text}>К сожалению, страница, которую вы ищете, не существует.</p>
+      </div>
+    </Layout>
   );
 };

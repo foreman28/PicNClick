@@ -11,19 +11,22 @@
 }
 
 .title {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-direction: row;
+
   color: var(--color-black);
   font-family: var(--font-family);
-  font-size: 100px;
-  font-style: normal;
+  font-size: 128px;
   font-weight: 700;
-  line-height: normal;
+  line-height: 1.5;
 }
 
 .text {
   color: var(--color-black);
   font-family: var(--font-family);
   font-size: 28px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  line-height: 1.5;
 }

@@ -11,3 +11,9 @@
 
   height: 100%;
 }
+
+@media (max-width: 1440px) {
+  .profile {
+    flex-direction: column;
+  }
+}

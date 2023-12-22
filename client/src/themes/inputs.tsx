@@ -42,6 +42,7 @@ export const inputPassword: any =  {
     borderRadius: 2,
     colorIcon: values['--color-black'],
     colorIconHover: values['--color-primary'],
+    fontSize: 12,
 
     colorTextPlaceholder: values['--color-black-100'],
     colorText: values['--color-black']

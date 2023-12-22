@@ -31,7 +31,7 @@ const CardItem = (
     }}
       className={styles.item}
     >
-      <Flex vertical>
+      <Flex vertical className={styles.content}>
         <span className={styles.count}>{count}</span>
         <Paragraph ellipsis={{rows: 2}} className={styles.title}>{title}</Paragraph>
       </Flex>

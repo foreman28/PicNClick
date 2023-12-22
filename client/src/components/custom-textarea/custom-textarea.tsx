@@ -34,7 +34,7 @@ export const CustomTextarea: React.FC<CustomTextareaProps> = (
   if (!customModules) {
     modules = {
       toolbar: [
-        [{'header': [1, 2, 3, false]}],
+        [{'header': [2, 3, false]}],
         ['bold', 'italic', 'underline', 'strike', 'blockquote'],
         [{'list': 'ordered'}, {'list': 'bullet'}],
         [

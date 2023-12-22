@@ -15,7 +15,7 @@ import {
 import {Paths} from "../../paths";
 
 import styles from "./navigationBar.module.scss";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 export const NavigationBar = () => {
   
@@ -28,6 +28,24 @@ export const NavigationBar = () => {
   function toggleCollapsed() {
     setCollapsed(!collapsed)
   }
+  
+  const checkWindowWidth = () => {
+    const screenWidth = window.innerWidth;
+    const shouldCollapse = screenWidth <= 1440;
+    
+    if (shouldCollapse !== collapsed) {
+      setCollapsed(shouldCollapse);
+    }
+  };
+  
+  useEffect(() => {
+    checkWindowWidth();
+    window.addEventListener('resize', checkWindowWidth);
+    
+    return () => {
+      window.removeEventListener('resize', checkWindowWidth);
+    };
+  }, [collapsed]);
   
   const user = useSelector(selectUser);
   
@@ -62,8 +80,8 @@ export const NavigationBar = () => {
     items.push(
       getItem('Профиль', 'personal', 'personal', <UserOutlined/>, [
         getItem('Профиль', Paths.profile, Paths.profile, <ProfileOutlined/>),
-        getItem('Ваши посты', Paths.userPosts, Paths.userPosts, <UnorderedListOutlined/>),
-        getItem('Добавить пост', Paths.addPost, Paths.addPost, <EditOutlined/>),
+        getItem('Ваши рубрики', Paths.userPosts, Paths.userPosts, <UnorderedListOutlined/>),
+        getItem('Добавить рубрику', Paths.addPost, Paths.addPost, <EditOutlined/>),
       ]),
     );
   }

@@ -1,4 +1,4 @@
-import {List, Space, Flex, Typography, Dropdown, MenuProps} from 'antd';
+import {List, Space, Flex, Typography, Dropdown, MenuProps, message} from 'antd';
 import {
   ClockCircleOutlined, MoreOutlined,
 } from '@ant-design/icons';
@@ -30,12 +30,12 @@ const PostItem = ({post, refetch}: Props) => {
   const [removePost] = useRemovePostMutation()
   
   const items: MenuProps['items'] =
-    (user?.id === post.authorId || user?.role === "ADMIN") ? [
+    (user?.id === post?.authorId || user?.role === "ADMIN") ? [
       {
         key: '1',
         label: "Поделиться",
         onClick: () => {
-          console.log("Поделиться")
+          message.success("Скопировано")
           copy(`${process.env.REACT_APP_CLIENT_URL}${Paths.forum}/${post.url}`)
         }
       },
@@ -43,7 +43,6 @@ const PostItem = ({post, refetch}: Props) => {
         key: '2',
         label: 'Изменить',
         onClick: () => {
-          console.log("Изменить")
           navigate(`${Paths.editPost}/${post.url}`)
         }
       },
@@ -100,7 +99,12 @@ const PostItem = ({post, refetch}: Props) => {
                 </Flex>
               </Flex>
               
-              <Dropdown menu={{items}} trigger={['click']} placement="bottomRight">
+              <Dropdown
+                menu={{items}}
+                trigger={['click']}
+                placement="bottomRight"
+                className={styles.dropdown}
+              >
                 <MoreOutlined className={styles.icon}/>
               </Dropdown>
             </Flex>

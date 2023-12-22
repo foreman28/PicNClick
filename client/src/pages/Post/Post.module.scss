@@ -11,6 +11,35 @@
 .content {
   //margin-bottom: 16px;
   padding: 0 !important;
+  max-height: none !important;
+}
+
+.img_box {
+  position: relative;
+
+
+  .dropdown {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+}
+
+
+.icon {
+  background-color: var(--color-white);
+  border-radius: 999px;
+  padding: 4px;
+  font-size: 24px;
+  cursor: pointer;
+
+  transition: color 0.2s ease-in, opacity 0.2s ease-in;
+  opacity: 0.4;
+
+  &:hover{
+    color: var(--color-primary);
+    opacity: 1;
+  }
 }
 
 .img {

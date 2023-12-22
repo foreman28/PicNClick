@@ -55,13 +55,13 @@ export const Register = () => {
           <div className={styles.content}>
             <Form onFinish={register} className={styles.form}>
               <Flex vertical>
-                <Title level={1} className={styles.title}>Мы скучали по тебе!</Title>
+                <Title level={1} className={styles.title}>Присоединяйтесь к сообществу «<span>Pic<span>&amp;</span>Click</span>»!</Title>
                 <Text className={styles.subtitle}>Более 150 вопросов ждут ваших мудрых предложений!</Text>
                 
-                <CustomInput theme={inputText} type="text" name="username" placeholder="Имя"/>
-                <CustomInput theme={inputText} type="email" name="email" placeholder="Email"/>
-                <CustomInput theme={inputPassword} type="password" name="password" placeholder="Пароль"/>
-                <CustomInput theme={inputPassword} type="password" name="confirmPassword" placeholder="Пароль"/>
+                <CustomInput theme={inputText} type="text" name="username" placeholder="Имя*"/>
+                <CustomInput theme={inputText} type="email" name="email" placeholder="Email*"/>
+                <CustomInput theme={inputPassword} type="password" name="password" placeholder="Пароль*"/>
+                <CustomInput theme={inputPassword} type="password" name="confirmPassword" placeholder="Повторите пароль*"/>
                 
                 <CustomButton theme={button} type="primary" htmlType="submit">
                   Зарегистрироваться

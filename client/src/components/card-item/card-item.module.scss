@@ -2,11 +2,13 @@
   border-radius: 5px;
 
   flex: 30%;
-  height: 120px;
 
-  padding: 12px 12px;
+  padding: 24px;
 }
 
+.content {
+  max-width: 280px;
+}
 
 .count {
   color: var(--color-white);

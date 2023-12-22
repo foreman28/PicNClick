@@ -10,7 +10,7 @@ export const Auth = ({children}: { children: JSX.Element }) => {
       <Flex justify={'center'} align={'center'} style={{height: '100vh'}}>
         <img
           className={"auth-loading"}
-          srcSet={`${process.env.PUBLIC_URL}/logo192.png`}
+          srcSet={`${process.env.PUBLIC_URL}/logo.svg`}
           width={128}
           height={128}
           alt={'logo'}
