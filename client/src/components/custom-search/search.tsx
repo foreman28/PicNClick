@@ -16,7 +16,7 @@ export const SearchComponent = () => {
   
   const {data: searchResults} = useGetAllPostsQuery({
     q: search,
-    pageSize: 6,
+    pageSize: 5,
   });
   
   const handleSearch = async (value: string) => {
@@ -57,13 +57,12 @@ export const SearchComponent = () => {
           dataSource={searchResults.posts}
           renderItem={(item) => (
             <List.Item className={styles.item} key={item.id}>
-              <Flex vertical gap={8} align={"flex-start"}>
-                
+              <Flex vertical gap={6} align={"flex-start"}>
                 <Link
                   to={`/forum/${item.url}`}
                   className={styles.title}
                 >
-                  <Title level={5}>{item.title}</Title>
+                  {item.title}
                   
                 </Link>
                 <Paragraph className={styles.text} ellipsis={{rows: 2}}>{item.description}</Paragraph>
