@@ -8,8 +8,17 @@ const PORT = process.env.PORT;
 
 const app = express();
 
+// const corsOptions = {
+//   origin: 'http://daniil8248.temp.swtest.ru', // Разрешенный источник (или массив источников)
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Разрешенные HTTP-методы
+//   credentials: true, // Разрешение передачи учетных данных (например, куки)
+//   optionsSuccessStatus: 204 // Устанавливает статус успешного выполнения для метода OPTIONS
+// };
+
 // Добавьте middleware для CORS
-app.use(cors());
+app.use(cors(
+  // corsOptions
+));
 
 // Добавьте middleware для логгера
 app.use(logger('dev'));

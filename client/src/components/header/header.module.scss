@@ -68,3 +68,23 @@
 .btns {
   width: 260px;
 }
+
+
+@media (max-width: 1440px) {
+
+}
+
+@media (max-width: 1024px) {
+}
+
+@media (max-width: 768px) {
+  .header_container {
+    flex-direction: column;
+  }
+  .logo_content {
+    width: auto;
+  }
+  .btns {
+    width: auto;
+  }
+}

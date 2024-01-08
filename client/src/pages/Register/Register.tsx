@@ -58,7 +58,7 @@ export const Register = () => {
                 <Title level={1} className={styles.title}>Присоединяйтесь к сообществу «<span>Pic<span>&amp;</span>Click</span>»!</Title>
                 <Text className={styles.subtitle}>Более 150 вопросов ждут ваших мудрых предложений!</Text>
                 
-                <CustomInput theme={inputText} type="text" name="username" placeholder="Имя*"/>
+                <CustomInput pattern={"[A-Za-z0-9]{3,100}"} theme={inputText} type="text" name="username" placeholder="Имя*"/>
                 <CustomInput theme={inputText} type="email" name="email" placeholder="Email*"/>
                 <CustomInput theme={inputPassword} type="password" name="password" placeholder="Пароль*"/>
                 <CustomInput theme={inputPassword} type="password" name="confirmPassword" placeholder="Повторите пароль*"/>
@@ -76,7 +76,7 @@ export const Register = () => {
               <ErrorMessage message={error}/>
             </Space>
           </div>
-          <img srcSet={"./img/Register-img.png"} alt={'photo'} className={styles.image}/>
+          <img srcSet={"./img/register-img.png"} alt={'photo'} className={styles.image}/>
         </Flex>
       </Layout.Content>
       <Footer/>

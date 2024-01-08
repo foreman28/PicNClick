@@ -57,7 +57,7 @@ export const Profile = () => {
       >
         <CustomBreadcrumb/>
 
-        <CustomTitle title={"Профиль"} level={1}/>
+        <CustomTitle title={`Профиль: ${user && user.username}`} level={1}/>
 
         <Flex className={styles.profile} gap={12} wrap={"wrap"}>
 

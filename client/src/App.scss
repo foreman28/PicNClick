@@ -55,7 +55,16 @@
   --white-navigationBar: 310px;
   --white-sidebar: 310px;
 
+  --h-header: 70px;
+
 }
+
+@media (max-width: 768px) {
+  :root {
+    --h-header: 191px;
+  }
+}
+
 
 * {
   margin: 0;
@@ -70,7 +79,7 @@
 
 .ant-layout-sider-children{
   position: sticky;
-  top: 70px;
+  top: var(--h-header);
   //min-height: 100vh;
 }
 

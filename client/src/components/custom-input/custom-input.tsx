@@ -9,6 +9,7 @@ type Props = {
   dependencies?: NamePath[];
   theme?: any;
   defaultValue?: string;
+  pattern?: string;
 };
 
 export const CustomInput = (
@@ -18,7 +19,8 @@ export const CustomInput = (
     placeholder,
     dependencies,
     theme,
-    defaultValue
+    defaultValue,
+    pattern
   }: Props) => {
   return (
     <ConfigProvider theme={theme}>
@@ -56,9 +58,9 @@ export const CustomInput = (
         ]}
       >
         {type === 'password' ? (
-          <Input.Password placeholder={placeholder} size="large"/>
+          <Input.Password pattern={pattern} placeholder={placeholder} size="large"/>
         ) : (
-          <Input placeholder={placeholder} type={type} size="middle"/>
+          <Input pattern={pattern} placeholder={placeholder} type={type} size="middle"/>
         )}
       </Form.Item>
     </ConfigProvider>

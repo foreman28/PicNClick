@@ -8,8 +8,7 @@ export const Footer = () => {
   
   return (
     <Layout.Footer className={styles.footer} style={{height: 'auto'}}>
-      <Layout className={styles.footer_container}>
-        <Flex gap={64} justify={"space-between"} style={{width: '100%'}}>
+        <Flex className={styles.footer_container} gap={64} justify={"space-between"} style={{width: '100%'}}>
           <Flex gap={24} className={styles.logo_content} align={"center"}>
             <Link to="/" className={styles.logo}>
               <img srcSet={`${process.env.PUBLIC_URL}/logo.svg`} width={48} height={48} alt={"PicNClick"}/>
@@ -19,7 +18,7 @@ export const Footer = () => {
             </Link>
           </Flex>
           
-          <Flex gap={48}>
+          <Flex gap={48} className={styles.list}>
             <Flex vertical>
               <h5 className={styles.footer__title}>Форум</h5>
               <Flex vertical className={styles.footer__items}>
@@ -83,7 +82,6 @@ export const Footer = () => {
           </Flex>
         
         </Flex>
-      </Layout>
     
     </Layout.Footer>
   );

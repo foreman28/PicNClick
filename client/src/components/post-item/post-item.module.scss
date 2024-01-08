@@ -6,6 +6,7 @@
   box-shadow: 2px 1px 5px 0 rgba(0, 0, 0, 0.15);
 
   margin-bottom: 20px;
+  overflow: hidden;
 }
 
 .username {
@@ -19,8 +20,6 @@
 }
 
 .title {
-
-
   color: var(--color-black);
   font-family: var(--font-family);
   font-size: 28px;

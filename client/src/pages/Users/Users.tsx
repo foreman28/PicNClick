@@ -26,15 +26,13 @@ export const Users = () => {
         
         <CustomTitle title={"Пользователи"} level={1}/>
         
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : (
+        {!isLoading ? (
           <>
             {users && users.map(({ id, ...user }:any) => (
               <UserItem key={id} user={user} />
             ))}
           </>
-        )}
+        ): undefined}
       </Flex>
     </Layout>
   );

@@ -19,20 +19,10 @@ type Props = {
 
 export const CustomButton = (
   {
-    theme,
-    children,
-    type,
-    danger,
-    loading,
-    htmlType = 'button',
-    onClick,
-    shape,
-    icon,
-    style,
+    theme, children, type, danger, loading, htmlType = 'button', onClick, shape, icon, style,
     disabled = false
   }: Props) => {
   return (
-    // <Form.Item>
     <ConfigProvider theme={theme}>
       <Button
         className={styles.btn}
@@ -50,6 +40,5 @@ export const CustomButton = (
         {children}
       </Button>
     </ConfigProvider>
-    // </Form.Item>
   );
 };

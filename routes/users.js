@@ -4,7 +4,7 @@ const {allUser, getUser, login, register, current} = require("../controllers/use
 const {auth} = require('../middleware/auth');
 
 router.get("/all", allUser);
-router.get("/profile/:username", auth, getUser);
+router.get("/profile/:username", getUser);
 router.post("/login", login);
 router.post("/register", register);
 router.get("/current", auth, current);

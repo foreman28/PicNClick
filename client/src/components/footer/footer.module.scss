@@ -130,3 +130,24 @@
     flex-direction: column;
   }
 }
+
+@media (max-width: 1024px) {
+  .footer_container {
+    flex-direction: column;
+  }
+  .logo_content {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer_container {
+    align-items: stretch;
+  }
+  .list {
+    flex-direction: column;
+  }
+  .info__content {
+    max-width: none;
+  }
+}

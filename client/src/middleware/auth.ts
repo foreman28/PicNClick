@@ -12,6 +12,7 @@ listenerMiddleware.startListening({
       localStorage.setItem('token', action.payload.token);
       
       console.log(action.payload.token)
+      // localStorage.setItem('email', String(action.payload.email));
       // localStorage.setItem('role', String(action.payload.role));
     }
   },

@@ -2,6 +2,7 @@
   width: 100%;
   /*max-width: 580px;*/
   padding: 20px;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,4 +35,10 @@
 .form {
   max-width: 480px;
   margin-bottom: 12px;
+}
+
+@media (max-width: 1024px) {
+  .image {
+    display: none;
+  }
 }
