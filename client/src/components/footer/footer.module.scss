@@ -75,9 +75,19 @@
   text-transform: uppercase;
 }
 
+.list{
+  max-width: 536px;
+
+  div {
+    max-width: 268px;
+  }
+}
+
 .footer__items {
   ul {
     list-style: none;
+    li {
+    }
   }
 }
 
@@ -89,6 +99,13 @@
   font-weight: 400;
   line-height: 28px;
   letter-spacing: 0.05rem;
+
+  display: block;
+  width: 100%;
+
+  white-space: nowrap; /* Запрещаем перенос строк */
+  overflow: hidden; /* Обрезаем все, что не помещается в область */
+  text-overflow: ellipsis; /* Добавляем многоточие */
 
   &:hover {
     color: var(--color-white-100);

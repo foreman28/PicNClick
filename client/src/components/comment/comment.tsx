@@ -10,6 +10,7 @@ import {useSelector} from "react-redux";
 import {selectUser} from "../../features/auth/authSlice";
 import {useRemoveCommentMutation} from "../../api/comment";
 import {CommentsWithUser} from "../../types";
+import {useEffect} from "react";
 // import {PrefetchOptions} from "@reduxjs/toolkit/query";
 
 
@@ -34,7 +35,12 @@ export const Comment = ({comment, refetch}: Props) => {
         label: 'Удалить',
         onClick: () => {
           removeComment(comment.id)
-          refetch()
+            .then(() => {
+              refetch();
+            })
+            .catch((error) => {
+              console.error('Ошибка при удалении комментария', error);
+            });
         },
         danger: true
       }

@@ -126,7 +126,7 @@ const register = async (req, res, next) => {
     });
 
     if (registeredUser2) {
-      return res.status(400).json({ message: 'Пользователь, с таким username уже существует' })
+      return res.status(400).json({ message: 'Пользователь, с таким логином уже существует' })
     }
 
     const salt = await bcrypt.genSalt(10);
