@@ -25,8 +25,6 @@ export const Footer = () => {
     }
   });
   
-  console.log(likesPosts?.posts)
-  
   return (
     <Layout.Footer className={styles.footer} style={{height: 'auto'}}>
       <Flex className={styles.footer_container} gap={64} justify={"space-between"} style={{width: '100%'}}>

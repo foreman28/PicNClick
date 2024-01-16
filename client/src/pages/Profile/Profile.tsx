@@ -84,13 +84,13 @@ export const Profile = () => {
                 icon={<FileTextFilled/>}
               />
               <CardItem
-                title={"Количество лайков в ваших постах"}
+                title={"Количество лайков в ваших темах"}
                 count={sumLikes}
                 color={"var(--color-secondary-200)"}
                 icon={<FileTextOutlined/>}
               />
               <CardItem
-                title={"Количество сообщений в ваших постах"}
+                title={"Количество сообщений в ваших темах"}
                 count={sumComments}
                 color={"var(--color-error-200)"}
                 icon={<MessageOutlined/>}

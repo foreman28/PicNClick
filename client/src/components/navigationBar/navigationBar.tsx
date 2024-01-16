@@ -81,7 +81,7 @@ export const NavigationBar = () => {
       getItem('Профиль', 'personal', 'personal', <UserOutlined/>, [
         getItem('Профиль', Paths.profile, Paths.profile, <ProfileOutlined/>),
         getItem('Ваши рубрики', Paths.userPosts, Paths.userPosts, <UnorderedListOutlined/>),
-        getItem('Добавить рубрику', Paths.addPost, Paths.addPost, <EditOutlined/>),
+        getItem('Добавить тему', Paths.addPost, Paths.addPost, <EditOutlined/>),
       ]),
     );
   }

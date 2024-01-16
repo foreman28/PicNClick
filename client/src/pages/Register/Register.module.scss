@@ -2,7 +2,7 @@
   width: 100%;
   /*max-width: 580px;*/
   padding: 20px;
-  min-height: 100vh;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,5 +40,8 @@
 @media (max-width: 1024px) {
   .image {
     display: none;
+  }
+  .content {
+    min-height: 100vh;
   }
 }
