@@ -55,7 +55,6 @@ export const PostForm = () => {
   }, [url, post]);
   
   const onFinish = async (values: any) => {
-    console.log(values)
     try {
       const postData = new FormData();
       postData.append('title', values.title);

@@ -39,14 +39,14 @@ export const Profile = () => {
     }
   });
 
-  const [sumLikes, setSumLikes] = useState(0)
-  const [sumComments, setSumComments] = useState(0)
-  useEffect(() => {
-    dataPosts && dataPosts.posts && dataPosts.posts.map((post:any)=>{
-      setSumLikes(prev => prev + +post?.likes?.length)
-      setSumComments(prev => prev + +post?.comments?.length)
-    })
-  }, [dataPosts]);
+  // const [sumLikes, setSumLikes] = useState(0)
+  // const [sumComments, setSumComments] = useState(0)
+  // useEffect(() => {
+  //   dataPosts && dataPosts.posts && dataPosts.posts.map((post:any)=>{
+  //     setSumLikes(prev => prev + +post?.likes?.length)
+  //     setSumComments(prev => prev + +post?.comments?.length)
+  //   })
+  // }, [dataPosts]);
 
   return (
     <ProfileLayout>
@@ -83,18 +83,18 @@ export const Profile = () => {
                 color={"var(--color-success-200)"}
                 icon={<FileTextFilled/>}
               />
-              <CardItem
-                title={"Количество лайков в ваших темах"}
-                count={sumLikes}
-                color={"var(--color-secondary-200)"}
-                icon={<FileTextOutlined/>}
-              />
-              <CardItem
-                title={"Количество сообщений в ваших темах"}
-                count={sumComments}
-                color={"var(--color-error-200)"}
-                icon={<MessageOutlined/>}
-              />
+              {/*<CardItem*/}
+              {/*  title={"Количество лайков в ваших темах"}*/}
+              {/*  count={sumLikes}*/}
+              {/*  color={"var(--color-secondary-200)"}*/}
+              {/*  icon={<FileTextOutlined/>}*/}
+              {/*/>*/}
+              {/*<CardItem*/}
+              {/*  title={"Количество сообщений в ваших темах"}*/}
+              {/*  count={sumComments}*/}
+              {/*  color={"var(--color-error-200)"}*/}
+              {/*  icon={<MessageOutlined/>}*/}
+              {/*/>*/}
             </>
           )}
         </Flex>

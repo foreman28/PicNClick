@@ -49,7 +49,6 @@ export const FeedPosts = ({authorId}: Props) => {
       searchParams.set('page', validPage.toString());
       searchParams.set('q', searchS);
       navigate(`?${searchParams.toString()}`);
-      console.log(123)
     }
   
   useEffect(() => {
