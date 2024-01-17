@@ -66,10 +66,10 @@ export const PostForm = () => {
       
       if (url) {
         await editPost({url, postData}).unwrap();
-        message.success('Рубрика успешна изменен!');
+        message.success('Тема успешна изменена!');
       } else {
         await addPost(postData).unwrap();
-        message.success('Рубрика успешна добавлен!');
+        message.success('Тема успешна добавлена!');
       }
       navigate(`/user-post`);
     } catch (error: any) {
@@ -117,7 +117,7 @@ export const PostForm = () => {
         <CustomBreadcrumb/>
         
         {/*<CustomTitle title={"Добавить пост"} level={1}/>*/}
-        <CustomTitle title={url ? 'Изменить рубрику' : 'Добавить рубрику'} level={1}/>
+        <CustomTitle title={url ? 'Изменить тему' : 'Добавить тему'} level={1}/>
         
         {getPostLoading ? undefined :
           <Form

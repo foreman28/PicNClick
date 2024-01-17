@@ -29,7 +29,7 @@ export const UserPosts = () => {
       <Flex gap={12} vertical>
         <CustomBreadcrumb/>
         
-        <CustomTitle title={"Ваши рубрики"} level={1}/>
+        <CustomTitle title={"Ваши темы"} level={1}/>
         
         {
           user ? (

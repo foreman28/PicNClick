@@ -12,9 +12,9 @@ export const CustomBreadcrumb = () => {
     const breadcrumbItems = pathSnippets.map((_, index) => {
       const pathsMap:any = {
         [Paths.forum.substring(1)]: 'Форум',
-        [Paths.userPosts.substring(1)]: 'Посты пользователя',
-        [Paths.addPost.substring(1)]: 'Добавить пост',
-        [Paths.editPost.substring(1)]: 'Изменить пост',
+        [Paths.userPosts.substring(1)]: 'Темы пользователя',
+        [Paths.addPost.substring(1)]: 'Добавить тему',
+        [Paths.editPost.substring(1)]: 'Изменить тему',
         [Paths.search.substring(1)]: 'Поиск',
         [Paths.tags.substring(1)]: 'Теги',
         [Paths.users.substring(1)]: 'Пользователи',
