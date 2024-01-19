@@ -1,3 +1,9 @@
+# PicNClick
+
+
+![alt](https://github.com/foreman28/PicNClick/blob/main/screenshot.png)
+
+
 ```
 git clone git@github.com:foreman28/PicNClick.git
 
